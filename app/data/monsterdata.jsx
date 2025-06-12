@@ -12,7 +12,7 @@ export const dataMonsters =[
     action : [
       {
       name: "Stab.",
-      description : "1d6+2. À la mort, les créatures adjacentes subissent 1 dégâts de feu.",
+      description : "1d6+2.",
       dice : {
         numberDice: 1,
         valueDice: 6,

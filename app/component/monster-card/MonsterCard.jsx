@@ -1,6 +1,6 @@
 "use client";
 
-import AttackButton from "../attackbutton";
+import AttackButton from "./actions/AttackButton";
 import HealButton from "./HealButton";
 import NamePanel from "./NamePanel";
 import PassivePanel from "./PassivePanel";
