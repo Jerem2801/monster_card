@@ -26,6 +26,8 @@ export const dataMonsters =[
     name: "Bugbear",
     hp: 30,
     level: "2",
+    armor : "M",
+    fly:2,
     passif: [
     ],
     action :[
@@ -42,7 +44,7 @@ export const dataMonsters =[
   },
   {
    name: "Soldat Hobgoblin",
-   level : "1/2, Moyen",
+   level : "1/2",
    armor : "M",
    hp : 11,
    passif: [
