@@ -33,7 +33,7 @@ export default function MonsterCard({monster, remove}){
 		}}>
 	  	<button 
 	    	onClick={remove} 
-	    	className="float-right text-red-600 hover:text-red-800 font-bold text-xl focus:outline-none"
+	    	className="cursor-pointer float-right text-red-600 hover:text-red-800 font-bold text-xl focus:outline-none"
 	    	aria-label="Remove Monster"
 	  	>
 	    	×

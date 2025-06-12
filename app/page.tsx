@@ -6,7 +6,25 @@ import { useState } from 'react';
 
 export default function Home() {
 
-  const [monsters, setMonsters] = useState([]);
+  type Monster = {
+    id: string;
+    monster: {
+      name: string;
+      hp: number;
+      action: {
+        name: string;
+        description: string;
+        dice: {
+          numberDice: number;
+          valueDice: number;
+          bonus: number;
+        };
+      }[];
+    };
+  };
+
+
+  const [monsters, setMonsters] = useState<Monster[]>([]);
   const [selectedMonsterName, setSelectedMonsterName] = useState(dataMonsters[0]?.name || '');
 
   function add(){
@@ -17,9 +35,9 @@ export default function Home() {
     setMonsters([...monsters, { id, monster: selected }]);
   }
 
-  function remove(idToRemove){
-    setMonsters(monsters.filter(monster => monster.id !== idToRemove)); 
-  }
+  function remove(idToRemove: string) {
+  setMonsters(monsters.filter(monster => monster.id !== idToRemove));
+}
 
 
   return (
