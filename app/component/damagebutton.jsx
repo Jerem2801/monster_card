@@ -2,7 +2,7 @@ export default function DamageButton({ handleClick, name, description, dice }) {
   return (
     <button
       onClick={handleClick}
-      className="cursor-pointer px-2 py-1 bg-transparent rounded-md transition-transform duration-200 hover:scale-105"
+      className="cursor-pointer px-2 py-1 bg-transparent rounded-md transition-transform duration-200 hover:scale-105 text-left"
       aria-label={`Lancer ${name}`}
     >
       <span className="font-bold text-lg">{name}</span>

@@ -1,113 +1,87 @@
-'use client'
+"use client";
 
-import { useState, useRef, useEffect } from 'react';
-import DamageButton from './damagebutton';
-import ResultDisplay from './resultdisplay';
-import AdvantagePanel from './advantagepanel';
+import { useState, useRef, useEffect } from "react";
+import DamageButton from "./damagebutton";
+import ResultDisplay from "./resultdisplay";
+import AdvantagePanel from "./advantagepanel";
+import { useClickOutside } from "../lib/useclickoutside";
+import { doCritic, doAdvantage, checkFailed } from "../lib/diceutils";
 
 export default function AttackButton({ action }) {
-  const [result, setResult] = useState({ total: 0, dices: [] });
-  const [advantage, setAdvantage] = useState(0);
-  const [showAdvantagePanel, setShowAdvantagePanel] = useState(false);
-  const [isCritic, setIsCritic] = useState(false);
-  const [isFailed, setIsFailed] = useState(false);
-  const panelRef = useRef(null);
+	const [result, setResult] = useState({ total: 0, dices: [] });
+	const [advantage, setAdvantage] = useState(0);
+	const [showAdvantagePanel, setShowAdvantagePanel] = useState(false);
+	const [isCritic, setIsCritic] = useState(false);
+	const [isFailed, setIsFailed] = useState(false);
+	const panelRef = useRef(null);
 
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (panelRef.current && !panelRef.current.contains(event.target)) {
-        setShowAdvantagePanel(false);
-      }
-    }
-    if (showAdvantagePanel) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showAdvantagePanel]);
+  	useClickOutside(
+    	panelRef,
+    	() => setShowAdvantagePanel(false),
+    	showAdvantagePanel
+  	);
 
-  function shuffle(allResultDices) {
-    allResultDices.sort(() => Math.random() - 0.5);
-  }
+	function throwDice(diceProperty) {
+		setIsCritic(false);
+		setIsFailed(false);
+		let allResultDices = [];
 
-  function doCritic(allResultDices, firstResult, valueDice) {
-    if (firstResult == valueDice) {
-      setIsCritic(true);
-      const newValue = Math.floor(Math.random() * valueDice) + 1;
-      allResultDices.push(newValue);
-      doCritic(allResultDices, newValue, valueDice);
-    }
-    return allResultDices;
-  }
+		const advantageAbsolute = Math.abs(advantage);
+		const allResultDicesToRoll = diceProperty.numberDice + advantageAbsolute;
 
-  function doAdvantage(advantageAbsolute, allResultDices, advantage) {
-    if (advantageAbsolute !== 0) {
-      allResultDices.sort((a, b) => a - b);
+		for (let i = 0; i < allResultDicesToRoll; i++) {
+			allResultDices.push(
+				Math.floor(Math.random() * diceProperty.valueDice) + 1
+			);
+		}
 
-      for (let i = 0; i < advantageAbsolute; i++) {
-        if (advantage > 0) {
-          allResultDices.shift();
-        } else if (advantage < 0) {
-          allResultDices.pop();
-        }
-      }
-      shuffle(allResultDices);
-    }
-    return allResultDices;
-  }
+		allResultDices = doAdvantage(advantageAbsolute, allResultDices, advantage);
+		allResultDices = doCritic(
+		allResultDices,
+		allResultDices[0],
+		diceProperty.valueDice,
+		() => setIsCritic(true)
+		);
 
-  function checkfailed(allResultDices) {
-    if (allResultDices[0] == 1) setIsFailed(true); 
-  }
+		checkFailed(allResultDices, () => setIsFailed(true));
 
-  function throwDice(diceProperty) {
-    setIsCritic(false);
-    setIsFailed(false);
-    let allResultDices = [];
+		let totalDices = allResultDices.reduce((acc, val) => acc + val, 0);
+		let totalDicesWithBonus =
+		parseInt(totalDices) + parseInt(diceProperty.bonus);
+		setResult({ total: totalDicesWithBonus, dices: allResultDices });
+		setShowAdvantagePanel(false);
+		setAdvantage(0);
+	}
 
-    const advantageAbsolute = Math.abs(advantage);
-    const allResultDicesToRoll = diceProperty.numberDice + advantageAbsolute;
+	function toggleAdvantagePanel() {
+		setShowAdvantagePanel((prev) => !prev);
+	}
 
-    for (let i = 0; i < allResultDicesToRoll; i++) {
-      allResultDices.push(Math.floor(Math.random() * diceProperty.valueDice) + 1);
-    }
+	return (
+		<div className="relative inline-block">
+		<DamageButton
+			handleClick={toggleAdvantagePanel}
+			name={action.name}
+			description={action.description}
+			dice={action.dice}
+		/>
 
-    allResultDices = doAdvantage(advantageAbsolute, allResultDices, advantage);
-    allResultDices = doCritic(allResultDices, allResultDices[0], diceProperty.valueDice);
+		{showAdvantagePanel && (
+			<div ref={panelRef}>
+			<AdvantagePanel
+				advantage={advantage}
+				setAdvantage={setAdvantage}
+				onThrowDice={() => throwDice(action.dice)}
+			/>
+			</div>
+		)}
 
-    let totalDices = allResultDices.reduce((accumulateur, valeurCourante) => accumulateur + valeurCourante, 0);
-    checkfailed(allResultDices);
-    let totalDicesWithBonus = parseInt(totalDices) + parseInt(diceProperty.bonus);
-    setResult({ total: totalDicesWithBonus, dices: allResultDices });
-    setShowAdvantagePanel(false);
-    setAdvantage(0);
-  }
-
-  function toggleAdvantagePanel() {
-    setShowAdvantagePanel((prev) => !prev);
-  }
-
-  return (
-    <div className="relative inline-block">
-      <DamageButton
-        handleClick={toggleAdvantagePanel}
-        name={action.name}
-        description={action.description}
-        dice={action.dice}
-      />
-
-      {showAdvantagePanel && (
-        <div ref={panelRef}>
-          <AdvantagePanel
-            advantage={advantage}
-            setAdvantage={setAdvantage}
-            onThrowDice={() => throwDice(action.dice)}
-          />
-        </div>
-      )}
-
-      <ResultDisplay resultToDisplay={result} isCritic={isCritic} isFailed={isFailed} diceProperties={action.dice} />
-    </div>
-  );
+		<ResultDisplay
+			resultToDisplay={result}
+			isCritic={isCritic}
+			isFailed={isFailed}
+			diceProperties={action.dice}
+		/>
+		</div>
+	);
 }

@@ -12,7 +12,7 @@ export const dataMonsters =[
     action : [
       {
       name: "Stab.",
-      description : "1d6+2.",
+      description : "1d6+2. À la mort, les créatures adjacentes subissent 1 dégâts de feu.",
       dice : {
         numberDice: 1,
         valueDice: 6,
@@ -39,5 +39,37 @@ export const dataMonsters =[
         }
       }
     ]
-  }
+  },
+  {
+   name: "Soldat Hobgoblin",
+   level : "1/2, Moyen",
+   armor : "M",
+   hp : 11,
+   passif: [
+    {
+      name: "Ichor infernal.",
+      description: "À la mort, les créatures adjacentes subissent 1 dégâts de feu."
+    }
+  ],
+  action: [
+    {
+      name: "Fléau de feu.",
+      description: "1d8 dégâts de feu et une cible adjacente à la 1er subit 2 dégâts de feu.",
+      dice : {
+        numberDice: 1,
+        valueDice: 8,
+        bonus: 0
+        }
+    },
+    {
+      name: "Tambour du bouclier.",
+      description: "(Porté 3) JdS de VOL 10 ou Provoqué pendant 1 tour.",
+      dice : {
+        numberDice: 0,
+        valueDice: 0,
+        bonus: 0
+        }
+    }
+  ]
+}
 ]
