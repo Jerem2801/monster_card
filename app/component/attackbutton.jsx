@@ -107,7 +107,7 @@ export default function AttackButton({ action }) {
         </div>
       )}
 
-      <ResultDisplay resultToDisplay={result} isCritic={isCritic} isFailed={isFailed}/>
+      <ResultDisplay resultToDisplay={result} isCritic={isCritic} isFailed={isFailed} diceProperties={action.dice} />
     </div>
   );
 }
