@@ -1,7 +1,6 @@
 'use client'
 
 import MonsterCard from './component/monstercard';
-import { gobelin } from './data/monsterdata';
 import { dataMonsters } from './data/monsterdata';
 import { useState } from 'react';
 
