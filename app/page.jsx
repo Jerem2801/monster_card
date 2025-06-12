@@ -6,25 +6,7 @@ import { useState } from 'react';
 
 export default function Home() {
 
-  type Monster = {
-    id: string;
-    monster: {
-      name: string;
-      hp: number;
-      action: {
-        name: string;
-        description: string;
-        dice: {
-          numberDice: number;
-          valueDice: number;
-          bonus: number;
-        };
-      }[];
-    };
-  };
-
-
-  const [monsters, setMonsters] = useState<Monster[]>([]);
+  const [monsters, setMonsters] = useState([]);
   const [selectedMonsterName, setSelectedMonsterName] = useState(dataMonsters[0]?.name || '');
 
   function add(){
@@ -35,14 +17,14 @@ export default function Home() {
     setMonsters([...monsters, { id, monster: selected }]);
   }
 
-  function remove(idToRemove: string) {
-  setMonsters(monsters.filter(monster => monster.id !== idToRemove));
-}
+  function remove(idToRemove){
+    setMonsters(monsters.filter(monster => monster.id !== idToRemove)); 
+  }
 
 
   return (
     <div className="p-4 space-y-4">
-      <div className="p-6 bg-white rounded-lg shadow-md flex items-center space-x-4 inline-flex">
+      <div className="p-6 bg-white rounded-lg shadow-md items-center space-x-4 inline-flex">
         <label htmlFor="monster-select" className="text-gray-700 font-semibold whitespace-nowrap">
           Séléctionner le Monstre:
         </label>
