@@ -9,7 +9,7 @@ export default function Home() {
     const [monsters, setMonsters] = useState([]);
     const [selectedMonsterName, setSelectedMonsterName] = useState(dataMonsters[0]?.name || '');
 
-    function add(){
+    function addMonster(){
         const selected = dataMonsters.find((m) => m.name === selectedMonsterName);
         if (!selected) return;
 
@@ -17,47 +17,45 @@ export default function Home() {
         setMonsters([...monsters, { id, monster: selected }]);
     }
 
-    function remove(idToRemove){
+    function removeMonster(idToRemove){
         setMonsters(monsters.filter(monster => monster.id !== idToRemove)); 
     }
 
 
     return (
         <div className="p-4 space-y-4">
-            <div className="p-6 bg-white rounded-lg shadow-md items-center space-x-4 inline-flex">
 
-                <label htmlFor="monster-select" className="text-gray-700 font-semibold whitespace-nowrap">
-                    Séléctionner le Monstre:
-                </label>
+            <div className="inline-flex items-center space-x-4 p-6 rounded-lg border border-neutral-200 bg-white shadow-md">
 
                 <select
-                    id="monster-select"
-                    className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 min-w-[10rem]"
-                    value={selectedMonsterName}
-                    onChange={(e) => setSelectedMonsterName(e.target.value)}
+                  id="monster-select"
+                  className="min-w-[10rem] px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
+                  value={selectedMonsterName}
+                  onChange={(e) => setSelectedMonsterName(e.target.value)}
                 >
-                {dataMonsters.map(({ name }) => (
-                    <option key={name} value={name}>
-                        {name}
-                    </option>
-                ))}
+                    {dataMonsters.map(({ name }) => (
+                        <option key={name} value={name}>
+                            {name}
+                        </option>
+                    ))}
                 </select>
 
                 <button
-                    className="bg-green-600 hover:bg-green-700 transition-colors text-white font-semibold rounded-md px-5 py-2 whitespace-nowrap"
-                    onClick={add}
+                  className="px-5 py-2 rounded-md bg-green-600 hover:bg-green-700 text-white font-semibold transition-colors whitespace-nowrap"
+                  onClick={addMonster}
                 >
-                    Ajouter le Monstre
+                    Ajouter
                 </button>
 
             </div>
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col space-y-4">
                 {monsters.map(({ id, monster }) => (
-                    <MonsterCard key={id} monster={monster} remove={() => remove(id)}/>
+                    <MonsterCard key={id} monster={monster} remove={() => removeMonster(id)} />
                 ))}
             </div>
 
         </div>
+
     );
 }

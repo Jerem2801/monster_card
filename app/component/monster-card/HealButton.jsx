@@ -23,28 +23,32 @@ export default function HealButton({ hpMax }) {
 	}
 
     return (
-        <div className="flex items-center gap-3 bg-white border border-gray-300 rounded-md px-3 py-1 shadow-sm w-max">
-
+        <div
+            className="flex items-center justify-center gap-3 relative max-w-md overflow-hidden border border-gray-300 rounded-md px-3 py-1.5 shadow-sm"
+            style={{
+                background: `linear-gradient(to right, #4ade80 ${Math.max(0, Math.min(100, (currentHp / hpMax) * 100))}%, #ffffff ${Math.max(0, Math.min(100, (currentHp / hpMax) * 100))}%)`,
+            }}
+        >
             <button
-                className="cursor-pointer px-2 py-0.5 bg-red-600 hover:bg-red-700 text-white rounded-full font-semibold transition"
                 onClick={removeHeal}
                 aria-label="Decrease health"
+                className="flex h-8 w-8 items-center justify-center p-0 rounded-full bg-red-600 hover:bg-red-700 text-white font-semibold transition"
             >
                 −
             </button>
 
-            <span className="font-mono text-lg font-medium text-gray-700">
+            <span className="flex h-8 w-20 items-center justify-center font-mono text-lg font-medium text-gray-700 leading-none">
                 {currentHp} / {hpMax}
             </span>
 
             <button
-                className="cursor-pointer px-2 py-0.5 bg-green-600 hover:bg-green-700 text-white rounded-full font-semibold transition"
                 onClick={addHeal}
                 aria-label="Increase health"
+                className="flex h-8 w-8 items-center justify-center p-0 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold transition"
             >
                 +
             </button>
-			
         </div>
+
     );
 }
