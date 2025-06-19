@@ -11,8 +11,8 @@ export const dataMonsters =[
     ],
     action : [
       {
-      name: "Stab.",
-      description : "1d6+2.",
+      name: "Planter.",
+      description : "$dice.",
       dice : {
         numberDice: 1,
         valueDice: 6,
@@ -27,13 +27,13 @@ export const dataMonsters =[
     hp: 30,
     level: "2",
     armor : "M",
-    fly:2,
+    speed:2,
     passif: [
     ],
     action :[
       {
       name: "Cleave",
-      description : "2d6+4.",
+      description : "$dice.",
       dice : {
         numberDice: 2,
         valueDice: 6,
@@ -56,7 +56,7 @@ export const dataMonsters =[
   action: [
     {
       name: "Fléau de feu.",
-      description: "1d8 dégâts de feu et une cible adjacente à la 1er subit 2 dégâts de feu.",
+      description: "$dice dégâts de feu et une cible adjacente à la 1er subit 2 dégâts de feu.",
       dice : {
         numberDice: 1,
         valueDice: 8,
@@ -65,12 +65,7 @@ export const dataMonsters =[
     },
     {
       name: "Tambour du bouclier.",
-      description: "(Porté 3) JdS de VOL 10 ou Provoqué pendant 1 tour.",
-      dice : {
-        numberDice: 0,
-        valueDice: 0,
-        bonus: 0
-        }
+      description: "(Porté 3) JdS de VOL 10 ou Provoqué pendant 1 tour."
     }
   ]
 }

@@ -63,7 +63,7 @@ export const STATUSES = [
     id: "poisoned",
     label: "Empoisonné",
     description: "Désavantage à tous les jets.",
-    emoji: "☠️🧪",
+    emoji: "🧪",
   },
   {
     id: "prone",

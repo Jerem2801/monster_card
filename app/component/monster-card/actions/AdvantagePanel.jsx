@@ -24,7 +24,7 @@ export default function AdvantagePanel({ advantage, setAdvantage, onThrowDice })
         className="text-lg cursor-pointer transition-transform duration-200 hover:scale-110"
         aria-label="Lancer le dé"
       >
-        🎲
+        OK
       </button>
     </div>
   );

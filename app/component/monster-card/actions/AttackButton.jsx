@@ -28,8 +28,12 @@ export default function AttackButton({ action }) {
   	);
 
 	function toggleAdvantagePanel() {
-		setShowResult(false);
-		setShowAdvantagePanel((prev) => !prev);
+		if(showAdvantagePanel){
+			getResult(action.dice)
+		}else{
+			setShowResult(false);
+			setShowAdvantagePanel((prev) => !prev);
+		}
 	}
 
 	function getResult(diceProperty) {

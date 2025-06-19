@@ -14,19 +14,19 @@ export default function NamePanel({ monster }) {
 				<span className="text-gray-500 text-sm">Niv. {monster.level}</span>
 
 				{monster.armor !== undefined && (
-					<span className="ml-2 px-2 py-0.5 bg-blue-100 text-blue-700 rounded text-xs font-bold">
+					<span className="ml-2 px-2 py-0.5 bg-slate-300 text-slate-600 rounded text-sm font-bold">
 						🛡️ {monster.armor}
 					</span>
 				)}
 
 				{monster.speed !== undefined && (
-					<span className="ml-2 px-2 py-0.5 bg-green-100 text-yellow-700 rounded text-xs font-bold">
+					<span className="ml-2 px-2 py-0.5 bg-blue-100 text-blue-400 rounded text-sm font-bold">
 						🏃 {monster.speed}
 					</span>
 				)}
 
 				{monster.fly !== undefined && (
-                    <span className="ml-2 px-2 py-0.5 bg-green-100 text-yellow-700 rounded text-xs font-bold">
+                    <span className="ml-2 px-2 py-0.5 bg-blue-100 text-blue-400 rounded text-sm font-bold">
                         🪽 {monster.fly}
                     </span>
                 )}

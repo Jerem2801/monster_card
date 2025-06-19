@@ -21,6 +21,10 @@ export default function Home() {
         setMonsters(monsters.filter(monster => monster.id !== idToRemove)); 
     }
 
+    function removeAll(){
+        setMonsters([]); 
+    }
+
 
     return (
         <div className="p-4 space-y-4">
@@ -41,10 +45,17 @@ export default function Home() {
                 </select>
 
                 <button
-                  className="px-5 py-2 rounded-md bg-green-600 hover:bg-green-700 text-white font-semibold transition-colors whitespace-nowrap"
+                  className="px-5 py-2 rounded-md bg-green-600 hover:bg-green-700 text-white font-semibold transition-colors whitespace-nowrap cursor-pointer"
                   onClick={addMonster}
                 >
                     Ajouter
+                </button>
+
+                <button
+                  className="px-5 py-2 rounded-md bg-red-600 hover:bg-red-700 text-white font-semibold transition-colors whitespace-nowrap cursor-pointer"
+                  onClick={removeAll}
+                >
+                    Nettoyer
                 </button>
 
             </div>
