@@ -39,7 +39,7 @@ export default function ActionButton({ handleClick, action }) {
 
   return (
     <div
-      className="px-2 py-1 bg-transparent rounded-md text-left"
+      className="px-2 py-1 rounded-md text-left"
       aria-label={`Lancer ${action.name}`}
     >
       <span className="font-bold text-lg">{action.name}</span>{" "}

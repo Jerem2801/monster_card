@@ -12,14 +12,19 @@ export default function ResultDisplay({ resultToDisplay, onHide }) {
     ].join(" ");
 
     return (
-        <div className="mt-3 p-2 bg-gray-100 border border-gray-300 rounded w-full max-w-sm" onClick={onHide} style={{cursor: 'pointer'}} title="Cliquer pour masquer le résultat">
+        <div className="inline-block mt-2 p-2 bg-gray-100 border border-gray-300 rounded cursor-pointer" onClick={onHide} title="Cliquer pour masquer le résultat">
             {/* Conteneur tooltip */}
             <div className="relative group inline-block font-semibold">
                 Résultat total :{" "}
                 <span className={resultClasses}>{resultToDisplay.total}</span>
                 {isCritic && (
-                    <span role="img" aria-label="critique" className="text-green-600 text-xl">
+                    <span role="img" aria-label="critique" className="text-green-600 text-xl ml-1">
                         💥
+                    </span>
+                )}
+                {isFailed && (
+                    <span role="img" aria-label="critique" className="text-red-600 text-xl ml-1">
+                        💀
                     </span>
                 )}
 

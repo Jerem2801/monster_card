@@ -4,7 +4,6 @@ import { useState, useRef} from "react";
 import ActionButton from "./ActionButton";
 import ResultDisplay from "./ResultDisplay";
 import AdvantagePanel from "./AdvantagePanel";
-import { useClickOutside } from "../../../lib/useclickoutside";
 import { throwDice} from "../../../lib/diceutils";
 
 export default function AttackButton({ action }) {
@@ -14,26 +13,13 @@ export default function AttackButton({ action }) {
 			diceProperty: {}});
 
 	const [advantage, setAdvantage] = useState(0);
-
-
 	const [showAdvantagePanel, setShowAdvantagePanel] = useState(false);
 	const [showResult, setShowResult] = useState(true);
 	const panelRef = useRef(null);
 
-
-  	useClickOutside(
-    	panelRef,
-    	() => setShowAdvantagePanel(false),
-    	showAdvantagePanel
-  	);
-
 	function toggleAdvantagePanel() {
-		if(showAdvantagePanel){
-			getResult(action.dice)
-		}else{
-			setShowResult(false);
-			setShowAdvantagePanel((prev) => !prev);
-		}
+		setShowResult(false);
+		setShowAdvantagePanel((prev) => !prev);
 	}
 
 	function getResult(diceProperty) {
@@ -45,6 +31,11 @@ export default function AttackButton({ action }) {
 		setAdvantage(0);
 	}
 
+	function closeAvantage(){
+		setShowAdvantagePanel((prev) => !prev);
+		setAdvantage(0);
+	}
+
 	function handleHideResult() {
 		setShowResult(false);
 	}
@@ -52,7 +43,7 @@ export default function AttackButton({ action }) {
 
 
 	return (
-		<div className="relative inline-block">
+		<div >
 			<ActionButton
 				handleClick={toggleAdvantagePanel}
 				action={action}
@@ -64,6 +55,8 @@ export default function AttackButton({ action }) {
 						advantage={advantage}
 						setAdvantage={setAdvantage}
 						onThrowDice={() => getResult(action.dice)}
+						closeWindows={closeAvantage}
+						diceProperty={action.dice}
 					/>
 				</div>
 			)}

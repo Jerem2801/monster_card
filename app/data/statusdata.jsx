@@ -6,12 +6,6 @@ export const STATUSES = [
     emoji: "😵‍",
   },
   {
-    id: "bloodied",
-    label: "En sang",
-    description: "À la moitié des PV ou moins.",
-    emoji: "🩸",
-  },
-  {
     id: "charmed",
     label: "Charmé",
     description: "Considère le charmeur comme un allié. Il a l’avantage sur les interactions sociales avec vous.",
@@ -20,7 +14,7 @@ export const STATUSES = [
   {
     id: "dazed",
     label: "Étourdi",
-    description: "Monstre : perd une action au prochain tour.",
+    description: "Ne peut faire qu'une action",
     emoji: "💫",
   },
   {
@@ -43,7 +37,7 @@ export const STATUSES = [
   },
   {
     id: "incapacitated",
-    label: "Incapable",
+    label: "Incapacité",
     description: "Ne peut rien faire. Les attaques contre vous ont l’avantage. Les attaques de mêlée qui touchent sont des critiques.",
     emoji: "❌",
   },
@@ -79,8 +73,16 @@ export const STATUSES = [
   },
   {
     id: "taunted",
-    label: "Nargué",
+    label: "Provoqué",
     description: "Désavantage aux attaques sauf contre le dernier à vous avoir nargué.",
     emoji: "😠",
   }
 ];
+
+export const BLOODIED = 
+  {
+    id: "bloodied",
+    label: "Ensanglanté",
+    description: "À la moitié des PV ou moins.",
+    emoji: "🩸",
+  }

@@ -1,14 +1,16 @@
-export default function NamePanel({ monster }) {
+export default function NamePanel({ monster,openStatusModal }) {
     return (
         	<div className="flex items-baseline gap-2 flex-wrap">
 
 				<div className="flex italic font-semibold flex-wrap">
-					{monster.name.split(" ").map((word, index) => (
-						<span key={index} className="mr-1">
-							<span className="text-2xl">{word.charAt(0)}</span>
-							<span className="text-lg uppercase">{word.slice(1)}</span>
-						</span>
-					))}
+					<button className="cursor-pointer" onClick={openStatusModal}>
+						{monster.name.split(" ").map((word, index) => (
+							<span key={index} className="mr-1">
+								<span className="text-2xl">{word.charAt(0)}</span>
+								<span className="text-lg uppercase">{word.slice(1)}</span>
+							</span>
+						))}
+					</button>
 				</div>
 
 				<span className="text-gray-500 text-sm">Niv. {monster.level}</span>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function HealButton({ hpMax }) {
+export default function HealButton({ hpMax, isBloodied }) {
 
 	const [currentHp, setCurrentHp] = useState(hpMax);
 
@@ -11,6 +11,9 @@ export default function HealButton({ hpMax }) {
 		if (newHp > hpMax) {
 			newHp = currentHp;
 		}
+        if(newHp >= hpMax/2){
+            isBloodied(false);
+        }
 		return setCurrentHp(newHp);
 	}
 
@@ -19,6 +22,10 @@ export default function HealButton({ hpMax }) {
 		if (newHp < 0) {
 			newHp = currentHp;
 		}
+        if(newHp <= hpMax/2){
+            isBloodied(true);
+        }
+
 		return setCurrentHp(newHp);
 	}
 
