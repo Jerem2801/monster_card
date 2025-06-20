@@ -5,7 +5,7 @@ import StatusSelector from "./status/StatusSelector";
 import HealButton from "./HealButton";
 import NamePanel from "./NamePanel";
 import PassivePanel from "./PassivePanel";
-import EnemyStatusSelector from "./status/EnemyStatusSelector";
+import ListStatus from "./status/ListStatus";
 import {useState} from "react";
 
 export default function MonsterCard({ monster, remove }) {
@@ -48,16 +48,16 @@ export default function MonsterCard({ monster, remove }) {
 			</button>*/}
 
 			<NamePanel monster={monster} openStatusModal={openStatusModal}/>
-
+				
 			<HealButton hpMax={monster.hp} isBloodied={isBloodied}/>
 
-			<PassivePanel monster={monster} />
+			<PassivePanel monster={monster}/>
 
 			<AttacksButtons monster={monster} />
 
 			{showModal && (<StatusSelector handleStatusModal={closeStatusModal} selectedStatuses={selectedStatuses} toggleStatus={toggleStatus}/>) }
 			
-			<EnemyStatusSelector selectedStatuses={selectedStatuses}/>
+			<ListStatus selectedStatuses={selectedStatuses} removeStatus={toggleStatus} />
 
 		</div>
 	);

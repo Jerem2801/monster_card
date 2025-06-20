@@ -1,7 +1,7 @@
 import { STATUSES } from "../../../data/statusdata"
 
 export default function StatusSelector({handleStatusModal,selectedStatuses,toggleStatus}){
-
+      const statusOrder = STATUSES.slice().sort((a, b) => a.label.localeCompare(b.label));
 
     return (<div className="fixed inset-0 bg-black/30 backdrop-blur-3xl flex items-center justify-center z-50">
           <div className="bg-white rounded-xl shadow-lg p-6 w-80 space-y-4">
@@ -10,7 +10,7 @@ export default function StatusSelector({handleStatusModal,selectedStatuses,toggl
             </h2>
 
             <div className="grid grid-cols-2 gap-3">
-              {STATUSES.map((status) => (
+              {statusOrder.map((status) => (
                 <label
                   key={status.id}
                   className="flex items-center gap-2 cursor-pointer"

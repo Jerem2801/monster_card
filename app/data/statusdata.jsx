@@ -20,7 +20,7 @@ export const STATUSES = [
   {
     id: "frightened",
     label: "Effrayé",
-    description: "Désavantage près de la source de peur ; vitesse réduite en s’en approchant.",
+    description: "Désavantage près de la source de peur; vitesse réduite en s’en approchant.",
     emoji: "😨",
   },
   {
@@ -28,12 +28,6 @@ export const STATUSES = [
     label: "Agrippé",
     description: "Ne peut pas bouger. Les attaques contre vous ont l’avantage.",
     emoji: "🤼",
-  },
-  {
-    id: "hampered",
-    label: "Entravé",
-    description: "Actions ou mouvements réduits (ex. Difficile, Étourdi, À terre).",
-    emoji: "⛓️",
   },
   {
     id: "incapacitated",

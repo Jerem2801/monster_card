@@ -6,14 +6,22 @@ export default function HealButton({ hpMax, isBloodied }) {
 
 	const [currentHp, setCurrentHp] = useState(hpMax);
 
+    function setBloodied(newHp, hpMax){
+        if(newHp === 0){
+            isBloodied(false);
+        }else if(newHp <= hpMax/2){
+            isBloodied(true);
+        }else if(newHp >= hpMax/2){
+            isBloodied(false);
+        }
+    }
+
 	function addHeal() {
 		let newHp = currentHp + 1;
 		if (newHp > hpMax) {
 			newHp = currentHp;
 		}
-        if(newHp >= hpMax/2){
-            isBloodied(false);
-        }
+        setBloodied(newHp,hpMax);
 		return setCurrentHp(newHp);
 	}
 
@@ -22,10 +30,7 @@ export default function HealButton({ hpMax, isBloodied }) {
 		if (newHp < 0) {
 			newHp = currentHp;
 		}
-        if(newHp <= hpMax/2){
-            isBloodied(true);
-        }
-
+        setBloodied(newHp,hpMax);
 		return setCurrentHp(newHp);
 	}
 

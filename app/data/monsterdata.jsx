@@ -89,7 +89,7 @@ export const dataMonsters =[
     action : [
       {
       name: "Lancer de toile.",
-      description : "(Portée 6) : $dice. En cas de coup réussi : Entravé (évasion DD 12, ou dégâts tranchants/feu).",
+      description : "$dice (Portée 6). En cas de coup réussi : Entravé (évasion DD 12, ou dégâts tranchants/feu).",
       dice : {
         numberDice: 1,
         valueDice: 8,
@@ -98,7 +98,7 @@ export const dataMonsters =[
       },
       {
       name: "Morsure.",
-      description : "(Cible entravée) : $dice, Empoisonné (les soins magiques prennent fin).",
+      description : "(Cible entravée) $dice, Empoisonné (les soins magiques prennent fin).",
       dice : {
         numberDice: 2,
         valueDice: 8,
