@@ -2,6 +2,7 @@
 
 import AttacksButtons from "./actions/AttacksButtons";
 import StatusSelector from "./status/StatusSelector";
+import LegendaryMecanics from "./legendary/LegendaryMechanics";
 import HealButton from "./HealButton";
 import NamePanel from "./NamePanel";
 import PassivePanel from "./PassivePanel";
@@ -11,6 +12,7 @@ import {useState} from "react";
 export default function MonsterCard({ monster, remove }) {
 	const [showModal, setShowModal] = useState(false);
 	const [selectedStatuses, setSelectedStatuses] = useState([]);
+	const [bloodied2, setBloodied2] = useState(false);
 
 	const openStatusModal = () => {
 		setShowModal(true);
@@ -31,14 +33,33 @@ export default function MonsterCard({ monster, remove }) {
 	function isBloodied(bloodied){
 		if(bloodied && !selectedStatuses.includes("bloodied")){
 			setSelectedStatuses((prev) => [...prev, "bloodied"]);
+			setBloodied2(true);
 		}else if(!bloodied){
 			setSelectedStatuses((prev) => prev.filter((s) => s !== "bloodied"));
-		}	
+			setBloodied2(false);
+		}
+	}
+	
+	if(monster.name==="Krogg, Roi des Gobelins" && bloodied2){
+		const updatedMonster = structuredClone(monster);
+		updatedMonster.action.map((newAction) => {
+			if (newAction.dice !== undefined) {
+				newAction.dice.valueDice = 8;
+			}
+		});
+		monster = updatedMonster;
 	}
 
-	return (
-		<div className="w-full max-w-lg p-4 space-y-3 border border-neutral-200 rounded-md bg-amber-50 shadow-md">
+	if(monster.name==="Krogg, Roi des Gobelins" && bloodied2){
+		const updatedMonster = structuredClone(monster);
+		updatedMonster.armor = "L";
+		monster = updatedMonster;
+	}
 
+
+	return (
+		<div className="w-full max-w-xl p-4 space-y-3 border border-neutral-200 rounded-md bg-amber-50 shadow-md">
+			{showModal && (<StatusSelector handleStatusModal={closeStatusModal} selectedStatuses={selectedStatuses} toggleStatus={toggleStatus}/>) }
 			{/*<button
 			  	onClick={remove}
 			  	className="float-right cursor-pointer text-3xl font-bold text-red-600 hover:text-red-800 transition-colors"
@@ -54,9 +75,11 @@ export default function MonsterCard({ monster, remove }) {
 			<PassivePanel monster={monster}/>
 
 			<AttacksButtons monster={monster} />
-
-			{showModal && (<StatusSelector handleStatusModal={closeStatusModal} selectedStatuses={selectedStatuses} toggleStatus={toggleStatus}/>) }
 			
+			{monster.bloodied !== undefined && (
+				<LegendaryMecanics monster={monster} />
+			)}
+
 			<ListStatus selectedStatuses={selectedStatuses} removeStatus={toggleStatus} />
 
 		</div>

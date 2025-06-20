@@ -33,6 +33,12 @@ export default function NamePanel({ monster,openStatusModal }) {
                     </span>
                 )}
 
+				{monster.save !== undefined && (
+					<span className="ml-2 px-2 py-0.5 bg-amber-200 text-amber-600 rounded text-sm font-bold">
+						⭐ {monster.save}
+					</span>
+				)}
+
 			</div>
     );
 }
