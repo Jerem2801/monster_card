@@ -108,7 +108,8 @@ export const dataMonsters =[
     ]
   },
   {
-    name: "Krogg, Roi des Gobelins",
+    name: "Krogg",
+    legendary: true,
     hp: 75,
     armor: "M",
     level: "2",
@@ -117,7 +118,11 @@ export const dataMonsters =[
     ],
     action : [
       {
-        name: "Massacre brutal.",
+        name: "ACTIONS.",
+        description : "Après chaque tour d'un héro, choissisez un :"
+      },
+      {
+        name: "• Massacre brutal.",
         description : "Se déplace de 6. Inflige $dice dégâts, la cible est agrippée (évasion DD 10).",
         dice : {
           numberDice: 2,
@@ -126,7 +131,7 @@ export const dataMonsters =[
         }
       },
       {
-      name: "Casse-crânes.",
+      name: "• Casse-crânes.",
       description : "Se déplace de 6. Utilise une créature agrippée comme arme contre une autre créature. Les deux subissent $dice dégâts, et l’agrippement prend fin.",
       dice : {
         numberDice: 2,
@@ -148,6 +153,110 @@ export const dataMonsters =[
       description : "Krogg est mourant ! S’il subit $hp dégâts supplémentaires, il meurt. D’ici là, il bénéficie d’une armure lourde.",
       hp : 20,
       newArmor : "L"
+    }
+  },
+  {
+    name: "Grimbeak",
+    legendary: true,
+    hp: 100,
+    armor: "M",
+    level: "3, Grand",
+    save: "FOR+",
+    passif: [
+      {
+        name: "Brutal.",
+        description: "Traitez n'import qu'elle dé comme un Dé Primaire. Sur un critique: A Terre.",
+      }
+    ],
+    action : [
+      {
+        name: "ACTIONS.",
+        description : "Après chaque tour d'un héro, choissisez un :"
+      },
+      {
+        name: "• Hurlement Sauvage.",
+        description : "Tous les ennemis dans un rayon de 12 subissent $dice dégâts (ignorent l'armure). JdS de VOL 11 ou deviennent Effrayés pendant 1 round.",
+        dice : {
+          numberDice: 2,
+          valueDice: 6,
+          bonus: 0
+        },
+        use: 1
+      },
+      {
+      name: "• Déchirer & Lacérer.",
+      description : "$dice.",
+      dice : {
+        numberDice: 2,
+        valueDice: 6,
+        bonus: 10
+        }
+      },
+      {
+      name: "• Bec.",
+      description : "Déplacement de 8 et $dice.",
+      dice : {
+        numberDice: 2,
+        valueDice: 6,
+        bonus: 0
+        }
+      }
+    ],
+    bloodied :{
+      description : "À $hp, Hurlement Sauvage se recharge.",
+      hp : "50 PV"
+    },
+    lastStand :{
+      description : "Grimbeak est mourant ! S’il subit $hp dégâts supplémentaires, il meurt. Jusqu'à ce moment-là, ses attaques utilisent des d10 au lieu des d6.",
+      hp : 30,
+      newValueDice : 10
+    }
+  },
+  {
+    name: "Greenthumb",
+    legendary: true,
+    hp: 100,
+    level: "3",
+    save: "INT+,VOL+",
+    passif: [
+    ],
+    action : [
+      {
+        name: "ACTIONS.",
+        description : "Après chaque tour d'un héro, mouvement de 6 puis choissisez un :"
+      },
+      {
+        name: "• Invoquer des Roncespectres.",
+        description : "Invoque 1 sbire / héros (taille : 1d4)."
+      },
+      {
+      name: "• Enracinement.",
+      description : "Choisissez la moitié des héros. Ils doivent réussir un JdS de DEX 11 ou subir $dice et être Entravés par des lianes épineuses (évasion : JdS de STR ou DEX 11, ou recevoir des dégâts tranchants ou de feu pour se libérer).",
+      dice : {
+        numberDice: 2,
+        valueDice: 4,
+        bonus: 0
+        }
+      },
+      {
+      name: "• Tir de ronces.",
+      description : "(Portée 10) $dice.",
+      dice : {
+        numberDice: 5,
+        valueDice: 4,
+        bonus: 5
+        }
+      }
+    ],
+    bloodied :{
+      description : "À $hp, Greenthumb gagne une écorce magique qui lui confère une Armure Lourde.",
+      hp : "50 PV",
+      armor : "L"
+    },
+    lastStand :{
+      description : "Grimbeak est mourant ! S’il subit $hp dégâts supplémentaires, il meurt. En attendant, il agit deux fois par tour.",
+      hp : 30,
+      newDescription: "Après chaque tour d'un héro, mouvement de 6 puis choissisez deux :"
     }
   }
 ]

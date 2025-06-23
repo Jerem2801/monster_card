@@ -15,6 +15,11 @@ export default function NamePanel({ monster,openStatusModal }) {
 
 				<span className="text-gray-500 text-sm">Niv. {monster.level}</span>
 
+				
+				<span className="ml-2 px-2 py-0.5 bg-red-300 text-red-600 rounded text-sm font-bold">
+					❤️ {monster.hp}
+				</span>
+
 				{monster.armor !== undefined && (
 					<span className="ml-2 px-2 py-0.5 bg-slate-300 text-slate-600 rounded text-sm font-bold">
 						🛡️ {monster.armor}

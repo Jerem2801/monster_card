@@ -2,28 +2,15 @@
 
 import { useState } from "react";
 
-export default function HealButton({ hpMax, isBloodied,updateLegendaryMonster}) {
+export default function HealButtonLegendary({ hpMax}) {
 
 	const [currentHp, setCurrentHp] = useState(hpMax);
-
-    function setBloodied(newHp, hpMax){
-        updateLegendaryMonster(newHp);
-        if(newHp === 0){
-            isBloodied(false);
-        }else if(newHp <= hpMax/2){
-            updateLegendaryMonster(newHp);
-            isBloodied(true);
-        }else if(newHp >= hpMax/2){
-            isBloodied(false);
-        }
-    }
 
 	function addHeal() {
 		let newHp = currentHp + 1;
 		if (newHp > hpMax) {
 			newHp = currentHp;
 		}
-        setBloodied(newHp,hpMax);
 		return setCurrentHp(newHp);
 	}
 
@@ -32,25 +19,18 @@ export default function HealButton({ hpMax, isBloodied,updateLegendaryMonster}) 
 		if (newHp < 0) {
 			newHp = currentHp;
 		}
-        setBloodied(newHp,hpMax);
 		return setCurrentHp(newHp);
 	}
 
     return (
         <div
             className="flex items-center justify-center gap-3 relative overflow-hidden border border-gray-300 rounded-md px-3 py-1.5 shadow-sm"
-                            style={{
-                    background: `linear-gradient(to right, ${
-                        currentHp / hpMax <= 0.2
-                            ? '#f87171' // rouge
-                            : currentHp / hpMax <= 0.5
-                            ? '#fbbf24' // orange
-                            : '#4ade80' // vert
-                    } ${Math.max(0, Math.min(100, (currentHp / hpMax) * 100))}%, #ffffff ${Math.max(0, Math.min(100, (currentHp / hpMax) * 100))}%)`,
-                    borderRadius: '0.375rem',
-                    padding: '0.25rem 0.75rem',
-                    transition: 'background 0.3s',
-                }}
+            style={{
+                background: `linear-gradient(to right, #3b82f6 ${Math.max(0, Math.min(100, (currentHp / hpMax) * 100))}%, #ffffff ${Math.max(0, Math.min(100, (currentHp / hpMax) * 100))}%)`,
+                borderRadius: '0.375rem',
+                padding: '0.25rem 0.75rem',
+                transition: 'background 0.3s',
+            }}
         >
             <button
                 onClick={() => removeHeal()}
@@ -60,7 +40,7 @@ export default function HealButton({ hpMax, isBloodied,updateLegendaryMonster}) 
                 −
             </button>
 
-            <span className="inline-flex h-8 items-center font-mono text-lg font-medium text-gray-700 leading-none">
+            <span className="flex h-8 w-20 items-center justify-center font-mono text-lg font-medium text-gray-700 leading-none">
                 {currentHp} / {hpMax}
             </span>
 

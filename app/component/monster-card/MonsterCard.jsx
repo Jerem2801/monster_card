@@ -2,7 +2,8 @@
 
 import AttacksButtons from "./actions/AttacksButtons";
 import StatusSelector from "./status/StatusSelector";
-import LegendaryMecanics from "./legendary/LegendaryMechanics";
+import LegendaryMecanics,{updateLegendaryMonster2} from "./legendary/LegendaryMechanics";
+import HealButtonLegendary from "./legendary/HealButtonLegendary";
 import HealButton from "./HealButton";
 import NamePanel from "./NamePanel";
 import PassivePanel from "./PassivePanel";
@@ -12,7 +13,9 @@ import {useState} from "react";
 export default function MonsterCard({ monster, remove }) {
 	const [showModal, setShowModal] = useState(false);
 	const [selectedStatuses, setSelectedStatuses] = useState([]);
-	const [bloodied2, setBloodied2] = useState(false);
+	const [localMonster,setLocalMonster] = useState(monster);
+
+	const [dead, setDead] = useState(false);
 
 	const openStatusModal = () => {
 		setShowModal(true);
@@ -33,28 +36,24 @@ export default function MonsterCard({ monster, remove }) {
 	function isBloodied(bloodied){
 		if(bloodied && !selectedStatuses.includes("bloodied")){
 			setSelectedStatuses((prev) => [...prev, "bloodied"]);
-			setBloodied2(true);
 		}else if(!bloodied){
 			setSelectedStatuses((prev) => prev.filter((s) => s !== "bloodied"));
-			setBloodied2(false);
 		}
 	}
-	
-	if(monster.name==="Krogg, Roi des Gobelins" && bloodied2){
-		const updatedMonster = structuredClone(monster);
-		updatedMonster.action.map((newAction) => {
-			if (newAction.dice !== undefined) {
-				newAction.dice.valueDice = 8;
+
+	function updateLegendaryMonster(newHp){
+		if(monster.legendary){
+			let updatedMonster = structuredClone(localMonster);
+			updateLegendaryMonster2(updatedMonster,newHp);
+			if(newHp === 0){
+				setDead(true);	
+			}else{
+				setDead(false);	
 			}
-		});
-		monster = updatedMonster;
+			setLocalMonster(updatedMonster);
+		}
 	}
 
-	if(monster.name==="Krogg, Roi des Gobelins" && bloodied2){
-		const updatedMonster = structuredClone(monster);
-		updatedMonster.armor = "L";
-		monster = updatedMonster;
-	}
 
 
 	return (
@@ -68,16 +67,20 @@ export default function MonsterCard({ monster, remove }) {
 				x
 			</button>*/}
 
-			<NamePanel monster={monster} openStatusModal={openStatusModal}/>
+			<NamePanel monster={localMonster} openStatusModal={openStatusModal}/>
 				
-			<HealButton hpMax={monster.hp} isBloodied={isBloodied}/>
+			<HealButton hpMax={localMonster.hp} isBloodied={isBloodied} updateLegendaryMonster={updateLegendaryMonster}/>
 
-			<PassivePanel monster={monster}/>
+			{dead && (
+				<HealButtonLegendary hpMax={localMonster.lastStand.hp} />
+			)}
 
-			<AttacksButtons monster={monster} />
+			<PassivePanel monster={localMonster}/>
+
+			<AttacksButtons monster={localMonster} />
 			
-			{monster.bloodied !== undefined && (
-				<LegendaryMecanics monster={monster} />
+			{localMonster.bloodied !== undefined && (
+				<LegendaryMecanics monster={localMonster} />
 			)}
 
 			<ListStatus selectedStatuses={selectedStatuses} removeStatus={toggleStatus} />
