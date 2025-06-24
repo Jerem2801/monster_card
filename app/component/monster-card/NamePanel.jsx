@@ -43,7 +43,7 @@ export default function NamePanel({ monster,openStatusModal }) {
 						⭐ {monster.save}
 					</span>
 				)}
-
+		
 			</div>
     );
 }

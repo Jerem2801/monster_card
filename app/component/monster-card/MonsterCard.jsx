@@ -1,5 +1,6 @@
 "use client";
 
+import RemoveMonsterCardButton from "./RemoveMonsterCardButton";
 import AttacksButtons from "./actions/AttacksButtons";
 import StatusSelector from "./status/StatusSelector";
 import LegendaryMecanics,{updateLegendaryMonster2} from "./legendary/LegendaryMechanics";
@@ -10,7 +11,7 @@ import PassivePanel from "./PassivePanel";
 import ListStatus from "./status/ListStatus";
 import {useState} from "react";
 
-export default function MonsterCard({ monster, remove }) {
+export default function MonsterCard({ monster, removeMonsterCard }) {
 	const [showModal, setShowModal] = useState(false);
 	const [selectedStatuses, setSelectedStatuses] = useState([]);
 	const [localMonster,setLocalMonster] = useState(monster);
@@ -58,16 +59,13 @@ export default function MonsterCard({ monster, remove }) {
 
 	return (
 		<div className="w-full max-w-xl p-4 space-y-3 border border-neutral-200 rounded-md bg-amber-50 shadow-md">
+
 			{showModal && (<StatusSelector handleStatusModal={closeStatusModal} selectedStatuses={selectedStatuses} toggleStatus={toggleStatus}/>) }
-			{/*<button
-			  	onClick={remove}
-			  	className="float-right cursor-pointer text-3xl font-bold text-red-600 hover:text-red-800 transition-colors"
-			  	aria-label="Remove Monster"
-			>
-				x
-			</button>*/}
+			
+			{/*<RemoveMonsterCardButton removeMonsterCard={removeMonsterCard} />*/}
 
 			<NamePanel monster={localMonster} openStatusModal={openStatusModal}/>
+
 				
 			<HealButton hpMax={localMonster.hp} isBloodied={isBloodied} updateLegendaryMonster={updateLegendaryMonster}/>
 
@@ -84,6 +82,8 @@ export default function MonsterCard({ monster, remove }) {
 			)}
 
 			<ListStatus selectedStatuses={selectedStatuses} removeStatus={toggleStatus} />
+
+			
 
 		</div>
 	);
