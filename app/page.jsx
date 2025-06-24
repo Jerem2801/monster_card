@@ -27,7 +27,7 @@ export default function Home() {
         <div className="">
             <MonsterSelector dataMonsters={dataMonsters} addMonster={addMonster} removeAll={removeAllMonster}/>
 
-            <div className="flex flex-wrap justify-center gap-4 p-6">
+            <div className="flex flex-wrap justify-center gap-10 pt-8">
                 {monsters.map(({ id, monster }) => (
                     <MonsterCard key={id} monster={monster} removeMonsterCard={() => removeMonster(id)} />
                 ))}

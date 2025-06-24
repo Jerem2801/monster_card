@@ -58,7 +58,7 @@ export default function MonsterCard({ monster, removeMonsterCard }) {
 
 
 	return (
-		<div className="w-full max-w-xl p-4 space-y-3 border border-neutral-200 rounded-md bg-amber-50 shadow-md">
+		<div className="w-[30%] p-4 space-y-3 border border-neutral-200 rounded-md bg-amber-50 shadow-md">
 
 			{showModal && (<StatusSelector handleStatusModal={closeStatusModal} selectedStatuses={selectedStatuses} toggleStatus={toggleStatus}/>) }
 			

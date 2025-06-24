@@ -15,7 +15,14 @@ export default function MonsterSelector({dataMonsters,addMonster,removeAll}){
     }
 
     return (
-        <div className="w-full inline-flex items-center justify-center space-x-4 p-6 border-b border-neutral-200 bg-gray-200 shadow-md">
+        <div className="w-full inline-flex items-center justify-center space-x-4 p-2 border-b border-neutral-200 bg-gray-200 shadow-md">
+
+            <div className="inline-block text-center mr-50">
+                <p className="text-xl font-bold">MONSTER CARDS</p>
+                <p className="bg-blue-300 text-black text-sm px-2  mt-1">
+                    BETA
+                </p>
+            </div>
 
             <select
                 id="monster-select"
