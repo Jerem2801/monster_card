@@ -22,7 +22,7 @@ export const dataMonsters =[
     ]
   },
   {
-    name: "Gobelin",
+    name: "Gobelin Mêlée",
     hp: 15,
     level: "1/3, Petit",
     passif: [
@@ -40,7 +40,21 @@ export const dataMonsters =[
         valueDice: 6,
         bonus: 2
         }
-      },{
+      }
+    ]
+  },
+  {
+    name: "Gobelin Distance",
+    hp: 15,
+    level: "1/3, Petit",
+    passif: [
+      {
+        name: "Haha, raté !",
+        description: "À chaque fois qu'une attaque vous rate, infligez 1 dégât psychique en retour.",
+      }
+    ],
+    action : [
+      {
         name: "Fronde.",
         description : "$dice (Portée 8).",
         dice: {
@@ -50,8 +64,7 @@ export const dataMonsters =[
         }
       }
     ]
-  }
-  ,
+  },
   {
     name: "Gobelin Monteur De Rat",
     hp: 30,
@@ -103,6 +116,29 @@ export const dataMonsters =[
         numberDice: 2,
         valueDice: 8,
         bonus: 4
+        }
+      }
+    ]
+  },
+  {
+    name: "Brise-racines Géante",
+    hp: 50,
+    armor: "L",
+    level: "5, Grand",
+    passif: [
+      {
+        name: "Écorce Arrachée",
+        description: "Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.",
+      }
+    ],
+    action : [
+      {
+      name: "Coup écrasant.",
+      description : "$dice. En cas de critique : repousse de 2 cases.",
+      dice : {
+        numberDice: 3,
+        valueDice: 6,
+        bonus: 6
         }
       }
     ]
