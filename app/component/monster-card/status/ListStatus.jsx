@@ -1,7 +1,7 @@
 import { DEADLY,BLOODIED,DEAD, STATUSES } from "../../../data/statusdata"
 
 
-export default function ListStatus({selectedStatuses,removeStatus}) {
+export default function ListStatus({selectedStatuses,removeStatus,setSelectedStatuses}) {
 
   return (
     <div className="relative">
@@ -19,7 +19,7 @@ export default function ListStatus({selectedStatuses,removeStatus}) {
             if (!status) return null;
             return (
               <div key={id} className="flex items-start gap-3">
-                <button onClick={() => removeStatus(id)} className="flex items-start gap-3 w-full text-left cursor-pointer">
+                <button onClick={() => removeStatus(id,setSelectedStatuses)} className="flex items-start gap-3 w-full text-left cursor-pointer">
                   {/* Emoji dans une zone fixe */}
                   <span className="w-8 flex justify-center items-center text-2xl select-none">
                     {status.emoji}

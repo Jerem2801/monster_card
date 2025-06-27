@@ -1,7 +1,6 @@
 "use client";
 
 import {useState} from "react";
-import RemoveMonsterCardButton from "./RemoveMonsterCardButton";
 import EditModal from './edit/EditModal';
 import NamePanel from "./NamePanel";
 import PassivePanel from "./PassivePanel";
@@ -10,22 +9,14 @@ import HealButtonLegendary from "./legendary/HealButtonLegendary";
 import AttacksButtons from "./actions/AttacksButtons";
 import LegendaryMecanics,{updateLegendaryMonster2} from "./legendary/LegendaryMechanics";
 import ListStatus from "./status/ListStatus";
+import { toggleStatus } from "./status/testStatus";
 
 
 export default function MonsterCard({ monster, removeMonsterCard }) {
 	const [showEditModal, setShowEditModal] = useState(false);
 	const [selectedStatuses, setSelectedStatuses] = useState([]);
 	const [localMonster,setLocalMonster] = useState(monster);
-
 	const [dead, setDead] = useState(false);
-
-	function toggleStatus(id){
-		setSelectedStatuses((prev) =>
-		prev.includes(id)
-			? prev.filter((s) => s !== id)
-			: [...prev, id]
-		);
-	};
 
 	function isBloodied(bloodied){
 		if(bloodied && !selectedStatuses.includes("bloodied")){
@@ -79,9 +70,9 @@ export default function MonsterCard({ monster, removeMonsterCard }) {
 	return (
 		<div className="w-[30%] p-4 space-y-3 border border-neutral-200 rounded-md bg-amber-50 shadow-md">
 
-			{showEditModal && (<EditModal closeModal={() => setShowEditModal(false)} monster={localMonster} changeMonster={changeMonster} selectedStatuses={selectedStatuses} toggleStatus={toggleStatus} removeMonsterCard={removeMonsterCard}/>)}
-			
-			{/*<RemoveMonsterCardButton removeMonsterCard={removeMonsterCard} />*/}
+			{showEditModal && (
+				<EditModal closeModal={() => setShowEditModal(false)} monster={localMonster} changeMonster={changeMonster} selectedStatuses={selectedStatuses} toggleStatus={toggleStatus} removeMonsterCard={removeMonsterCard} setSelectedStatuses={setSelectedStatuses}/>
+			)}
 
 			<NamePanel monster={localMonster} openStatusModal={() => setShowEditModal(true)}/>
 				
@@ -99,7 +90,7 @@ export default function MonsterCard({ monster, removeMonsterCard }) {
 				<LegendaryMecanics monster={localMonster} />
 			)}
 
-			<ListStatus selectedStatuses={selectedStatuses} removeStatus={toggleStatus} />
+			<ListStatus selectedStatuses={selectedStatuses} removeStatus={toggleStatus} setSelectedStatuses={setSelectedStatuses}/>
 
 			
 

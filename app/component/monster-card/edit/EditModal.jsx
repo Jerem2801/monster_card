@@ -1,7 +1,7 @@
 import { useState } from "react";
 import StatusSelector from "../status/StatusSelector"
 
-export default function EditModal({ closeModal, monster, changeMonster,selectedStatuses,toggleStatus,removeMonsterCard }) {
+export default function EditModal({ closeModal, monster, changeMonster,selectedStatuses,toggleStatus,removeMonsterCard,setSelectedStatuses }) {
 	const [editMonster, setEditMonster] = useState(monster);
 
 	const updateField = (field, value) => {
@@ -78,7 +78,7 @@ export default function EditModal({ closeModal, monster, changeMonster,selectedS
                 </div>
 
                 {/* Status */}
-                <StatusSelector selectedStatuses={selectedStatuses} toggleStatus={toggleStatus} />
+                <StatusSelector selectedStatuses={selectedStatuses} toggleStatus={toggleStatus} setSelectedStatuses={setSelectedStatuses}/>
 				
 
 				{/* Actions */}
