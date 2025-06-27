@@ -80,3 +80,19 @@ export const BLOODIED =
     description: "À la moitié des PV ou moins.",
     emoji: "🩸",
   }
+
+export const DEAD = 
+  {
+    id: "dead",
+    label: "Mort",
+    description: "Le monstre est mort.",
+    emoji: "💀",
+  }
+
+export const DEADLY = 
+  {
+    id: "deadly",
+    label: "Mourrant",
+    description: "Le monstre est mourrant.",
+    emoji: "⚠️",
+  }

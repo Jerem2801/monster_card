@@ -1,5 +1,4 @@
-import { STATUSES } from "../../../data/statusdata"
-import { BLOODIED } from "../../../data/statusdata"
+import { DEADLY,BLOODIED,DEAD, STATUSES } from "../../../data/statusdata"
 
 
 export default function ListStatus({selectedStatuses,removeStatus}) {
@@ -12,6 +11,10 @@ export default function ListStatus({selectedStatuses,removeStatus}) {
             let status = STATUSES.find((s) => s.id === id);
             if(BLOODIED.id === id){
               status = BLOODIED;
+            }else if(DEAD.id === id){
+              status = DEAD;
+            }else if(DEADLY.id === id){
+              status = DEADLY;
             }
             if (!status) return null;
             return (

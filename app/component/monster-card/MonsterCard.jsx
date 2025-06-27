@@ -2,7 +2,6 @@
 
 import {useState} from "react";
 import RemoveMonsterCardButton from "./RemoveMonsterCardButton";
-//import StatusSelector from "./status/StatusSelector";
 import EditModal from './edit/EditModal';
 import NamePanel from "./NamePanel";
 import PassivePanel from "./PassivePanel";
@@ -36,37 +35,59 @@ export default function MonsterCard({ monster, removeMonsterCard }) {
 		}
 	}
 
-	function updateLegendaryMonster(newHp){
+	function putToDead(newHp){
+		let statusDead = "dead";
 		if(monster.legendary){
-			let updatedMonster = structuredClone(localMonster);
-			updateLegendaryMonster2(updatedMonster,newHp);
-			if(newHp === 0){
-				setDead(true);	
-			}else{
-				setDead(false);	
-			}
-			setLocalMonster(updatedMonster);
+			statusDead = "deadly";
 		}
+		
+		if(newHp === 0 && !selectedStatuses.includes(statusDead)){
+			setSelectedStatuses((prev) => [...prev, statusDead]);
+			setDead(true);
+		}else if(newHp > 0){
+			setSelectedStatuses((prev) => prev.filter((s) => s !== statusDead));
+			setDead(false);
+		}
+	}
+
+	function updateLegendaryMonster(newHp){
+		let updatedMonster = structuredClone(localMonster);
+		updateLegendaryMonster2(updatedMonster,newHp);
+		setLocalMonster(updatedMonster);
 	}
 
 	function changeMonster(editMonster){
 		setLocalMonster(editMonster);
 	}
 
+	function handleNewHP(newHp){
+		if (newHp >= localMonster.hp/2){
+			isBloodied(false);
+		}else if(newHp <= localMonster.hp/2){
+			isBloodied(true);
+		}
+		putToDead(newHp);
+
+		if(localMonster.legendary){
+			updateLegendaryMonster(newHp);
+		}
+	}
+
+
 
 
 	return (
 		<div className="w-[30%] p-4 space-y-3 border border-neutral-200 rounded-md bg-amber-50 shadow-md">
 
-			{showEditModal && (<EditModal closeModal={() => setShowEditModal(false)} monster={localMonster} changeMonster={changeMonster} selectedStatuses={selectedStatuses} toggleStatus={toggleStatus} />)}
+			{showEditModal && (<EditModal closeModal={() => setShowEditModal(false)} monster={localMonster} changeMonster={changeMonster} selectedStatuses={selectedStatuses} toggleStatus={toggleStatus} removeMonsterCard={removeMonsterCard}/>)}
 			
 			{/*<RemoveMonsterCardButton removeMonsterCard={removeMonsterCard} />*/}
 
 			<NamePanel monster={localMonster} openStatusModal={() => setShowEditModal(true)}/>
 				
-			<HealButton hpMax={localMonster.hp} isBloodied={isBloodied} updateLegendaryMonster={updateLegendaryMonster}/>
+			<HealButton hpMax={localMonster.hp} sendNewHp={handleNewHP}/>
 
-			{dead && (
+			{dead && localMonster.legendary === true && ( 
 				<HealButtonLegendary hpMax={localMonster.lastStand.hp} />
 			)}
 

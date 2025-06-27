@@ -2,39 +2,19 @@
 
 import { useState } from "react";
 
-export default function HealButton({ hpMax, isBloodied,updateLegendaryMonster}) {
+export default function HealButton({ hpMax, sendNewHp}) {
 
 	const [currentHp, setCurrentHp] = useState(hpMax);
 
-    function setBloodied(newHp, hpMax){
-        updateLegendaryMonster(newHp);
-        if(newHp === 0){
-            isBloodied(false);
-        }else if(newHp <= hpMax/2){
-            updateLegendaryMonster(newHp);
-            isBloodied(true);
-        }else if(newHp >= hpMax/2){
-            isBloodied(false);
-        }
+
+    function updateHeal(addValue){
+        if ((addValue > 0 && currentHp === hpMax) || (addValue < 0 && currentHp === 0)) {
+			return;
+		}
+        let newHp = currentHp + addValue;
+        setCurrentHp(newHp);
+        sendNewHp(newHp);
     }
-
-	function addHeal() {
-		let newHp = currentHp + 1;
-		if (newHp > hpMax) {
-			newHp = currentHp;
-		}
-        setBloodied(newHp,hpMax);
-		return setCurrentHp(newHp);
-	}
-
-	function removeHeal() {
-		let newHp = currentHp - 1;
-		if (newHp < 0) {
-			newHp = currentHp;
-		}
-        setBloodied(newHp,hpMax);
-		return setCurrentHp(newHp);
-	}
 
     return (
         <div
@@ -53,7 +33,7 @@ export default function HealButton({ hpMax, isBloodied,updateLegendaryMonster}) 
                 }}
         >
             <button
-                onClick={() => removeHeal()}
+                onClick={() => updateHeal(-1)}
                 aria-label="Decrease health"
                 className="flex h-8 w-8 items-center justify-center p-0 rounded-full bg-red-600 hover:bg-red-700 text-white font-semibold transition cursor-pointer"
             >
@@ -65,7 +45,7 @@ export default function HealButton({ hpMax, isBloodied,updateLegendaryMonster}) 
             </span>
 
             <button
-                onClick={() => addHeal()}
+                onClick={() => updateHeal(+1)}
                 aria-label="Increase health"
                 className="flex h-8 w-8 items-center justify-center p-0 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold transition cursor-pointer"
             >
