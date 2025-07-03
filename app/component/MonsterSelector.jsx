@@ -15,11 +15,11 @@ export default function MonsterSelector({dataMonsters,addMonster,removeAll}){
     }
 
     return (
-        <div className="w-full inline-flex items-center justify-center space-x-4 p-2 border-b border-neutral-200 bg-gray-200 shadow-md">
+        <div className="w-full inline-flex items-center justify-center space-x-4 p-4 bg-gray-100">
 
             <div className="inline-block text-center mr-50">
-                <p className="text-xl font-bold">MONSTER CARDS</p>
-                <p className="bg-blue-300 text-black text-sm px-2  mt-1">
+                <p className="text-l font-bold">MONSTER CARDS</p>
+                <p className="bg-blue-300 text-black text-xs px-2  mt-1">
                     BETA
                 </p>
             </div>
@@ -38,7 +38,11 @@ export default function MonsterSelector({dataMonsters,addMonster,removeAll}){
             </select>
             
             <button
-                className="px-5 py-2 rounded-md bg-white border-2 border-green-600 hover:text-green-400 hover:border-green-400 text-green-600 font-semibold transition-colors whitespace-nowrap cursor-pointer"
+                className="px-5 py-2 rounded-md bg-white border-2 border-green-600
+             hover:text-green-400 hover:border-green-400 text-green-600
+             font-semibold transition-all duration-150 ease-in-out
+             whitespace-nowrap cursor-pointer
+             active:scale-95 active:bg-green-50"
                 onClick={() => addMonsterToPanel()}
             >
                 Ajouter
