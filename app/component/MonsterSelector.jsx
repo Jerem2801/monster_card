@@ -1,6 +1,7 @@
 'use client'
 
 import {useState} from "react";
+import Link from "next/link";
 
 export default function MonsterSelector({dataMonsters,addMonster,removeAll}){
     const [selectedMonsterName, setSelectedMonsterName] = useState(dataMonsters[0]?.name || '');
@@ -19,11 +20,20 @@ export default function MonsterSelector({dataMonsters,addMonster,removeAll}){
 
             <div className="inline-block text-center mr-50">
                 <p className="text-l font-bold">MONSTER CARDS</p>
-                <p className="bg-blue-300 text-black text-xs px-2  mt-1">
+                <p className="bg-blue-300 text-black text-xs px-2">
                     BETA
                 </p>
             </div>
 
+            <div>
+                <Link
+                    href="/encounter">
+                    Rencontre
+                </Link>
+                
+            </div>
+
+            {/*
             <select
                 id="monster-select"
                 className="min-w-[10rem] px-3 py-2 border border-gray-400 bg-white rounded-md focus:outline-none"
@@ -38,11 +48,7 @@ export default function MonsterSelector({dataMonsters,addMonster,removeAll}){
             </select>
             
             <button
-                className="px-5 py-2 rounded-md bg-white border-2 border-green-600
-             hover:text-green-400 hover:border-green-400 text-green-600
-             font-semibold transition-all duration-150 ease-in-out
-             whitespace-nowrap cursor-pointer
-             active:scale-95 active:bg-green-50"
+                className="px-5 py-2 rounded-md bg-white border-2 border-green-600 hover:text-green-400 hover:border-green-400 text-green-600 font-semibold transition-all duration-150 ease-in-out whitespace-nowrap cursor-pointer active:scale-95 active:bg-green-50"
                 onClick={() => addMonsterToPanel()}
             >
                 Ajouter
@@ -53,7 +59,7 @@ export default function MonsterSelector({dataMonsters,addMonster,removeAll}){
                 onClick={removeAll}
             >
                 Nettoyer
-            </button>
+            </button>*/}
         </div>
     );
 }

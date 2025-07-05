@@ -10,7 +10,7 @@ export default function AdvantagePanel({ advantage, setAdvantage, onThrowDice, c
 
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-3xl flex items-center justify-center z-50 px-4">
+    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 px-4">
       <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 relative flex flex-col items-center gap-6 border border-gray-200">
 		{/* Bouton fermer */}
 		<button
