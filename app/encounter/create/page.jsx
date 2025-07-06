@@ -52,7 +52,7 @@ export default function Page() {
     <div className="pt-4">
       {/* Ligne 1 : input + lien */}
       <div className="flex justify-between items-center mb-6">
-        <div className="bg-gray-100 rounded-2xl hover:bg-gray-200 p-4 flex gap-4 items-end">
+        <div className="bg-gray-100 rounded-2xl hover:bg-gray-200 shadow-md p-4 flex gap-4 items-end">
           <div>
             <label htmlFor="encounterName" className="block text-sm">Rencontre</label>
             <input
@@ -89,7 +89,7 @@ export default function Page() {
           href="/encounter/create"
           className="text-blue-300 border-2 border-blue-300 px-6 py-3 rounded-2xl hover:bg-blue-100 transition-colors"
         >
-          Création
+          Enregistrer
         </Link>
       </div>
 
@@ -106,7 +106,7 @@ export default function Page() {
         {/* Bloc 2 — 1/3 */}
         <div className="w-full md:w-1/3">
           <h2 className="text-lg font-semibold mb-1">Monstres Sélectionnés</h2>
-          <div className="mb-4 p-3 bg-gray-50 rounded-lg border text-sm">
+          <div className="mb-4 p-3 bg-gray-100 rounded-lg shadow-md text-sm">
             <div>Nombre de monstres : <span className="font-bold">{selectedMonsters.length}</span></div>
             <div>Niveau cumulé : <span className="font-bold">{
               Math.round(
