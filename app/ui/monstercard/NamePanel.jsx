@@ -37,7 +37,7 @@ export default function NamePanel({ monster,add,remove, selected }) {
 				<button className="px-2 py-0.5 bg-red-200 rounded text-sm font-bold hover:bg-red-300 cursor-pointer transition-colors" onClick={remove}>
 					➖	
 				</button>
-        </div>)}
+            </div>)}
 		</div>
     );
 }

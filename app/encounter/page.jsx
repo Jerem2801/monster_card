@@ -1,48 +1,65 @@
-// app/encounter/page.jsx
+'use client';
+
 import Link from 'next/link';
+import SimpleLink from '@/app/ui/SimpleLink';
+import { fetchApi } from '@/app/lib/api';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
-async function getEncounters() {
-  const res = await fetch('http://localhost:3000/api/encounter/', {
-    cache: 'no-store',
-  });
+export default function Page() {
+  const [encounters, setEncounters] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  const router = useRouter();
 
-  if (!res.ok) {
-    throw new Error('Échec du chargement des rencontres');
-  }
+  useEffect(() => {
+    async function loadEncounters() {
+      const data = await fetchApi('http://localhost:3000/api/encounter/');
+      setEncounters(data.encounters);
+    }
+    loadEncounters();
+  }, [refresh]);
 
-  const data = await res.json();
-  return data.encounters;
-}
-
-export default async function Page() {
-  const encounters = await getEncounters();
+  const handleDelete = async (id) => {
+    const response = await fetch(`/api/encounter/${id}?id=${id}`, {
+      method: 'DELETE',
+    });
+    if (response.ok) {
+      //router.refresh();
+      setRefresh(!refresh);
+    } else {
+      alert('Erreur lors de la suppression de la rencontre');
+    }
+  };
 
   return (
     <div className="flex flex-col gap-6 py-8">
-      {/* Barre du haut */}
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Rencontre</h1>
-        <Link
-          href="/encounter/create"
-          className="bg-blue-300 px-6 py-3 rounded-xl hover:bg-blue-100 transition-colors"
-        >
-          Création
-        </Link>
+        <SimpleLink href="/encounter/create" name="Nouvelle" />
       </div>
 
-      {/* Liste des rencontres */}
       <div className="flex flex-col gap-2">
         {encounters.length === 0 ? (
           <p className="text-gray-500">Aucune rencontre trouvée.</p>
         ) : (
           encounters.map((encounter) => (
-            <Link
-              key={encounter.id}
-              href={`/encounter/${encounter.id}`}
+            <div
               className="p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              key={encounter.id}
             >
-              {encounter.name}
-            </Link>
+              <Link
+                href={`/encounter/${encounter.id}`}
+                className=""
+              >
+                {encounter.name}
+              </Link>
+              <button
+                className="ml-4 text-red-500 hover:text-red-700"
+                onClick={() => handleDelete(encounter.id)}
+              >
+                Supprimer
+              </button>
+            </div>
           ))
         )}
       </div>
