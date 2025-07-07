@@ -1,15 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import SimpleLink from '@/app/ui/SimpleLink';
-import { fetchApi } from '@/app/lib/api';
-import { useRouter } from 'next/navigation';
+import SimpleLink from '@/ui/SimpleLink';
+import { fetchApi } from '@/lib/api';
 import { useState, useEffect } from 'react';
 
 export default function Page() {
   const [encounters, setEncounters] = useState([]);
   const [refresh, setRefresh] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     async function loadEncounters() {
@@ -24,7 +22,6 @@ export default function Page() {
       method: 'DELETE',
     });
     if (response.ok) {
-      //router.refresh();
       setRefresh(!refresh);
     } else {
       alert('Erreur lors de la suppression de la rencontre');

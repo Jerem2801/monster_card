@@ -1,11 +1,11 @@
 'use client';
 
-import EncounterForm from '@/app/component/EncounterForm';
+import EncounterForm from '@/component/encounter/EncounterForm';
 
 export default function Page() {
 
   return (
-    <div className="p-8">
+    <div>
       <EncounterForm encounterId={0} />
     </div>
   );
