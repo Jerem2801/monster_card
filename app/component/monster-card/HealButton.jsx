@@ -1,5 +1,7 @@
 "use client";
 
+import { PlusIcon, MinusIcon } from "@heroicons/react/16/solid";
+import { Button } from "flowbite-react";
 import { useState, useRef, useEffect } from "react";
 
 export default function HealButton({ hpMax, sendNewHp }) {
@@ -47,7 +49,7 @@ export default function HealButton({ hpMax, sendNewHp }) {
 	return (
 		<div className="relative w-full" ref={tooltipRef}>
 			<div
-				className="w-full flex items-center justify-center gap-3 relative overflow-hidden border border-gray-300 rounded-md px-3 py-1.5 shadow-sm cursor-pointer"
+				className="flex items-center justify-center gap-3 relative overflow-hidden border border-gray-300 rounded-md px-3 py-1.5 shadow-sm"
 				style={{
 					background: `linear-gradient(to right, ${
 						currentHp / hpMax <= 0.2
@@ -62,31 +64,42 @@ export default function HealButton({ hpMax, sendNewHp }) {
 				}}
 				onClick={() => setShowTooltip(!showTooltip)}
 			>
-				<button
+
+				<div className="flex items-center justify-center">
+				<Button
 					onClick={(e) => {
 						e.stopPropagation();
 						updateHeal(-1);
 					}}
-					aria-label="Decrease health"
-					className="flex h-8 w-8 items-center justify-center p-0 rounded-full bg-red-600 hover:bg-red-700 text-white font-semibold transition cursor-pointer"
-				>
-					−
-				</button>
+					color='red'
+					size='xs'
+					pill
+					iconOnly
+					>
+					<MinusIcon className="h-5 w-5" />		
+				</Button>	
+				</div>
 
-				<span className="inline-flex h-8 items-center font-mono text-lg font-medium text-gray-700 leading-none select-none">
+
+				<span className="flex h-8 w-20 items-center justify-center font-mono text-lg font-medium text-gray-700 leading-none">
 					{currentHp} / {hpMax}
 				</span>
 
-				<button
+				<Button
 					onClick={(e) => {
 						e.stopPropagation();
 						updateHeal(+1);
 					}}
-					aria-label="Increase health"
-					className="flex h-8 w-8 items-center justify-center p-0 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold transition cursor-pointer"
-				>
-					+
-				</button>
+					color='green'
+					size='xs'
+					pill
+					iconOnly
+					
+					>
+					<PlusIcon className="h-5 w-5" />		
+				</Button>
+
+
 			</div>
 
 			{showTooltip && (

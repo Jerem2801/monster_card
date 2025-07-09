@@ -1,9 +1,9 @@
 "use client";
 
 import {useState} from "react";
-import EditModal from './edit/EditModal';
-import NamePanel from "./NamePanel";
-import PassivePanel from "./PassivePanel";
+import EditModal from '@/component/monster-card/edit/EditModal';
+import NamePanel from "@/component/monster-card/NamePanel";
+import PassivePanel from "@/component/monster-card/PassivePanel";
 import HealButton from "./HealButton";
 import HealButtonLegendary from "./legendary/HealButtonLegendary";
 import AttacksButtons from "./actions/AttacksButtons";

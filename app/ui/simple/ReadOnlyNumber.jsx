@@ -8,7 +8,7 @@ export default function ReadOnlyNumber({ label, value }) {
       </label>
 
       <div
-        className="h-11 bg-gray-50 border border-gray-300 rounded-lg text-center flex items-center justify-center text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+        className="h-11 bg-gray-50 border border-gray-300 rounded-lg text-center flex shadow-inner items-center justify-center text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
       >
         {value}
       </div>

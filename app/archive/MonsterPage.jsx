@@ -6,7 +6,6 @@ import { dataMonsters } from '../data/monsterdata';
 import { useState } from 'react';
 
 export default function MonsterPage() {
-
     const [monsters, setMonsters] = useState([]);
 
     function addMonster(selectedMonster){

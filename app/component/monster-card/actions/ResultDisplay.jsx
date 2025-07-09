@@ -1,3 +1,5 @@
+import { Button, Tooltip } from "flowbite-react";
+
 export default function ResultDisplay({ resultToDisplay, onHide }) {
 
     if (!resultToDisplay || resultToDisplay.dices.length === 0) return null;
@@ -11,27 +13,8 @@ export default function ResultDisplay({ resultToDisplay, onHide }) {
         !isFailed && isCritic ? "text-green-600 scale-110" : "",
     ].join(" ");
 
-    return (
-        <div className="inline-block mt-2 p-2 bg-gray-100 border border-gray-300 rounded cursor-pointer" onClick={onHide} title="Cliquer pour masquer le résultat">
-            {/* Conteneur tooltip */}
-            <div className="relative group inline-block font-semibold">
-                Résultat total :{" "}
-                <span className={resultClasses}>{resultToDisplay.total}</span>
-                {isCritic && (
-                    <span role="img" aria-label="critique" className="text-green-600 text-xl ml-1">
-                        💥
-                    </span>
-                )}
-                {isFailed && (
-                    <span role="img" aria-label="critique" className="text-red-600 text-xl ml-1">
-                        💀
-                    </span>
-                )}
-
-                {/* Tooltip, caché par défaut, visible au hover */}
-                <div className="absolute top-1/2 left-full ml-2 -translate-y-1/2 hidden group-hover:flex whitespace-nowrap rounded bg-gray-800 px-2 py-1 text-xs text-white z-10 select-none space-x-1">
-                    Dés lancés :{" "}
-                    {resultToDisplay.dices.map((dice, i) => {
+    const content = (
+        resultToDisplay.dices.map((dice, i) => {
                         // Critique = premier dé (i === 0) et valeur max
                         if (i === 0 && isCritic) {
                             return (
@@ -61,9 +44,29 @@ export default function ResultDisplay({ resultToDisplay, onHide }) {
                                 {dice}
                             </span>
                         );
-                    })}
-                </div>
+                    })
+    );
+
+    return (
+        <div className="inline-block mt-2 p-2 bg-gray-100 border border-gray-300 rounded cursor-pointer" onClick={onHide} title="Cliquer pour masquer le résultat">
+            {/* Conteneur tooltip */}
+            <Tooltip content={content} placement="top" style="light">
+            <div className="relative group inline-block font-semibold">
+                Résultat total :{" "}
+                <span className={resultClasses}>{resultToDisplay.total}</span>
+                {isCritic && (
+                    <span role="img" aria-label="critique" className="text-green-600 text-xl ml-1">
+                        💥
+                    </span>
+                )}
+                {isFailed && (
+                    <span role="img" aria-label="critique" className="text-red-600 text-xl ml-1">
+                        💀
+                    </span>
+                )}
+ 
             </div>
+            </Tooltip>
         </div>
     );
 }

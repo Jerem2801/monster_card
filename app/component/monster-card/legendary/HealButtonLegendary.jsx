@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { PlusIcon, MinusIcon } from "@heroicons/react/16/solid";
+import { Button } from "flowbite-react";
 
 export default function HealButtonLegendary({ hpMax}) {
 
@@ -32,25 +34,31 @@ export default function HealButtonLegendary({ hpMax}) {
                 transition: 'background 0.3s',
             }}
         >
-            <button
-                onClick={() => removeHeal()}
-                aria-label="Decrease health"
-                className="flex h-8 w-8 items-center justify-center p-0 rounded-full bg-red-600 hover:bg-red-700 text-white font-semibold transition cursor-pointer"
-            >
-                −
-            </button>
+            <div className="flex items-center justify-center">
+				<Button
+					onClick={() => {removeHeal()}}
+					color='red'
+					size='xs'
+					pill
+					iconOnly
+					>
+					<MinusIcon className="h-5 w-5" />		
+				</Button>	
+				</div>
 
             <span className="flex h-8 w-20 items-center justify-center font-mono text-lg font-medium text-gray-700 leading-none">
                 {currentHp} / {hpMax}
             </span>
 
-            <button
-                onClick={() => addHeal()}
-                aria-label="Increase health"
-                className="flex h-8 w-8 items-center justify-center p-0 rounded-full bg-green-600 hover:bg-green-700 text-white font-semibold transition cursor-pointer"
-            >
-                +
-            </button>
+            <Button
+					onClick={() => addHeal()}
+					color='green'
+					size='xs'
+					pill
+					iconOnly
+					>
+					<PlusIcon className="h-5 w-5" />		
+				</Button>
         </div>
 
     );

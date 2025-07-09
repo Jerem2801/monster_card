@@ -1,8 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import SimpleLink from '@/ui//simple/SimpleLink';
-import SimpleButton from '@/ui/simple/SimpleLink';
+import SimpleLink from '@/ui/simple/SimpleLink';
+import SimpleButton from '@/ui/simple/SimpleButton';
+import { Button}  from 'flowbite-react';
+import { PencilSquareIcon,XCircleIcon,PlayCircleIcon } from '@heroicons/react/16/solid';
 import { fetchApi } from '@/lib/api';
 import { useState, useEffect } from 'react';
 
@@ -23,14 +25,14 @@ export default function Page() {
 
   useEffect(() => {
     async function loadEncounters() {
-      const data = await fetchApi('http://localhost:3000/api/encounter/');
+      const data = await fetchApi('/api/encounter/');
       setEncounters(data.encounters);
     }
     loadEncounters();
   }, [refresh]);
 
   return (
-    <div className="flex flex-col gap-6 py-8">
+    <div className="flex flex-col gap-6 p-8 pl-80 pr-80">
 
       <div className="flex justify-between items-center">
 
@@ -39,27 +41,46 @@ export default function Page() {
 
       </div>
 
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-4">
         
         {encounters.length === 0 ? (
           <p className="text-gray-500">Aucune rencontre trouvée.</p>
         ) : (
           encounters.map((encounter) => (
             <div
-              className="p-4 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+              className="flex justify-between items-center p-2 bg-gray-100 rounded-lg shadow-sm hover:bg-gray-200 transition-colors"
               key={encounter.id}
             >
-              <Link
-                href={`/encounter/${encounter.id}`}
-              >
-                {encounter.name}
+              <div className="pl-10 text-xl font-bold">
+                <Link
+                  href={`/encounter/${encounter.id}`}
+                >
+                  {encounter.name}
+                </Link>
+              </div> 
+
+              
+            <div className="flex gap-2 pr-10">
+              <Link href={`/fight/${encounter.id}`}>
+                <Button>
+                  <PlayCircleIcon className="h-5 w-5" />
+                </Button>
               </Link>
 
-              <SimpleButton
-                label="Supprimer"
-                onClick={() => handleDelete(encounter.id)}
-              />
+              <Link href={`/encounter/${encounter.id}`}>
+                <Button
+                  color='green'>
+                  <PencilSquareIcon className="h-5 w-5" />
+                </Button>
+              </Link>
 
+              <Button
+                  color='red'
+                  onClick={() => handleDelete(encounter.id)} >
+                  <XCircleIcon className="h-5 w-5" />
+                </Button>
+
+            </div>
             </div>
           ))
         )}

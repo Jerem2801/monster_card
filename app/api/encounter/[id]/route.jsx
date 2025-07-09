@@ -5,8 +5,8 @@ import postgres from 'postgres';
 const sql = postgres(process.env.POSTGRES_URL, { ssl: 'require' });
 
 export async function GET(_,{params}) {
-  const encounterId = params.id;
     try {
+        const { id: encounterId } = await params;
         const rows = await sql`SELECT e.name, ed.nom_monstre, ed.nombre_monstre FROM encounter e JOIN encounter_detail ed ON e.id = ed.encounter_id WHERE e.id = ${encounterId}`;
         if (rows.length === 0) {
         return errorResponse(new Error("Rencontre introuvable"), 404);
@@ -27,7 +27,7 @@ export async function GET(_,{params}) {
 
 export async function DELETE(_, {params}) {
   try {
-    const encounterId = params.id;
+    const { id: encounterId } = await params;
 
     if (!encounterId) {
       return errorResponse(new Error('ID de rencontre manquant'), 400);

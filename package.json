@@ -6,16 +6,20 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "flowbite-react patch"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "@neondatabase/serverless": "^1.0.1",
+    "@next/font": "^14.2.15",
     "clsx": "^2.1.1",
+    "flowbite-react": "^0.11.8",
     "next": "15.3.3",
     "postgres": "^3.4.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "vercel": "^44.2.13"
+    "vercel": "^32.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

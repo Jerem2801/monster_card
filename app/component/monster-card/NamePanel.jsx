@@ -2,7 +2,7 @@ export default function NamePanel({ monster,openStatusModal }) {
     return (
         	<div className="flex items-baseline gap-2 flex-wrap">
 
-				<div className="flex italic font-semibold flex-wrap">
+				<div className="flex font-semibold flex-wrap">
 					<button className="cursor-pointer" onClick={openStatusModal}>
 						{monster.name.split(" ").map((word, index) => (
 							<span key={index} className="mr-1">
@@ -15,10 +15,6 @@ export default function NamePanel({ monster,openStatusModal }) {
 
 				<span className="text-gray-500 text-sm">Niv. {monster.level}</span>
 
-				
-				{/*<span className="ml-2 px-2 py-0.5 bg-red-300 text-red-600 rounded text-sm font-bold">
-					❤️ {monster.hp}
-				</span>*/}
 
 				{monster.armor && monster.armor.toLowerCase() !== "none" && (
 					<span className="ml-2 px-2 py-0.5 bg-slate-300 text-slate-600 rounded text-sm font-bold">

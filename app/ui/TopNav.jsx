@@ -11,9 +11,8 @@ export default function TopNav() {
           </div>
         </Link>
       </div>
-
-      <div>
-        <Link href="../encounter" className="font-bold hover:text-blue-700">
+      <div className="flex space-x-4">
+        <Link href="../encounter" className="text-gray-900 rounded-sm hover:bg-gray-100 font-medium">
           Rencontre
         </Link>
       </div>

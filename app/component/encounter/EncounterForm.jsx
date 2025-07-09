@@ -37,13 +37,14 @@ export default function EncounterForm({ encounterId }) {
   };
 
   const saveEncounter = async () => {
-    if(!(await isGoodBeforeSaveEncounter(encounterId, encounterName, selectedMonsters))){
+    const encounterNameTrimmed = encounterName.trim();
+    if(!(await isGoodBeforeSaveEncounter(encounterId, encounterNameTrimmed, selectedMonsters))){
       return;
     }
 
     try {
       const encounterDetails = getMonsterToSave(selectedMonsters);
-      saveOrUpdateEncounter(encounterId,encounterName,encounterDetails);
+      saveOrUpdateEncounter(encounterId,encounterNameTrimmed,encounterDetails);
       router.push('/encounter');
     } catch (error) {
       console.error("Erreur lors de l'enregistrement de la rencontre :", error);
@@ -68,7 +69,7 @@ export default function EncounterForm({ encounterId }) {
 
   
   return (
-    <div className="pt-4">
+    <div className="p-8 pl-80 pr-80">
 
       <EncounterParams 
         encounterName={encounterName} 

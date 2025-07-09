@@ -1,17 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from 'next/font/google';
 import "./globals.css";
 import TopNav from "./ui/TopNav";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: "Monster Card",
@@ -25,15 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col h-screen`}
-      >
+      <body className={`${inter.className} antialiased flex flex-col h-screen`}>
         <TopNav />
         <div className="flex-grow overflow-auto"
-          style={{
-            paddingLeft: 'max(0px, calc((100vw - 1300px) / 2))',
-            paddingRight: 'max(0px, calc((100vw - 1300px) / 2))',
-          }}>
+          >
           {children}
         </div>
       </body>
