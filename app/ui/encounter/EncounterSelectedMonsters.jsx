@@ -1,4 +1,4 @@
-import MonsterCard from '@/ui/monstercard/MonsterCard';
+import MonsterCard from '@/ui/encounter/monstercard/MonsterCard';
 import {getTotalMonsterLevel, computeDifficultyLabel } from '@/lib/monsterUtils';
 
 export default function EncounterSelectedMonsters({selectedMonsters,nbHeroes,levelHeroes,removeMonster}){

@@ -1,4 +1,4 @@
-import MonsterCard from '@/ui/monstercard/MonsterCard'
+import MonsterCard from '@/ui/encounter/monstercard/MonsterCard'
 
 export default function EncounterListMonsters({sortedMonsters, addMonster}){
     return (
