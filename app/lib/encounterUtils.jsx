@@ -2,7 +2,7 @@ import { fetchApi } from '@/lib/api'
 
 
 async function checkExisting(encounterId, name) {
-    const data = await fetchApi('http://localhost:3000/api/encounter/');
+    const data = await fetchApi('/api/encounter/');
     const encounters = data.encounters;
     if (!Array.isArray(encounters) || encounters.length === 0) {
         return false; 
