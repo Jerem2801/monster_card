@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { dataMonsters } from '@/data/monsterdata';
 
 import EncounterParams from '@/ui/encounter/EncounterParams';
-import EncounterListMonsters from '@/ui/encounter/EncounterListMonsters';
+import EncounterListMonsters from '@/component/encounter/EncounterListMonsters';
 import EncounterSelectedMonsters from '@/ui/encounter/EncounterSelectedMonsters';
 
 import { parseLevel } from '@/lib/monsterUtils';
@@ -81,6 +81,7 @@ export default function EncounterForm({ encounterId }) {
                 encounterName={encounterName}
                 nbHeroes={nbHeroes}
                 levelHeroes={levelHeroes}
+				selectedMonsters={selectedMonsters}
                 setEncounterName={setEncounterName}
                 setNbHeroes={setNbHeroes}
                 setLevelHeroes={setLevelHeroes}

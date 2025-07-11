@@ -1,4 +1,4 @@
-export default function SimpleInputText({ label, value, onChange }) {
+export default function SimpleInputText({ label, value, onChange, placeholder = '', required = false, ...props }) {
     return (
         <div className="max-w-[700] flex-grow">
             <label
@@ -12,7 +12,10 @@ export default function SimpleInputText({ label, value, onChange }) {
                 id="default-input"
                 value={value}
                 onChange={onChange}
-                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-md focus:border-blue-500 focus:ring-blue-500"
+                placeholder={placeholder}
+                required={required}
+                {...props}
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-md focus:border-blue-500 focus:ring-2 focus:ring-blue-500 transition-all duration-150"
             />
         </div>
     );

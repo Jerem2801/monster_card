@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import SimpleLink from '@/ui/simple/SimpleLink';
 import { Button } from 'flowbite-react';
 import { PencilSquareIcon, XCircleIcon, PlayCircleIcon } from '@heroicons/react/16/solid';
 import { fetchApi } from '@/lib/api';
@@ -34,7 +33,11 @@ export default function Page() {
         <div className="flex flex-col gap-6 pt-8 pr-8 pl-8 lg:pr-80 lg:pl-80">
             <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-bold">Rencontre</h1>
-                <SimpleLink href="/encounter/create" name="Nouvelle" />
+				<Link href="/encounter/create">
+					<Button>
+						Nouvelle
+					</Button>
+				</Link>
             </div>
 
             <div className="flex flex-col gap-4">

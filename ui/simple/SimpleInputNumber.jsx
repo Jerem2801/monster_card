@@ -1,5 +1,6 @@
-export default function SimpleInputNumber({ label, min, value, onChange }) {
+export default function SimpleInputNumber({ label, min, max, value, onChange }) {
     const increment = () => {
+        if (typeof max === 'number' && Number(value) >= max) return;
         onChange({ target: { value: Number(value) + 1 } });
     };
 
@@ -20,7 +21,8 @@ export default function SimpleInputNumber({ label, min, value, onChange }) {
                 <button
                     type="button"
                     onClick={decrement}
-                    className="h-11 rounded-s-lg border border-gray-300 bg-gray-100 p-3 shadow-md hover:bg-gray-200 focus:ring-2 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+                    disabled={Number(value) <= min}
+                    className={`h-11 rounded-s-lg border border-gray-300 bg-gray-100 p-3 shadow-md transition-transform active:scale-95 hover:bg-gray-200 focus:ring-2 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 ${Number(value) <= min ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                     <svg
                         className="h-3 w-3 text-gray-900 dark:text-white"
@@ -44,6 +46,7 @@ export default function SimpleInputNumber({ label, min, value, onChange }) {
                     id="quantity-input"
                     readOnly
                     min={min}
+                    max={max}
                     value={value}
                     onChange={onChange}
                     className="block h-11 w-full border-x-0 border-gray-300 bg-gray-50 py-2.5 text-center text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
@@ -53,7 +56,8 @@ export default function SimpleInputNumber({ label, min, value, onChange }) {
                 <button
                     type="button"
                     onClick={increment}
-                    className="h-11 rounded-e-lg border border-gray-300 bg-gray-100 p-3 shadow-md hover:bg-gray-200 focus:ring-2 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
+                    disabled={typeof max === 'number' && Number(value) >= max}
+                    className={`h-11 rounded-e-lg border border-gray-300 bg-gray-100 p-3 shadow-md transition-transform active:scale-95 hover:bg-gray-200 focus:ring-2 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 ${typeof max === 'number' && Number(value) >= max ? 'opacity-50 cursor-not-allowed' : ''}`}
                 >
                     <svg
                         className="h-3 w-3 text-gray-900 dark:text-white"
