@@ -32,7 +32,7 @@ export default function Page() {
   }, [refresh]);
 
   return (
-    <div className="flex flex-col gap-6 p-8 pl-80 pr-80">
+    <div className="flex flex-col gap-6 pt-8 pl-8 pr-8 lg:pl-80 lg:pr-80">
 
       <div className="flex justify-between items-center">
 
@@ -52,11 +52,7 @@ export default function Page() {
               key={encounter.id}
             >
               <div className="pl-10 text-xl font-bold">
-                <Link
-                  href={`/encounter/${encounter.id}`}
-                >
                   {encounter.name}
-                </Link>
               </div> 
 
               

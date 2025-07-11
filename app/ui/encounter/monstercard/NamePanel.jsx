@@ -1,3 +1,5 @@
+import { PlusIcon, MinusIcon } from "@heroicons/react/16/solid";
+
 export default function NamePanel({ monster,add,remove, selected }) {
     return (
         <div className="flex items-start flex-nowrap w-full gap-4">
@@ -25,7 +27,7 @@ export default function NamePanel({ monster,add,remove, selected }) {
                 )}
 
 				<button className="px-2 py-0.5 bg-green-200 rounded text-sm text-green-700 font-bold hover:bg-green-300 cursor-pointer transition-colors" onClick={add}>
-                        +
+                        <PlusIcon className="h-5 w-5" />	
                 </button>
 				
             </div>
@@ -34,7 +36,7 @@ export default function NamePanel({ monster,add,remove, selected }) {
 			{selected && (
 			<div className="flex items-center gap-1 flex-shrink-0 pt-3">
 				<button className="px-2 py-0.5 bg-red-200 rounded text-sm text-red-700 font-bold hover:bg-red-300 cursor-pointer transition-colors" onClick={remove}>
-					-	
+					<MinusIcon className="h-5 w-5" />	
 				</button>
             </div>)}
 		</div>

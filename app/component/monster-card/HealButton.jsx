@@ -74,7 +74,6 @@ export default function HealButton({ hpMax, sendNewHp }) {
 					color='red'
 					size='xs'
 					pill
-					iconOnly
 					>
 					<MinusIcon className="h-5 w-5" />		
 				</Button>	
@@ -93,8 +92,6 @@ export default function HealButton({ hpMax, sendNewHp }) {
 					color='green'
 					size='xs'
 					pill
-					iconOnly
-					
 					>
 					<PlusIcon className="h-5 w-5" />		
 				</Button>

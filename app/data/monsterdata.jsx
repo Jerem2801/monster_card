@@ -166,6 +166,7 @@ export const dataMonsters =[
     name: "Gobelin Minion",
     hp: 1,
     level: "1/4, Petit",
+    minion: true,
     passif: [
       {
         name: "Haha, raté !",
@@ -290,7 +291,7 @@ export const dataMonsters =[
     level: "5, Grand",
     passif: [
       {
-        name: "Écorce Arrachée",
+        name: "Écorce Arrachée.",
         description: "Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.",
       }
     ],
@@ -302,6 +303,119 @@ export const dataMonsters =[
         numberDice: 3,
         valueDice: 6,
         bonus: 6
+        }
+      }
+    ]
+  },
+  {
+    name: "Pousse",
+    hp: 8,
+    armor: "L",
+    level: "1/2, Petit",
+    passif: [
+      {
+        name: "Écorce Arrachée.",
+        description: "Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.",
+      }
+    ],
+    action : [
+      {
+      name: "Graine de ronces.",
+      description : "(Portée 6) $dice.",
+      dice : {
+        numberDice: 2,
+        valueDice: 6,
+        bonus: 2
+        }
+      }
+    ]
+  },
+  {
+    name: "Gousse Acide",
+    hp: 8,
+    armor: "L",
+    level: "1, Petit",
+    passif: [
+      {
+        name: "Écorce Arrachée.",
+        description: "Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.",
+      },
+      {
+        name: "Éruption caustique.",
+        description: "À la mort : 4d6 d’acide à TOUTES les créatures adjacentes.",
+      dice : {
+        numberDice: 4,
+        valueDice: 6,
+        bonus: 0
+        }
+      }
+    ],
+    action : [
+      {
+      name: "Attraper.",
+      description : "JdS de DEX 12 ou Aggripé."
+      }
+    ]
+  },
+  {
+    name: "Enchevêtreur",
+    hp: 20,
+    armor: "L",
+    level: "2, Petit",
+    passif: [
+      {
+        name: "Écorce Arrachée.",
+        description: "Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.",
+      }
+    ],
+    action : [
+      {
+      name: "Enchevêtrement (2×).",
+      description : "(Portée 6) $dice. En cas de coup réussi : Aggripé (évasion DD 12, ou tout dégât de feu ou tranchant).",
+       dice : {
+        numberDice: 1,
+        valueDice: 6,
+        bonus: 2
+        }
+      }
+    ]
+  },
+  {
+    name: "Treant",
+    hp: 170,
+    armor: "L",
+    level: "14, Très Grand",
+    passif: [
+      {
+        name: "Écorce Arrachée.",
+        description: "Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.",
+      },
+      {
+        name: "Enragé.",
+        description: "Attaque avec avantage quand il n'a plus d'armure.",
+      }
+    ],
+    action : [
+      {
+      name: "Choisissez deux fois :",
+      description : "",
+      },
+      {
+      name: "• Coup de masse.",
+      description : "(Portée 3) $dice. En cas de dégâts : Mise à terre.",
+       dice : {
+        numberDice: 2,
+        valueDice: 6,
+        bonus: 10
+        }
+      },
+      {
+      name: "• Piétinement.",
+      description : "(Cible entravée) $dice.",
+       dice : {
+        numberDice: 2,
+        valueDice: 6,
+        bonus: 20
         }
       }
     ]
@@ -341,7 +455,7 @@ export const dataMonsters =[
     ],
     bloodied :{
       description : "À $hp, les dégâts de Krogg passent à 2d8+3.",
-      hp : "35 PV",
+      hp : "37 PV",
       newDice : {
         numberDice: 2,
         valueDice: 8,

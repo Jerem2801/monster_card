@@ -13,6 +13,13 @@ export default function EncounterParams({encounterName,setEncounterName,nbHeroes
                 onChange={e => setEncounterName(e.target.value)}
             />
 
+            <div >
+                <SimpleButton
+                    label="Enregistrer"
+                    onClick={saveEncounter}
+                />
+            </div>  
+
             <SimpleInputNumber
                 label="Nombre de héros"
                 min={1}
@@ -32,12 +39,7 @@ export default function EncounterParams({encounterName,setEncounterName,nbHeroes
                 value={nbHeroes * levelHeroes}
             />
 
-            <div className="self-end">
-                <SimpleButton
-                    label="Enregistrer"
-                    onClick={saveEncounter}
-                />
-            </div>  
+            
             
         </div>
     );

@@ -69,7 +69,7 @@ export default function EncounterForm({ encounterId }) {
 
   
   return (
-    <div className="p-8 pl-80 pr-80">
+    <div className="pt-8 pl-8 pr-8 lg:pl-80 lg:pr-80">
 
       <EncounterParams 
         encounterName={encounterName} 
