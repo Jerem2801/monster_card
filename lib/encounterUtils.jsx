@@ -1,6 +1,5 @@
 import { fetchApi } from '@/lib/api'
 
-
 async function checkExisting(encounterId, name) {
     const data = await fetchApi('/api/encounter/');
     const encounters = data.encounters;

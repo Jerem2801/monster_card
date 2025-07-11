@@ -1,4 +1,4 @@
-import { DEADLY,BLOODIED,DEAD, STATUSES } from "../../../data/statusdata"
+import { DEADLY,BLOODIED,DEAD, STATUSES } from "@/data/statusdata"
 
 
 export default function ListStatus({selectedStatuses,removeStatus,setSelectedStatuses}) {

@@ -1,4 +1,4 @@
-import { STATUSES } from "../../../data/statusdata"
+import { STATUSES } from "@/data/statusdata"
 
 export default function StatusSelector({selectedStatuses,toggleStatus,setSelectedStatuses}){
       const statusOrder = STATUSES.slice().sort((a, b) => a.label.localeCompare(b.label));

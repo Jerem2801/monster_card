@@ -4,12 +4,12 @@ import {useState} from "react";
 import EditModal from '@/component/monster-card/edit/EditModal';
 import NamePanel from "@/component/monster-card/NamePanel";
 import PassivePanel from "@/component/monster-card/PassivePanel";
-import HealButton from "./HealButton";
-import HealButtonLegendary from "./legendary/HealButtonLegendary";
-import AttacksButtons from "./actions/AttacksButtons";
-import LegendaryMecanics,{updateLegendaryMonster2} from "./legendary/LegendaryMechanics";
-import ListStatus from "./status/ListStatus";
-import { toggleStatus } from "./status/testStatus";
+import HealButton from "@/component/monster-card/HealButton";
+import HealButtonLegendary from "@/component/monster-card/legendary/HealButtonLegendary";
+import AttacksButtons from "@/component/monster-card/actions/AttacksButtons";
+import LegendaryMecanics,{updateLegendaryMonster2} from "@/component/monster-card/legendary/LegendaryMechanics";
+import ListStatus from "@/component/monster-card/status/ListStatus";
+import { toggleStatus } from "@/component/monster-card/status/testStatus";
 
 
 export default function MonsterCard({ monster, removeMonsterCard }) {

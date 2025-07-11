@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useRef} from "react";
-import ActionButton from "./ActionButton";
-import ResultDisplay from "./ResultDisplay";
-import AdvantagePanel from "./AdvantagePanel";
-import { throwDice} from "../../../lib/diceutils";
+import ActionButton from "@/component/monster-card/actions/ActionButton";
+import ResultDisplay from "@/component/monster-card/actions/ResultDisplay";
+import AdvantagePanel from "@/component/monster-card/actions/AdvantagePanel";
+import { throwDice} from "@/lib/diceutils";
 
 export default function AttackButton({ action }) {
 	const [result, setResult] = useState({ type: '',

@@ -1,4 +1,4 @@
-import AttackButton from "./AttackButton";
+import AttackButton from "@/component/monster-card/actions/AttackButton";
 
 export default function AttackButtons({monster}){
     return (

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import "./globals.css";
 import 'rc-slider/assets/index.css';
-import TopNav from "./ui/TopNav";
+import TopNav from "@/ui/TopNav";
 
 const inter = Inter({ subsets: ['latin'] });
 

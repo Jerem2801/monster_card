@@ -1,5 +1,5 @@
 import { useState } from "react";
-import StatusSelector from "../status/StatusSelector"
+import StatusSelector from "@/component/monster-card/status/StatusSelector"
 
 export default function EditModal({ closeModal, monster, changeMonster,selectedStatuses,toggleStatus,removeMonsterCard,setSelectedStatuses }) {
 	const [editMonster, setEditMonster] = useState(monster);

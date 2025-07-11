@@ -1,4 +1,4 @@
-import NamePanel from "./NamePanel";
+import NamePanel from "@/ui/encounter/monstercard/NamePanel";
 
 export default function MonsterCard({ monster, add, remove, selected }) {
 
