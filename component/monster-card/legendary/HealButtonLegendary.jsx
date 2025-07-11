@@ -25,7 +25,7 @@ export default function HealButtonLegendary({ hpMax }) {
 
     return (
         <div
-            className="flex items-center justify-center gap-3 relative overflow-hidden border border-gray-300 rounded-md px-3 py-1.5 shadow-sm"
+            className="relative flex items-center justify-center gap-3 overflow-hidden rounded-md border border-gray-300 px-3 py-1.5 shadow-sm"
             style={{
                 background: `linear-gradient(to right, #3b82f6 ${Math.max(0, Math.min(100, (currentHp / hpMax) * 100))}%, #ffffff ${Math.max(0, Math.min(100, (currentHp / hpMax) * 100))}%)`,
                 borderRadius: '0.375rem',
@@ -47,7 +47,7 @@ export default function HealButtonLegendary({ hpMax }) {
                 </Button>
             </div>
 
-            <span className="flex h-8 w-20 items-center justify-center font-mono text-lg font-medium text-gray-700 leading-none">
+            <span className="flex h-8 w-20 items-center justify-center font-mono text-lg leading-none font-medium text-gray-700">
                 {currentHp} / {hpMax}
             </span>
 

@@ -31,8 +31,8 @@ export default function Page() {
     }, [refresh]);
 
     return (
-        <div className="flex flex-col gap-6 pt-8 pl-8 pr-8 lg:pl-80 lg:pr-80">
-            <div className="flex justify-between items-center">
+        <div className="flex flex-col gap-6 pt-8 pr-8 pl-8 lg:pr-80 lg:pl-80">
+            <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-bold">Rencontre</h1>
                 <SimpleLink href="/encounter/create" name="Nouvelle" />
             </div>
@@ -43,7 +43,7 @@ export default function Page() {
                 ) : (
                     encounters.map(encounter => (
                         <div
-                            className="flex justify-between items-center p-2 bg-gray-100 rounded-lg shadow-sm hover:bg-gray-200 transition-colors"
+                            className="flex items-center justify-between rounded-lg bg-gray-100 p-2 shadow-sm transition-colors hover:bg-gray-200"
                             key={encounter.id}
                         >
                             <div className="pl-10 text-xl font-bold">{encounter.name}</div>

@@ -9,21 +9,21 @@ export default function SimpleInputNumber({ label, min, value, onChange }) {
     };
 
     return (
-        <div className="max-w-xs mx-auto">
+        <div className="mx-auto max-w-xs">
             <label
                 htmlFor="quantity-input"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white text-center"
+                className="mb-2 block text-center text-sm font-medium text-gray-900 dark:text-white"
             >
                 {label}
             </label>
-            <div className="relative flex items-center max-w-[8rem] ">
+            <div className="relative flex max-w-[8rem] items-center">
                 <button
                     type="button"
                     onClick={decrement}
-                    className="bg-gray-100  shadow-md  dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                    className="h-11 rounded-s-lg border border-gray-300 bg-gray-100 p-3 shadow-md hover:bg-gray-200 focus:ring-2 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
                 >
                     <svg
-                        className="w-3 h-3 text-gray-900 dark:text-white"
+                        className="h-3 w-3 text-gray-900 dark:text-white"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -46,17 +46,17 @@ export default function SimpleInputNumber({ label, min, value, onChange }) {
                     min={min}
                     value={value}
                     onChange={onChange}
-                    className="bg-gray-50  border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="block h-11 w-full border-x-0 border-gray-300 bg-gray-50 py-2.5 text-center text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                     required
                 />
 
                 <button
                     type="button"
                     onClick={increment}
-                    className="bg-gray-100  shadow-md  dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                    className="h-11 rounded-e-lg border border-gray-300 bg-gray-100 p-3 shadow-md hover:bg-gray-200 focus:ring-2 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700"
                 >
                     <svg
-                        className="w-3 h-3 text-gray-900 dark:text-white"
+                        className="h-3 w-3 text-gray-900 dark:text-white"
                         aria-hidden="true"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

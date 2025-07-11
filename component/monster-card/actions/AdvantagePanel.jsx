@@ -14,13 +14,13 @@ export default function AdvantagePanel({
     }
 
     return (
-        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-            <div className="bg-white rounded-2xl shadow-xl max-w-sm w-full p-6 relative flex flex-col items-center gap-6 border border-gray-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4 backdrop-blur-sm">
+            <div className="relative flex w-full max-w-sm flex-col items-center gap-6 rounded-2xl border border-gray-200 bg-white p-6 shadow-xl">
                 {/* Bouton fermer */}
                 <button
                     onClick={closeWindows}
                     aria-label="Fermer la fenêtre"
-                    className="absolute top-3 right-3 text-2xl text-gray-400 hover:text-red-500 transition-colors"
+                    className="absolute top-3 right-3 text-2xl text-gray-400 transition-colors hover:text-red-500"
                 >
                     &times;
                 </button>
@@ -28,11 +28,11 @@ export default function AdvantagePanel({
                 {/* Titre */}
                 <h2 className="text-xl font-semibold text-gray-800">Ajuster l’avantage</h2>
 
-                <div className="w-full bg-gray-100 rounded-lg p-4 text-sm text-gray-700">
+                <div className="w-full rounded-lg bg-gray-100 p-4 text-sm text-gray-700">
                     <p>
                         <strong>Fourchette :</strong>
-                        <span className="text-red-500 ml-1 mr-1">{getMinTotal(diceProperty)}</span>-
-                        <span className="text-green-500 ml-1.5">{getMaxTotal(diceProperty)}</span>
+                        <span className="mr-1 ml-1 text-red-500">{getMinTotal(diceProperty)}</span>-
+                        <span className="ml-1.5 text-green-500">{getMaxTotal(diceProperty)}</span>
                     </p>
                 </div>
 
@@ -41,19 +41,19 @@ export default function AdvantagePanel({
                     <button
                         onClick={() => setAdvantage(a => a - 1)}
                         aria-label="Réduire avantage"
-                        className="bg-red-100 text-red-600 hover:bg-red-200 font-bold text-xl w-10 h-10 rounded-full shadow transition"
+                        className="h-10 w-10 rounded-full bg-red-100 text-xl font-bold text-red-600 shadow transition hover:bg-red-200"
                     >
                         −
                     </button>
 
-                    <span className="text-3xl font-bold text-gray-700 w-10 text-center">
+                    <span className="w-10 text-center text-3xl font-bold text-gray-700">
                         {advantage}
                     </span>
 
                     <button
                         onClick={() => setAdvantage(a => a + 1)}
                         aria-label="Augmenter avantage"
-                        className="bg-green-100 text-green-600 hover:bg-green-200 font-bold text-xl w-10 h-10 rounded-full shadow transition"
+                        className="h-10 w-10 rounded-full bg-green-100 text-xl font-bold text-green-600 shadow transition hover:bg-green-200"
                     >
                         +
                     </button>
@@ -62,7 +62,7 @@ export default function AdvantagePanel({
                 {/* Bouton lancer */}
                 <button
                     onClick={onThrowDice}
-                    className="w-full py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg text-lg font-semibold hover:from-blue-600 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl"
+                    className="w-full rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 py-3 text-lg font-semibold text-white shadow-lg transition-all hover:from-blue-600 hover:to-blue-700 hover:shadow-xl"
                 >
                     Lancer le dé 🎲
                 </button>

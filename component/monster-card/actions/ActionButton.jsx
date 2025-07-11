@@ -35,7 +35,7 @@ export default function ActionButton({ handleClick, action }) {
                         e.stopPropagation();
                         handleClick();
                     }}
-                    className="inline-block bg-gray-200 hover:bg-gray-300 rounded px-1 cursor-pointer text-md align-middle"
+                    className="text-md inline-block cursor-pointer rounded bg-gray-200 px-1 align-middle hover:bg-gray-300"
                     aria-label={`Lancer ${diceText}`}
                     type="button"
                 >
@@ -50,12 +50,12 @@ export default function ActionButton({ handleClick, action }) {
 
     return (
         <div
-            className={`px-2 py-1 rounded-md text-left ${
-                allChecked ? 'line-through text-gray-500' : ''
+            className={`rounded-md px-2 py-1 text-left ${
+                allChecked ? 'text-gray-500 line-through' : ''
             }`}
             aria-label={`Lancer ${action.name}`}
         >
-            <span className="font-bold text-lg">{action.name}</span>{' '}
+            <span className="text-lg font-bold">{action.name}</span>{' '}
             {useCount > 0 && (
                 <span className="ml-2 text-sm text-gray-700">
                     (

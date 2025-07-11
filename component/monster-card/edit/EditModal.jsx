@@ -27,9 +27,9 @@ export default function EditModal({
     };
 
     return (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50">
-            <div className="bg-white rounded-2xl shadow-xl p-6 w-[400px] space-y-5 border border-gray-200">
-                <h2 className="text-lg font-semibold text-gray-800 text-center border-b pb-2">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+            <div className="w-[400px] space-y-5 rounded-2xl border border-gray-200 bg-white p-6 shadow-xl">
+                <h2 className="border-b pb-2 text-center text-lg font-semibold text-gray-800">
                     Éditer le Monstre
                 </h2>
 
@@ -39,7 +39,7 @@ export default function EditModal({
                         Nom
                     </label>
                     <input
-                        className="flex-1 border border-gray-300 p-2 rounded-md text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="flex-1 rounded-md border border-gray-300 p-2 text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                         type="text"
                         id="name"
                         value={editMonster.name}
@@ -54,7 +54,7 @@ export default function EditModal({
                     </label>
                     <select
                         id="armor"
-                        className="flex-1 border border-gray-300 p-2 rounded-md text-gray-800 bg-white"
+                        className="flex-1 rounded-md border border-gray-300 bg-white p-2 text-gray-800"
                         value={editMonster.armor || 'Aucune'}
                         onChange={e => updateField('armor', e.target.value)}
                     >
@@ -69,7 +69,7 @@ export default function EditModal({
                     <label className="w-28 text-sm text-gray-600">Vitesse</label>
                     <input
                         type="number"
-                        className="flex-1 border border-gray-300 p-2 rounded-md text-gray-800"
+                        className="flex-1 rounded-md border border-gray-300 p-2 text-gray-800"
                         value={editMonster.speed || ''}
                         onChange={e => updateField('speed', e.target.value)}
                     />
@@ -80,7 +80,7 @@ export default function EditModal({
                     <label className="w-28 text-sm text-gray-600">JdS</label>
                     <input
                         type="text"
-                        className="flex-1 border border-gray-300 p-2 rounded-md text-gray-800"
+                        className="flex-1 rounded-md border border-gray-300 p-2 text-gray-800"
                         value={editMonster.save || ''}
                         onChange={e => updateField('save', e.target.value)}
                     />
@@ -96,20 +96,20 @@ export default function EditModal({
                 {/* Actions */}
                 <div className="flex justify-center gap-3 border-t pt-3">
                     <button
-                        className="flex-1 px-4 py-1 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+                        className="flex-1 rounded-md bg-blue-600 px-4 py-1 text-sm font-medium text-white hover:bg-blue-700"
                         onClick={closeModal}
                     >
                         Annuler
                     </button>
                     <button
-                        className="flex-1 px-4 py-1 bg-red-600 text-white text-sm font-medium rounded-md hover:bg-red-700"
+                        className="flex-1 rounded-md bg-red-600 px-4 py-1 text-sm font-medium text-white hover:bg-red-700"
                         onClick={removeMonster}
                     >
                         Supprimer
                     </button>
 
                     <button
-                        className="flex-1 px-4 py-1 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700"
+                        className="flex-1 rounded-md bg-green-600 px-4 py-1 text-sm font-medium text-white hover:bg-green-700"
                         onClick={sendEditMonster}
                     >
                         OK

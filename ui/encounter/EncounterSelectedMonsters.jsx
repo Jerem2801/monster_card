@@ -9,8 +9,8 @@ export default function EncounterSelectedMonsters({
 }) {
     return (
         <div className="w-full md:w-1/3">
-            <h2 className="text-lg font-semibold mb-1">Monstres Sélectionnés</h2>
-            <div className="mb-4 p-3 bg-gray-100 rounded-lg shadow-md text-sm">
+            <h2 className="mb-1 text-lg font-semibold">Monstres Sélectionnés</h2>
+            <div className="mb-4 rounded-lg bg-gray-100 p-3 text-sm shadow-md">
                 <div>
                     Nombre de monstres :{' '}
                     <span className="font-bold">{selectedMonsters.length}</span>

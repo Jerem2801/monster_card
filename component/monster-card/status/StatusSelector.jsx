@@ -5,11 +5,11 @@ export default function StatusSelector({ selectedStatuses, toggleStatus, setSele
 
     return (
         <div className="border-t pt-3 text-center">
-            <label className="block text-sm text-gray-600 mb-2">Status</label>
+            <label className="mb-2 block text-sm text-gray-600">Status</label>
 
             <div className="grid grid-cols-2 gap-3">
                 {statusOrder.map(status => (
-                    <label key={status.id} className="flex items-center gap-2 cursor-pointer pl-5">
+                    <label key={status.id} className="flex cursor-pointer items-center gap-2 pl-5">
                         <input
                             type="checkbox"
                             checked={selectedStatuses.includes(status.id)}

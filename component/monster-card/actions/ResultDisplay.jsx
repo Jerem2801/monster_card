@@ -16,14 +16,14 @@ export default function ResultDisplay({ resultToDisplay, onHide }) {
         // Critique = premier dé (i === 0) et valeur max
         if (i === 0 && isCritic) {
             return (
-                <span key={i} className="px-1 rounded text-green-400 font-bold">
+                <span key={i} className="rounded px-1 font-bold text-green-400">
                     {dice}
                 </span>
             );
         }
         if (i === 0 && isFailed) {
             return (
-                <span key={i} className="px-1 rounded text-red-400 font-bold">
+                <span key={i} className="rounded px-1 font-bold text-red-400">
                     {dice}
                 </span>
             );
@@ -31,14 +31,14 @@ export default function ResultDisplay({ resultToDisplay, onHide }) {
         // Dés explosés = ceux lancés en plus (i >= numberDice)
         if (i >= (resultToDisplay.diceProperty?.numberDice || 0)) {
             return (
-                <span key={i} className="px-1 rounded text-blue-400 font-semibold">
+                <span key={i} className="rounded px-1 font-semibold text-blue-400">
                     {dice}
                 </span>
             );
         }
         // Dés normaux
         return (
-            <span key={i} className="px-1 rounded">
+            <span key={i} className="rounded px-1">
                 {dice}
             </span>
         );
@@ -46,19 +46,19 @@ export default function ResultDisplay({ resultToDisplay, onHide }) {
 
     return (
         <div
-            className="inline-block mt-2 p-2 bg-gray-100 border border-gray-300 rounded cursor-pointer"
+            className="mt-2 inline-block cursor-pointer rounded border border-gray-300 bg-gray-100 p-2"
             onClick={onHide}
             title="Cliquer pour masquer le résultat"
         >
             {/* Conteneur tooltip */}
             <Tooltip content={content} placement="top" style="light">
-                <div className="relative group inline-block font-semibold">
+                <div className="group relative inline-block font-semibold">
                     Résultat total : <span className={resultClasses}>{resultToDisplay.total}</span>
                     {isCritic && (
                         <span
                             role="img"
                             aria-label="critique"
-                            className="text-green-600 text-xl ml-1"
+                            className="ml-1 text-xl text-green-600"
                         >
                             💥
                         </span>
@@ -67,7 +67,7 @@ export default function ResultDisplay({ resultToDisplay, onHide }) {
                         <span
                             role="img"
                             aria-label="critique"
-                            className="text-red-600 text-xl ml-1"
+                            className="ml-1 text-xl text-red-600"
                         >
                             💀
                         </span>

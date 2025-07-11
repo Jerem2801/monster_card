@@ -5,7 +5,7 @@ export default function LegendaryMechanics({ monster }) {
             acc.push(<span key={`text-${index}`}>{part}</span>);
             if (index < parts.length - 1) {
                 acc.push(
-                    <span key={`hp-${index}`} className="font-bold text-lg text-red-700">
+                    <span key={`hp-${index}`} className="text-lg font-bold text-red-700">
                         {hp}
                     </span>,
                 );
@@ -15,13 +15,13 @@ export default function LegendaryMechanics({ monster }) {
     };
 
     return (
-        <div className="border-t-2 border-gray-300 pt-4 mt-4">
+        <div className="mt-4 border-t-2 border-gray-300 pt-4">
             <p>
-                <span className="font-bold text-xl">ENSANGLANTÉ: </span>
+                <span className="text-xl font-bold">ENSANGLANTÉ: </span>
                 {formatDescription(monster.bloodied.description, monster.bloodied.hp)}
             </p>
             <p>
-                <span className="font-bold text-xl">DERNIÈRE CHANCE: </span>
+                <span className="text-xl font-bold">DERNIÈRE CHANCE: </span>
                 {formatDescription(monster.lastStand.description, monster.lastStand.hp)}
             </p>
         </div>

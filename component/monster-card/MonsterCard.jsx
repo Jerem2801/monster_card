@@ -66,7 +66,7 @@ export default function MonsterCard({ monster, removeMonsterCard }) {
     }
 
     return (
-        <div className="w-[30%] p-4 space-y-3 border border-neutral-200 rounded-md bg-amber-50 shadow-md">
+        <div className="w-[30%] space-y-3 rounded-md border border-neutral-200 bg-amber-50 p-4 shadow-md">
             {showEditModal && (
                 <EditModal
                     closeModal={() => setShowEditModal(false)}

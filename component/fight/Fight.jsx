@@ -43,7 +43,7 @@ export default function MonsterPage({ encounterId }) {
 
     return (
         <div>
-            <h1 className="text-2xl font-bold pt-8 pl-80 pr-80">Rencontre : {encounterName}</h1>
+            <h1 className="pt-8 pr-80 pl-80 text-2xl font-bold">Rencontre : {encounterName}</h1>
 
             <div className="flex flex-wrap justify-center gap-10 pt-8">
                 {monsters.map(({ id, monster }) => (

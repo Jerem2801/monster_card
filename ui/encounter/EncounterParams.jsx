@@ -13,7 +13,7 @@ export default function EncounterParams({
     saveEncounter,
 }) {
     return (
-        <div className="flex flex-wrap items-end gap-6 mb-6">
+        <div className="mb-6 flex flex-wrap items-end gap-6">
             <SimpleInputText
                 label="Nom de la Rencontre"
                 value={encounterName}

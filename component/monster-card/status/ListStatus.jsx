@@ -19,10 +19,10 @@ export default function ListStatus({ selectedStatuses, removeStatus, setSelected
                             <div key={id} className="flex items-start gap-3">
                                 <button
                                     onClick={() => removeStatus(id, setSelectedStatuses)}
-                                    className="flex items-start gap-3 w-full text-left cursor-pointer"
+                                    className="flex w-full cursor-pointer items-start gap-3 text-left"
                                 >
                                     {/* Emoji dans une zone fixe */}
-                                    <span className="w-8 flex justify-center items-center text-2xl select-none">
+                                    <span className="flex w-8 items-center justify-center text-2xl select-none">
                                         {status.emoji}
                                     </span>
 

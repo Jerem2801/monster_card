@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={`${inter.className} antialiased flex flex-col h-screen`}>
+            <body className={`${inter.className} flex h-screen flex-col antialiased`}>
                 <TopNav />
                 <div className="flex-grow overflow-auto">{children}</div>
             </body>

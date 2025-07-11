@@ -17,7 +17,7 @@ export default function EncounterListMonsters({ sortedMonsters, addMonster }) {
 
     return (
         <div className="w-full md:w-2/3">
-            <div className="flex flex-wrap gap-4 mb-4">
+            <div className="mb-4 flex flex-wrap gap-4">
                 <ToggleSwitch checked={showMinions} label="Minions" onChange={setShowMinions} />
                 <ToggleSwitch checked={showNormals} label="Normaux" onChange={setShowNormals} />
                 <ToggleSwitch

@@ -49,7 +49,7 @@ export default function HealButton({ hpMax, sendNewHp }) {
     return (
         <div className="relative w-full" ref={tooltipRef}>
             <div
-                className="flex items-center justify-center gap-3 relative overflow-hidden border border-gray-300 rounded-md px-3 py-1.5 shadow-sm"
+                className="relative flex items-center justify-center gap-3 overflow-hidden rounded-md border border-gray-300 px-3 py-1.5 shadow-sm"
                 style={{
                     background: `linear-gradient(to right, ${
                         currentHp / hpMax <= 0.2
@@ -78,7 +78,7 @@ export default function HealButton({ hpMax, sendNewHp }) {
                     </Button>
                 </div>
 
-                <span className="flex h-8 w-20 items-center justify-center font-mono text-lg font-medium text-gray-700 leading-none">
+                <span className="flex h-8 w-20 items-center justify-center font-mono text-lg leading-none font-medium text-gray-700">
                     {currentHp} / {hpMax}
                 </span>
 
@@ -96,24 +96,24 @@ export default function HealButton({ hpMax, sendNewHp }) {
             </div>
 
             {showTooltip && (
-                <div className="absolute z-10 top-full mt-2 left-1/2 -translate-x-1/2 bg-white border border-gray-300 rounded-md shadow-md p-3 w-35">
+                <div className="absolute top-full left-1/2 z-10 mt-2 w-35 -translate-x-1/2 rounded-md border border-gray-300 bg-white p-3 shadow-md">
                     <div className="flex flex-col gap-2">
                         <button
                             onClick={handleHeal}
-                            className="w-full bg-green-600 hover:bg-green-700 text-white text-sm py-1 rounded"
+                            className="w-full rounded bg-green-600 py-1 text-sm text-white hover:bg-green-700"
                         >
                             Soin
                         </button>
                         <input
                             type="number"
-                            className="w-full border rounded px-2 py-1 text-sm"
+                            className="w-full rounded border px-2 py-1 text-sm"
                             value={inputValue}
                             onChange={e => setInputValue(e.target.value)}
                             min={0}
                         />
                         <button
                             onClick={handleDamage}
-                            className="w-full bg-red-600 hover:bg-red-700 text-white text-sm py-1 rounded"
+                            className="w-full rounded bg-red-600 py-1 text-sm text-white hover:bg-red-700"
                         >
                             Dégâts
                         </button>
