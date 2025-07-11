@@ -1,32 +1,33 @@
 {
-  "name": "monster_card",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "postinstall": "flowbite-react patch"
-  },
-  "dependencies": {
-    "@heroicons/react": "^2.2.0",
-    "@neondatabase/serverless": "^1.0.1",
-    "clsx": "^2.1.1",
-    "flowbite-react": "^0.11.8",
-    "next": "15.3.3",
-    "postgres": "^3.4.7",
-    "rc-slider": "^11.1.8",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "vercel": "^32.0.1"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "tailwindcss": "^4.1.10",
-    "typescript": "^5"
-  }
+    "name": "monster_card",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev --turbopack",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "postinstall": "flowbite-react patch"
+    },
+    "dependencies": {
+        "@heroicons/react": "^2.2.0",
+        "@neondatabase/serverless": "^1.0.1",
+        "clsx": "^2.1.1",
+        "flowbite-react": "^0.11.8",
+        "next": "15.3.3",
+        "postgres": "^3.4.7",
+        "rc-slider": "^11.1.8",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "vercel": "^32.0.1"
+    },
+    "devDependencies": {
+        "@tailwindcss/postcss": "^4",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "prettier": "^3.6.2",
+        "tailwindcss": "^4.1.10",
+        "typescript": "^5"
+    }
 }

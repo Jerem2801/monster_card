@@ -1,28 +1,27 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { PlusIcon, MinusIcon } from "@heroicons/react/16/solid";
-import { Button } from "flowbite-react";
+import { useState } from 'react';
+import { PlusIcon, MinusIcon } from '@heroicons/react/16/solid';
+import { Button } from 'flowbite-react';
 
-export default function HealButtonLegendary({ hpMax}) {
+export default function HealButtonLegendary({ hpMax }) {
+    const [currentHp, setCurrentHp] = useState(hpMax);
 
-	const [currentHp, setCurrentHp] = useState(hpMax);
+    function addHeal() {
+        let newHp = currentHp + 1;
+        if (newHp > hpMax) {
+            newHp = currentHp;
+        }
+        return setCurrentHp(newHp);
+    }
 
-	function addHeal() {
-		let newHp = currentHp + 1;
-		if (newHp > hpMax) {
-			newHp = currentHp;
-		}
-		return setCurrentHp(newHp);
-	}
-
-	function removeHeal() {
-		let newHp = currentHp - 1;
-		if (newHp < 0) {
-			newHp = currentHp;
-		}
-		return setCurrentHp(newHp);
-	}
+    function removeHeal() {
+        let newHp = currentHp - 1;
+        if (newHp < 0) {
+            newHp = currentHp;
+        }
+        return setCurrentHp(newHp);
+    }
 
     return (
         <div
@@ -35,31 +34,26 @@ export default function HealButtonLegendary({ hpMax}) {
             }}
         >
             <div className="flex items-center justify-center">
-				<Button
-					onClick={() => {removeHeal()}}
-					color='red'
-					size='xs'
-					pill
-					iconOnly
-					>
-					<MinusIcon className="h-5 w-5" />		
-				</Button>	
-				</div>
+                <Button
+                    onClick={() => {
+                        removeHeal();
+                    }}
+                    color="red"
+                    size="xs"
+                    pill
+                    iconOnly
+                >
+                    <MinusIcon className="h-5 w-5" />
+                </Button>
+            </div>
 
             <span className="flex h-8 w-20 items-center justify-center font-mono text-lg font-medium text-gray-700 leading-none">
                 {currentHp} / {hpMax}
             </span>
 
-            <Button
-					onClick={() => addHeal()}
-					color='green'
-					size='xs'
-					pill
-					iconOnly
-					>
-					<PlusIcon className="h-5 w-5" />		
-				</Button>
+            <Button onClick={() => addHeal()} color="green" size="xs" pill iconOnly>
+                <PlusIcon className="h-5 w-5" />
+            </Button>
         </div>
-
     );
 }

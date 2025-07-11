@@ -7,7 +7,7 @@ export default function EncounterListMonsters({ sortedMonsters, addMonster }) {
     const [showNormals, setShowNormals] = useState(true);
     const [showLegendary, setShowLegendary] = useState(true);
 
-    const filteredMonsters = sortedMonsters.filter((monster) => {
+    const filteredMonsters = sortedMonsters.filter(monster => {
         return (
             (showMinions && monster.minion) ||
             (showLegendary && monster.legendary) ||
@@ -18,16 +18,8 @@ export default function EncounterListMonsters({ sortedMonsters, addMonster }) {
     return (
         <div className="w-full md:w-2/3">
             <div className="flex flex-wrap gap-4 mb-4">
-                <ToggleSwitch
-                    checked={showMinions}
-                    label="Minions"
-                    onChange={setShowMinions}
-                />
-                <ToggleSwitch
-                    checked={showNormals}
-                    label="Normaux"
-                    onChange={setShowNormals}
-                />
+                <ToggleSwitch checked={showMinions} label="Minions" onChange={setShowMinions} />
+                <ToggleSwitch checked={showNormals} label="Normaux" onChange={setShowNormals} />
                 <ToggleSwitch
                     checked={showLegendary}
                     label="Légendaires"

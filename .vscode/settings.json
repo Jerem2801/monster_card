@@ -1,34 +1,28 @@
 {
-  "files.associations": {
-    "*.css": "tailwindcss"
-  },
-  "tailwindCSS.classAttributes": [
-    "class",
-    "className",
-    "theme"
-  ],
-  "tailwindCSS.experimental.classRegex": [
-    [
-      "twMerge\\(([^)]*)\\)",
-      "[\"'`]([^\"'`]*).*?[\"'`]"
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "tailwindCSS.classAttributes": ["class", "className", "theme"],
+    "tailwindCSS.experimental.classRegex": [
+        ["twMerge\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+        [
+            "createTheme(?:<\\w+>)?\\s*\\(([^)]*)\\)",
+            "{?\\s?[\\w].*:\\s*?[\"'`]([^\"'`]*).*?,?\\s?}?"
+        ]
     ],
-    [
-      "createTheme(?:<\\w+>)?\\s*\\(([^)]*)\\)",
-      "{?\\s?[\\w].*:\\s*?[\"'`]([^\"'`]*).*?,?\\s?}?"
-    ]
-  ],
-  "files.exclude": {
-    "**/.env": true,
-    "**/.flowbite-react": true,
-    "**/.gitignore": true,
-    "**/.next": true,
-    "**/.vercel": true,
-    "**/.vscode": true,
-    "**/next-env.d.ts": true,
-    "**/next.config.ts": true,
-    "**/node_modules": true,
-    "**/package-lock.json": true,
-    "**/postcss.config.mjs": true,
-    "**/README.md": true
-  }
+    "files.exclude": {
+        "**/.env": true,
+        "**/.flowbite-react": true,
+        "**/.gitignore": true,
+        "**/.next": true,
+        "**/.prettierignore": true,
+        "**/.vercel": true,
+        "**/.vscode": true,
+        "**/next-env.d.ts": true,
+        "**/next.config.ts": true,
+        "**/node_modules": true,
+        "**/package-lock.json": true,
+        "**/postcss.config.mjs": true,
+        "**/README.md": true
+    }
 }

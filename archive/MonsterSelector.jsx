@@ -1,36 +1,29 @@
-'use client'
+'use client';
 
-import {useState} from "react";
-import Link from "next/link";
+import { useState } from 'react';
+import Link from 'next/link';
 
-export default function MonsterSelector({dataMonsters,addMonster,removeAll}){
+export default function MonsterSelector({ dataMonsters, addMonster, removeAll }) {
     const [selectedMonsterName, setSelectedMonsterName] = useState(dataMonsters[0]?.name || '');
 
-    function addMonsterToPanel(){
-        const selected = dataMonsters.find((m) => m.name === selectedMonsterName);
-        if (!selected){
-            return
-        }else{
+    function addMonsterToPanel() {
+        const selected = dataMonsters.find(m => m.name === selectedMonsterName);
+        if (!selected) {
+            return;
+        } else {
             addMonster(selected);
-        } 
+        }
     }
 
     return (
         <div className="w-full inline-flex items-center justify-center space-x-4 p-4 bg-gray-100">
-
             <div className="inline-block text-center mr-50">
                 <p className="text-l font-bold">MONSTER CARDS</p>
-                <p className="bg-blue-300 text-black text-xs px-2">
-                    BETA
-                </p>
+                <p className="bg-blue-300 text-black text-xs px-2">BETA</p>
             </div>
 
             <div>
-                <Link
-                    href="/encounter">
-                    Rencontre
-                </Link>
-                
+                <Link href="/encounter">Rencontre</Link>
             </div>
 
             {/*

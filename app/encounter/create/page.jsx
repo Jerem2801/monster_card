@@ -3,10 +3,9 @@
 import EncounterForm from '@/component/encounter/EncounterForm';
 
 export default function Page() {
-
-  return (
-    <div>
-      <EncounterForm encounterId={0} />
-    </div>
-  );
+    return (
+        <div>
+            <EncounterForm encounterId={0} />
+        </div>
+    );
 }

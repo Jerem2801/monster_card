@@ -3,22 +3,26 @@ import SimpleInputText from '@/ui/simple/SimpleInputText';
 import ReadOnlyNumber from '@/ui/simple/ReadOnlyNumber';
 import SimpleButton from '@/ui/simple/SimpleButton';
 
-export default function EncounterParams({encounterName,setEncounterName,nbHeroes,setNbHeroes,levelHeroes,setLevelHeroes,saveEncounter}){
+export default function EncounterParams({
+    encounterName,
+    setEncounterName,
+    nbHeroes,
+    setNbHeroes,
+    levelHeroes,
+    setLevelHeroes,
+    saveEncounter,
+}) {
     return (
         <div className="flex flex-wrap items-end gap-6 mb-6">
-
             <SimpleInputText
                 label="Nom de la Rencontre"
                 value={encounterName}
                 onChange={e => setEncounterName(e.target.value)}
             />
 
-            <div >
-                <SimpleButton
-                    label="Enregistrer"
-                    onClick={saveEncounter}
-                />
-            </div>  
+            <div>
+                <SimpleButton label="Enregistrer" onClick={saveEncounter} />
+            </div>
 
             <SimpleInputNumber
                 label="Nombre de héros"
@@ -34,13 +38,7 @@ export default function EncounterParams({encounterName,setEncounterName,nbHeroes
                 onChange={e => setLevelHeroes(Number(e.target.value))}
             />
 
-            <ReadOnlyNumber 
-                label="Niveau Total" 
-                value={nbHeroes * levelHeroes}
-            />
-
-            
-            
+            <ReadOnlyNumber label="Niveau Total" value={nbHeroes * levelHeroes} />
         </div>
     );
 }
