@@ -81,7 +81,7 @@ export default function EncounterForm({ encounterId }) {
                 encounterName={encounterName}
                 nbHeroes={nbHeroes}
                 levelHeroes={levelHeroes}
-				selectedMonsters={selectedMonsters}
+                selectedMonsters={selectedMonsters}
                 setEncounterName={setEncounterName}
                 setNbHeroes={setNbHeroes}
                 setLevelHeroes={setLevelHeroes}

@@ -1,7 +1,7 @@
 import SimpleInputNumber from '@/ui/simple/SimpleInputNumber';
 import SimpleInputText from '@/ui/simple/SimpleInputText';
 import ReadOnlyNumber from '@/ui/simple/ReadOnlyNumber';
-import {Button} from 'flowbite-react';
+import { Button } from 'flowbite-react';
 
 export default function EncounterParams({
     encounterName,
@@ -13,8 +13,9 @@ export default function EncounterParams({
     setLevelHeroes,
     saveEncounter,
 }) {
-    const isDisabled = !encounterName || !Array.isArray(selectedMonsters) || selectedMonsters.length === 0;
-    const handleSubmit = (e) => {
+    const isDisabled =
+        !encounterName || !Array.isArray(selectedMonsters) || selectedMonsters.length === 0;
+    const handleSubmit = e => {
         e.preventDefault();
         if (!isDisabled) saveEncounter();
     };
@@ -31,7 +32,7 @@ export default function EncounterParams({
             <Button
                 type="submit"
                 disabled={isDisabled}
-                className="transition-transform active:scale-95"
+                className="cursor-pointer transition-transform active:scale-95"
             >
                 Enregistrer
             </Button>

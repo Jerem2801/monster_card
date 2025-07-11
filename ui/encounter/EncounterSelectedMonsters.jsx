@@ -11,10 +11,10 @@ export default function EncounterSelectedMonsters({
 }) {
     const [fadingIndexes, setFadingIndexes] = useState([]);
 
-    const handleRemove = (index) => {
-        setFadingIndexes((prev) => [...prev, index]);
+    const handleRemove = index => {
+        setFadingIndexes(prev => [...prev, index]);
         setTimeout(() => {
-            setFadingIndexes((prev) => prev.filter(i => i !== index));
+            setFadingIndexes(prev => prev.filter(i => i !== index));
             removeMonster(index);
         }, 300);
     };
@@ -28,9 +28,9 @@ export default function EncounterSelectedMonsters({
                 nbHeroes={nbHeroes}
                 levelHeroes={levelHeroes}
             />
-            
+
             {selectedMonsters.length === 0 ? (
-                <div className="flex items-center justify-center h-24 text-gray-400 italic">
+                <div className="flex h-24 items-center justify-center text-gray-400 italic">
                     Aucun monstre sélectionné.
                 </div>
             ) : (
@@ -52,12 +52,24 @@ export default function EncounterSelectedMonsters({
             )}
             <style jsx>{`
                 @keyframes fadein {
-                    from { opacity: 0; transform: scale(0.95); }
-                    to { opacity: 1; transform: scale(1); }
+                    from {
+                        opacity: 0;
+                        transform: scale(0.95);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
                 }
                 @keyframes fadeout {
-                    from { opacity: 1; transform: scale(1); }
-                    to { opacity: 0; transform: scale(0.95); }
+                    from {
+                        opacity: 1;
+                        transform: scale(1);
+                    }
+                    to {
+                        opacity: 0;
+                        transform: scale(0.95);
+                    }
                 }
                 .animate-fadein {
                     animation: fadein 0.3s;

@@ -86,9 +86,9 @@ function updateKrogg(monster, newHp) {
         changeValueDice(monster, 6);
     }
     if (newHp === 0) {
-        monster.armor = 'L';
+        monster.armor.label = 'L';
     } else {
-        monster.armor = 'M';
+        monster.armor.label = 'M';
     }
     return monster;
 }

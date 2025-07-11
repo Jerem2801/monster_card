@@ -7,66 +7,28 @@ import PassivePanel from '@/component/monster-card/PassivePanel';
 import HealButton from '@/component/monster-card/HealButton';
 import HealButtonLegendary from '@/component/monster-card/legendary/HealButtonLegendary';
 import AttacksButtons from '@/component/monster-card/actions/AttacksButtons';
-import LegendaryMecanics, {
-    updateLegendaryMonster2,
-} from '@/component/monster-card/legendary/LegendaryMechanics';
+import LegendaryMecanics from '@/component/monster-card/legendary/LegendaryMechanics';
 import ListStatus from '@/component/monster-card/status/ListStatus';
 import { toggleStatus } from '@/component/monster-card/status/testStatus';
+import { useMonsterCard } from '@/component/monster-card/useMonsterCard';
 
 export default function MonsterCard({ monster, removeMonsterCard }) {
     const [showEditModal, setShowEditModal] = useState(false);
-    const [selectedStatuses, setSelectedStatuses] = useState([]);
-    const [localMonster, setLocalMonster] = useState(monster);
-    const [dead, setDead] = useState(false);
-
-    function isBloodied(bloodied) {
-        if (bloodied && !selectedStatuses.includes('bloodied')) {
-            setSelectedStatuses(prev => [...prev, 'bloodied']);
-        } else if (!bloodied) {
-            setSelectedStatuses(prev => prev.filter(s => s !== 'bloodied'));
-        }
-    }
-
-    function putToDead(newHp) {
-        let statusDead = 'dead';
-        if (monster.legendary) {
-            statusDead = 'deadly';
-        }
-
-        if (newHp === 0 && !selectedStatuses.includes(statusDead)) {
-            setSelectedStatuses(prev => [...prev, statusDead]);
-            setDead(true);
-        } else if (newHp > 0) {
-            setSelectedStatuses(prev => prev.filter(s => s !== statusDead));
-            setDead(false);
-        }
-    }
-
-    function updateLegendaryMonster(newHp) {
-        let updatedMonster = structuredClone(localMonster);
-        updateLegendaryMonster2(updatedMonster, newHp);
-        setLocalMonster(updatedMonster);
-    }
+    const {
+        localMonster,
+        setLocalMonster,
+        selectedStatuses,
+        setSelectedStatuses,
+        dead,
+        handleNewHP,
+    } = useMonsterCard(monster);
 
     function changeMonster(editMonster) {
         setLocalMonster(editMonster);
     }
 
-    function handleNewHP(newHp) {
-        if (newHp >= localMonster.hp / 2) {
-            isBloodied(false);
-        } else if (newHp <= localMonster.hp / 2) {
-            isBloodied(true);
-        }
-        putToDead(newHp);
-
-        if (localMonster.legendary) {
-            updateLegendaryMonster(newHp);
-        }
-    }
-
     return (
-        <div className="w-[30%] space-y-3 rounded-md border border-neutral-200 bg-amber-50 p-4 shadow-md">
+        <div className="w-full space-y-3 rounded-md border border-neutral-200 bg-amber-50 p-4 shadow-md md:w-[48%] xl:w-[30%]">
             {showEditModal && (
                 <EditModal
                     closeModal={() => setShowEditModal(false)}
@@ -91,7 +53,7 @@ export default function MonsterCard({ monster, removeMonsterCard }) {
 
             <AttacksButtons monster={localMonster} />
 
-            {localMonster.bloodied !== undefined && <LegendaryMecanics monster={localMonster} />}
+            {localMonster.bloodied != null && <LegendaryMecanics monster={localMonster} />}
 
             <ListStatus
                 selectedStatuses={selectedStatuses}

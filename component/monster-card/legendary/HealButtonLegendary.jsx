@@ -41,7 +41,7 @@ export default function HealButtonLegendary({ hpMax }) {
                     color="red"
                     size="xs"
                     pill
-                    iconOnly
+                    icononly
                 >
                     <MinusIcon className="h-5 w-5" />
                 </Button>
@@ -51,7 +51,7 @@ export default function HealButtonLegendary({ hpMax }) {
                 {currentHp} / {hpMax}
             </span>
 
-            <Button onClick={() => addHeal()} color="green" size="xs" pill iconOnly>
+            <Button onClick={() => addHeal()} color="green" size="xs" pill icononly>
                 <PlusIcon className="h-5 w-5" />
             </Button>
         </div>

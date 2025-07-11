@@ -1,69 +1,141 @@
+export const SIZE_TYPE = {
+    TINY: { id: 'tiny', label: 'Très Petit' },
+    SMALL: { id: 'small', label: 'Petit' },
+    MEDIUM: { id: null, label: 'Moyenne' },
+    LARGE: { id: 'large', label: 'Grand' },
+    HUGE: { id: 'huge', label: 'Très Grand' },
+};
+
+export const ARMOR_TYPE = {
+    NONE: { id: null, label: 'Aucune' },
+    MEDIUM: { id: 'M', label: 'M' },
+    HEAVY: { id: 'H', label: 'H' },
+};
+
+// Passifs réutilisables
+const passifHahaRate = {
+    name: 'Haha, raté !',
+    description: "À chaque fois qu'une attaque vous rate, infligez 1 dégât psychique en retour.",
+};
+const passifNooooo = {
+    name: 'Nooooo !',
+    description:
+        'Quand un allié à 2 cases ou moins meurt, effectuez une attaque gratuite immédiatement.',
+};
+const passifEcorceArrachee = {
+    name: 'Écorce Arrachée.',
+    description: 'Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.',
+};
+
+// Tableau des types de monstres
+export const MONSTER_TYPE = {
+    GOBELIN: { id: 'gobelin', label: 'Gobelins' },
+    KOBOLD: { id: 'kobold', label: 'Kobolds' },
+    HOBGOBLIN: { id: 'hobgoblin', label: 'Hobgoblins' },
+    ARAIGNEE: { id: 'araignee', label: 'Araignées' },
+    PLANTE: { id: 'plante', label: 'Plantes' },
+    ANIMAL: { id: 'animal', label: 'Animaux' },
+    SORCIER: { id: 'sorcier', label: 'Sorcier' },
+};
+
+// Valeurs par défaut pour chaque monstre
+const defaultMonster = {
+    armor: ARMOR_TYPE.NONE,
+    speed: null,
+    save: null,
+    size: SIZE_TYPE.MEDIUM,
+    legendary: false,
+    minion: false,
+    passif: [],
+    action: [],
+    bloodied: null,
+    lastStand: null,
+};
+
 export const dataMonsters = [
     {
+        ...defaultMonster,
         name: 'Gobelin',
+        type: MONSTER_TYPE.GOBELIN,
         hp: 15,
-        level: '1/2, Petit',
-        passif: [
+        level: '1/2',
+        size: SIZE_TYPE.SMALL,
+        passif: [passifHahaRate],
+        action: [
             {
-                name: 'Haha, raté !',
-                description:
-                    "À chaque fois qu'une attaque vous rate, infligez 1 dégât psychique en retour.",
+                name: 'Planter.',
+                description: '$dice.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 2 },
+            },
+            {
+                name: 'Tirer.',
+                description: '(Portée 8) $dice.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 2 },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Maître Gobelin',
+        type: MONSTER_TYPE.GOBELIN,
+        hp: 30,
+        armor: ARMOR_TYPE.MEDIUM,
+        level: '2',
+        size: SIZE_TYPE.SMALL,
+        passif: [
+            passifHahaRate,
+            {
+                name: 'Bouclier de viande.',
+                description: "Peut forcer un autre gobelin à s'Interposer pour Lui.",
             },
         ],
         action: [
             {
                 name: 'Planter.',
                 description: '$dice.',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 6,
-                    bonus: 2,
-                },
+                dice: { numberDice: 1, valueDice: 6, bonus: 2 },
+            },
+            {
+                name: 'Tirer.',
+                description: '(Portée 8) $dice.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 2 },
+            },
+            {
+                name: 'Ramenez-vous ! ',
+                description: 'Appelle un sbire gobelin au combat.',
             },
         ],
     },
     {
+        ...defaultMonster,
         name: 'Kobold',
+        type: MONSTER_TYPE.KOBOLD,
         hp: 12,
-        level: '1/3, Petit',
-        passif: [
-            {
-                name: 'Nooooo !',
-                description:
-                    'Quand un allié à 2 cases ou moins meurt, effectuez une attaque gratuite immédiatement.',
-            },
-        ],
+        level: '1/3',
+        size: SIZE_TYPE.SMALL,
+        passif: [passifNooooo],
         action: [
             {
                 name: 'Coup de dague',
                 description: '$dice.',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 4,
-                    bonus: 2,
-                },
+                dice: { numberDice: 1, valueDice: 4, bonus: 2 },
             },
             {
                 name: 'Fronde',
-                description: '$dice (Portée 8).',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 4,
-                    bonus: 2,
-                },
+                description: '(Portée 8) $dice.',
+                dice: { numberDice: 1, valueDice: 4, bonus: 2 },
             },
         ],
     },
     {
+        ...defaultMonster,
         name: 'Kobold Sournois',
+        type: MONSTER_TYPE.KOBOLD,
         hp: 16,
-        level: '1/2, Petit',
+        level: '1/2',
+        size: SIZE_TYPE.SMALL,
         passif: [
-            {
-                name: 'Nooooo !',
-                description:
-                    'Quand un allié à 2 cases ou moins meurt, effectuez une attaque gratuite immédiatement.',
-            },
+            passifNooooo,
             {
                 name: 'Revanche !',
                 description:
@@ -74,33 +146,24 @@ export const dataMonsters = [
             {
                 name: 'Coup de dague',
                 description: '$dice.',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 4,
-                    bonus: 2,
-                },
+                dice: { numberDice: 1, valueDice: 4, bonus: 2 },
             },
             {
                 name: 'Fronde',
-                description: '$dice (Portée 8).',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 4,
-                    bonus: 2,
-                },
+                description: '(Portée 8) $dice.',
+                dice: { numberDice: 1, valueDice: 4, bonus: 2 },
             },
         ],
     },
     {
+        ...defaultMonster,
         name: 'Kobold Trappeur',
+        type: MONSTER_TYPE.KOBOLD,
         hp: 26,
-        level: '1, Petit',
+        level: '1',
+        size: SIZE_TYPE.SMALL,
         passif: [
-            {
-                name: 'Nooooo !',
-                description:
-                    'Quand un allié à 2 cases ou moins meurt, effectuez une attaque gratuite immédiatement.',
-            },
+            passifNooooo,
             {
                 name: 'Pièges !',
                 description:
@@ -110,12 +173,8 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Lancer de scorpion (2×)',
-                description: '$dice (Portée 8).',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 4,
-                    bonus: 2,
-                },
+                description: '(Portée 8) $dice.',
+                dice: { numberDice: 1, valueDice: 4, bonus: 2 },
             },
             {
                 name: 'Filet caché',
@@ -124,29 +183,28 @@ export const dataMonsters = [
         ],
     },
     {
+        ...defaultMonster,
         name: 'Bugbear',
+        type: MONSTER_TYPE.GOBELIN,
         hp: 30,
         level: '2',
-        armor: 'M',
+        armor: ARMOR_TYPE.MEDIUM,
         speed: 2,
-        passif: [],
         action: [
             {
                 name: 'Cleave',
                 description: '$dice.',
-                dice: {
-                    numberDice: 2,
-                    valueDice: 6,
-                    bonus: 4,
-                },
+                dice: { numberDice: 2, valueDice: 6, bonus: 4 },
             },
         ],
     },
     {
+        ...defaultMonster,
         name: 'Soldat Hobgoblin',
-        level: '1/2',
-        armor: 'M',
+        type: MONSTER_TYPE.HOBGOBLIN,
         hp: 11,
+        level: '1/2',
+        armor: ARMOR_TYPE.MEDIUM,
         passif: [
             {
                 name: 'Ichor infernal.',
@@ -158,11 +216,7 @@ export const dataMonsters = [
                 name: 'Fléau de feu.',
                 description:
                     '$dice dégâts de feu et une cible adjacente à la 1er subit 2 dégâts de feu.',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 8,
-                    bonus: 0,
-                },
+                dice: { numberDice: 1, valueDice: 8, bonus: 0 },
             },
             {
                 name: 'Tambour du bouclier.',
@@ -171,86 +225,32 @@ export const dataMonsters = [
         ],
     },
     {
+        ...defaultMonster,
         name: 'Gobelin Minion',
+        type: MONSTER_TYPE.GOBELIN,
         hp: 1,
-        level: '1/4, Petit',
+        level: '1/4',
+        size: SIZE_TYPE.SMALL,
         minion: true,
-        passif: [
-            {
-                name: 'Haha, raté !',
-                description:
-                    "À chaque fois qu'une attaque vous rate, infligez 1 dégât psychique en retour.",
-            },
-        ],
+        passif: [passifHahaRate],
         action: [
             {
                 name: 'Planter.',
                 description: '$dice.',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 6,
-                    bonus: 0,
-                },
+                dice: { numberDice: 1, valueDice: 6, bonus: 0 },
             },
         ],
     },
     {
-        name: 'Gobelin Mêlée',
-        hp: 15,
-        level: '1/3, Petit',
-        passif: [
-            {
-                name: 'Haha, raté !',
-                description:
-                    "À chaque fois qu'une attaque vous rate, infligez 1 dégât psychique en retour.",
-            },
-        ],
-        action: [
-            {
-                name: 'Planter.',
-                description: '$dice.',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 6,
-                    bonus: 2,
-                },
-            },
-        ],
-    },
-    {
-        name: 'Gobelin Distance',
-        hp: 15,
-        level: '1/3, Petit',
-        passif: [
-            {
-                name: 'Haha, raté !',
-                description:
-                    "À chaque fois qu'une attaque vous rate, infligez 1 dégât psychique en retour.",
-            },
-        ],
-        action: [
-            {
-                name: 'Fronde.',
-                description: '$dice (Portée 8).',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 6,
-                    bonus: 2,
-                },
-            },
-        ],
-    },
-    {
+        ...defaultMonster,
         name: 'Gobelin Monteur De Rat',
+        type: MONSTER_TYPE.GOBELIN,
         hp: 30,
-        speed: 10,
         level: '2',
+        size: SIZE_TYPE.LARGE,
+        speed: 10,
         passif: [
-            {
-                name: 'Haha, raté !',
-                description:
-                    "À chaque fois qu'une attaque vous rate, infligez 1 dégât psychique en retour.",
-            },
+            passifHahaRate,
             {
                 name: 'CHAAARGE!',
                 description:
@@ -261,110 +261,79 @@ export const dataMonsters = [
             {
                 name: 'Mordre & Planter (x2).',
                 description: '$dice. Sur un critique: A terre.',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 6,
-                    bonus: 2,
-                },
+                dice: { numberDice: 1, valueDice: 6, bonus: 2 },
             },
         ],
     },
     {
+        ...defaultMonster,
         name: 'Araignée Géante',
+        type: MONSTER_TYPE.ARAIGNEE,
         hp: 27,
-        armor: 'M',
         level: '2',
-        passif: [],
+        size: SIZE_TYPE.LARGE,
+        armor: ARMOR_TYPE.MEDIUM,
         action: [
             {
                 name: 'Lancer de toile.',
                 description:
-                    '$dice (Portée 6). En cas de coup réussi : Entravé (évasion DD 12, ou dégâts tranchants/feu).',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 8,
-                    bonus: 2,
-                },
+                    '(Portée 6) $dice. En cas de coup réussi : Entravé (évasion DD 12, ou dégâts tranchants/feu).',
+                dice: { numberDice: 1, valueDice: 8, bonus: 2 },
             },
             {
                 name: 'Morsure.',
                 description:
                     '(Cible entravée) $dice, Empoisonné (les soins magiques prennent fin).',
-                dice: {
-                    numberDice: 2,
-                    valueDice: 8,
-                    bonus: 4,
-                },
+                dice: { numberDice: 2, valueDice: 8, bonus: 4 },
             },
         ],
     },
     {
+        ...defaultMonster,
         name: 'Brise-racines Géante',
+        type: MONSTER_TYPE.PLANTE,
         hp: 50,
-        armor: 'L',
-        level: '5, Grand',
-        passif: [
-            {
-                name: 'Écorce Arrachée.',
-                description:
-                    'Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.',
-            },
-        ],
+        level: '5',
+        size: SIZE_TYPE.LARGE,
+        armor: ARMOR_TYPE.MEDIUM,
+        passif: [passifEcorceArrachee],
         action: [
             {
                 name: 'Coup écrasant.',
                 description: '$dice. En cas de critique : repousse de 2 cases.',
-                dice: {
-                    numberDice: 3,
-                    valueDice: 6,
-                    bonus: 6,
-                },
+                dice: { numberDice: 3, valueDice: 6, bonus: 6 },
             },
         ],
     },
     {
+        ...defaultMonster,
         name: 'Pousse',
+        type: MONSTER_TYPE.PLANTE,
         hp: 8,
-        armor: 'L',
-        level: '1/2, Petit',
-        passif: [
-            {
-                name: 'Écorce Arrachée.',
-                description:
-                    'Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.',
-            },
-        ],
+        level: '1/2',
+        size: SIZE_TYPE.SMALL,
+        passif: [passifEcorceArrachee],
         action: [
             {
                 name: 'Graine de ronces.',
                 description: '(Portée 6) $dice.',
-                dice: {
-                    numberDice: 2,
-                    valueDice: 6,
-                    bonus: 2,
-                },
+                dice: { numberDice: 2, valueDice: 6, bonus: 2 },
             },
         ],
     },
     {
+        ...defaultMonster,
         name: 'Gousse Acide',
+        type: MONSTER_TYPE.PLANTE,
         hp: 8,
-        armor: 'L',
-        level: '1, Petit',
+        level: '1',
+        size: SIZE_TYPE.SMALL,
         passif: [
-            {
-                name: 'Écorce Arrachée.',
-                description:
-                    'Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.',
-            },
+            passifEcorceArrachee,
             {
                 name: 'Éruption caustique.',
                 description: 'À la mort : 4d6 d’acide à TOUTES les créatures adjacentes.',
-                dice: {
-                    numberDice: 4,
-                    valueDice: 6,
-                    bonus: 0,
-                },
+                dice: { numberDice: 4, valueDice: 6, bonus: 0 },
             },
         ],
         action: [
@@ -375,41 +344,31 @@ export const dataMonsters = [
         ],
     },
     {
+        ...defaultMonster,
         name: 'Enchevêtreur',
+        type: MONSTER_TYPE.PLANTE,
         hp: 20,
-        armor: 'L',
-        level: '2, Petit',
-        passif: [
-            {
-                name: 'Écorce Arrachée.',
-                description:
-                    'Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.',
-            },
-        ],
+        level: '2',
+        passif: [passifEcorceArrachee],
         action: [
             {
                 name: 'Enchevêtrement (2×).',
                 description:
                     '(Portée 6) $dice. En cas de coup réussi : Aggripé (évasion DD 12, ou tout dégât de feu ou tranchant).',
-                dice: {
-                    numberDice: 1,
-                    valueDice: 6,
-                    bonus: 2,
-                },
+                dice: { numberDice: 1, valueDice: 6, bonus: 2 },
             },
         ],
     },
     {
+        ...defaultMonster,
         name: 'Treant',
+        type: MONSTER_TYPE.PLANTE,
         hp: 170,
-        armor: 'L',
-        level: '14, Très Grand',
+        level: '14',
+        size: SIZE_TYPE.HUGE,
+        armor: ARMOR_TYPE.HEAVY,
         passif: [
-            {
-                name: 'Écorce Arrachée.',
-                description:
-                    'Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.',
-            },
+            passifEcorceArrachee,
             {
                 name: 'Enragé.',
                 description: "Attaque avec avantage quand il n'a plus d'armure.",
@@ -423,28 +382,22 @@ export const dataMonsters = [
             {
                 name: '• Coup de masse.',
                 description: '(Portée 3) $dice. En cas de dégâts : Mise à terre.',
-                dice: {
-                    numberDice: 2,
-                    valueDice: 6,
-                    bonus: 10,
-                },
+                dice: { numberDice: 2, valueDice: 6, bonus: 10 },
             },
             {
                 name: '• Piétinement.',
                 description: '(Cible entravée) $dice.',
-                dice: {
-                    numberDice: 2,
-                    valueDice: 6,
-                    bonus: 20,
-                },
+                dice: { numberDice: 2, valueDice: 6, bonus: 20 },
             },
         ],
     },
     {
+        ...defaultMonster,
         name: 'Krogg',
+        type: MONSTER_TYPE.GOBELIN,
         legendary: true,
         hp: 75,
-        armor: 'M',
+        armor: ARMOR_TYPE.MEDIUM,
         level: '2',
         save: 'FOR+,DEX+',
         passif: [],
@@ -457,45 +410,36 @@ export const dataMonsters = [
                 name: '• Massacre brutal.',
                 description:
                     'Se déplace de 6. Inflige $dice dégâts, la cible est agrippée (évasion DD 10).',
-                dice: {
-                    numberDice: 2,
-                    valueDice: 6,
-                    bonus: 3,
-                },
+                dice: { numberDice: 2, valueDice: 6, bonus: 3 },
             },
             {
                 name: '• Casse-crânes.',
                 description:
                     'Se déplace de 6. Utilise une créature agrippée comme arme contre une autre créature. Les deux subissent $dice dégâts, et l’agrippement prend fin.',
-                dice: {
-                    numberDice: 2,
-                    valueDice: 6,
-                    bonus: 3,
-                },
+                dice: { numberDice: 2, valueDice: 6, bonus: 3 },
             },
         ],
         bloodied: {
             description: 'À $hp, les dégâts de Krogg passent à 2d8+3.',
             hp: '37 PV',
-            newDice: {
-                numberDice: 2,
-                valueDice: 8,
-                bonus: 3,
-            },
+            newDice: { numberDice: 2, valueDice: 8, bonus: 3 },
         },
         lastStand: {
             description:
                 'Krogg est mourant ! S’il subit $hp dégâts supplémentaires, il meurt. D’ici là, il bénéficie d’une armure lourde.',
             hp: 20,
-            newArmor: 'L',
+            newArmor: ARMOR_TYPE.HEAVY,
         },
     },
     {
+        ...defaultMonster,
         name: 'Grimbeak',
+        type: MONSTER_TYPE.ANIMAL,
         legendary: true,
         hp: 100,
-        armor: 'M',
-        level: '3, Grand',
+        armor: ARMOR_TYPE.MEDIUM,
+        level: '3',
+        size: SIZE_TYPE.LARGE,
         save: 'FOR+',
         passif: [
             {
@@ -513,30 +457,18 @@ export const dataMonsters = [
                 name: '• Hurlement Sauvage.',
                 description:
                     "Tous les ennemis dans un rayon de 12 subissent $dice dégâts (ignorent l'armure). JdS de VOL 11 ou deviennent Effrayés pendant 1 round.",
-                dice: {
-                    numberDice: 2,
-                    valueDice: 6,
-                    bonus: 0,
-                },
+                dice: { numberDice: 2, valueDice: 6, bonus: 0 },
                 use: 1,
             },
             {
                 name: '• Déchirer & Lacérer.',
                 description: '$dice.',
-                dice: {
-                    numberDice: 2,
-                    valueDice: 6,
-                    bonus: 10,
-                },
+                dice: { numberDice: 2, valueDice: 6, bonus: 10 },
             },
             {
                 name: '• Bec.',
                 description: 'Déplacement de 8 et $dice.',
-                dice: {
-                    numberDice: 2,
-                    valueDice: 6,
-                    bonus: 0,
-                },
+                dice: { numberDice: 2, valueDice: 6, bonus: 0 },
             },
         ],
         bloodied: {
@@ -551,10 +483,13 @@ export const dataMonsters = [
         },
     },
     {
+        ...defaultMonster,
         name: 'Greenthumb',
+        type: MONSTER_TYPE.SORCIER,
         legendary: true,
         hp: 100,
         level: '3',
+        size: SIZE_TYPE.SMALL,
         save: 'INT+,VOL+',
         passif: [],
         action: [
@@ -570,27 +505,19 @@ export const dataMonsters = [
                 name: '• Enracinement.',
                 description:
                     'Choisissez la moitié des héros. Ils doivent réussir un JdS de DEX 11 ou subir $dice et être Entravés par des lianes épineuses (évasion : JdS de STR ou DEX 11, ou recevoir des dégâts tranchants ou de feu pour se libérer).',
-                dice: {
-                    numberDice: 2,
-                    valueDice: 4,
-                    bonus: 0,
-                },
+                dice: { numberDice: 2, valueDice: 4, bonus: 0 },
             },
             {
                 name: '• Tir de ronces.',
                 description: '(Portée 10) $dice.',
-                dice: {
-                    numberDice: 5,
-                    valueDice: 4,
-                    bonus: 5,
-                },
+                dice: { numberDice: 5, valueDice: 4, bonus: 5 },
             },
         ],
         bloodied: {
             description:
                 'À $hp, Greenthumb gagne une écorce magique qui lui confère une Armure Lourde.',
             hp: '50 PV',
-            armor: 'L',
+            armor: ARMOR_TYPE.HEAVY,
         },
         lastStand: {
             description:

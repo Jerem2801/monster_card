@@ -1,22 +1,32 @@
 import { PlusIcon, MinusIcon } from '@heroicons/react/16/solid';
 
-export default function StatPanel({selected,monster,add,remove}){
+export default function StatPanel({ selected, monster, add, remove }) {
+    console.log(monster);
     return (
         <div>
             {!selected && (
                 <div className="flex flex-shrink-0 items-center gap-1 pt-3">
-                    <span className="rounded bg-red-300 px-2 py-0.5 text-sm font-bold text-red-600" title="Points de vie">
+                    <span
+                        className="rounded bg-red-300 px-2 py-0.5 text-sm font-bold text-red-600"
+                        title="Points de vie"
+                    >
                         ❤️ {monster.hp}
                     </span>
 
-                    {monster.armor && monster.armor.toLowerCase() !== 'none' && (
-                        <span className="rounded bg-slate-300 px-2 py-0.5 text-sm font-bold text-slate-600" title="Armure">
-                            🛡️ {monster.armor}
+                    {monster.armor.id != null && (
+                        <span
+                            className="rounded bg-slate-300 px-2 py-0.5 text-sm font-bold text-slate-600"
+                            title="Armure"
+                        >
+                            🛡️ {monster.armor.label}
                         </span>
                     )}
 
-                    {monster.save !== undefined && monster.save !== '' && (
-                        <span className="rounded bg-amber-200 px-2 py-0.5 text-sm font-bold text-amber-600" title="Sauvegarde">
+                    {monster.save != null && (
+                        <span
+                            className="rounded bg-amber-200 px-2 py-0.5 text-sm font-bold text-amber-600"
+                            title="Sauvegarde"
+                        >
                             ⭐ {monster.save}
                         </span>
                     )}

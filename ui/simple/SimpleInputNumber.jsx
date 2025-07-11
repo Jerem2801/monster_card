@@ -22,7 +22,7 @@ export default function SimpleInputNumber({ label, min, max, value, onChange }) 
                     type="button"
                     onClick={decrement}
                     disabled={Number(value) <= min}
-                    className={`h-11 rounded-s-lg border border-gray-300 bg-gray-100 p-3 shadow-md transition-transform active:scale-95 hover:bg-gray-200 focus:ring-2 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 ${Number(value) <= min ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    className={`h-11 cursor-pointer rounded-s-lg border border-gray-300 bg-gray-100 p-3 shadow-md transition-transform hover:bg-gray-200 focus:ring-2 focus:ring-gray-100 focus:outline-none active:scale-95 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 ${Number(value) <= min ? 'cursor-not-allowed opacity-50' : ''}`}
                 >
                     <svg
                         className="h-3 w-3 text-gray-900 dark:text-white"
@@ -57,7 +57,7 @@ export default function SimpleInputNumber({ label, min, max, value, onChange }) 
                     type="button"
                     onClick={increment}
                     disabled={typeof max === 'number' && Number(value) >= max}
-                    className={`h-11 rounded-e-lg border border-gray-300 bg-gray-100 p-3 shadow-md transition-transform active:scale-95 hover:bg-gray-200 focus:ring-2 focus:ring-gray-100 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 ${typeof max === 'number' && Number(value) >= max ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    className={`h-11 cursor-pointer rounded-e-lg border border-gray-300 bg-gray-100 p-3 shadow-md transition-transform hover:bg-gray-200 focus:ring-2 focus:ring-gray-100 focus:outline-none active:scale-95 dark:border-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 ${typeof max === 'number' && Number(value) >= max ? 'cursor-not-allowed opacity-50' : ''}`}
                 >
                     <svg
                         className="h-3 w-3 text-gray-900 dark:text-white"

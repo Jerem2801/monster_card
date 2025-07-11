@@ -9,7 +9,7 @@ export default function ReadOnlyNumber({ label, value, format, ...props }) {
             <div
                 tabIndex={0}
                 {...props}
-                className="flex h-11 items-center justify-center rounded-lg border border-gray-300 bg-gray-50 text-center text-lg font-bold text-gray-900 shadow-inner focus:ring-2 focus:ring-blue-500 transition-all duration-150 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                className="flex h-11 items-center justify-center rounded-lg border border-gray-300 bg-gray-50 text-center text-lg font-bold text-gray-900 shadow-inner transition-all duration-150 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
             >
                 {displayValue}
             </div>

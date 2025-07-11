@@ -12,21 +12,24 @@ export default function NamePanel({ monster, openStatusModal }) {
                 </button>
             </div>
 
-            <span className="text-sm text-gray-500">Niv. {monster.level}</span>
+            <span className="text-sm text-gray-500">
+                Niv. {monster.level}
+                {monster.size.id != null ? `, ${monster.size.label}` : ''}
+            </span>
 
-            {monster.armor && monster.armor.toLowerCase() !== 'none' && (
+            {monster.armor.id != null && (
                 <span className="ml-2 rounded bg-slate-300 px-2 py-0.5 text-sm font-bold text-slate-600">
-                    🛡️ {monster.armor}
+                    🛡️ {monster.armor.label}
                 </span>
             )}
 
-            {monster.speed !== undefined && monster.speed !== '' && (
+            {monster.speed != null && (
                 <span className="ml-2 rounded bg-blue-100 px-2 py-0.5 text-sm font-bold text-blue-400">
                     🏃 {monster.speed}
                 </span>
             )}
 
-            {monster.save !== undefined && monster.save !== '' && (
+            {monster.save != null && (
                 <span className="ml-2 rounded bg-amber-200 px-2 py-0.5 text-sm font-bold text-amber-600">
                     ⭐ {monster.save}
                 </span>
