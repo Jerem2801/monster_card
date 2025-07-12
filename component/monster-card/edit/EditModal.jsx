@@ -1,5 +1,7 @@
 import { useState } from 'react';
+
 import StatusSelector from '@/component/monster-card/status/StatusSelector';
+import {getArmorType} from '@/lib/monsterUtils';
 
 export default function EditModal({
     closeModal,
@@ -55,12 +57,15 @@ export default function EditModal({
                     <select
                         id="armor"
                         className="flex-1 rounded-md border border-gray-300 bg-white p-2 text-gray-800"
-                        value={editMonster.armor || 'Aucune'}
-                        onChange={e => updateField('armor', e.target.value)}
+                        value={editMonster.armor?.id ?? ''}
+                        onChange={e => {
+                            const armorObj = getArmorType(e.target.value);
+                            updateField('armor', armorObj);
+                        }}
                     >
-                        <option value="none">Aucune</option>
+                        <option value="">Aucune</option>
                         <option value="M">Moyenne</option>
-                        <option value="L">Lourde</option>
+                        <option value="H">Lourde</option>
                     </select>
                 </div>
 

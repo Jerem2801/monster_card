@@ -1,14 +1,17 @@
+import { ARMOR_TYPE } from '@/data/monsterdata';
+
 // Calcule la difficulté d'une rencontre et retourne un objet { label, color }
 export function parseLevel(levelStr) {
     if (!levelStr) return Infinity;
-    const levelPart = levelStr.split(',')[0].trim();
-    if (levelPart.includes('/')) {
-        const [numerator, denominator] = levelPart.split('/').map(Number);
+    if (levelStr.includes('/')) {
+        const [numerator, denominator] = levelStr.split('/').map(Number);
         return numerator / denominator;
     }
-    const parsed = parseFloat(levelPart);
+    const parsed = parseFloat(levelStr);
     return isNaN(parsed) ? Infinity : parsed;
 }
+
+
 
 export function computeDifficultyLabel({ nbHeroes, levelHeroes, selectedMonsters }) {
     const totalHeroLevel = nbHeroes * levelHeroes;
@@ -54,4 +57,19 @@ export function getTotalMonsterLevel(monsters, nbHeroes) {
     }, 0);
     // Arrondi à un chiffre après la virgule
     return Math.round(total * 10) / 10;
+}
+
+export function formatMonsterName(name) {
+  if (!name) return null;
+  return name.split(' ').map((word, index) => (
+    <span key={index} className="mr-1">
+      <span className="text-2xl">{word.charAt(0)}</span>
+      <span className="text-lg uppercase">{word.slice(1)}</span>
+    </span>
+  ));
+}
+
+export function getArmorType(value){
+    const selectedId = value === '' ? null : value;
+    return Object.values(ARMOR_TYPE).find(a => a.id === selectedId);
 }
