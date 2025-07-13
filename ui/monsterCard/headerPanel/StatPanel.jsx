@@ -1,4 +1,4 @@
-export default function StatPanel({monster}){
+export default function StatPanel({ monster }) {
     return (
         <>
             {monster.armor.id != null && (

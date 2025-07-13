@@ -20,8 +20,6 @@ export default function MonsterPage({ encounterId }) {
                     dataMonsters,
                 );
 
-                console.log('selectedMonsters =', selectedMonsters);
-
                 const monstersWithId = selectedMonsters.map(monster => ({
                     id: crypto.randomUUID(),
                     monster,

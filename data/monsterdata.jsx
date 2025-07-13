@@ -9,7 +9,7 @@ export const SIZE_TYPE = {
 export const ARMOR_TYPE = {
     NONE: { id: null, label: 'Aucune' },
     MEDIUM: { id: 'M', label: 'M' },
-    HEAVY: { id: 'H', label: 'H' },
+    HEAVY: { id: 'H', label: 'L' },
 };
 
 // Passifs réutilisables
@@ -192,7 +192,7 @@ export const dataMonsters = [
         speed: 2,
         action: [
             {
-                name: 'Cleave',
+                name: 'Cleave.',
                 description: '$dice.',
                 dice: { numberDice: 2, valueDice: 6, bonus: 4 },
             },
@@ -332,7 +332,7 @@ export const dataMonsters = [
             passifEcorceArrachee,
             {
                 name: 'Éruption caustique.',
-                description: 'À la mort : 4d6 d’acide à TOUTES les créatures adjacentes.',
+                description: 'À la mort : $dice d’acide à TOUTES les créatures adjacentes.',
                 dice: { numberDice: 4, valueDice: 6, bonus: 0 },
             },
         ],

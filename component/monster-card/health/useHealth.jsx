@@ -1,38 +1,27 @@
 // useHeal.ts
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 
 export function useHealth(hpMax, sendNewHp) {
-  const [currentHp, setCurrentHp] = useState(hpMax);
-  const [showTooltip, setShowTooltip] = useState(false);
-  const tooltipRef = useRef(null);
+    const [currentHp, setCurrentHp] = useState(hpMax);
 
-  const updateHeal = (delta) => {
-    const newHp = Math.max(0, Math.min(hpMax, currentHp + delta));
-    setCurrentHp(newHp);
-    sendNewHp(newHp);
-  };
+    const updateHealth = delta => {
+        const newHp = Math.max(0, Math.min(hpMax, currentHp + delta));
+        setCurrentHp(newHp);
+        sendNewHp(newHp);
+    };
 
-  const closeTooltip = () => {
-    setShowTooltip(false);
-  };
+    function getHealthGradient(currentHp, hpMax) {
+        const ratio = Math.max(0, Math.min(1, currentHp / hpMax));
+        const color = ratio <= 0.2 ? '#f87171' : ratio <= 0.5 ? '#fbbf24' : '#4ade80';
 
-  const handleClickOutside = (event) => {
-    if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
-      closeTooltip();
+        const percent = ratio * 100;
+
+        return `linear-gradient(to right, ${color} ${percent}%, #ffffff ${percent}%)`;
     }
-  };
 
-  useEffect(() => {
-    if (showTooltip) document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [showTooltip]);
-
-  return {
-    currentHp,
-    showTooltip,
-    tooltipRef,
-    setShowTooltip,
-    updateHeal,
-    closeTooltip,
-  };
+    return {
+        currentHp,
+        updateHealth,
+        getHealthGradient,
+    };
 }

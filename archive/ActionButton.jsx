@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function ActionButton({ handleClick, action }) {
+export default function ActionButton({ action }) {
     const useCount = action.use ?? 0; // 0 si undefined/null
     const [checkedStates, setCheckedStates] = useState(Array(useCount).fill(false));
 
@@ -31,10 +31,6 @@ export default function ActionButton({ handleClick, action }) {
             <>
                 <span>{before}</span>
                 <button
-                    onClick={e => {
-                        e.stopPropagation();
-                        handleClick();
-                    }}
                     className="text-md inline-block cursor-pointer rounded bg-gray-200 px-1 align-middle hover:bg-gray-300"
                     aria-label={`Lancer ${diceText}`}
                     type="button"

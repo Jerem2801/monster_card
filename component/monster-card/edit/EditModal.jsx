@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import StatusSelector from '@/component/monster-card/status/StatusSelector';
-import {getArmorType} from '@/lib/monsterUtils';
+import { getArmorType } from '@/lib/monsterUtils';
 
 export default function EditModal({
     closeModal,

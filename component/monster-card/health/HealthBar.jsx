@@ -1,88 +1,49 @@
 'use client';
 
-import { PlusIcon, MinusIcon } from '@heroicons/react/16/solid';
-import { Button } from 'flowbite-react';
-import { useState, useRef, useEffect } from 'react';
+import { Button, Popover } from 'flowbite-react';
 import { useHealth } from '@/component/monster-card/health/useHealth';
-import HealtCalculatorModal from './HealthCalculatorModal';
+import HealthCalculatorModal from '@/ui/monsterCard/health/HealthCalculatorModal';
+import HealthBarButton from '@/ui/monsterCard/health/HealthBarButton';
 
 export default function HealthBar({ hpMax, sendNewHp }) {
-     const {
-        currentHp,
-        showTooltip,
-        tooltipRef,
-        setShowTooltip,
-        updateHeal,
-        closeTooltip,
-    } = useHealth(hpMax, sendNewHp);
-
+    const { currentHp, updateHealth, getHealthGradient } = useHealth(hpMax, sendNewHp);
 
     function handleHeal(inputValue) {
-        updateHeal(Number(inputValue));
-        closeTooltip();
+        updateHealth(Number(inputValue));
     }
 
     function handleDamage(inputValue) {
-        updateHeal(-Number(inputValue));
-        closeTooltip();
+        updateHealth(-Number(inputValue));
     }
 
-
     return (
-        <div className="relative w-full" ref={tooltipRef}>
+        <div className="w-full">
             <div
-                className="relative flex items-center justify-center gap-3 overflow-hidden rounded-md border border-gray-300 px-3 py-1.5 shadow-sm"
+                className="flex w-full items-center justify-center gap-3 overflow-hidden rounded-md border border-gray-300 px-3 py-1.5 shadow-sm transition-colors duration-300"
                 style={{
-                    background: `linear-gradient(to right, ${
-                        currentHp / hpMax <= 0.2
-                            ? '#f87171'
-                            : currentHp / hpMax <= 0.5
-                              ? '#fbbf24'
-                              : '#4ade80'
-                    } ${Math.max(0, Math.min(100, (currentHp / hpMax) * 100))}%, #ffffff ${Math.max(0, Math.min(100, (currentHp / hpMax) * 100))}%)`,
-                    borderRadius: '0.375rem',
-                    padding: '0.25rem 0.75rem',
-                    transition: 'background 0.3s',
+                    background: getHealthGradient(currentHp, hpMax),
                 }}
-                onClick={() => setShowTooltip(!showTooltip)}
             >
-                <div className="flex items-center justify-center">
-                    <Button
-                        onClick={e => {
-                            e.stopPropagation();
-                            updateHeal(-1);
-                        }}
-                        color="red"
-                        size="xs"
-                        pill
-                    >
-                        <MinusIcon className="h-5 w-5" />
-                    </Button>
-                </div>
+                <HealthBarButton updateHealth={() => updateHealth(-1)} color="red" icon="-" />
 
-                <span className="flex h-8 w-20 items-center justify-center font-mono text-lg leading-none font-medium text-gray-700">
-                    {currentHp} / {hpMax}
-                </span>
-
-                <Button
-                    onClick={e => {
-                        e.stopPropagation();
-                        updateHeal(+1);
-                    }}
-                    color="green"
-                    size="xs"
-                    pill
+                <Popover
+                    content={
+                        <div className="w-64 text-sm text-gray-500">
+                            <HealthCalculatorModal
+                                handleDamage={handleDamage}
+                                handleHeal={handleHeal}
+                            />
+                        </div>
+                    }
+                    placement="top"
                 >
-                    <PlusIcon className="h-5 w-5" />
-                </Button>
+                    <span className="flex h-8 w-20 cursor-pointer items-center justify-center font-mono text-lg leading-none font-medium text-gray-700">
+                        {currentHp} / {hpMax}
+                    </span>
+                </Popover>
+
+                <HealthBarButton updateHealth={() => updateHealth(+1)} color="green" icon="+" />
             </div>
-            
-            <HealtCalculatorModal
-                showTooltip={showTooltip}
-                handleDamage={handleDamage}
-                handleHeal={handleHeal}
-            />
-            
         </div>
     );
 }

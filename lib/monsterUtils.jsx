@@ -11,8 +11,6 @@ export function parseLevel(levelStr) {
     return isNaN(parsed) ? Infinity : parsed;
 }
 
-
-
 export function computeDifficultyLabel({ nbHeroes, levelHeroes, selectedMonsters }) {
     const totalHeroLevel = nbHeroes * levelHeroes;
     const monsterLevel =
@@ -60,16 +58,16 @@ export function getTotalMonsterLevel(monsters, nbHeroes) {
 }
 
 export function formatMonsterName(name) {
-  if (!name) return null;
-  return name.split(' ').map((word, index) => (
-    <span key={index} className="mr-1">
-      <span className="text-2xl">{word.charAt(0)}</span>
-      <span className="text-lg uppercase">{word.slice(1)}</span>
-    </span>
-  ));
+    if (!name) return null;
+    return name.split(' ').map((word, index) => (
+        <span key={index} className="mr-1">
+            <span className="text-2xl">{word.charAt(0)}</span>
+            <span className="text-lg uppercase">{word.slice(1)}</span>
+        </span>
+    ));
 }
 
-export function getArmorType(value){
+export function getArmorType(value) {
     const selectedId = value === '' ? null : value;
     return Object.values(ARMOR_TYPE).find(a => a.id === selectedId);
 }

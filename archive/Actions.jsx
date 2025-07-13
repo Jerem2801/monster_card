@@ -6,7 +6,7 @@ import ResultDisplay from '@/component/monster-card/actions/ResultDisplay';
 import AdvantagePanel from '@/component/monster-card/actions/AdvantagePanel';
 import { throwDice } from '@/lib/diceutils';
 
-export default function AttackButton({ action }) {
+export default function Actions({ action }) {
     const [result, setResult] = useState({ type: '', total: 0, dices: [], diceProperty: {} });
 
     const [advantage, setAdvantage] = useState(0);

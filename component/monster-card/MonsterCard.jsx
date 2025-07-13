@@ -5,7 +5,6 @@ import { useState } from 'react';
 import { toggleStatus } from '@/component/monster-card/status/testStatus';
 import { useMonsterCard } from '@/component/monster-card/useMonsterCard';
 
-
 import NamePanel from '@/ui/monsterCard/headerPanel/NamePanel';
 import HealthBar from '@/component/monster-card/health/HealthBar';
 
@@ -13,10 +12,9 @@ import PassivePanel from '@/component/monster-card/passive/PassivePanel';
 import EditModal from '@/component/monster-card/edit/EditModal';
 
 import HealButtonLegendary from '@/component/monster-card/legendary/HealButtonLegendary';
-import AttacksButtons from '@/component/monster-card/actions/AttacksButtons';
+import ActionPanel from '@/component/monster-card/actions/ActionPanel';
 import LegendaryMecanics from '@/component/monster-card/legendary/LegendaryMechanics';
 import ListStatus from '@/component/monster-card/status/ListStatus';
-
 
 export default function MonsterCard({ monster, removeMonsterCard }) {
     const [showEditModal, setShowEditModal] = useState(false);
@@ -57,7 +55,7 @@ export default function MonsterCard({ monster, removeMonsterCard }) {
 
             <PassivePanel monster={localMonster} />
 
-            <AttacksButtons monster={localMonster} />
+            <ActionPanel monster={localMonster} />
 
             {localMonster.bloodied != null && <LegendaryMecanics monster={localMonster} />}
 

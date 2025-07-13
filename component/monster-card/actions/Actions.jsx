@@ -1,0 +1,27 @@
+import { getActionContent } from '@/ui/monsterCard/actions/actionUtils';
+import CheckUsage from '@/ui/monsterCard/actions/CheckUsage';
+import { useActionUses } from '@/component/monster-card/actions/useActionUses';
+
+export default function Actions({ action }) {
+    const { useCount, checkedStates, allChecked, toggleCheckbox } = useActionUses(action);
+    const content = getActionContent(action);
+
+    return (
+        <div
+            className={`rounded-md px-2 py-1 text-left ${
+                allChecked ? 'text-gray-500 line-through' : ''
+            }`}
+        >
+            <span className="text-lg font-bold">{action.name}</span>
+            {''}
+
+            <span className="ml-1 text-base">{content}</span>
+
+            <CheckUsage
+                useCount={useCount}
+                toggleCheckbox={toggleCheckbox}
+                checkedStates={checkedStates}
+            />
+        </div>
+    );
+}

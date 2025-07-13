@@ -66,3 +66,11 @@ export function throwDice(diceProperty, advantage) {
     };
     return resultDice;
 }
+
+export function formatDice({ numberDice, valueDice, bonus }) {
+    let result = `${numberDice}d${valueDice}`;
+    if (bonus && bonus !== 0) {
+        result += bonus > 0 ? `+${bonus}` : `${bonus}`;
+    }
+    return result;
+}
