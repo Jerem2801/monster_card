@@ -2,9 +2,9 @@ import { getActionContent } from '@/ui/monsterCard/actions/actionUtils';
 import CheckUsage from '@/ui/monsterCard/actions/CheckUsage';
 import { useActionUses } from '@/component/monster-card/actions/useActionUses';
 
-export default function Actions({ action }) {
+export default function Actions({ action, addMonsterCard, monsterName }) {
     const { useCount, checkedStates, allChecked, toggleCheckbox } = useActionUses(action);
-    const content = getActionContent(action);
+    const content = getActionContent(action, false, addMonsterCard,monsterName);
 
     return (
         <div

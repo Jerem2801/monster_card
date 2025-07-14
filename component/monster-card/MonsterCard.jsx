@@ -16,7 +16,7 @@ import ActionPanel from '@/component/monster-card/actions/ActionPanel';
 import LegendaryMecanics from '@/component/monster-card/legendary/LegendaryMechanics';
 import ListStatus from '@/component/monster-card/status/ListStatus';
 
-export default function MonsterCard({ monster, removeMonsterCard }) {
+export default function MonsterCard({ monster, removeMonsterCard, addMonsterCard }) {
     const [showEditModal, setShowEditModal] = useState(false);
     const {
         localMonster,
@@ -55,7 +55,7 @@ export default function MonsterCard({ monster, removeMonsterCard }) {
 
             <PassivePanel monster={localMonster} />
 
-            <ActionPanel monster={localMonster} />
+            <ActionPanel monster={localMonster} addMonsterCard={addMonsterCard} />
 
             {localMonster.bloodied != null && <LegendaryMecanics monster={localMonster} />}
 

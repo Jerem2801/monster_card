@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function TopNav() {
     return (
-        <nav className="inline-flex h-20 w-full items-center justify-center gap-8 bg-gray-100 p-4">
+        <nav className="fixed top-0 right-0 left-0 z-50 inline-flex h-20 w-full items-center justify-center gap-8 bg-gray-100 p-4 shadow-md">
             <Link href="/" className="group flex flex-col items-center justify-center select-none">
                 <span className="text-lg font-bold tracking-wide">MONSTER CARDS</span>
                 <span className="w-full rounded bg-blue-300 px-2 py-0.5 text-center text-xs text-black">

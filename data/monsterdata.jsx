@@ -102,7 +102,8 @@ export const dataMonsters = [
             },
             {
                 name: 'Ramenez-vous ! ',
-                description: 'Appelle un sbire gobelin au combat.',
+                description: 'Appelle un $summon au combat.',
+                summon: { name: 'Sbire Gobelin', number: 1 },
             },
         ],
     },
@@ -226,7 +227,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        name: 'Gobelin Minion',
+        name: 'Sbire Gobelin',
         type: MONSTER_TYPE.GOBELIN,
         hp: 1,
         level: '1/4',

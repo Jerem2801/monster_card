@@ -1,19 +1,35 @@
 import { formatDice } from '@/lib/diceutils';
 import AttackButton from '@/ui/monsterCard/actions/AttackButton';
+import SummonButton from '@/ui/monsterCard/actions/SummonButton'; // à adapter selon ton chemin
 
-export function getActionContent(action) {
-    if (!action.description.includes('$dice')) {
-        return <span>{action.description}</span>;
-    }
-
-    const [before, after] = action.description.split('$dice');
-    const diceText = formatDice(action.dice);
-
+export function getActionContent(action, passive, addMonsterCard,monsterName) {
+    const parts = action.description.split(/(\$dice|\$summon)/); // coupe autour des tokens spéciaux
     return (
         <>
-            <span>{before}</span>
-            <AttackButton diceText={diceText} action={action}/>
-            <span>{after}</span>
+            {parts.map((part, index) => {
+                if (part === '$dice') {
+                    return (
+                        <AttackButton
+                            key={`dice-${index}`}
+                            diceText={formatDice(action.dice)}
+                            action={action}
+                            passive={passive}
+                            monsterName={monsterName}
+                        />
+                    );
+                } else if (part === '$summon') {
+                    return (
+                        <SummonButton
+                            key={`summon-${index}`}
+                            action={action}
+                            passive={passive}
+                            addMonsterCard={addMonsterCard}
+                        />
+                    );
+                } else {
+                    return <span key={`text-${index}`}>{part}</span>;
+                }
+            })}
         </>
     );
 }

@@ -11,16 +11,12 @@ export const metadata: Metadata = {
     description: 'A simple app to create and manage your tabletop RPG encounters',
 };
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={`${inter.className} flex h-screen flex-col antialiased`}>
+            <body className={`${inter.className} h-screen antialiased`}>
                 <TopNav />
-                <div className="flex-grow overflow-auto">{children}</div>
+                <div className="h-full pt-20">{children}</div>
             </body>
         </html>
     );

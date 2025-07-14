@@ -1,57 +1,21 @@
-'use client';
+import { MessagesProvider } from '@/component/fight/resultDisplay/MessagesProvider';
+import MonsterPage from './MonsterPage';
+import ResultDisplayDialogBox from '@/component/fight/resultDisplay/ResultDisplayDialogBox';
 
-import { useEffect, useState } from 'react';
-import MonsterCard from '@/component/monster-card/MonsterCard';
-import { dataMonsters } from '@/data/monsterdata';
-import { loadEncounter } from '@/lib/encounterUtils';
-
-export default function MonsterPage({ encounterId }) {
-    const [monsters, setMonsters] = useState([]);
-    const [encounterName, setEncounterName] = useState('');
-
-    // Charge les monstres depuis l'API + dataMonsters
-    useEffect(() => {
-        if (!encounterId) return;
-
-        async function fetchEncounter() {
-            try {
-                const { encounterName, selectedMonsters } = await loadEncounter(
-                    encounterId,
-                    dataMonsters,
-                );
-
-                const monstersWithId = selectedMonsters.map(monster => ({
-                    id: crypto.randomUUID(),
-                    monster,
-                }));
-
-                setEncounterName(encounterName || '');
-                setMonsters(monstersWithId);
-            } catch (err) {
-                console.error('Erreur lors du chargement de la rencontre:', err);
-            }
-        }
-
-        fetchEncounter();
-    }, [encounterId]);
-
-    function removeMonster(idToRemove) {
-        setMonsters(prev => prev.filter(m => m.id !== idToRemove));
-    }
-
+export default function Fight({ encounterId }) {
     return (
-        <div>
-            <h1 className="pt-8 pr-80 pl-80 text-2xl font-bold">Rencontre : {encounterName}</h1>
+        <MessagesProvider>
+            <div className="flex" style={{ height: 'calc(100vh - 5rem)' }}>
+                {/* Zone principale scrollable */}
+                <div className="flex-1 overflow-y-auto">
+                    <MonsterPage encounterId={encounterId} />
+                </div>
 
-            <div className="flex flex-wrap justify-center gap-10 pt-8">
-                {monsters.map(({ id, monster }) => (
-                    <MonsterCard
-                        key={id}
-                        monster={monster}
-                        removeMonsterCard={() => removeMonster(id)}
-                    />
-                ))}
+                {/* Panneau latéral fixe */}
+                <div className="w-80 bg-white py-6">
+                    <ResultDisplayDialogBox />
+                </div>
             </div>
-        </div>
+        </MessagesProvider>
     );
 }
