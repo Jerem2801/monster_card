@@ -12,7 +12,9 @@ export default function ActionThrowModal({ action,monsterName }) {
     
     function handleAction() {
         const resultDice = throwDice(action.dice, advantage);
-        const cleanedActionName = action.name.replace(/^•\s*/, '').slice(0, -1);
+        const cleanedActionName = action.name
+  .replace(/^•\s*/, '')          // enlève le "• " au début
+  .replace(/\s*\([^)]*\)[.]?$/, '');
         const diceFormat = formatDice(action.dice);
         
         const message = {

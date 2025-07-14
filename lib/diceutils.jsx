@@ -13,20 +13,38 @@ export function doCritic(allResultDices, firstResult, valueDice, onCritic) {
 }
 
 export function doAdvantage(advantageAbsolute, allResultDices, advantage) {
-    if (advantageAbsolute !== 0) {
-        allResultDices.sort((a, b) => a - b);
+  if (advantageAbsolute === 0) {
+    return {
+      final: allResultDices,
+      annotated: allResultDices.map(value => ({
+        value,
+        kept: true
+      }))
+    };
+  }
 
-        for (let i = 0; i < advantageAbsolute; i++) {
-            if (advantage > 0) {
-                allResultDices.shift();
-            } else if (advantage < 0) {
-                allResultDices.pop();
-            }
-        }
-        shuffle(allResultDices);
-    }
-    return allResultDices;
+  const dicesWithIndex = allResultDices.map((value, index) => ({ value, index }));
+  dicesWithIndex.sort((a, b) => a.value - b.value);
+
+  const toDiscard = advantage > 0
+    ? dicesWithIndex.slice(0, advantageAbsolute)       // On jette les plus petits
+    : dicesWithIndex.slice(-advantageAbsolute);         // On jette les plus grands
+
+  const discardedIndexes = new Set(toDiscard.map(d => d.index));
+
+  const annotated = allResultDices.map((value, index) => ({
+    value,
+    kept: !discardedIndexes.has(index)
+  }));
+
+  const finalValues = annotated.filter(d => d.kept).map(d => d.value);
+
+  return {
+    final: finalValues,
+    annotated
+  };
 }
+
 
 export function checkFailed(allResultDices, onFailed) {
     if (allResultDices[0] === 1) {
@@ -35,36 +53,74 @@ export function checkFailed(allResultDices, onFailed) {
 }
 
 export function throwDice(diceProperty, advantage) {
-    let isCriticResult = false;
-    let isFailedResult = false;
-    let allResultDices = [];
+  const advantageAbsolute = Math.abs(advantage);
+  const totalToRoll = diceProperty.numberDice + advantageAbsolute;
+  const valueDice = diceProperty.valueDice;
 
-    const advantageAbsolute = Math.abs(advantage);
-    const allResultDicesToRoll = diceProperty.numberDice + advantageAbsolute;
+  // Génération brute des dés
+  const rawRolls = Array.from({ length: totalToRoll }, () =>
+    Math.floor(Math.random() * valueDice) + 1
+  );
 
-    for (let i = 0; i < allResultDicesToRoll; i++) {
-        allResultDices.push(Math.floor(Math.random() * diceProperty.valueDice) + 1);
+  // Application de l'avantage/désavantage
+  const { final: keptDiceValues, annotated } = doAdvantage(advantageAbsolute, rawRolls, advantage);
+
+  // Ajout des critiques
+  let isCriticResult = false;
+  let isFailedResult = false;
+  const finalDiceList = [];
+
+  annotated.forEach((die, idx) => {
+    finalDiceList.push({
+      value: die.value,
+      kept: die.kept,
+      discarded: !die.kept,
+      primary: false,
+      extra: false,
+    });
+  });
+
+  // Recherche du 1er dé gardé pour vérifier s’il est critique
+  const primaryIndex = finalDiceList.findIndex(d => d.kept);
+  if (primaryIndex !== -1 && finalDiceList[primaryIndex].value === valueDice) {
+    isCriticResult = true;
+    finalDiceList[primaryIndex].primary = true;
+
+    let lastCritValue = valueDice;
+    while (lastCritValue === valueDice) {
+      const extra = Math.floor(Math.random() * valueDice) + 1;
+      lastCritValue = extra;
+      finalDiceList.push({
+        value: extra,
+        kept: true,
+        discarded: false,
+        primary: false,
+        extra: true,
+      });
     }
+  } else if (primaryIndex !== -1) {
+    finalDiceList[primaryIndex].primary = true;
+  }
 
-    allResultDices = doAdvantage(advantageAbsolute, allResultDices, advantage);
-    allResultDices = doCritic(allResultDices, allResultDices[0], diceProperty.valueDice, () => {
-        isCriticResult = true;
-    });
+  // Vérification d’un échec critique (si tous les dés gardés == 1)
+  const keptForFailureCheck = finalDiceList.filter(d => d.kept).map(d => d.value);
+  checkFailed(keptForFailureCheck, () => {
+    isFailedResult = true;
+  });
 
-    checkFailed(allResultDices, () => {
-        isFailedResult = true;
-    });
+  // Total des dés gardés (bonus ignoré pour l’instant)
+  const totalKept = finalDiceList
+    .filter(d => d.kept)
+    .reduce((sum, d) => sum + d.value, 0);
 
-    let totalDices = allResultDices.reduce((acc, val) => acc + val, 0);
-    let totalDicesWithBonus = parseInt(totalDices) + parseInt(diceProperty.bonus);
+  const totalWithBonus = totalKept + parseInt(diceProperty.bonus || 0, 10);
 
-    const resultDice = {
-        type: isCriticResult ? 'critic' : isFailedResult ? 'failed' : 'normal',
-        total: totalDicesWithBonus,
-        dices: allResultDices,
-        diceProperty: diceProperty,
-    };
-    return resultDice;
+  return {
+    type: isCriticResult ? 'critic' : isFailedResult ? 'failed' : 'normal',
+    total: totalWithBonus,
+    dices: finalDiceList,
+    diceProperty,
+  };
 }
 
 export function formatDice({ numberDice, valueDice, bonus }) {

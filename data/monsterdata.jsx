@@ -296,7 +296,7 @@ export const dataMonsters = [
         hp: 50,
         level: '5',
         size: SIZE_TYPE.LARGE,
-        armor: ARMOR_TYPE.MEDIUM,
+        armor: ARMOR_TYPE.HEAVY,
         passif: [passifEcorceArrachee],
         action: [
             {
@@ -313,6 +313,7 @@ export const dataMonsters = [
         hp: 8,
         level: '1/2',
         size: SIZE_TYPE.SMALL,
+        armor: ARMOR_TYPE.HEAVY,
         passif: [passifEcorceArrachee],
         action: [
             {
@@ -329,6 +330,7 @@ export const dataMonsters = [
         hp: 8,
         level: '1',
         size: SIZE_TYPE.SMALL,
+        armor: ARMOR_TYPE.HEAVY,
         passif: [
             passifEcorceArrachee,
             {
@@ -350,6 +352,7 @@ export const dataMonsters = [
         type: MONSTER_TYPE.PLANTE,
         hp: 20,
         level: '2',
+        armor: ARMOR_TYPE.HEAVY,
         passif: [passifEcorceArrachee],
         action: [
             {
