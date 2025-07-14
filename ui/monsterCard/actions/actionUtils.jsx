@@ -2,7 +2,7 @@ import { formatDice } from '@/lib/diceutils';
 import AttackButton from '@/ui/monsterCard/actions/AttackButton';
 import SummonButton from '@/ui/monsterCard/actions/SummonButton'; // à adapter selon ton chemin
 
-export function getActionContent(action, passive, addMonsterCard,monsterName) {
+export function getActionContent(action, passive, addMonsterCard, monsterName) {
     const parts = action.description.split(/(\$dice|\$summon)/); // coupe autour des tokens spéciaux
     return (
         <>

@@ -50,19 +50,19 @@ export default function MonsterPage({ encounterId }) {
     }
 
     return (
-  <div className="px-8">
-    <h1 className="pt-8 text-2xl font-bold">Rencontre : {encounterName}</h1>
+        <div className="px-8">
+            <h1 className="pt-8 text-2xl font-bold">Rencontre : {encounterName}</h1>
 
-    <div className="flex flex-wrap justify-center gap-10 pt-8">
-      {monsters.map(({ id, monster }) => (
-        <MonsterCard
-          key={id}
-          monster={monster}
-          addMonsterCard={addMonster}
-          removeMonsterCard={() => removeMonster(id)}
-        />
-      ))}
-    </div>
-  </div>
-);
+            <div className="flex flex-wrap justify-center gap-10 pt-8">
+                {monsters.map(({ id, monster }) => (
+                    <MonsterCard
+                        key={id}
+                        monster={monster}
+                        addMonsterCard={addMonster}
+                        removeMonsterCard={() => removeMonster(id)}
+                    />
+                ))}
+            </div>
+        </div>
+    );
 }
