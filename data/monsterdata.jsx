@@ -34,6 +34,10 @@ const passifCoilingStrike = {
     name: 'Frappe enroulée.',
     description: 'En cas de coup critique en mêlée : Agrippe (DD d’évasion 10).',
 };
+const passifDeathStench = {
+    name: 'Peste de Mort.',
+    description: 'À la mort, il Empoisonne les ennemis adjacents pendant 1 manche.'
+}
 
 
 // Tableau des types de monstres
@@ -44,6 +48,7 @@ export const MONSTER_TYPE = {
     SNAKEMEN: {id: 'snakemen', label: 'Hommmes-serpents' },
     FOREST_DENIZEN: { id: 'forest_denizen', label: 'Habitant de la forêt' },
     BRIARBANE: { id: 'briarbane', label: 'Fléaux des ronces' },
+    TROGLODYTE: { id: 'troglodyte', label: 'Troglodyte' },
     ARAIGNEE: { id: 'araignee', label: 'Araignées' },
     ANIMAL: { id: 'animal', label: 'Animaux' },
     SORCIER: { id: 'sorcier', label: 'Sorcier' },
@@ -743,6 +748,160 @@ export const dataMonsters = [
                 dice: { numberDice: 2, valueDice: 6, bonus: 20 },
             }
         ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Troglodyte',
+        type: MONSTER_TYPE.TROGLODYTE,
+        hp: 14,
+        level: '1/3',
+        passif : [passifDeathStench],
+        action: [
+            {
+                name: 'Griffes.',
+                description:
+                    '$dice.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 3 },
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Troglodyte Tunnelier',
+        type: MONSTER_TYPE.TROGLODYTE,
+        hp: 14,
+        level: '1',
+        passif : [
+            passifDeathStench,
+            {
+                name:'Fouisseur',
+                description:'Invisible jusqu\'à ce que vous attaquiez (avantage aux attaques quand invisible). Si le troglodyte n’est ni en train de creuser ni d’agripper, il creuse au lieu d’attaquer.'
+            }
+        ],
+        action: [
+            {
+                name: 'Par en dessous !',
+                description:
+                    '$dice. En cas de réussite : Agrippé (DD d’évasion 10).',
+                dice: { numberDice: 1, valueDice: 6, bonus: 3 },
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Troglodyte Lance-boue',
+        type: MONSTER_TYPE.TROGLODYTE,
+        hp: 20,
+        level: '2',
+        passif : [passifDeathStench],
+        action: [
+            {
+                name: 'Jet de Glu.',
+                description:
+                    '(Distance 6) $dice. En cas de touche : Aveuglé pendant 1 round.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 3 },
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Troglodyte Hurleur',
+        type: MONSTER_TYPE.TROGLODYTE,
+        hp: 30,
+        level: '3',
+        passif : [passifDeathStench],
+        action: [
+            {
+                name: 'Hurlement.',
+                description:
+                    '(ZdE, Portée 2) $dice. Étourdit tous les ennemis.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 3 },
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Troglodyte Champion',
+        type: MONSTER_TYPE.TROGLODYTE,
+        hp: 40,
+        armor: ARMOR_TYPE.MEDIUM,
+        level: '4',
+        passif : [passifDeathStench],
+        action: [
+            {
+                name: 'Massue à pointes.',
+                description:
+                    '(ZdE, Portée 2) $dice. Étourdit tous les ennemis.',
+                dice: { numberDice: 3, valueDice: 6, bonus: 9 },
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Colosse Fongique',
+        type: MONSTER_TYPE.TROGLODYTE,
+        hp: 50,
+        size: SIZE_TYPE.LARGE,
+        armor: ARMOR_TYPE.MEDIUM,
+        speed: 4,
+        level: '4',
+        passif : [
+            passifDeathStench,{
+                name: 'Véhicule de Siège.',
+                description:'Jusqu’à 4 créatures moyennes peuvent monter dessus et diriger le mouvement de cette créature. Elles bénéficient de Couverture et d’une Armure Moyenne. Lorsqu’il est détruit, toutes les créatures à son bord tombent à Terre.'
+            }
+        ],
+        action: [
+            {
+                name: 'Écrasement.',
+                description:'1 créature plus petite sur son chemin subit 10 dégâts.'
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Troglodyte Enflé',
+        type: MONSTER_TYPE.TROGLODYTE,
+        hp: 50,
+        size: SIZE_TYPE.LARGE,
+        level: '5',
+        passif : [passifDeathStench],
+        action: [
+            {
+                name: 'Lancer.',
+                description:'Lance un allié adjacent jusqu’à 6 cases.'
+            },
+            {
+                name: 'Puis :',
+                description:''
+            },
+            {
+                name: 'Puantise Envahissante.',
+                description:'(ZdE, Portée 12) : $dice à tous les ennemis. Ils sont Étourdis et Empoisonnés pendant 1 round.',
+                dice: { numberDice: 3, valueDice: 6, bonus: 3 }
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Phalène de l’Ombre',
+        type: MONSTER_TYPE.TROGLODYTE,
+        hp: 40,
+        size: SIZE_TYPE.HUGE,
+        level: '6',
+        fly: 4,
+        passif : [
+            passifDeathStench,
+            {
+                name: 'Ailes Absorbant la Lumière.',
+                description:'Le rayon de la lumière et du son est réduit de moitié.'
+            },
+            {
+                name: 'Poussière d’Ombre.',
+                description:'Les Troglodytes dans une portée de 12 lancent des d12 au lieu de d6. Lorsqu’elle subit des dégâts, inflige 1d12 de dégâts psychiques imparables aux ennemis dans une portée de 12.'
+            }
+        ],
+        action: [],
     },
     {
         ...defaultMonster,
