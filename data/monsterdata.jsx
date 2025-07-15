@@ -30,12 +30,18 @@ const passifParry = {
     name: 'Parade.',
     description: 'Considérez les attaques contre vous qui font un 2 au jet comme un échec.',
 };
+const passifCoilingStrike = {
+    name: 'Frappe enroulée.',
+    description: 'En cas de coup critique en mêlée : Agrippe (DD d’évasion 10).',
+};
+
 
 // Tableau des types de monstres
 export const MONSTER_TYPE = {
     GOBELIN: { id: 'gobelin', label: 'Gobelins' },
     KOBOLD: { id: 'kobold', label: 'Kobolds' },
     BANDIT: { id: 'bandit', label: 'Bandits' },
+    SNAKEMEN: {id: 'snakemen', label: 'Hommmes-serpents' },
     FOREST_DENIZEN: { id: 'forest_denizen', label: 'Habitant de la forêt' },
     BRIARBANE: { id: 'briarbane', label: 'Fléaux des ronces' },
     ARAIGNEE: { id: 'araignee', label: 'Araignées' },
@@ -351,6 +357,7 @@ export const dataMonsters = [
         name: 'Sbire Bandit',
         type: MONSTER_TYPE.BANDIT,
         hp: 1,
+        minion: 1,
         level: '1/4',
         passif: [passifParry],
         action: [
@@ -450,7 +457,7 @@ export const dataMonsters = [
             {
                 name: 'Éclair Arqué.',
                 description: '(Distance 12) $dice. Frappe également la créature la plus proche suivante. En cas d’échec : se blesse soi-même à la place.',
-                dice: { numberDice: 1, valueDice: 8, bonus: 2 },
+                dice: { numberDice: 3, valueDice: 8, bonus: 0 },
             }
         ],
     },
@@ -651,7 +658,93 @@ export const dataMonsters = [
             },
         ],
     },
-        {
+    {
+        ...defaultMonster,
+        name: 'Sbire Homme-serpent',
+        type: MONSTER_TYPE.SNAKEMEN,
+        hp: 1,
+        level: '1/4',
+        minion: true,
+        passif: [passifCoilingStrike],
+        action: [
+            {
+                name: 'Frappe.',
+                description:
+                    '$dice.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 0 },
+            },
+            {
+                name: 'Crachat.',
+                description:
+                    '(Distance 8) $dice.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 0 },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Homme-serpent',
+        type: MONSTER_TYPE.SNAKEMEN,
+        hp: 26,
+        level: '1',
+        passif: [passifCoilingStrike],
+        action: [
+            {
+                name: 'Entaille.',
+                description:
+                    '$dice.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 6 },
+            },
+            {
+                name: 'Crachat.',
+                description:
+                    '(Distance 8) $dice.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 6 },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Capitaine Cobra',
+        type: MONSTER_TYPE.SNAKEMEN,
+        hp: 36,
+        level: '4',
+        armor: ARMOR_TYPE.MEDIUM,
+        passif: [passifCoilingStrike],
+        action: [
+            {
+                name: 'Entaille (2x).',
+                description:
+                    '$dice.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 6 },
+            },
+            {
+                name: 'Crachat (2x).',
+                description:
+                    '(Distance 8) $dice.',
+                dice: { numberDice: 1, valueDice: 6, bonus: 6 },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Cobra Géant',
+        type: MONSTER_TYPE.SNAKEMEN,
+        hp: 80,
+        level: '8',
+        size: SIZE_TYPE.LARGE,
+        armor: ARMOR_TYPE.MEDIUM,
+        passif: [passifCoilingStrike],
+        action: [
+            {
+                name: 'Écrasement.',
+                description:
+                    '$dice. Avantage contre les créatures plus petites.',
+                dice: { numberDice: 2, valueDice: 6, bonus: 20 },
+            }
+        ],
+    },
+    {
         ...defaultMonster,
         name: 'Araignée Géante',
         type: MONSTER_TYPE.ARAIGNEE,
