@@ -26,6 +26,10 @@ const passifEcorceArrachee = {
     name: 'Écorce Arrachée.',
     description: 'Chaque dégât subit fait baisser l’armure d’un cran : Lourd » Moyen » Aucune.',
 };
+const passifParry = {
+    name: 'Parade.',
+    description: 'Considérez les attaques contre vous qui font un 2 au jet comme un échec.',
+};
 
 // Tableau des types de monstres
 export const MONSTER_TYPE = {
@@ -36,6 +40,7 @@ export const MONSTER_TYPE = {
     PLANTE: { id: 'plante', label: 'Plantes' },
     ANIMAL: { id: 'animal', label: 'Animaux' },
     SORCIER: { id: 'sorcier', label: 'Sorcier' },
+    BANDIT: { id: 'bandit', label: 'Bandits' },
 };
 
 // Valeurs par défaut pour chaque monstre
@@ -145,15 +150,58 @@ export const dataMonsters = [
         ],
         action: [
             {
-                name: 'Coup de dague',
+                name: 'Coup de dague.',
                 description: '$dice.',
                 dice: { numberDice: 1, valueDice: 4, bonus: 2 },
             },
             {
-                name: 'Fronde',
+                name: 'Fronde.',
                 description: '(Portée 8) $dice.',
                 dice: { numberDice: 1, valueDice: 4, bonus: 2 },
             },
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Sbire Kobold',
+        type: MONSTER_TYPE.KOBOLD,
+        hp: 1,
+        minion: true,
+        level: '1/4',
+        size: SIZE_TYPE.SMALL,
+        passif: [passifNooooo],
+        action: [
+            {
+                name: 'Coup de dague.',
+                description: '$dice.',
+                dice: { numberDice: 1, valueDice: 4, bonus: 2 },
+            },
+            {
+                name: 'Fronde.',
+                description: '(Portée 8) $dice.',
+                dice: { numberDice: 1, valueDice: 4, bonus: 2 },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Gardien de Tanière Kobold',
+        type: MONSTER_TYPE.KOBOLD,
+        hp: 20,
+        level: '1',
+        size: SIZE_TYPE.SMALL,
+        armor: ARMOR_TYPE.MEDIUM,
+        passif: [passifNooooo,{
+                name: 'Halte !',
+                description:
+                    "Les alliés adjacents gagnent une armure intermédiaire.",
+            },],
+        action: [
+            {
+                name: 'Coup de dague (2x).',
+                description: '$dice.',
+                dice: { numberDice: 1, valueDice: 4, bonus: 2 },
+            }
         ],
     },
     {
@@ -178,9 +226,34 @@ export const dataMonsters = [
                 dice: { numberDice: 1, valueDice: 4, bonus: 2 },
             },
             {
+                name: 'ABEIIILLES !',
+                description: '$dice (ne rate jamais). La moitié des dégâts est infligée à toutes les créatures adjacentes.',
+                dice: { numberDice: 5, valueDice: 4, bonus: 0 },
+                use: 1
+            },
+            {
                 name: 'Filet caché',
                 description: 'Entravé (évasion DD 10).',
+                use: 1
             },
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Kobold Sonneur',
+        type: MONSTER_TYPE.KOBOLD,
+        hp: 16,
+        level: '1',
+        armor: ARMOR_TYPE.HEAVY,
+        passif: [
+            passifNooooo,
+            {
+                name: 'CLANG !',
+                description:
+                    'Les alliés qui entendent votre vacarme lancent 1 dé supplémentaire à chaque fois qu’ils attaquent.',
+            },
+        ],
+        action: [
         ],
     },
     {
@@ -190,12 +263,45 @@ export const dataMonsters = [
         hp: 30,
         level: '2',
         armor: ARMOR_TYPE.MEDIUM,
-        speed: 2,
         action: [
             {
-                name: 'Cleave.',
+                name: 'Frappe large.',
                 description: '$dice.',
                 dice: { numberDice: 2, valueDice: 6, bonus: 4 },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Bugbear Chef de Guerre',
+        type: MONSTER_TYPE.GOBELIN,
+        hp: 40,
+        level: '4',
+        armor: ARMOR_TYPE.MEDIUM,
+        action: [
+            {
+                name: 'Frappe large.',
+                description: '(Portée 2) $dice, peut également infliger des dégâts à une 2ᵉ cible à portée.',
+                dice: { numberDice: 2, valueDice: 6, bonus: 10 },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Nilbog',
+        type: MONSTER_TYPE.GOBELIN,
+        hp: 30,
+        level: '3',
+        passif: [
+            {
+                name: 'Chaos inversé.',
+                description: 'Les attaques qui toucheraient normalement un Nilbog ratent à la place, et celles qui rateraient normalement touchent à la place.',
+            },
+        ],
+        action: [
+            {
+                name: 'Na-na-nère !',
+                description: 'Réaction — lorsqu\'une attaque d\'un héros rate un Gobelin, ou lorsqu\'un héros aurait pu effectuer une attaque d\'opportunité contre un Gobelin mais ne le fait pas : infligez 4 dégâts psychiques.'
             },
         ],
     },
@@ -263,6 +369,21 @@ export const dataMonsters = [
                 name: 'Mordre & Planter (x2).',
                 description: '$dice. Sur un critique: A terre.',
                 dice: { numberDice: 1, valueDice: 6, bonus: 2 },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        name: 'Sbire Bandit',
+        type: MONSTER_TYPE.BANDIT,
+        hp: 1,
+        level: '1/4',
+        passif: [passifParry],
+        action: [
+            {
+                name: 'Coup de Dague.',
+                description: '$dice.',
+                dice: { numberDice: 1, valueDice: 8, bonus: 0 },
             },
         ],
     },
