@@ -28,11 +28,7 @@ export default function EncounterList({ encounters, handleDelete }) {
                                 </Button>
                             </Link>
 
-                            <Button
-                                color="red"
-                                className="cursor-pointer"
-                                onClick={() => handleDelete(encounter.id)}
-                            >
+                            <Button color="red" className="cursor-pointer" onClick={() => handleDelete(encounter.id)}>
                                 <XCircleIcon className="h-5 w-5" />
                             </Button>
                         </div>

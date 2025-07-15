@@ -12,12 +12,26 @@ export const ARMOR_TYPE = {
     HEAVY: { id: 'H', label: 'L' },
 };
 
+// Tableau des types de monstres
+export const MONSTER_TYPE = {
+    GOBELIN: { id: 'gobelin', label: 'Gobelins' },
+    KOBOLD: { id: 'kobold', label: 'Kobolds' },
+    BANDIT: { id: 'bandit', label: 'Bandits' },
+    SNAKEMEN: {id: 'snakemen', label: 'Hommmes-serpents' },
+    FOREST_DENIZEN: { id: 'forest_denizen', label: 'Habitant de la forêt' },
+    BRIARBANE: { id: 'briarbane', label: 'Fléaux des ronces' },
+    TROGLODYTE: { id: 'troglodyte', label: 'Troglodyte' },
+    ARAIGNEE: { id: 'araignee', label: 'Araignées' },
+    ANIMAL: { id: 'animal', label: 'Animaux' },
+    SORCIER: { id: 'sorcier', label: 'Sorcier' },
+};
+
 // Passifs réutilisables
-const passifHahaRate = {
+const passiveHahaMissedMe = {
     name: 'Haha, raté !',
     description: "À chaque fois qu'une attaque vous rate, infligez 1 dégât psychique en retour.",
 };
-const passifNooooo = {
+const passiveNooooo = {
     name: 'Nooooo !',
     description:
         'Quand un allié à 2 cases ou moins meurt, effectuez une attaque gratuite immédiatement.',
@@ -40,20 +54,6 @@ const passifDeathStench = {
 }
 
 
-// Tableau des types de monstres
-export const MONSTER_TYPE = {
-    GOBELIN: { id: 'gobelin', label: 'Gobelins' },
-    KOBOLD: { id: 'kobold', label: 'Kobolds' },
-    BANDIT: { id: 'bandit', label: 'Bandits' },
-    SNAKEMEN: {id: 'snakemen', label: 'Hommmes-serpents' },
-    FOREST_DENIZEN: { id: 'forest_denizen', label: 'Habitant de la forêt' },
-    BRIARBANE: { id: 'briarbane', label: 'Fléaux des ronces' },
-    TROGLODYTE: { id: 'troglodyte', label: 'Troglodyte' },
-    ARAIGNEE: { id: 'araignee', label: 'Araignées' },
-    ANIMAL: { id: 'animal', label: 'Animaux' },
-    SORCIER: { id: 'sorcier', label: 'Sorcier' },
-};
-
 // Valeurs par défaut pour chaque monstre
 const defaultMonster = {
     armor: ARMOR_TYPE.NONE,
@@ -69,6 +69,7 @@ const defaultMonster = {
 };
 
 export const dataMonsters = [
+    //GOBELIN
     {
         ...defaultMonster,
         name: 'Sbire Gobelin',
@@ -77,7 +78,7 @@ export const dataMonsters = [
         level: '1/4',
         size: SIZE_TYPE.SMALL,
         minion: true,
-        passif: [passifHahaRate],
+        passif: [passiveHahaMissedMe],
         action: [
             {
                 name: 'Planter.',
@@ -93,7 +94,7 @@ export const dataMonsters = [
         hp: 15,
         level: '1/2',
         size: SIZE_TYPE.SMALL,
-        passif: [passifHahaRate],
+        passif: [passiveHahaMissedMe],
         action: [
             {
                 name: 'Planter.',
@@ -116,7 +117,7 @@ export const dataMonsters = [
         size: SIZE_TYPE.LARGE,
         speed: 10,
         passif: [
-            passifHahaRate,
+            passiveHahaMissedMe,
             {
                 name: 'CHAAARGE!',
                 description:
@@ -140,7 +141,7 @@ export const dataMonsters = [
         level: '2',
         size: SIZE_TYPE.SMALL,
         passif: [
-            passifHahaRate,
+            passiveHahaMissedMe,
             {
                 name: 'Bouclier de viande.',
                 description: "Peut forcer un autre gobelin à s'Interposer pour Lui.",
@@ -213,6 +214,7 @@ export const dataMonsters = [
             },
         ],
     },
+    //KOBOLD
     {
         ...defaultMonster,
         name: 'Sbire Kobold',
@@ -221,7 +223,7 @@ export const dataMonsters = [
         minion: true,
         level: '1/4',
         size: SIZE_TYPE.SMALL,
-        passif: [passifNooooo],
+        passif: [passiveNooooo],
         action: [
             {
                 name: 'Planter.',
@@ -242,7 +244,7 @@ export const dataMonsters = [
         hp: 12,
         level: '1/3',
         size: SIZE_TYPE.SMALL,
-        passif: [passifNooooo],
+        passif: [passiveNooooo],
         action: [
             {
                 name: 'Planter.',
@@ -264,7 +266,7 @@ export const dataMonsters = [
         level: '1/2',
         size: SIZE_TYPE.SMALL,
         passif: [
-            passifNooooo,
+            passiveNooooo,
             {
                 name: 'Revanche !',
                 description:
@@ -292,7 +294,7 @@ export const dataMonsters = [
         level: '1',
         size: SIZE_TYPE.SMALL,
         armor: ARMOR_TYPE.MEDIUM,
-        passif: [passifNooooo,{
+        passif: [passiveNooooo,{
                 name: 'Halte !',
                 description:
                     "Les alliés adjacents gagnent une armure intermédiaire.",
@@ -313,7 +315,7 @@ export const dataMonsters = [
         level: '1',
         size: SIZE_TYPE.SMALL,
         passif: [
-            passifNooooo,
+            passiveNooooo,
             {
                 name: 'Pièges !',
                 description:
@@ -347,7 +349,7 @@ export const dataMonsters = [
         level: '1',
         armor: ARMOR_TYPE.HEAVY,
         passif: [
-            passifNooooo,
+            passiveNooooo,
             {
                 name: 'CLANG !',
                 description:
@@ -357,6 +359,7 @@ export const dataMonsters = [
         action: [
         ],
     },
+    //BANDIT
     {
         ...defaultMonster,
         name: 'Sbire Bandit',
@@ -487,6 +490,7 @@ export const dataMonsters = [
             }
         ],
     },
+    //HABITANT DE LA FORET
     {
         ...defaultMonster,
         name: 'Traqueur du Crépuscule',
@@ -524,7 +528,11 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Regard de pierre.',
-                description: 'Étourdit 1 créature dans le champ de vision, puis :'
+                description: 'Étourdit 1 créature dans le champ de vision.'
+            },
+            {
+                name: 'PUIS :',
+                description: ''
             },
             {
                 name: 'Envenimer.',
@@ -557,6 +565,7 @@ export const dataMonsters = [
             }
         ],
     },
+    //FLEAUX DES RONCES
     {
         ...defaultMonster,
         name: 'Pousse',
@@ -663,6 +672,7 @@ export const dataMonsters = [
             },
         ],
     },
+    //HOMME-SERPENT
     {
         ...defaultMonster,
         name: 'Sbire Homme-serpent',
@@ -749,6 +759,7 @@ export const dataMonsters = [
             }
         ],
     },
+    //TROGLODYTE
     {
         ...defaultMonster,
         name: 'Troglodyte',
@@ -903,6 +914,7 @@ export const dataMonsters = [
         ],
         action: [],
     },
+    //ARAIGNEE
     {
         ...defaultMonster,
         name: 'Araignée Géante',
@@ -926,6 +938,7 @@ export const dataMonsters = [
             },
         ],
     },
+    //LEGENDAIRE
     {
         ...defaultMonster,
         name: 'Krogg',
