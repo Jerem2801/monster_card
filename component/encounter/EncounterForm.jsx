@@ -17,7 +17,7 @@ import {
     loadEncounter,
 } from '@/lib/encounterUtils';
 
-export default function EncounterForm({ encounterId }) {
+export default function EncounterForm({ encounterId = 0 }) {
     const [selectedMonsters, setSelectedMonsters] = useState([]);
     const [nbHeroes, setNbHeroes] = useState(1);
     const [levelHeroes, setLevelHeroes] = useState(1);
