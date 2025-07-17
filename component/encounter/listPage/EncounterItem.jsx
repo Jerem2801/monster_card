@@ -9,13 +9,13 @@ return (
         <div className="flex gap-2 pr-10">
 
             <Link href={`/fight/${encounter.id}`}>
-                <Button>
+                <Button className="cursor-pointer">
                     <PlayCircleIcon className="h-5 w-5" />
                 </Button>
             </Link>
 
             <Link href={`/encounter/${encounter.id}`}>
-                <Button color="green">
+                <Button color="green" className="cursor-pointer">
                     <PencilSquareIcon className="h-5 w-5" />
                 </Button>
             </Link>
@@ -23,6 +23,7 @@ return (
             <Button
                 color="red"
                 onClick={() => handleDelete(encounter.id)}
+                className="cursor-pointer"
             >
                 <XCircleIcon className="h-5 w-5" />
             </Button>

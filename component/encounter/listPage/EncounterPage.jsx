@@ -5,7 +5,7 @@ import { useEffect} from 'react';
 import Link from 'next/link';
 import { Button} from 'flowbite-react';
 
-import { useEncounters } from './hooks/useEncounters';
+import { useEncounters } from './hooks/useEncounterPage';
 
 import EncounterList from './EncounterList';
 import LoadingWrapper from '@/ui/LoadingWrapper';
