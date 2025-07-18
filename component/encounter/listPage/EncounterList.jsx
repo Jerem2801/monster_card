@@ -1,4 +1,4 @@
-import EncounterItem from './EncounterItem'
+import EncounterItem from './EncounterItem';
 
 export default function EncounterList({ encounters, handleDelete }) {
     if (encounters.length === 0) {

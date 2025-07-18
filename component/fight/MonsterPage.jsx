@@ -1,19 +1,22 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import MonsterCard from '@/component/monster-card/MonsterCard';
+import { useEffect, useState, useCallback } from 'react';
+
 import { dataMonsters } from '@/data/monsterdata';
-import { loadEncounter } from '@/lib/encounterUtils';
+
+import MonsterCard from './monsterCard/MonsterCard';
+
+import { loadEncounter } from '@/component/encounter/form/lib/EncounterFormQuery';
 
 export default function MonsterPage({ encounterId }) {
-    const [monsters, setMonsters] = useState([]);
     const [encounterName, setEncounterName] = useState('');
+    const [monsters, setMonsters] = useState([]);
 
-    // Charge les monstres depuis l'API + dataMonsters
+    // 🔄 Chargement initial
     useEffect(() => {
         if (!encounterId) return;
 
-        async function fetchEncounter() {
+        const fetchEncounter = async () => {
             try {
                 const { encounterName, selectedMonsters } = await loadEncounter(
                     encounterId,
@@ -28,30 +31,39 @@ export default function MonsterPage({ encounterId }) {
                 setEncounterName(encounterName || '');
                 setMonsters(monstersWithId);
             } catch (err) {
-                console.error('Erreur lors du chargement de la rencontre:', err);
+                console.error('Erreur lors du chargement de la rencontre :', err);
             }
-        }
+        };
 
         fetchEncounter();
     }, [encounterId]);
 
-    function removeMonster(idToRemove) {
-        setMonsters(prev => prev.filter(m => m.id !== idToRemove));
-    }
+    // 🧼 Mémoïsation pour éviter les re-rendus inutiles
+    const removeMonster = useCallback(
+        idToRemove => {
+            setMonsters(prev => prev.filter(m => m.id !== idToRemove));
+        },
+        [setMonsters],
+    );
 
-    function addMonster(monster) {
-        setMonsters(prev => [
-            ...prev,
-            {
-                id: crypto.randomUUID(),
-                monster: monster,
-            },
-        ]);
-    }
+    const addMonster = useCallback(
+        monster => {
+            setMonsters(prev => [
+                ...prev,
+                {
+                    id: crypto.randomUUID(),
+                    monster,
+                },
+            ]);
+        },
+        [setMonsters],
+    );
 
     return (
         <div className="px-8">
-            <h1 className="pt-8 text-2xl font-bold">Rencontre : {encounterName}</h1>
+            <h1 className="pt-8 text-center text-3xl font-bold">
+                <span>{encounterName}</span>
+            </h1>
 
             <div className="flex flex-wrap justify-center gap-10 pt-8">
                 {monsters.map(({ id, monster }) => (

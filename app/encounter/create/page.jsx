@@ -1,9 +1,9 @@
-import EncounterForm from '@/component/encounter/EncounterForm';
+import EncounterForm from '@/component/encounter/form/EncounterForm';
 
 export default function Page() {
     return (
         <div>
-            <EncounterForm/>
+            <EncounterForm />
         </div>
     );
 }

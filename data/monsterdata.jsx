@@ -17,7 +17,7 @@ export const MONSTER_TYPE = {
     GOBELIN: { id: 'gobelin', label: 'Gobelins' },
     KOBOLD: { id: 'kobold', label: 'Kobolds' },
     BANDIT: { id: 'bandit', label: 'Bandits' },
-    SNAKEMEN: {id: 'snakemen', label: 'Hommmes-serpents' },
+    SNAKEMEN: { id: 'snakemen', label: 'Hommmes-serpents' },
     FOREST_DENIZEN: { id: 'forest_denizen', label: 'Habitant de la forêt' },
     BRIARBANE: { id: 'briarbane', label: 'Fléaux des ronces' },
     TROGLODYTE: { id: 'troglodyte', label: 'Troglodyte' },
@@ -50,9 +50,8 @@ const passifCoilingStrike = {
 };
 const passifDeathStench = {
     name: 'Peste de Mort.',
-    description: 'À la mort, il Empoisonne les ennemis adjacents pendant 1 manche.'
-}
-
+    description: 'À la mort, il Empoisonne les ennemis adjacents pendant 1 manche.',
+};
 
 // Valeurs par défaut pour chaque monstre
 const defaultMonster = {
@@ -189,13 +188,15 @@ export const dataMonsters = [
         passif: [
             {
                 name: 'Chaos inversé.',
-                description: 'Les attaques qui toucheraient normalement un Nilbog ratent à la place, et celles qui rateraient normalement touchent à la place.',
+                description:
+                    'Les attaques qui toucheraient normalement un Nilbog ratent à la place, et celles qui rateraient normalement touchent à la place.',
             },
         ],
         action: [
             {
                 name: 'Na-na-nère !',
-                description: 'Réaction — lorsqu\'une attaque d\'un héros rate un Gobelin, ou lorsqu\'un héros aurait pu effectuer une attaque d\'opportunité contre un Gobelin mais ne le fait pas : infligez 4 dégâts psychiques.'
+                description:
+                    "Réaction — lorsqu'une attaque d'un héros rate un Gobelin, ou lorsqu'un héros aurait pu effectuer une attaque d'opportunité contre un Gobelin mais ne le fait pas : infligez 4 dégâts psychiques.",
             },
         ],
     },
@@ -209,7 +210,8 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Frappe large.',
-                description: '(Portée 2) $dice, peut également infliger des dégâts à une 2ᵉ cible à portée.',
+                description:
+                    '(Portée 2) $dice, peut également infliger des dégâts à une 2ᵉ cible à portée.',
                 dice: { numberDice: 2, valueDice: 6, bonus: 10 },
             },
         ],
@@ -294,17 +296,19 @@ export const dataMonsters = [
         level: '1',
         size: SIZE_TYPE.SMALL,
         armor: ARMOR_TYPE.MEDIUM,
-        passif: [passiveNooooo,{
+        passif: [
+            passiveNooooo,
+            {
                 name: 'Halte !',
-                description:
-                    "Les alliés adjacents gagnent une armure intermédiaire.",
-            },],
+                description: 'Les alliés adjacents gagnent une armure intermédiaire.',
+            },
+        ],
         action: [
             {
                 name: 'Planter (2x).',
                 description: '$dice.',
                 dice: { numberDice: 1, valueDice: 4, bonus: 2 },
-            }
+            },
         ],
     },
     {
@@ -330,14 +334,15 @@ export const dataMonsters = [
             },
             {
                 name: 'ABEIIILLES !',
-                description: '$dice (ne rate jamais). La moitié des dégâts est infligée à toutes les créatures adjacentes.',
+                description:
+                    '$dice (ne rate jamais). La moitié des dégâts est infligée à toutes les créatures adjacentes.',
                 dice: { numberDice: 5, valueDice: 4, bonus: 0 },
-                use: 1
+                use: 1,
             },
             {
                 name: 'Filet caché',
                 description: 'Entravé (évasion DD 10).',
-                use: 1
+                use: 1,
             },
         ],
     },
@@ -356,8 +361,7 @@ export const dataMonsters = [
                     'Les alliés qui entendent votre vacarme lancent 1 dé supplémentaire à chaque fois qu’ils attaquent.',
             },
         ],
-        action: [
-        ],
+        action: [],
     },
     //BANDIT
     {
@@ -408,7 +412,7 @@ export const dataMonsters = [
                 name: 'Arc de combat.',
                 description: '(Distance 12) $dice.',
                 dice: { numberDice: 2, valueDice: 8, bonus: 2 },
-            }
+            },
         ],
     },
     {
@@ -424,7 +428,7 @@ export const dataMonsters = [
                 name: 'Coup violent.',
                 description: '$dice.',
                 dice: { numberDice: 2, valueDice: 8, bonus: 4 },
-            }
+            },
         ],
     },
     {
@@ -437,15 +441,15 @@ export const dataMonsters = [
             passifParry,
             {
                 name: 'Furtivité.',
-                description: 'Vous êtes invisible jusqu\'à ce que vous attaquiez.'
-            }
+                description: "Vous êtes invisible jusqu'à ce que vous attaquiez.",
+            },
         ],
         action: [
             {
                 name: 'Lame empoisonnée (2×).',
                 description: '$dice. En cas de dégâts : Étourdi.',
                 dice: { numberDice: 1, valueDice: 8, bonus: 2 },
-            }
+            },
         ],
     },
     {
@@ -458,15 +462,16 @@ export const dataMonsters = [
             passifParry,
             {
                 name: 'Pas Étincelant.',
-                description: 'Lorsqu’il subit des dégâts, téléporte jusqu’à 4 cases.'
-            }
+                description: 'Lorsqu’il subit des dégâts, téléporte jusqu’à 4 cases.',
+            },
         ],
         action: [
             {
                 name: 'Éclair Arqué.',
-                description: '(Distance 12) $dice. Frappe également la créature la plus proche suivante. En cas d’échec : se blesse soi-même à la place.',
+                description:
+                    '(Distance 12) $dice. Frappe également la créature la plus proche suivante. En cas d’échec : se blesse soi-même à la place.',
                 dice: { numberDice: 3, valueDice: 8, bonus: 0 },
-            }
+            },
         ],
     },
     {
@@ -487,7 +492,7 @@ export const dataMonsters = [
                 name: 'Tir (3×).',
                 description: '(Distance 8) $dice.',
                 dice: { numberDice: 1, valueDice: 8, bonus: 1 },
-            }
+            },
         ],
     },
     //HABITANT DE LA FORET
@@ -501,15 +506,16 @@ export const dataMonsters = [
         passif: [
             {
                 name: 'Aura Illusoire.',
-                description: 'Les attaques contre du Traqueur du Crépuscule ont un désavantage 2. Les dégâts suppriment cet effet jusqu\'à la fin du prochain tour du héros.'
-            }
+                description:
+                    "Les attaques contre du Traqueur du Crépuscule ont un désavantage 2. Les dégâts suppriment cet effet jusqu'à la fin du prochain tour du héros.",
+            },
         ],
         action: [
             {
                 name: 'Ravage (2x).',
                 description: '$dice.',
                 dice: { numberDice: 2, valueDice: 8, bonus: 2 },
-            }
+            },
         ],
     },
     {
@@ -522,23 +528,24 @@ export const dataMonsters = [
         passif: [
             {
                 name: 'Chair en pierre.',
-                description: 'Les créatures étourdies par le Basilic restent dans cet état pendant 10 minutes. Étourdi 3 fois = Pétrifié.'
-            }
+                description:
+                    'Les créatures étourdies par le Basilic restent dans cet état pendant 10 minutes. Étourdi 3 fois = Pétrifié.',
+            },
         ],
         action: [
             {
                 name: 'Regard de pierre.',
-                description: 'Étourdit 1 créature dans le champ de vision.'
+                description: 'Étourdit 1 créature dans le champ de vision.',
             },
             {
                 name: 'PUIS :',
-                description: ''
+                description: '',
             },
             {
                 name: 'Envenimer.',
                 description: '$dice. Avantage contre les cibles étourdies.',
                 dice: { numberDice: 1, valueDice: 8, bonus: 10 },
-            }
+            },
         ],
     },
     {
@@ -556,13 +563,14 @@ export const dataMonsters = [
             },
             {
                 name: 'OU :',
-                description: ''
+                description: '',
             },
             {
                 name: 'Ouragan.',
-                description: '(Portée 3) $dice à tous les ennemis à portée. En cas de dégâts : déplace les cibles n’importe où dans la portée.',
+                description:
+                    '(Portée 3) $dice à tous les ennemis à portée. En cas de dégâts : déplace les cibles n’importe où dans la portée.',
                 dice: { numberDice: 4, valueDice: 4, bonus: 10 },
-            }
+            },
         ],
     },
     //FLEAUX DES RONCES
@@ -684,14 +692,12 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Frappe.',
-                description:
-                    '$dice.',
+                description: '$dice.',
                 dice: { numberDice: 1, valueDice: 6, bonus: 0 },
             },
             {
                 name: 'Crachat.',
-                description:
-                    '(Distance 8) $dice.',
+                description: '(Distance 8) $dice.',
                 dice: { numberDice: 1, valueDice: 6, bonus: 0 },
             },
         ],
@@ -706,14 +712,12 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Entaille.',
-                description:
-                    '$dice.',
+                description: '$dice.',
                 dice: { numberDice: 1, valueDice: 6, bonus: 6 },
             },
             {
                 name: 'Crachat.',
-                description:
-                    '(Distance 8) $dice.',
+                description: '(Distance 8) $dice.',
                 dice: { numberDice: 1, valueDice: 6, bonus: 6 },
             },
         ],
@@ -729,14 +733,12 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Entaille (2x).',
-                description:
-                    '$dice.',
+                description: '$dice.',
                 dice: { numberDice: 1, valueDice: 6, bonus: 6 },
             },
             {
                 name: 'Crachat (2x).',
-                description:
-                    '(Distance 8) $dice.',
+                description: '(Distance 8) $dice.',
                 dice: { numberDice: 1, valueDice: 6, bonus: 6 },
             },
         ],
@@ -753,10 +755,9 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Écrasement.',
-                description:
-                    '$dice. Avantage contre les créatures plus petites.',
+                description: '$dice. Avantage contre les créatures plus petites.',
                 dice: { numberDice: 2, valueDice: 6, bonus: 20 },
-            }
+            },
         ],
     },
     //TROGLODYTE
@@ -766,14 +767,13 @@ export const dataMonsters = [
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 14,
         level: '1/3',
-        passif : [passifDeathStench],
+        passif: [passifDeathStench],
         action: [
             {
                 name: 'Griffes.',
-                description:
-                    '$dice.',
+                description: '$dice.',
                 dice: { numberDice: 1, valueDice: 6, bonus: 3 },
-            }
+            },
         ],
     },
     {
@@ -782,20 +782,20 @@ export const dataMonsters = [
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 14,
         level: '1',
-        passif : [
+        passif: [
             passifDeathStench,
             {
-                name:'Fouisseur',
-                description:'Invisible jusqu\'à ce que vous attaquiez (avantage aux attaques quand invisible). Si le troglodyte n’est ni en train de creuser ni d’agripper, il creuse au lieu d’attaquer.'
-            }
+                name: 'Fouisseur',
+                description:
+                    "Invisible jusqu'à ce que vous attaquiez (avantage aux attaques quand invisible). Si le troglodyte n’est ni en train de creuser ni d’agripper, il creuse au lieu d’attaquer.",
+            },
         ],
         action: [
             {
                 name: 'Par en dessous !',
-                description:
-                    '$dice. En cas de réussite : Agrippé (DD d’évasion 10).',
+                description: '$dice. En cas de réussite : Agrippé (DD d’évasion 10).',
                 dice: { numberDice: 1, valueDice: 6, bonus: 3 },
-            }
+            },
         ],
     },
     {
@@ -804,14 +804,13 @@ export const dataMonsters = [
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 20,
         level: '2',
-        passif : [passifDeathStench],
+        passif: [passifDeathStench],
         action: [
             {
                 name: 'Jet de Glu.',
-                description:
-                    '(Distance 6) $dice. En cas de touche : Aveuglé pendant 1 round.',
+                description: '(Distance 6) $dice. En cas de touche : Aveuglé pendant 1 round.',
                 dice: { numberDice: 1, valueDice: 6, bonus: 3 },
-            }
+            },
         ],
     },
     {
@@ -820,14 +819,13 @@ export const dataMonsters = [
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 30,
         level: '3',
-        passif : [passifDeathStench],
+        passif: [passifDeathStench],
         action: [
             {
                 name: 'Hurlement.',
-                description:
-                    '(ZdE, Portée 2) $dice. Étourdit tous les ennemis.',
+                description: '(ZdE, Portée 2) $dice. Étourdit tous les ennemis.',
                 dice: { numberDice: 1, valueDice: 6, bonus: 3 },
-            }
+            },
         ],
     },
     {
@@ -837,14 +835,13 @@ export const dataMonsters = [
         hp: 40,
         armor: ARMOR_TYPE.MEDIUM,
         level: '4',
-        passif : [passifDeathStench],
+        passif: [passifDeathStench],
         action: [
             {
                 name: 'Massue à pointes.',
-                description:
-                    '(ZdE, Portée 2) $dice. Étourdit tous les ennemis.',
+                description: '(ZdE, Portée 2) $dice. Étourdit tous les ennemis.',
                 dice: { numberDice: 3, valueDice: 6, bonus: 9 },
-            }
+            },
         ],
     },
     {
@@ -856,17 +853,19 @@ export const dataMonsters = [
         armor: ARMOR_TYPE.MEDIUM,
         speed: 4,
         level: '4',
-        passif : [
-            passifDeathStench,{
+        passif: [
+            passifDeathStench,
+            {
                 name: 'Véhicule de Siège.',
-                description:'Jusqu’à 4 créatures moyennes peuvent monter dessus et diriger le mouvement de cette créature. Elles bénéficient de Couverture et d’une Armure Moyenne. Lorsqu’il est détruit, toutes les créatures à son bord tombent à Terre.'
-            }
+                description:
+                    'Jusqu’à 4 créatures moyennes peuvent monter dessus et diriger le mouvement de cette créature. Elles bénéficient de Couverture et d’une Armure Moyenne. Lorsqu’il est détruit, toutes les créatures à son bord tombent à Terre.',
+            },
         ],
         action: [
             {
                 name: 'Écrasement.',
-                description:'1 créature plus petite sur son chemin subit 10 dégâts.'
-            }
+                description: '1 créature plus petite sur son chemin subit 10 dégâts.',
+            },
         ],
     },
     {
@@ -876,21 +875,22 @@ export const dataMonsters = [
         hp: 50,
         size: SIZE_TYPE.LARGE,
         level: '5',
-        passif : [passifDeathStench],
+        passif: [passifDeathStench],
         action: [
             {
                 name: 'Lancer.',
-                description:'Lance un allié adjacent jusqu’à 6 cases.'
+                description: 'Lance un allié adjacent jusqu’à 6 cases.',
             },
             {
                 name: 'Puis :',
-                description:''
+                description: '',
             },
             {
                 name: 'Puantise Envahissante.',
-                description:'(ZdE, Portée 12) : $dice à tous les ennemis. Ils sont Étourdis et Empoisonnés pendant 1 round.',
-                dice: { numberDice: 3, valueDice: 6, bonus: 3 }
-            }
+                description:
+                    '(ZdE, Portée 12) : $dice à tous les ennemis. Ils sont Étourdis et Empoisonnés pendant 1 round.',
+                dice: { numberDice: 3, valueDice: 6, bonus: 3 },
+            },
         ],
     },
     {
@@ -901,16 +901,17 @@ export const dataMonsters = [
         size: SIZE_TYPE.HUGE,
         level: '6',
         fly: 4,
-        passif : [
+        passif: [
             passifDeathStench,
             {
                 name: 'Ailes Absorbant la Lumière.',
-                description:'Le rayon de la lumière et du son est réduit de moitié.'
+                description: 'Le rayon de la lumière et du son est réduit de moitié.',
             },
             {
                 name: 'Poussière d’Ombre.',
-                description:'Les Troglodytes dans une portée de 12 lancent des d12 au lieu de d6. Lorsqu’elle subit des dégâts, inflige 1d12 de dégâts psychiques imparables aux ennemis dans une portée de 12.'
-            }
+                description:
+                    'Les Troglodytes dans une portée de 12 lancent des d12 au lieu de d6. Lorsqu’elle subit des dégâts, inflige 1d12 de dégâts psychiques imparables aux ennemis dans une portée de 12.',
+            },
         ],
         action: [],
     },

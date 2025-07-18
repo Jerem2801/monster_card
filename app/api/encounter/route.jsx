@@ -13,22 +13,33 @@ export async function GET() {
 }
 
 export async function POST(req) {
-    const body = await req.json();
-    const { name, encounter } = body;
+    try {
+        const { name, encounter } = await req.json();
 
-    if (!name || !Array.isArray(encounter) || encounter.length === 0) {
-        return errorResponse(new Error('Nom ou détails manquants'), 400);
+        if (!name || !Array.isArray(encounter) || encounter.length === 0) {
+            return errorResponse(new Error('Nom ou détails manquants'), 400);
+        }
+
+        // Création de la rencontre
+        const [{ id: newId }] = await sql`
+            INSERT INTO encounter (name)
+            VALUES (${name})
+            RETURNING id
+        `;
+
+        // Construction des valeurs à insérer pour un INSERT multiple
+        const values = encounter
+            .map(d => `(${newId}, '${d.nom_monstre}', ${d.nombre_monstre})`)
+            .join(', ');
+
+        await sql.unsafe(`
+            INSERT INTO encounter_detail (encounter_id, nom_monstre, nombre_monstre)
+            VALUES ${values}
+        `);
+
+        return jsonResponse({ success: true, id: newId });
+    } catch (err) {
+        console.error(err);
+        return errorResponse(new Error('Erreur serveur'), 500);
     }
-
-    const inserted = await sql`INSERT INTO encounter (name) VALUES (${name}) RETURNING id`;
-    const newId = inserted[0]?.id;
-
-    for (const detail of encounter) {
-        await sql`
-      INSERT INTO encounter_detail (encounter_id, nom_monstre, nombre_monstre)
-      VALUES (${newId}, ${detail.nom_monstre}, ${detail.nombre_monstre})
-    `;
-    }
-
-    return jsonResponse({ success: true, id: newId });
 }

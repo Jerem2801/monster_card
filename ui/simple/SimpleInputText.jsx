@@ -22,7 +22,7 @@ export default function SimpleInputText({
                 placeholder={placeholder}
                 required={required}
                 {...props}
-                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-md transition-all duration-150 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+                className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm transition-all duration-150 focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
         </div>
     );

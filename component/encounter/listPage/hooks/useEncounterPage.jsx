@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { fetchApi } from '@/lib/api';
 
-export function useEncounters() {
+export function useEncounterPage() {
     const [encounters, setEncounters] = useState([]);
     const [refresh, setRefresh] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -9,16 +9,16 @@ export function useEncounters() {
     const loadEncounters = useCallback(async () => {
         setIsLoading(true);
         try {
-        const data = await fetchApi('/api/encounter/');
-        setEncounters(data.encounters);
+            const data = await fetchApi('/api/encounter/');
+            setEncounters(data.encounters);
         } catch (e) {
-        console.error('Erreur de chargement :', e);
+            console.error('Erreur de chargement :', e);
         } finally {
-        setIsLoading(false);
+            setIsLoading(false);
         }
     }, []);
 
-    const handleDelete = useCallback(async (id) => {
+    const handleDelete = useCallback(async id => {
         const response = await fetch(`/api/encounter/${id}?id=${id}`, {
             method: 'DELETE',
         });
@@ -30,13 +30,11 @@ export function useEncounters() {
         }
     }, []);
 
-
-
-  return {
-    encounters,
-    refresh,
-    isLoading,
-    loadEncounters,
-    handleDelete,
-  };
+    return {
+        encounters,
+        refresh,
+        isLoading,
+        loadEncounters,
+        handleDelete,
+    };
 }

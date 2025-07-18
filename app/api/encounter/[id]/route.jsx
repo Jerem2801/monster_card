@@ -42,26 +42,41 @@ export async function DELETE(_, { params }) {
 }
 
 // PUT - mettre à jour
+
 export async function PUT(req) {
-    const body = await req.json();
-    const { encounterId, name, encounter } = body;
+    try {
+        const { encounterId, name, encounter } = await req.json();
 
-    if (!encounterId) {
-        return errorResponse(new Error('ID de rencontre manquant pour mise à jour'), 400);
+        // Validation
+        if (!encounterId) {
+            return errorResponse(new Error('ID de rencontre manquant pour mise à jour'), 400);
+        }
+        if (!name?.trim() || !Array.isArray(encounter) || encounter.length === 0) {
+            return errorResponse(new Error('Nom ou détails manquants'), 400);
+        }
+
+        // Transaction : sécurise tout ou rien
+        await sql.begin(async tx => {
+            await tx`UPDATE encounter SET name = ${name.trim()} WHERE id = ${encounterId}`;
+            await tx`DELETE FROM encounter_detail WHERE encounter_id = ${encounterId}`;
+
+            // Insertion groupée des détails
+            const insertValues = encounter
+                .map(
+                    ({ nom_monstre, nombre_monstre }) =>
+                        `(${encounterId}, '${nom_monstre}', ${nombre_monstre})`,
+                )
+                .join(',');
+
+            await tx.unsafe(`
+        INSERT INTO encounter_detail (encounter_id, nom_monstre, nombre_monstre)
+        VALUES ${insertValues}
+      `);
+        });
+
+        return jsonResponse({ success: true, id: encounterId });
+    } catch (err) {
+        console.error('Erreur PUT /encounter:', err);
+        return errorResponse(new Error('Échec de la mise à jour de la rencontre'), 500);
     }
-    if (!name || !Array.isArray(encounter) || encounter.length === 0) {
-        return errorResponse(new Error('Nom ou détails manquants'), 400);
-    }
-
-    await sql`UPDATE encounter SET name = ${name} WHERE id = ${encounterId}`;
-    await sql`DELETE FROM encounter_detail WHERE encounter_id = ${encounterId}`;
-
-    for (const detail of encounter) {
-        await sql`
-      INSERT INTO encounter_detail (encounter_id, nom_monstre, nombre_monstre)
-      VALUES (${encounterId}, ${detail.nom_monstre}, ${detail.nombre_monstre})
-    `;
-    }
-
-    return jsonResponse({ success: true, id: encounterId });
 }
