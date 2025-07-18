@@ -56,7 +56,8 @@ const passifDeathStench = {
 // Valeurs par défaut pour chaque monstre
 const defaultMonster = {
     armor: ARMOR_TYPE.NONE,
-    speed: null,
+    speed: 6,
+    fly: null,
     save: null,
     size: SIZE_TYPE.MEDIUM,
     legendary: false,
@@ -109,7 +110,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        name: 'Gobelin Monteur De Rat',
+        name: 'Gobelin Monteur de Rat',
         type: MONSTER_TYPE.GOBELIN,
         hp: 30,
         level: '2',
@@ -550,7 +551,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        name: 'Druide ',
+        name: 'Druide',
         type: MONSTER_TYPE.FOREST_DENIZEN,
         hp: 90,
         level: '8',

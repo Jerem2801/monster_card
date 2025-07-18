@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import StatPanel from './StatPanel';
-import { formatMonsterName } from '@/lib/monsterUtils';
+import { formatMonsterName } from './lib/headerPanelUtils';
 
 export default function NamePanel({ monster, openStatusModal }) {
     // Robustesse : fallback si monster ou monster.size n'est pas défini
@@ -11,9 +11,7 @@ export default function NamePanel({ monster, openStatusModal }) {
     return (
         <div className="flex flex-wrap items-baseline gap-2">
             <div className="flex flex-wrap font-semibold">
-                <button className="cursor-pointer focus:outline-none" onClick={openStatusModal}>
                     {monsterName}
-                </button>
             </div>
             <span className="text-sm text-gray-500">
                 Niv. {monsterLevel}

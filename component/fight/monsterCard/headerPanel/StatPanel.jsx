@@ -7,9 +7,15 @@ export default function StatPanel({ monster }) {
                 </span>
             )}
 
-            {monster.speed != null && (
+            {monster.speed != 6 && (
                 <span className="ml-2 rounded bg-blue-100 px-2 py-0.5 text-sm font-bold text-blue-400">
                     🏃 {monster.speed}
+                </span>
+            )}
+
+            {monster.fly != null && (
+                <span className="ml-2 rounded bg-blue-100 px-2 py-0.5 text-sm font-bold text-blue-400">
+                    🪶 {monster.fly}
                 </span>
             )}
 

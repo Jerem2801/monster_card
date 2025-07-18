@@ -8,7 +8,7 @@ export default function HealthCalculatorModal({ handleHeal, handleDamage }) {
     return (
         <>
             <div className="p-3">
-                <div className="flex gap-2">
+                <div className="flex w-25 flex-col gap-2">
                     <button
                         onClick={() => {
                             handleDamage(inputValue);
@@ -20,7 +20,7 @@ export default function HealthCalculatorModal({ handleHeal, handleDamage }) {
                     </button>
                     <input
                         type="number"
-                        className="no-spinner block h-11 w-full rounded border-x-0 border-black bg-gray-200 py-2.5 text-center text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                        className="no-spinner block h-10 w-full rounded border-x-0 border-black bg-gray-200 py-2 text-center text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
                         value={inputValue}
                         onChange={e => setInputValue(e.target.value)}
                         min={0}
