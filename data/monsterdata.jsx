@@ -1,3 +1,6 @@
+import { DAZED, PETRIFIED, PRONE, RESTRAINED, GRAPPLED, HAMPERED } from './statusdata';
+
+// Tableau des types de taille
 export const SIZE_TYPE = {
     TINY: { id: 'tiny', label: 'Très Petit' },
     SMALL: { id: 'small', label: 'Petit' },
@@ -6,10 +9,11 @@ export const SIZE_TYPE = {
     HUGE: { id: 'huge', label: 'Très Grand' },
 };
 
+// Tableau des types d'armure
 export const ARMOR_TYPE = {
     NONE: { id: null, label: 'Aucune' },
-    MEDIUM: { id: 'M', label: 'M' },
-    HEAVY: { id: 'H', label: 'L' },
+    MEDIUM: { id: 'M', label: 'M', path: '/armor/mediumArmor.png' },
+    HEAVY: { id: 'H', label: 'L', path: '/armor/heavyArmor.png' },
 };
 
 // Tableau des types de monstres
@@ -46,11 +50,26 @@ const passifParry = {
 };
 const passifCoilingStrike = {
     name: 'Frappe enroulée.',
-    description: 'En cas de coup critique en mêlée : Agrippe (DD d’évasion 10).',
+    description: 'En cas de coup critique en mêlée : $status (DD d’évasion 10).',
+    effect: {
+        status: GRAPPLED,
+    },
 };
 const passifDeathStench = {
     name: 'Peste de Mort.',
     description: 'À la mort, il Empoisonne les ennemis adjacents pendant 1 manche.',
+};
+
+// Tableau des types conditions
+export const CONDITIONS_TYPE = {
+    CRITIC: {
+        id: 'critic',
+        name: 'Critique',
+    },
+    HIT: {
+        id: 'hit',
+        name: 'Touché',
+    },
 };
 
 // Valeurs par défaut pour chaque monstre
@@ -127,8 +146,12 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Mordre & Planter (x2).',
-                description: '$dice. Sur un critique: A terre.',
+                description: '$dice. Sur un critique: $status.',
                 dice: { numberDice: 1, valueDice: 6, bonus: 2 },
+                effect: {
+                    trigger: CONDITIONS_TYPE.CRITIC,
+                    status: PRONE,
+                },
             },
         ],
     },
@@ -341,9 +364,12 @@ export const dataMonsters = [
                 use: 1,
             },
             {
-                name: 'Filet caché',
-                description: 'Entravé (évasion DD 10).',
+                name: 'Filet caché.',
+                description: '$status (évasion DD 10).',
                 use: 1,
+                effect: {
+                    status: RESTRAINED,
+                },
             },
         ],
     },
@@ -448,8 +474,12 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Lame empoisonnée (2×).',
-                description: '$dice. En cas de dégâts : Étourdi.',
+                description: '$dice. En cas de dégâts : $status.',
                 dice: { numberDice: 1, valueDice: 8, bonus: 2 },
+                effect: {
+                    trigger: CONDITIONS_TYPE.HIT,
+                    status: DAZED,
+                },
             },
         ],
     },
@@ -530,13 +560,19 @@ export const dataMonsters = [
             {
                 name: 'Chair en pierre.',
                 description:
-                    'Les créatures étourdies par le Basilic restent dans cet état pendant 10 minutes. Étourdi 3 fois = Pétrifié.',
+                    'Les créatures étourdies par le Basilic restent dans cet état pendant 10 minutes. Étourdi 3 fois = $status.',
+                effect: {
+                    status: PETRIFIED,
+                },
             },
         ],
         action: [
             {
                 name: 'Regard de pierre.',
-                description: 'Étourdit 1 créature dans le champ de vision.',
+                description: '$status 1 créature dans le champ de vision.',
+                effect: {
+                    status: DAZED,
+                },
             },
             {
                 name: 'PUIS :',
@@ -544,8 +580,11 @@ export const dataMonsters = [
             },
             {
                 name: 'Envenimer.',
-                description: '$dice. Avantage contre les cibles étourdies.',
+                description: '$dice. Avantage contre les cibles $status.',
                 dice: { numberDice: 1, valueDice: 8, bonus: 10 },
+                effect: {
+                    status: DAZED,
+                },
             },
         ],
     },
@@ -611,7 +650,10 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Attraper.',
-                description: 'JdS de DEX 12 ou Aggripé.',
+                description: 'JdS de DEX 12 ou $status.',
+                effect: {
+                    status: GRAPPLED,
+                },
             },
         ],
     },
@@ -627,8 +669,11 @@ export const dataMonsters = [
             {
                 name: 'Enchevêtrement (2×).',
                 description:
-                    '(Distance 6) $dice. En cas de coup réussi : Aggripé (évasion DD 12, ou tout dégât de feu ou tranchant).',
+                    '(Distance 6) $dice. En cas de coup réussi : $status (évasion DD 12, ou tout dégât de feu ou tranchant).',
                 dice: { numberDice: 1, valueDice: 6, bonus: 2 },
+                effect: {
+                    status: GRAPPLED,
+                },
             },
         ],
     },
@@ -671,13 +716,19 @@ export const dataMonsters = [
             },
             {
                 name: '• Coup de masse.',
-                description: '(Portée 3) $dice. En cas de dégâts : Mise à terre.',
+                description: '(Portée 3) $dice. En cas de dégâts : $status.',
                 dice: { numberDice: 2, valueDice: 6, bonus: 10 },
+                effect: {
+                    status: PRONE,
+                },
             },
             {
                 name: '• Piétinement.',
-                description: '(Cible entravée) $dice.',
+                description: '(Cible $status) $dice.',
                 dice: { numberDice: 2, valueDice: 6, bonus: 20 },
+                effect: {
+                    status: HAMPERED,
+                },
             },
         ],
     },

@@ -1,6 +1,6 @@
 import Passive from './Passive';
 
-export default function NamePanel({ monster }) {
+export default function PassivePanel({ monster }) {
     return (
         <div>
             {monster.passif && monster.passif.length > 0 && (

@@ -2,7 +2,15 @@ import { getHealthBarProps } from './health/lib/healthCalculatorUtils';
 import StatPanel from '../monsterCard/headerPanel/StatPanel';
 import HealPanel from './health/HealthPanel';
 
-export default function SimpleCard({ monster, currentHp, onHpChange, onSelect, selected, deleteMode,onDelete }) {
+export default function SimpleCard({
+    monster,
+    currentHp,
+    onHpChange,
+    onSelect,
+    selected,
+    deleteMode,
+    onDelete,
+}) {
     // HP logic
     function handleHeal(value) {
         const healedAmount = Number(value);
@@ -27,7 +35,7 @@ export default function SimpleCard({ monster, currentHp, onHpChange, onSelect, s
             className={`relative mb-4 cursor-pointer rounded-md border-2 transition hover:shadow-md ${
                 selected ? 'border-blue-400 bg-blue-50' : 'border-gray-300 bg-white'
             }`}
->
+        >
             {/* Header */}
             <div className="p-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
@@ -56,11 +64,11 @@ export default function SimpleCard({ monster, currentHp, onHpChange, onSelect, s
             </div>
             {deleteMode && (
                 <button
-                    onClick={(e) => {
+                    onClick={e => {
                         e.stopPropagation(); // ne déclenche pas onSelect
                         onDelete();
                     }}
-                    className="absolute right-2 top-2 rounded bg-red-300 px-2 py-0.5 text-xs text-white hover:bg-red-400"
+                    className="absolute top-2 right-2 rounded bg-red-300 px-2 py-0.5 text-xs text-white hover:bg-red-400"
                 >
                     ❌
                 </button>

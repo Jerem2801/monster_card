@@ -1,9 +1,11 @@
 import { formatDice } from '@/lib/diceutils';
-import AttackButton from '../AttackButton';
-import SummonButton from '../SummonButton'; // à adapter selon ton chemin
+import AttackButton from '../button/AttackButton';
+import SummonButton from '../button/SummonButton';
+import StatusButton from '../button/StatusButton'; // 👈 Import du bouton de statut
 
 export function getActionContent(action, passive, addMonsterCard, monsterName) {
-    const parts = action.description.split(/(\$dice|\$summon)/); // coupe autour des tokens spéciaux
+    const parts = action.description.split(/(\$dice|\$summon|\$status)/); // 👈 Ajout de $status
+
     return (
         <>
             {parts.map((part, index) => {
@@ -26,10 +28,19 @@ export function getActionContent(action, passive, addMonsterCard, monsterName) {
                             addMonsterCard={addMonsterCard}
                         />
                     );
+                } else if (part === '$status') {
+                    return (
+                        <StatusButton key={`status-${index}`} action={action} passive={passive} />
+                    );
                 } else {
                     return <span key={`text-${index}`}>{part}</span>;
                 }
             })}
         </>
     );
+}
+
+export function getDiceImagePath(action) {
+    const value = action.dice.valueDice;
+    return `/dice/d${value}.png`;
 }

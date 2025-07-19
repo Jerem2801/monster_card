@@ -1,6 +1,5 @@
-import { ARMOR_TYPE } from '@/data/monsterdata';
-
-export function getArmorType(value) {
-    const selectedId = value === '' ? null : value;
-    return Object.values(ARMOR_TYPE).find(a => a.id === selectedId);
+export function getArmorImagePath(monster) {
+    if (!monster?.armor?.id) return;
+    console.log(monster.armor.path);
+    return monster.armor.path;
 }

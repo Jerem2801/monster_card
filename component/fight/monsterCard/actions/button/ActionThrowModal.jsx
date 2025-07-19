@@ -23,6 +23,7 @@ export default function ActionThrowModal({ action, monsterName }) {
             format: diceFormat,
             result: resultDice,
             monsterName: monsterName,
+            effect: action.effect,
         };
 
         addMessage(message);

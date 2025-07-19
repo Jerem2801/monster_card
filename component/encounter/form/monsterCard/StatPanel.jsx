@@ -1,33 +1,35 @@
 import { PlusIcon, MinusIcon } from '@heroicons/react/16/solid';
+import Image from 'next/image';
+import { getArmorImagePath } from '@/lib/monsterUtils';
 
 export default function StatPanel({ selected, monster, add, remove }) {
-    console.log(monster);
+    const armorPath = getArmorImagePath(monster);
+
     return (
         <div>
             {!selected && (
                 <div className="flex flex-shrink-0 items-center gap-1 pt-3">
                     <span
-                        className="rounded bg-red-300 px-2 py-0.5 text-sm font-bold text-red-600"
+                        className="flex items-center gap-1 rounded bg-red-300 px-2 py-0.5 text-sm font-bold text-red-600"
                         title="Points de vie"
                     >
-                        ❤️ {monster.hp}
+                        <Image src="/stat/hp.png" alt="❤️" width={20} height={20} /> {monster.hp}
                     </span>
 
                     {monster.armor.id != null && (
-                        <span
-                            className="rounded bg-slate-300 px-2 py-0.5 text-sm font-bold text-slate-600"
-                            title="Armure"
-                        >
-                            🛡️ {monster.armor.label}
+                        <span className="flex items-center gap-1 rounded bg-slate-300 px-2 py-0.5 text-sm font-bold text-slate-600">
+                            <Image src={armorPath} alt="🛡️" width={20} height={20} />
+                            {monster.armor.label}
                         </span>
                     )}
 
                     {monster.save != null && (
                         <span
-                            className="rounded bg-amber-200 px-2 py-0.5 text-sm font-bold text-amber-600"
+                            className="flex items-center gap-1 rounded bg-amber-200 px-2 py-0.5 text-sm font-bold text-amber-600"
                             title="Sauvegarde"
                         >
-                            ⭐ {monster.save}
+                            <Image src="/stat/savingThrow.png" alt="⭐" width={20} height={20} />{' '}
+                            {monster.save}
                         </span>
                     )}
 

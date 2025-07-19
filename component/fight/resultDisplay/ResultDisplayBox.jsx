@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Popover } from 'flowbite-react';
 
+import { getEffectToDisplay } from './lib/resultDisplayBoxUtils';
+
 export default function ResultDisplayBox({ msg }) {
-    const { name, format, result, advantage, monsterName } = msg.text;
+    const { name, format, result, advantage, monsterName, effect } = msg.text;
 
     const isCritic = result.type === 'critic';
     const isFailed = result.type === 'failed';
@@ -55,6 +57,8 @@ export default function ResultDisplayBox({ msg }) {
         </div>
     );
 
+    const effectToDisplay = getEffectToDisplay({ result, effect });
+
     const [visible, setVisible] = useState(false);
     useEffect(() => {
         const timeout = setTimeout(() => setVisible(true), 10);
@@ -70,31 +74,37 @@ export default function ResultDisplayBox({ msg }) {
     };
 
     return (
-        <div className="flex items-center justify-between rounded bg-gray-100 p-3">
-            {/* Partie gauche */}
-            <div className="flex flex-1 flex-col justify-between pr-4">
-                <div className="mb-1 text-base font-bold text-gray-800">{monsterName}</div>
-                <div className="mt-1 flex items-center text-xs text-gray-500">
-                    <span>
-                        {name} : {format}
-                    </span>
-                    {renderAdvantage()}
+        <div className="flex flex-col rounded bg-gray-100 p-3">
+            {/* Haut : nom + stats + résultat */}
+            <div className="flex items-center justify-between">
+                {/* Partie gauche */}
+                <div className="flex flex-1 flex-col justify-between pr-4">
+                    <div className="mb-1 text-base font-bold text-gray-800">{monsterName}</div>
+                    <div className="mt-1 flex items-center text-xs text-gray-500">
+                        <span>
+                            {name} : {format}
+                        </span>
+                        {renderAdvantage()}
+                    </div>
                 </div>
+
+                {/* Partie droite */}
+                <Popover content={popoverContent} trigger="hover">
+                    <div
+                        className={`flex h-12 w-12 flex-col items-center justify-center rounded border text-lg font-bold ${totalColor}`}
+                        style={{
+                            opacity: visible ? 1 : 0,
+                            transition: 'opacity 0.5s ease',
+                            pointerEvents: visible ? 'auto' : 'none',
+                        }}
+                    >
+                        {isFailed ? '💀' : result.total}
+                    </div>
+                </Popover>
             </div>
 
-            {/* Partie droite */}
-            <Popover content={popoverContent} trigger="hover">
-                <div
-                    className={`flex h-12 w-12 flex-col items-center justify-center rounded border text-lg font-bold ${totalColor}`}
-                    style={{
-                        opacity: visible ? 1 : 0,
-                        transition: 'opacity 0.5s ease',
-                        pointerEvents: visible ? 'auto' : 'none',
-                    }}
-                >
-                    {isFailed ? '💀' : result.total}
-                </div>
-            </Popover>
+            {/* Bas : effet critique */}
+            {effectToDisplay}
         </div>
     );
 }
