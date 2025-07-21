@@ -21,13 +21,13 @@ export function getMonsterToSave(selectedMonsters) {
     const countMap = new Map();
 
     for (const monster of selectedMonsters) {
-        const name = monster.name;
-        countMap.set(name, (countMap.get(name) || 0) + 1);
+        const id = monster.id;
+        countMap.set(id, (countMap.get(id) || 0) + 1);
     }
 
-    return Array.from(countMap.entries()).map(([nom_monstre, nombre_monstre]) => ({
-        nom_monstre,
-        nombre_monstre,
+    return Array.from(countMap.entries()).map(([monster_id, monster_number]) => ({
+        monster_id,
+        monster_number,
     }));
 }
 

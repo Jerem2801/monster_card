@@ -16,6 +16,7 @@ export async function POST(req) {
     try {
         const { name, encounter } = await req.json();
 
+
         if (!name || !Array.isArray(encounter) || encounter.length === 0) {
             return errorResponse(new Error('Nom ou détails manquants'), 400);
         }
@@ -29,11 +30,11 @@ export async function POST(req) {
 
         // Construction des valeurs à insérer pour un INSERT multiple
         const values = encounter
-            .map(d => `(${newId}, '${d.nom_monstre}', ${d.nombre_monstre})`)
+            .map(d => `(${newId}, '${d.monster_id}', ${d.monster_number})`)
             .join(', ');
 
         await sql.unsafe(`
-            INSERT INTO encounter_detail (encounter_id, nom_monstre, nombre_monstre)
+            INSERT INTO encounter_detail (encounter_id, monster_id, monster_number)
             VALUES ${values}
         `);
 

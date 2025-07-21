@@ -11,9 +11,9 @@ const encounters = [
 ];
 
 const encounterDetails = [
-    { id: 1, encounter_id: 1, nom_monstre: 'Goblin', nombre_monstre: 5 },
-    { id: 2, encounter_id: 1, nom_monstre: 'Kobold', nombre_monstre: 3 },
-    { id: 3, encounter_id: 2, nom_monstre: 'Greenthumb', nombre_monstre: 1 },
+    { id: 1, encounter_id: 1, monster_id: 'goblin', monster_number: 5 },
+    { id: 2, encounter_id: 1, monster_id: 'kobold', monster_number: 3 },
+    { id: 3, encounter_id: 2, monster_id: 'greenthumb', monster_number: 1 },
 ];
 
 async function createTables() {
@@ -28,8 +28,8 @@ async function createTables() {
     CREATE TABLE IF NOT EXISTS encounter_detail (
       id SERIAL PRIMARY KEY,
       encounter_id INT NOT NULL REFERENCES encounter(id) ON DELETE CASCADE,
-      nom_monstre VARCHAR(255) NOT NULL,
-      nombre_monstre INT NOT NULL
+      monster_id VARCHAR(255) NOT NULL,
+      monster_number INT NOT NULL
     );
   `;
 }
@@ -53,8 +53,8 @@ async function createEncounterDetail() {
         encounterDetails.map(
             detail =>
                 sql`
-        INSERT INTO encounter_detail (id, encounter_id, nom_monstre, nombre_monstre)
-        VALUES (${detail.id}, ${detail.encounter_id}, ${detail.nom_monstre}, ${detail.nombre_monstre})
+        INSERT INTO encounter_detail (id, encounter_id, monster_id, monster_number)
+        VALUES (${detail.id}, ${detail.encounter_id}, ${detail.monster_id}, ${detail.monster_number})
         ON CONFLICT (id) DO NOTHING;
       `,
         ),

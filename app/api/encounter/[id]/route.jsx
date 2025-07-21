@@ -7,7 +7,7 @@ export async function GET(_, { params }) {
     try {
         const { id: encounterId } = await params;
         const rows =
-            await sql`SELECT e.name, ed.nom_monstre, ed.nombre_monstre FROM encounter e JOIN encounter_detail ed ON e.id = ed.encounter_id WHERE e.id = ${encounterId}`;
+            await sql`SELECT e.name, ed.monster_id, ed.monster_number FROM encounter e JOIN encounter_detail ed ON e.id = ed.encounter_id WHERE e.id = ${encounterId}`;
         if (rows.length === 0) {
             return errorResponse(new Error('Rencontre introuvable'), 404);
         }
@@ -15,8 +15,8 @@ export async function GET(_, { params }) {
         const name = rows[0].name;
 
         const encounter = rows.map(row => ({
-            nom_monstre: row.nom_monstre,
-            nombre_monstre: row.nombre_monstre,
+            monster_id: row.monster_id,
+            monster_number: row.monster_number,
         }));
 
         return jsonResponse({ name, encounter });
@@ -63,13 +63,13 @@ export async function PUT(req) {
             // Insertion groupée des détails
             const insertValues = encounter
                 .map(
-                    ({ nom_monstre, nombre_monstre }) =>
-                        `(${encounterId}, '${nom_monstre}', ${nombre_monstre})`,
+                    ({ monster_id, monster_number }) =>
+                        `(${encounterId}, '${monster_id}', ${monster_number})`,
                 )
                 .join(',');
 
             await tx.unsafe(`
-        INSERT INTO encounter_detail (encounter_id, nom_monstre, nombre_monstre)
+        INSERT INTO encounter_detail (encounter_id, monster_id, monster_number)
         VALUES ${insertValues}
       `);
         });

@@ -1,7 +1,8 @@
 import { formatDice } from '@/lib/diceutils';
 import AttackButton from '../button/AttackButton';
 import SummonButton from '../button/SummonButton';
-import StatusButton from '../button/StatusButton'; // 👈 Import du bouton de statut
+import StatusButton from '../button/StatusButton';
+import AdvantageButton from '../button/AdvantageButton';
 
 export function getActionContent(action, passive, addMonsterCard, monsterName) {
     const parts = action.description.split(/(\$[^$]+\$)/g); // Match tout ce qui est entre deux $
@@ -53,6 +54,14 @@ export function getActionContent(action, passive, addMonsterCard, monsterName) {
                                 addMonsterCard={addMonsterCard}
                             />
                         );
+                    case "advantage":
+                        return (
+                            <AdvantageButton
+                                key={`advantage-${index}`}
+                                advantageNumber={parsed.advantageNumber}
+                                passive={passive}
+                            />
+                        );
                     default:
                         return <span key={`text-${index}`}>{part}</span>;
                 }
@@ -64,7 +73,8 @@ export function getActionContent(action, passive, addMonsterCard, monsterName) {
 export function parseToken(token) {
     const diceRegex = /^dice:(\d*)d(\d+)([+-]\d+)?$/;
     const statusRegex = /^status:(\w+)$/;
-    const summonRegex = /^summon:(\w+):(\d+)(h?)$/; // capture id, nombre, et éventuellement "h"
+    const summonRegex = /^summon:(\w+):(\d+)(h?)$/; 
+    const advantageRegex = /^advantage:([+-]\d+)$/; 
 
     const diceMatch = token.match(diceRegex);
     if (diceMatch) {
@@ -95,6 +105,15 @@ export function parseToken(token) {
         };
     }
 
+    const advantageMatch = token.match(advantageRegex);
+    if (advantageMatch) {
+        const [, advantageNumber] = advantageMatch;
+        return {
+            type: "advantage",
+            advantageNumber: advantageNumber
+        };
+    }
+
     return null;
 }
 
@@ -103,4 +122,27 @@ export function parseToken(token) {
 export function getDiceImagePath(diceProperty) {
     const value = diceProperty.valueDice;
     return `/dice/d${value}.png`;
+}
+
+
+export function getAdvantage(action){
+    const modifiers = [];
+
+  if (action.advantage) {
+    modifiers.push({
+      type: "advantage",
+      name: action.advantage.name,
+      description: action.advantage.description,
+    });
+  }
+
+  if (action.disadvantage) {
+    modifiers.push({
+      type: "disadvantage",
+      name: action.disadvantage.name,
+      description: action.disadvantage.description,
+    });
+  }
+
+  return modifiers;
 }

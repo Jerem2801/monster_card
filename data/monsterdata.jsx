@@ -150,7 +150,7 @@ export const dataMonsters = [
             {
                 name: 'CHAAARGE!',
                 description:
-                    "Si vous vous déplacez d'au moins 4 cases en ligne droite, effectuez une attaque avec avantage.",
+                    'Si vous vous déplacez d\'au moins 4 cases en ligne droite, effectuez une attaque avec $advantage:+1$.',
             },
         ],
         action: [
@@ -161,6 +161,11 @@ export const dataMonsters = [
                     trigger: TRIGGER_TYPE.CRITIC,
                     status: PRONE,
                 },
+                advantage: {
+                    name: 'CHAAARGE!',
+                    description:
+                    'Si vous vous déplacez d\'au moins 4 cases en ligne droite, effectuez une attaque avec 1 Avantage.',
+                }
             },
         ],
     },
@@ -550,7 +555,7 @@ export const dataMonsters = [
             {
                 name: 'Aura Illusoire.',
                 description:
-                    "Les attaques contre du Traqueur du Crépuscule ont un désavantage 2. Les dégâts suppriment cet effet jusqu'à la fin du prochain tour du héros.",
+                    "Les attaques contre du Traqueur du Crépuscule ont $advantage:-2$. Les dégâts suppriment cet effet jusqu'à la fin du prochain tour du héros.",
             },
         ],
         action: [
@@ -586,7 +591,12 @@ export const dataMonsters = [
             },
             {
                 name: 'Envenimer.',
-                description: '$dice:1d8+10$. Avantage contre les cibles $status:dazed$.'
+                description: '$dice:1d8+10$. $advantage:+1$ contre les cibles $status:dazed$.',
+                advantage: {
+                    name: 'Envenimer!',
+                    description:
+                    '1 Avantage contre les cibles Étourdis.',
+                }
             },
         ],
     },
@@ -714,7 +724,7 @@ export const dataMonsters = [
             passifEcorceArrachee,
             {
                 name: 'Enragé.',
-                description: "Attaque avec avantage quand il n'a plus d'armure.",
+                description: "Attaque avec $advantage:+1$ quand il n'a plus d'Armure.",
             },
         ],
         action: [
@@ -729,10 +739,20 @@ export const dataMonsters = [
                     trigger: TRIGGER_TYPE.DAMAGE,
                     status: PRONE,
                 },
+                advantage: {
+                    name: 'Enragé.',
+                    description:
+                    '1 Avantage quand il n\'a plus d\'Armure.',
+                }
             },
             {
                 name: '• Piétinement.',
-                description: '(Cible $status:hampered$) $dice:2d6+20$.'
+                description: '(Cible $status:hampered$) $dice:2d6+20$.',
+                advantage: {
+                    name: 'Enragé.',
+                    description:
+                    '1 Avantage quand il n\'a plus d\'Armure.',
+                }
             },
         ],
     },
@@ -821,10 +841,15 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Écrasement.',
-                description: '$dice:2d6+20$. Avantage contre les créatures plus petites.',
+                description: '$dice:2d6+20$. $advantage:+1$ contre les créatures plus petites.',
                 effect: {
                     trigger: TRIGGER_TYPE.CRITIC,
                     status: GRAPPLED
+                },
+                advantage: {
+                    name: 'Écrasement.',
+                    description:
+                    '1 Avantage contre les créatures plus petites.',
                 }
             },
         ],
@@ -1118,7 +1143,7 @@ export const dataMonsters = [
         passif : [
             {
                 name: 'Phéromones déroutantes.',
-                description: 'Les ennemis doivent réussir un JdS de VOL 15 au début de leur tour, sinon ils sont $status:confused$ pour ce tour. Ils gagnent avantage 1 au jet pour chaque échec subi durant cet affrontement.'
+                description: 'Les ennemis doivent réussir un JdS de VOL 15 au début de leur tour, sinon ils sont $status:confused$ pour ce tour. Ils gagnent $advantage:+1$ au jet pour chaque échec subi durant cet affrontement.'
             },
         ],
         action: [
@@ -1141,7 +1166,7 @@ export const dataMonsters = [
         passif : [
             {
                 name: 'Embusqué.',
-                description: 'Les voileurs agissent toujours en premier et les héros lancent leur initiative avec désavantage.'
+                description: 'Les voileurs agissent toujours en premier et les héros lancent leur initiative avec $advantage:-1$.'
             },
             {
                 name: 'Souffrance partagée.',
@@ -1187,7 +1212,7 @@ export const dataMonsters = [
         passif : [
             {
                 name: 'Vision sismique.',
-                description: 'Avantage contre les créatures qui se sont déplacées depuis le dernier tour du ver.'
+                description: '$advantage:+1$ contre les créatures qui se sont déplacées depuis le dernier tour du ver.'
             },
         ],
         action: [
@@ -1209,6 +1234,11 @@ export const dataMonsters = [
                 effect: {
                     trigger:TRIGGER_TYPE.CRITIC,
                     status:SWALLOWED
+                },
+                advantage: {
+                    name: 'Vision sismique.',
+                    description:
+                    '1 Avantage contre les créatures qui se sont déplacées depuis le dernier tour du ver.',
                 }
             },
         ],

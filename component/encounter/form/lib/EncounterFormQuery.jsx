@@ -21,7 +21,7 @@ export async function saveEncounterInDB(encounterId, name, encounter) {
     const url = isUpdate ? `/api/encounter/${encounterId}` : `/api/encounter`;
 
     const method = isUpdate ? 'PUT' : 'POST';
-
+    
     const response = await fetch(url, {
         method,
         headers: {
@@ -50,9 +50,9 @@ export async function loadEncounter(encounterId, dataMonsters) {
 
         const monstersLoaded = [];
         datas.encounter.forEach(data => {
-            const baseMonster = dataMonsters.find(m => m.name === data.nom_monstre);
+            const baseMonster = dataMonsters.find(m => m.id === data.monster_id);
             if (baseMonster) {
-                for (let i = 0; i < data.nombre_monstre; i++) {
+                for (let i = 0; i < data.monster_number; i++) {
                     monstersLoaded.push(baseMonster);
                 }
             }

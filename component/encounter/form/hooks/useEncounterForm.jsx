@@ -12,8 +12,8 @@ export function useEncounterForm(encounterId = 0) {
     const [encounterName, setEncounterName] = useState('');
     const [selectedMonsters, setSelectedMonsters] = useState([]);
 
-    const addMonster = useCallback(monsterName => {
-        const monster = dataMonsters.find(m => m.name === monsterName);
+    const addMonster = useCallback(monsterId => {
+        const monster = dataMonsters.find(m => m.id === monsterId);
         if (monster) {
             setSelectedMonsters(prev => [...prev, monster]);
         }
@@ -30,7 +30,7 @@ export function useEncounterForm(encounterId = 0) {
     const saveEncounter = useCallback(async () => {
         const name = encounterName.trim();
         if (await isExisting(encounterId, name)) return;
-
+        
         try {
             const details = getMonsterToSave(selectedMonsters);
             saveEncounterInDB(encounterId, name, details);

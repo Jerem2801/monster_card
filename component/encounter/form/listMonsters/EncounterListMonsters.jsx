@@ -31,7 +31,7 @@ export default function EncounterListMonsters({ sortedMonsters, addMonster }) {
                     <MonsterCard
                         key={index}
                         monster={monster}
-                        add={() => addMonster(monster.name)}
+                        add={() => addMonster(monster.id)}
                         selected={false}
                     />
                 ))}
