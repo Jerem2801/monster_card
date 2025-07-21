@@ -1,16 +1,25 @@
+'use client'
+
 import { getHealthBarProps } from './health/lib/healthCalculatorUtils';
+import { useState } from "react";
 import StatPanel from '../monsterCard/headerPanel/StatPanel';
 import HealPanel from './health/HealthPanel';
+import StatusModal from './status/StatusModal';
 
 export default function SimpleCard({
     monster,
     currentHp,
+    status,
     onHpChange,
     onSelect,
     selected,
     deleteMode,
     onDelete,
+    updateMonsterStatus,
 }) {
+
+     const [openModal, setOpenModal] = useState(false);
+
     // HP logic
     function handleHeal(value) {
         const healedAmount = Number(value);
@@ -40,7 +49,16 @@ export default function SimpleCard({
             <div className="p-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                     {/* Left: Nom */}
-                    <h2 className="text-lg font-bold">{monster.name}</h2>
+                    <button
+                    type="button"
+                    onClick={e => {
+                        e.stopPropagation();
+                        setOpenModal(true);
+                    }}
+                        className="cursor-pointer px-1 hover:text-blue-600 transition duration-200"
+                    >
+                        <h2 className="text-lg font-bold">{monster.name}</h2>
+                    </button>
 
                     {/* Right: Stats + HP */}
                     <div className="flex items-center gap-2">
@@ -62,6 +80,8 @@ export default function SimpleCard({
                     style={{ width: barWidth }}
                 />
             </div>
+
+            {/* Delete button */}
             {deleteMode && (
                 <button
                     onClick={e => {
@@ -73,6 +93,13 @@ export default function SimpleCard({
                     ❌
                 </button>
             )}
+
+            <StatusModal
+                openModal={openModal}
+                onClose={() => setOpenModal(false)}
+                status={status}
+                updateMonsterStatus={updateMonsterStatus}
+            />
         </div>
     );
 }

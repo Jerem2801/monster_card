@@ -46,10 +46,10 @@ export default function ActionThrowModal({ action, monsterName, diceProperty }) 
 
     return (
 <>
-  <div className={`mx-auto rounded-xl not-italic bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg ring-1 ring-gray-300 text-sm text-gray-700 ${
+  <div className={`mx-auto not-italic bg-gradient-to-br from-gray-100 to-gray-200 shadow-lg ring-1 ring-gray-300 text-sm text-gray-700 ${
     modifiers.length > 0 ? 'w-90' : 'w-78'}`}>
     {/* Titre */}
-    <div className="rounded-t-xl bg-gray-800 px-4 py-3">
+    <div className=" bg-gray-800 px-4 py-3">
       <h3 className="text-center font-semibold text-white tracking-wide">
         {cleanedActionName}
         <span className="text-sm font-medium text-gray-300">

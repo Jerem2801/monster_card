@@ -167,3 +167,18 @@ export const STATUSES = {
     DEAD,
     DEADLY,
 };
+
+export const STATUSES_TO_SHOW = [
+    BLINDED,
+    CHARMED,
+    DAZED,
+    FRIGHTENED,
+    GRAPPLED,
+    RESTRAINED,
+    INCAPACITATED,
+    INVISIBLE,
+    PETRIFIED,
+    POISONED,
+    PRONE,
+    SLOWED
+];

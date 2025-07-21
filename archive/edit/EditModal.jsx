@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import StatusSelector from '../status/StatusSelector';
+import StatusSelector from '../../component/fight/simpleCard/status/StatusSelector';
 import { getArmorType } from '@/lib/monsterUtils';
 
 export default function EditModal({
