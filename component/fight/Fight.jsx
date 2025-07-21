@@ -41,17 +41,17 @@ export default function Fight({ encounterId }) {
         );
     }
 
-    function addMonsterCard(baseMonster) {
-        if (!baseMonster) return;
+function addMonsterCard(baseMonster, quantity = 1) {
+    if (!baseMonster || quantity <= 0) return;
 
-        const newMonster = {
-            id: crypto.randomUUID(),
-            monster: baseMonster,
-            currentHp: baseMonster.hp,
-        };
+    const newMonsters = Array.from({ length: quantity }, () => ({
+        id: crypto.randomUUID(),
+        monster: baseMonster,
+        currentHp: baseMonster.hp,
+    }));
 
-        setMonsters(prev => [...prev, newMonster]);
-    }
+    setMonsters(prev => [...prev, ...newMonsters]);
+}
 
     function deleteMonster(id) {
         setMonsters(prev => prev.filter(m => m.id !== id));

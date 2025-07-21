@@ -24,7 +24,7 @@ export const DAZED = {
 export const FRIGHTENED = {
     id: 'frightened',
     label: 'Effrayé',
-    description: 'Désavantage près de la source de peur; vitesse réduite en s’en approchant.',
+    description: 'Désavantage près de la source de peur. Vitesse réduite en s’en approchant.',
     path: '/status/frightened.png',
 };
 
@@ -37,7 +37,7 @@ export const GRAPPLED = {
 
 export const RESTRAINED = {
     id: 'restrained',
-    label: 'Entravé',
+    label: 'Immobilisé',
     description: 'Ne peut pas bouger. Les attaques contre vous ont l’avantage.',
     path: '/status/restrained.png',
 };
@@ -45,7 +45,7 @@ export const RESTRAINED = {
 export const HAMPERED = {
     id: 'hampered',
     label: 'Entravé',
-    description: 'Toute créature dont les actions ou les déplacements sont réduits',
+    description: 'Toute créature dont les actions ou les déplacements sont réduits.',
     path: '/status/hampered.png',
 };
 
@@ -95,6 +95,27 @@ export const SLOWED = {
     path: '/status/slowed.png',
 };
 
+export const SILENCED = {
+    id: 'silenced',
+    label: 'Réduit au silence',
+    description: 'Ne peut pas lancer de sorts ni utiliser d’autres capacités nécessitant la parole (ex. : Ordres du commandant).',
+    path: '/status/silence.png',
+};
+
+export const CONFUSED = {
+    id: 'confused',
+    label: 'Confus',
+    description: 'Le MJ choisit votre prochaine action.',
+    path: '/status/confused.png',
+};
+
+export const SWALLOWED = {
+    id: 'swallowed',
+    label: 'Avalé.',
+    description: 'Vous subissez 20 dégâts au début de votre tour. Vos attaques ne peuvent pas rater et ignorent l’armure.',
+    path: '/status/swallowed.png',
+};
+
 export const TAUNTED = {
     id: 'taunted',
     label: 'Provoqué',
@@ -132,10 +153,14 @@ export const STATUSES = {
     GRAPPLED,
     RESTRAINED,
     INCAPACITATED,
+    HAMPERED,
     INVISIBLE,
     PETRIFIED,
     POISONED,
+    CONFUSED,
+    SWALLOWED,
     PRONE,
+    SILENCED,
     SLOWED,
     TAUNTED,
     BLOODIED,

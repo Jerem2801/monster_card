@@ -3,17 +3,17 @@ import ActionThrowModal from './ActionThrowModal';
 import Image from 'next/image';
 import { getDiceImagePath } from '../lib/actionUtils';
 
-export default function AttackButton({ diceText, action, passive, monsterName }) {
+export default function AttackButton({ diceText,diceProperty, action, passive, monsterName }) {
     const baseClass =
-        'text-md not-italic inline-flex items-center gap-1 cursor-pointer rounded px-1 align-middle';
+        'text-md inline-flex items-center gap-1 cursor-pointer rounded px-1 align-middle';
     const passiveClass = 'bg-gray-100 hover:bg-gray-200';
     const activeClass = 'bg-gray-200 hover:bg-gray-300';
 
-    const dicePath = getDiceImagePath(action);
+    const dicePath = getDiceImagePath(diceProperty);
 
     return (
         <Popover
-            content={<ActionThrowModal action={action} monsterName={monsterName} />}
+            content={<ActionThrowModal action={action} monsterName={monsterName} diceProperty={diceProperty}/>}
             placement="top"
         >
             <button

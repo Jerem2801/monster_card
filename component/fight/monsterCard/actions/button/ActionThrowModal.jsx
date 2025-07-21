@@ -6,16 +6,16 @@ import { Button } from 'flowbite-react';
 import { useState } from 'react';
 import { useMessages } from '@/component/fight/resultDisplay/MessagesProvider';
 
-export default function ActionThrowModal({ action, monsterName }) {
+export default function ActionThrowModal({ action, monsterName, diceProperty }) {
     const [advantage, setAdvantage] = useState(0);
     const { addMessage } = useMessages();
 
     function handleAction() {
-        const resultDice = throwDice(action.dice, advantage);
+        const resultDice = throwDice(diceProperty, advantage);
         const cleanedActionName = action.name
             .replace(/^•\s*/, '') // enlève le "• " au début
             .replace(/\s*\([^)]*\)[.]?$/, '');
-        const diceFormat = formatDice(action.dice);
+        const diceFormat = formatDice(diceProperty);
 
         const message = {
             name: cleanedActionName,
@@ -44,8 +44,8 @@ export default function ActionThrowModal({ action, monsterName }) {
                     <h3 className="text-center font-semibold text-gray-900">
                         {action.name}
                         {' ('}
-                        <span className="mr-1 text-red-500">{getMinTotal(action.dice)}</span>-
-                        <span className="ml-1.5 text-green-500">{getMaxTotal(action.dice)}</span>
+                        <span className="mr-1 text-red-500">{getMinTotal(diceProperty)}</span>-
+                        <span className="ml-1.5 text-green-500">{getMaxTotal(diceProperty)}</span>
                         {')'}
                     </h3>
                 </div>
