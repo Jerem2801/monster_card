@@ -73,6 +73,14 @@ export const PETRIFIED = {
     path: '/status/petrified.png',
 };
 
+export const LATCH_ON = {
+    id: 'latch_on',
+    label: 'Accroché',
+    description:
+        'Vous vous déplacez en même temps que votre cible jusqu’à ce que l’un de vous deux meure. Vos attaques ne peuvent ni rater, ni être parées ou interceptées. Les attaques qui vous manquent infligent des dégâts à votre cible à la place.',
+    path: '/status/grappled.png',
+};
+
 export const POISONED = {
     id: 'poisoned',
     label: 'Empoisonné',
@@ -158,6 +166,7 @@ export const STATUSES = {
     HAMPERED,
     INVISIBLE,
     PETRIFIED,
+    LATCH_ON,
     POISONED,
     CONFUSED,
     SWALLOWED,

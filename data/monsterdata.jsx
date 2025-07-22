@@ -26,6 +26,7 @@ export const MONSTER_TYPE = {
     BRIARBANE: { id: 'briarbane', label: 'Fléaux des ronces' },
     TROGLODYTE: { id: 'troglodyte', label: 'Troglodyte' },
     UNDERGROUND: { id: 'underground', label: 'Souterrain' },
+    DUNGEON_DENIZEN: { id: 'dungeon_denizen', label: 'Habitant du donjons' },
     ANIMAL: { id: 'animal', label: 'Animaux' },
     SORCIER: { id: 'sorcier', label: 'Sorcier' },
 };
@@ -60,6 +61,11 @@ const passiveOverwhelmingStench = {
     name: 'Peste accablante.',
     description:
         'Lors d’un jet d’initiative contre des troglodytes, faites un JdS de FOR à la place.',
+};
+const passiveEvasiveFlier = {
+    name: 'Vol Évasif.',
+    description:
+        'Les attaques contre les Stirges se font avec $advantage:-1$.',
 };
 
 // Tableau des types conditions
@@ -539,6 +545,49 @@ export const dataMonsters = [
             {
                 name: 'Tir (3×).',
                 description: '(Distance 8) $dice:1d8+1$.',
+            },
+        ],
+    },
+    //HABITANT DU DONJONS
+    {
+        ...defaultMonster,
+        id: 'strige',
+        name: 'Strige',
+        type: MONSTER_TYPE.DUNGEON_DENIZEN,
+        size: SIZE_TYPE.TINY,
+        hp: 10,
+        fly: 6,
+        level: '1/2',
+        passif: [passiveEvasiveFlier],
+        action: [
+            {
+                name: 'S\'accrocher.',
+                description: '$dice:1d4+2$. En cas de touche : $status:latch_on$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: LATCH_ON,
+                },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'greater_strige',
+        name: 'Strige Supérieur',
+        type: MONSTER_TYPE.DUNGEON_DENIZEN,
+        size: SIZE_TYPE.SMALL,
+        hp: 60,
+        fly: 6,
+        level: '6',
+        passif: [passiveEvasiveFlier],
+        action: [
+            {
+                name: 'S\'accrocher.',
+                description: '$dice:1d12+10$. En cas de touche: $status:latch_on$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: LATCH_ON,
+                },
             },
         ],
     },
