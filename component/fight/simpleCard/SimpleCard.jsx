@@ -1,10 +1,11 @@
-'use client'
+'use client';
 
 import { getHealthBarProps } from './health/lib/healthCalculatorUtils';
-import { useState } from "react";
+import { useState } from 'react';
 import StatPanel from '../monsterCard/headerPanel/StatPanel';
 import HealPanel from './health/HealthPanel';
 import StatusModal from './status/StatusModal';
+import StatusPanel from './status/StatusPanel';
 
 export default function SimpleCard({
     monster,
@@ -17,8 +18,7 @@ export default function SimpleCard({
     onDelete,
     updateMonsterStatus,
 }) {
-
-     const [openModal, setOpenModal] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
 
     // HP logic
     function handleHeal(value) {
@@ -50,14 +50,17 @@ export default function SimpleCard({
                 <div className="flex flex-wrap items-center justify-between gap-2">
                     {/* Left: Nom */}
                     <button
-                    type="button"
-                    onClick={e => {
-                        e.stopPropagation();
-                        setOpenModal(true);
-                    }}
-                        className="cursor-pointer px-1 hover:text-blue-600 transition duration-200"
+                        type="button"
+                        onClick={e => {
+                            e.stopPropagation();
+                            setOpenModal(true);
+                        }}
+                        className="cursor-pointer px-1 transition duration-200 hover:text-blue-600"
                     >
                         <h2 className="text-lg font-bold">{monster.name}</h2>
+                        <StatusPanel
+                            status={status}
+                        />
                     </button>
 
                     {/* Right: Stats + HP */}

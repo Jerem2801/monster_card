@@ -68,9 +68,20 @@ export default function ResultDisplayBox({ msg }) {
 
     const renderAdvantage = () => {
         if (advantage > 0)
-            return <span className="ml-2 inline-flex items-center gap-1 font-medium text-green-600">({advantage}<Image src="/dice/advantage.png" alt="advantage" width={20} height={20} />)</span>;
+            return (
+                <span className="ml-2 inline-flex items-center gap-1 font-medium text-green-600">
+                    ({advantage}
+                    <Image src="/dice/advantage.png" alt="advantage" width={20} height={20} />)
+                </span>
+            );
         if (advantage < 0)
-            return <span className="ml-2 inline-flex items-center gap-1 font-medium text-red-600">({Math.abs(advantage)}<Image src="/dice/disadvantage.png" alt="disadvantage" width={20} height={20} />)</span>;
+            return (
+                <span className="ml-2 inline-flex items-center gap-1 font-medium text-red-600">
+                    ({Math.abs(advantage)}
+                    <Image src="/dice/disadvantage.png" alt="disadvantage" width={20} height={20} />
+                    )
+                </span>
+            );
         return null;
     };
 
@@ -82,10 +93,10 @@ export default function ResultDisplayBox({ msg }) {
                 <div className="flex flex-1 flex-col justify-between pr-4">
                     <div className="mb-1 text-base font-bold text-gray-800">{monsterName}</div>
                     <div className="mt-1 flex flex-wrap items-center text-xs text-gray-500">
-                    <span className="whitespace-nowrap mr-2">
-                        {name} : {format}
-                    </span>
-                    {renderAdvantage()}
+                        <span className="mr-2 whitespace-nowrap">
+                            {name} : {format}
+                        </span>
+                        {renderAdvantage()}
                     </div>
                 </div>
 

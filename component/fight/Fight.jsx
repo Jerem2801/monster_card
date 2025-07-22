@@ -43,35 +43,26 @@ export default function Fight({ encounterId }) {
     }
 
     function updateMonsterStatus(id, newStatusList) {
-        setMonsters(prev =>
-            prev.map(m =>
-                m.id === id ? { ...m, status: newStatusList } : m
-            )
-        );
+        setMonsters(prev => prev.map(m => (m.id === id ? { ...m, status: newStatusList } : m)));
     }
 
     function removeStatusFromMonster(id, statusId) {
         setMonsters(prev =>
             prev.map(m =>
-                m.id === id
-                    ? { ...m, status: m.status.filter(s => s.id !== statusId) }
-                    : m
-            )
+                m.id === id ? { ...m, status: m.status.filter(s => s.id !== statusId) } : m,
+            ),
         );
     }
-
 
     function addStatusToMonster(id, status) {
         setMonsters(prev =>
             prev.map(m =>
                 m.id === id && !m.status.some(s => s.id === status.id)
                     ? { ...m, status: [...m.status, status] }
-                    : m
-            )
+                    : m,
+            ),
         );
     }
-
-
 
     function addMonsterCard(baseMonster, quantity = 1) {
         if (!baseMonster || quantity <= 0) return;
@@ -107,18 +98,22 @@ export default function Fight({ encounterId }) {
 
                     {/* Liste des cartes */}
                     <div className="p-4">
-                        {monsters.map(({ id, monster, currentHp,status }) => (
+                        {monsters.map(({ id, monster, currentHp, status }) => (
                             <SimpleCard
                                 key={id}
                                 monster={monster}
                                 currentHp={currentHp}
                                 status={status}
-                                onSelect={() => setSelectedMonster({ id, monster, currentHp, status})}
+                                onSelect={() =>
+                                    setSelectedMonster({ id, monster, currentHp, status })
+                                }
                                 onHpChange={newHp => updateMonsterHp(id, newHp)}
                                 selected={selectedMonster?.id === id}
                                 deleteMode={deleteMode}
                                 onDelete={() => deleteMonster(id)}
-                                updateMonsterStatus={(newStatusList) => (updateMonsterStatus(id,newStatusList))}
+                                updateMonsterStatus={newStatusList =>
+                                    updateMonsterStatus(id, newStatusList)
+                                }
                             />
                         ))}
                     </div>

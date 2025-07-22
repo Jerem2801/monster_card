@@ -1,8 +1,8 @@
 import { Popover } from 'flowbite-react';
 import Image from 'next/image';
-import {STATUSES} from '@/data/statusdata';
+import { STATUSES } from '@/data/statusdata';
 
-export default function StatusButton({ statusName ,passive }) {
+export default function StatusButton({ statusName, passive }) {
     const baseClass =
         'text-md inline-flex items-center gap-1 rounded px-1 align-middle select-none';
     const passiveClass = 'bg-gray-100 hover:bg-gray-200';

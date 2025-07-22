@@ -58,9 +58,9 @@ const passiveDeathStench = {
 };
 const passiveOverwhelmingStench = {
     name: 'Peste accablante.',
-    description: 'Lors d’un jet d’initiative contre des troglodytes, faites un JdS de FOR à la place.',
-
-}
+    description:
+        'Lors d’un jet d’initiative contre des troglodytes, faites un JdS de FOR à la place.',
+};
 
 // Tableau des types conditions
 export const TRIGGER_TYPE = {
@@ -78,7 +78,7 @@ export const TRIGGER_TYPE = {
     },
     MISS: {
         id: 'miss',
-        name: 'de d\'Echecs',
+        name: "de d'Echecs",
     },
 };
 
@@ -112,13 +112,13 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Planter.',
-                description: '$dice:1d6$.'
+                description: '$dice:1d6$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'goblin',
+        id: 'goblin',
         name: 'Gobelin',
         type: MONSTER_TYPE.GOBELIN,
         hp: 15,
@@ -128,7 +128,7 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Planter.',
-                description: '$dice:1d6+2$.'
+                description: '$dice:1d6+2$.',
             },
             {
                 name: 'Tir.',
@@ -138,7 +138,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        id:'goblin_ratrider',
+        id: 'goblin_ratrider',
         name: 'Gobelin Monteur de Rat',
         type: MONSTER_TYPE.GOBELIN,
         hp: 30,
@@ -150,7 +150,7 @@ export const dataMonsters = [
             {
                 name: 'CHAAARGE!',
                 description:
-                    'Si vous vous déplacez d\'au moins 4 cases en ligne droite, effectuez une attaque avec $advantage:+1$.',
+                    "Si vous vous déplacez d'au moins 4 cases en ligne droite, effectuez une attaque avec $advantage:+1$.",
             },
         ],
         action: [
@@ -164,8 +164,8 @@ export const dataMonsters = [
                 advantage: {
                     name: 'CHAAARGE!',
                     description:
-                    'Si vous vous déplacez d\'au moins 4 cases en ligne droite, effectuez une attaque avec 1 Avantage.',
-                }
+                        "Si vous vous déplacez d'au moins 4 cases en ligne droite, effectuez une attaque avec 1 Avantage.",
+                },
             },
         ],
     },
@@ -202,7 +202,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        id:'bugbear',
+        id: 'bugbear',
         name: 'Bugbear',
         type: MONSTER_TYPE.GOBELIN,
         hp: 30,
@@ -211,7 +211,7 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Frappe large.',
-                description: '$dice:2d6+4$.'
+                description: '$dice:2d6+4$.',
             },
         ],
     },
@@ -239,7 +239,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        id:'bugbear_cheiftain',
+        id: 'bugbear_cheiftain',
         name: 'Bugbear Chef de Guerre',
         type: MONSTER_TYPE.GOBELIN,
         hp: 40,
@@ -249,14 +249,14 @@ export const dataMonsters = [
             {
                 name: 'Frappe large.',
                 description:
-                    '(Portée 2) $dice:2d6+10$, peut également infliger des dégâts à une 2ᵉ cible à portée.'
+                    '(Portée 2) $dice:2d6+10$, peut également infliger des dégâts à une 2ᵉ cible à portée.',
             },
         ],
     },
     //KOBOLD
     {
         ...defaultMonster,
-        id:'kobold_minion',
+        id: 'kobold_minion',
         name: 'Sbire Kobold',
         type: MONSTER_TYPE.KOBOLD,
         hp: 1,
@@ -267,17 +267,17 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Planter.',
-                description: '$dice:1d4+2$.'
+                description: '$dice:1d4+2$.',
             },
             {
                 name: 'Fronde.',
-                description: '(Distance 8) $dice:1d4+2$.'
+                description: '(Distance 8) $dice:1d4+2$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'kobold',
+        id: 'kobold',
         name: 'Kobold',
         type: MONSTER_TYPE.KOBOLD,
         hp: 12,
@@ -287,17 +287,17 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Planter.',
-                description: '$dice:1d4+2$.'
+                description: '$dice:1d4+2$.',
             },
             {
                 name: 'Fronde',
-                description: '(Distance 8) $dice:1d4+2$.'
+                description: '(Distance 8) $dice:1d4+2$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'kobold_sneak',
+        id: 'kobold_sneak',
         name: 'Kobold Sournois',
         type: MONSTER_TYPE.KOBOLD,
         hp: 16,
@@ -314,11 +314,11 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Planter.',
-                description: '$dice:1d4+2$.'
+                description: '$dice:1d4+2$.',
             },
             {
                 name: 'Fronde.',
-                description: '(Distance 8) $dice:1d4+2$.'
+                description: '(Distance 8) $dice:1d4+2$.',
             },
         ],
     },
@@ -341,12 +341,12 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Planter (2x).',
-                description: '$dice:1d4+2$.'
+                description: '$dice:1d4+2$.',
             },
             {
                 name: 'Fronde (2x).',
-                description: '(Distance 8) $dice:1d4+2$.'
-            }
+                description: '(Distance 8) $dice:1d4+2$.',
+            },
         ],
     },
     {
@@ -368,18 +368,18 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Lancer de scorpion (2×)',
-                description: '(Distance 8) $dice:1d4+2$.'
+                description: '(Distance 8) $dice:1d4+2$.',
             },
             {
                 name: 'ABEIIILLES !',
                 description:
                     '$dice:5d4$ (ne rate jamais). La moitié des dégâts est infligée à toutes les créatures adjacentes.',
-                use: 1
+                use: 1,
             },
             {
                 name: 'Filet caché.',
                 description: '$status:restrained$ (Évasion DD 10).',
-                use: 1
+                use: 1,
             },
         ],
     },
@@ -388,7 +388,7 @@ export const dataMonsters = [
         id: 'kobold_clanger',
         name: 'Kobold Sonneur',
         type: MONSTER_TYPE.KOBOLD,
-        hp: 16,         
+        hp: 16,
         level: '1',
         armor: ARMOR_TYPE.HEAVY,
         passif: [
@@ -404,7 +404,7 @@ export const dataMonsters = [
     //BANDIT
     {
         ...defaultMonster,
-        id:'bandit_minion',
+        id: 'bandit_minion',
         name: 'Sbire Bandit',
         type: MONSTER_TYPE.BANDIT,
         hp: 1,
@@ -414,13 +414,13 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Planter.',
-                description: '$dice:1d8$.'
+                description: '$dice:1d8$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'bandit',
+        id: 'bandit',
         name: 'Bandit',
         type: MONSTER_TYPE.BANDIT,
         hp: 12,
@@ -441,7 +441,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        id:'bandit_hunter',
+        id: 'bandit_hunter',
         name: 'Bandit Chasseur',
         type: MONSTER_TYPE.BANDIT,
         hp: 22,
@@ -457,7 +457,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        id:'bandit_bruiser',
+        id: 'bandit_bruiser',
         name: 'Bandit Brutal',
         type: MONSTER_TYPE.BANDIT,
         hp: 24,
@@ -467,13 +467,13 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Coup violent.',
-                description: '$dice:2d8+4$.'
+                description: '$dice:2d8+4$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'bandit_assassin',
+        id: 'bandit_assassin',
         name: 'Bandit Assassin',
         type: MONSTER_TYPE.BANDIT,
         hp: 24,
@@ -498,7 +498,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        id:'bandit_mage',
+        id: 'bandit_mage',
         name: 'Bandit Mage',
         type: MONSTER_TYPE.BANDIT,
         hp: 41,
@@ -515,16 +515,16 @@ export const dataMonsters = [
                 name: 'Éclair Arqué.',
                 description:
                     '(Distance 12) $dice:3d8$. Frappe également la créature la plus proche suivante. En cas d’échec : se blesse soi-même à la place.',
-                effect : {
+                effect: {
                     trigger: TRIGGER_TYPE.MISS,
-                    message: 'Vous vous blessez des dégâts.'
-                }
-            }
+                    message: 'Vous vous blessez des dégâts.',
+                },
+            },
         ],
     },
     {
         ...defaultMonster,
-        id:'bandit_captain',
+        id: 'bandit_captain',
         name: 'Capitaine Bandit',
         type: MONSTER_TYPE.BANDIT,
         hp: 36,
@@ -534,18 +534,18 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Entaille (3×).',
-                description: '$dice:1d8+1$.'
+                description: '$dice:1d8+1$.',
             },
             {
                 name: 'Tir (3×).',
-                description: '(Distance 8) $dice:1d8+1$.'
+                description: '(Distance 8) $dice:1d8+1$.',
             },
         ],
     },
     //HABITANT DE LA FORET
     {
         ...defaultMonster,
-        id:'duskprowler',
+        id: 'duskprowler',
         name: 'Traqueur du Crépuscule',
         type: MONSTER_TYPE.FOREST_DENIZEN,
         hp: 70,
@@ -561,13 +561,13 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Ravage (2x).',
-                description: '$dice:2d8+2$.'
+                description: '$dice:2d8+2$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'basilik',
+        id: 'basilik',
         name: 'Basilic ',
         type: MONSTER_TYPE.FOREST_DENIZEN,
         hp: 48,
@@ -577,13 +577,13 @@ export const dataMonsters = [
             {
                 name: 'Chair en pierre.',
                 description:
-                    'Les créatures $status:dazed$ par le Basilic restent dans cet état pendant 10 minutes. $status:dazed$ 3 fois = $status:petrified$.'
+                    'Les créatures $status:dazed$ par le Basilic restent dans cet état pendant 10 minutes. $status:dazed$ 3 fois = $status:petrified$.',
             },
         ],
         action: [
             {
                 name: 'Regard de pierre.',
-                description: '$status:dazed$ 1 créature dans le champ de vision.'
+                description: '$status:dazed$ 1 créature dans le champ de vision.',
             },
             {
                 name: 'PUIS :',
@@ -594,15 +594,14 @@ export const dataMonsters = [
                 description: '$dice:1d8+10$. $advantage:+1$ contre les cibles $status:dazed$.',
                 advantage: {
                     name: 'Envenimer!',
-                    description:
-                    '1 Avantage contre les cibles Étourdis.',
-                }
+                    description: '1 Avantage contre les cibles Étourdis.',
+                },
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'druid',
+        id: 'druid',
         name: 'Druide',
         type: MONSTER_TYPE.FOREST_DENIZEN,
         hp: 90,
@@ -611,7 +610,7 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Métamorphose bestiale.',
-                description: '+4 en vitesse, gagne une Armure Moyenne ce tour. $dice:4d4+10$'
+                description: '+4 en vitesse, gagne une Armure Moyenne ce tour. $dice:4d4+10$',
             },
             {
                 name: 'OU :',
@@ -623,7 +622,7 @@ export const dataMonsters = [
                     '(Portée 3) $dice:4d4+10$ à tous les ennemis à portée. En cas de dégâts : déplace les cibles n’importe où dans la portée.',
                 effect: {
                     trigger: TRIGGER_TYPE.DAMAGE,
-                    message: 'Déplacer les cibles n’importe où dans Portée 3.'
+                    message: 'Déplacer les cibles n’importe où dans Portée 3.',
                 },
             },
         ],
@@ -631,7 +630,7 @@ export const dataMonsters = [
     //FLEAUX DES RONCES
     {
         ...defaultMonster,
-        id:'seedling',
+        id: 'seedling',
         name: 'Pousse',
         type: MONSTER_TYPE.BRIARBANE,
         hp: 8,
@@ -642,13 +641,13 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Graine de ronces.',
-                description: '(Distance 6) $dice:2d6+2$.'
+                description: '(Distance 6) $dice:2d6+2$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'acidpod',
+        id: 'acidpod',
         name: 'Gousse Acide',
         type: MONSTER_TYPE.BRIARBANE,
         hp: 8,
@@ -665,13 +664,13 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Attraper.',
-                description: 'JdS de DEX 12 ou $status:grappled$.'
+                description: 'JdS de DEX 12 ou $status:grappled$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'tangler',
+        id: 'tangler',
         name: 'Enchevêtreur',
         type: MONSTER_TYPE.BRIARBANE,
         hp: 20,
@@ -692,7 +691,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        id:'rootbreaker',
+        id: 'rootbreaker',
         name: 'Brise-racines Géante',
         type: MONSTER_TYPE.BRIARBANE,
         hp: 50,
@@ -706,14 +705,14 @@ export const dataMonsters = [
                 description: '$dice:3d6+6$. En cas de critique : Repousse de 2 cases.',
                 effect: {
                     trigger: TRIGGER_TYPE.CRITIC,
-                    message: 'Repousse de 2 cases.'
+                    message: 'Repousse de 2 cases.',
                 },
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'treant',
+        id: 'treant',
         name: 'Gardien Sylvestre',
         type: MONSTER_TYPE.BRIARBANE,
         hp: 170,
@@ -741,25 +740,23 @@ export const dataMonsters = [
                 },
                 advantage: {
                     name: 'Enragé.',
-                    description:
-                    '1 Avantage quand il n\'a plus d\'Armure.',
-                }
+                    description: "1 Avantage quand il n'a plus d'Armure.",
+                },
             },
             {
                 name: '• Piétinement.',
                 description: '(Cible $status:hampered$) $dice:2d6+20$.',
                 advantage: {
                     name: 'Enragé.',
-                    description:
-                    '1 Avantage quand il n\'a plus d\'Armure.',
-                }
+                    description: "1 Avantage quand il n'a plus d'Armure.",
+                },
             },
         ],
     },
     //HOMME-SERPENT
     {
         ...defaultMonster,
-        id:'snakeman_minion',
+        id: 'snakeman_minion',
         name: 'Sbire Homme-serpent',
         type: MONSTER_TYPE.SNAKEMEN,
         hp: 1,
@@ -772,18 +769,18 @@ export const dataMonsters = [
                 description: '$dice:1d6$.',
                 effect: {
                     trigger: TRIGGER_TYPE.CRITIC,
-                    status: GRAPPLED
-                }
+                    status: GRAPPLED,
+                },
             },
             {
                 name: 'Crachat.',
-                description: '(Distance 8) $dice:1d6$.'
+                description: '(Distance 8) $dice:1d6$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'snakeman',
+        id: 'snakeman',
         name: 'Homme-serpent',
         type: MONSTER_TYPE.SNAKEMEN,
         hp: 26,
@@ -795,18 +792,18 @@ export const dataMonsters = [
                 description: '$dice:1d6+6$.',
                 effect: {
                     trigger: TRIGGER_TYPE.CRITIC,
-                    status: GRAPPLED
-                }
+                    status: GRAPPLED,
+                },
             },
             {
                 name: 'Crachat.',
-                description: '(Distance 8) $dice:1d6+6$.'
+                description: '(Distance 8) $dice:1d6+6$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'cobra_captain',
+        id: 'cobra_captain',
         name: 'Capitaine Cobra',
         type: MONSTER_TYPE.SNAKEMEN,
         hp: 36,
@@ -819,18 +816,18 @@ export const dataMonsters = [
                 description: '$dice:1d6+6$.',
                 effect: {
                     trigger: TRIGGER_TYPE.CRITIC,
-                    status: GRAPPLED
-                }
+                    status: GRAPPLED,
+                },
             },
             {
                 name: 'Crachat (2x).',
-                description: '(Distance 8) $dice:1d6+6$.'
+                description: '(Distance 8) $dice:1d6+6$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'giant_cobra',
+        id: 'giant_cobra',
         name: 'Cobra Géant',
         type: MONSTER_TYPE.SNAKEMEN,
         hp: 80,
@@ -844,35 +841,34 @@ export const dataMonsters = [
                 description: '$dice:2d6+20$. $advantage:+1$ contre les créatures plus petites.',
                 effect: {
                     trigger: TRIGGER_TYPE.CRITIC,
-                    status: GRAPPLED
+                    status: GRAPPLED,
                 },
                 advantage: {
                     name: 'Écrasement.',
-                    description:
-                    '1 Avantage contre les créatures plus petites.',
-                }
+                    description: '1 Avantage contre les créatures plus petites.',
+                },
             },
         ],
     },
     //TROGLODYTE
     {
         ...defaultMonster,
-        id:'troglodyte',
+        id: 'troglodyte',
         name: 'Troglodyte',
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 14,
         level: '1/3',
-        passif: [passiveOverwhelmingStench,passiveDeathStench],
+        passif: [passiveOverwhelmingStench, passiveDeathStench],
         action: [
             {
                 name: 'Griffes.',
-                description: '$dice:1d6+3$.'
+                description: '$dice:1d6+3$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'troglodyte_tunneler',
+        id: 'troglodyte_tunneler',
         name: 'Troglodyte Tunnelier',
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 14,
@@ -883,77 +879,79 @@ export const dataMonsters = [
             {
                 name: 'Fouisseur.',
                 description:
-                    '$status:invisible$ jusqu\'à ce que vous attaquiez. Si le troglodyte n’est ni en train de creuser ni d’agripper, il creuse au lieu d’attaquer.',
+                    "$status:invisible$ jusqu'à ce que vous attaquiez. Si le troglodyte n’est ni en train de creuser ni d’agripper, il creuse au lieu d’attaquer.",
             },
         ],
         action: [
             {
                 name: 'Par en dessous !',
-                description: '$dice:1d6+3$. En cas de coup réussi : $status:grappled$ (Évasion DD 10).',
+                description:
+                    '$dice:1d6+3$. En cas de coup réussi : $status:grappled$ (Évasion DD 10).',
                 effect: {
                     trigger: TRIGGER_TYPE.HIT,
-                    status: GRAPPLED
+                    status: GRAPPLED,
                 },
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'troglodyte_muckthrower',
+        id: 'troglodyte_muckthrower',
         name: 'Troglodyte Lance-boue',
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 20,
         level: '2',
-        passif: [passiveOverwhelmingStench,passiveDeathStench],
+        passif: [passiveOverwhelmingStench, passiveDeathStench],
         action: [
             {
                 name: 'Jet de Glu.',
-                description: '(Distance 6) $dice:1d6+3$. En cas de touche : $status:blinded$ pendant 1 round.',
+                description:
+                    '(Distance 6) $dice:1d6+3$. En cas de touche : $status:blinded$ pendant 1 round.',
                 effect: {
                     trigger: TRIGGER_TYPE.HIT,
-                    status: BLINDED
-                }
+                    status: BLINDED,
+                },
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'troglodyte_screecher',
+        id: 'troglodyte_screecher',
         name: 'Troglodyte Hurleur',
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 30,
         level: '3',
-        passif: [passiveOverwhelmingStench,passiveDeathStench],
+        passif: [passiveOverwhelmingStench, passiveDeathStench],
         action: [
             {
                 name: 'Hurlement.',
                 description: '(ZdE, Portée 2) $dice:1d6+3$. $status:dazed$ tous les ennemis.',
                 effect: {
                     trigger: TRIGGER_TYPE.HIT,
-                    status: DAZED
-                }
+                    status: DAZED,
+                },
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'troglodyte_champion',
+        id: 'troglodyte_champion',
         name: 'Troglodyte Champion',
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 40,
         armor: ARMOR_TYPE.MEDIUM,
         level: '4',
-        passif: [passiveOverwhelmingStench,passiveDeathStench],
+        passif: [passiveOverwhelmingStench, passiveDeathStench],
         action: [
             {
                 name: 'Massue à pointes.',
-                description: '$dice:3d6+9$.'
+                description: '$dice:3d6+9$.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'fungal_hulk',
+        id: 'fungal_hulk',
         name: 'Colosse Fongique',
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 50,
@@ -979,13 +977,13 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        id:'troglodyte_swollen_one',
+        id: 'troglodyte_swollen_one',
         name: 'Troglodyte Enflé',
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 50,
         size: SIZE_TYPE.LARGE,
         level: '5',
-        passif: [passiveOverwhelmingStench,passiveDeathStench],
+        passif: [passiveOverwhelmingStench, passiveDeathStench],
         action: [
             {
                 name: 'Lancer.',
@@ -998,13 +996,13 @@ export const dataMonsters = [
             {
                 name: 'Puantise Envahissante.',
                 description:
-                    '(ZdE, Portée 12) : $dice:3d6+3$ à tous les ennemis. Ils sont $status:dazed$ et $status:poisoned$ pendant 1 round.'
+                    '(ZdE, Portée 12) : $dice:3d6+3$ à tous les ennemis. Ils sont $status:dazed$ et $status:poisoned$ pendant 1 round.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'gloom_moth',
+        id: 'gloom_moth',
         name: 'Phalène de l’Ombre',
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 40,
@@ -1029,7 +1027,7 @@ export const dataMonsters = [
     //UNDERGROUND
     {
         ...defaultMonster,
-        id:'spider_minion',
+        id: 'spider_minion',
         name: 'Sbire Araignée',
         type: MONSTER_TYPE.UNDERGROUND,
         hp: 1,
@@ -1038,14 +1036,13 @@ export const dataMonsters = [
         action: [
             {
                 name: 'Morsure.',
-                description:
-                    '$dice:1d8$.'
-            }
+                description: '$dice:1d8$.',
+            },
         ],
     },
     {
         ...defaultMonster,
-        id:'giant_spider',
+        id: 'giant_spider',
         name: 'Araignée Géante',
         type: MONSTER_TYPE.UNDERGROUND,
         hp: 27,
@@ -1059,8 +1056,8 @@ export const dataMonsters = [
                     '(Distance 6) $dice:1d8+2$. En cas de coup réussi : $status:restrained$ (Évasion DD 12, ou dégâts tranchants/feu).',
                 effect: {
                     trigger: TRIGGER_TYPE.HIT,
-                    status: RESTRAINED
-                }
+                    status: RESTRAINED,
+                },
             },
             {
                 name: 'Morsure.',
@@ -1068,14 +1065,14 @@ export const dataMonsters = [
                     '(Cible $status:hampered$) $dice:2d8+4$, $status:poisoned$ (les soins magiques prennent fin).',
                 effect: {
                     trigger: TRIGGER_TYPE.HIT,
-                    status: POISONED
-                }
+                    status: POISONED,
+                },
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'ettercap',
+        id: 'ettercap',
         name: 'Tisseur bestial',
         type: MONSTER_TYPE.UNDERGROUND,
         hp: 49,
@@ -1087,14 +1084,14 @@ export const dataMonsters = [
                     '$dice:1d8+2$. En cas de touche : $status:grappled$ (Évasion DD 13), $status:silenced$ jusqu’à ce que la cible se libère.',
                 effect: {
                     trigger: TRIGGER_TYPE.HIT,
-                    status: GRAPPLED
-                }
+                    status: GRAPPLED,
+                },
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'nestweaver',
+        id: 'nestweaver',
         name: 'Tisseur de Nid',
         type: MONSTER_TYPE.UNDERGROUND,
         hp: 54,
@@ -1104,8 +1101,7 @@ export const dataMonsters = [
         action: [
             {
                 name: '',
-                description:
-                    'Invoque 2 $summon:spider_minion:2$. Puis choisissez 1 option :'
+                description: 'Invoque 2 $summon:spider_minion:2$. Puis choisissez 1 option :',
             },
             {
                 name: '• Lancer de toile.',
@@ -1113,12 +1109,12 @@ export const dataMonsters = [
                     '(Distance 6) $dice:1d8+2$. En cas de coup réussi : $status:restrained$ (Évasion DD 12, ou dégâts tranchants/feu).',
                 effect: {
                     trigger: TRIGGER_TYPE.HIT,
-                    status: RESTRAINED
-                }
+                    status: RESTRAINED,
+                },
             },
-                        {
+            {
                 name: 'OU :',
-                description:''
+                description: '',
             },
             {
                 name: '• Morsure.',
@@ -1126,51 +1122,53 @@ export const dataMonsters = [
                     '(Cible $status:hampered$) $dice:3d8+6$, $status:poisoned$ (les soins magiques prennent fin).',
                 effect: {
                     trigger: TRIGGER_TYPE.HIT,
-                    status: POISONED
-                }
+                    status: POISONED,
+                },
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'umber_hulk',
+        id: 'umber_hulk',
         name: 'Colosse des ombres',
         type: MONSTER_TYPE.UNDERGROUND,
         hp: 70,
         level: '10',
         size: SIZE_TYPE.LARGE,
         armor: ARMOR_TYPE.HEAVY,
-        passif : [
+        passif: [
             {
                 name: 'Phéromones déroutantes.',
-                description: 'Les ennemis doivent réussir un JdS de VOL 15 au début de leur tour, sinon ils sont $status:confused$ pour ce tour. Ils gagnent $advantage:+1$ au jet pour chaque échec subi durant cet affrontement.'
+                description:
+                    'Les ennemis doivent réussir un JdS de VOL 15 au début de leur tour, sinon ils sont $status:confused$ pour ce tour. Ils gagnent $advantage:+1$ au jet pour chaque échec subi durant cet affrontement.',
             },
         ],
         action: [
             {
                 name: 'Mandibules & Griffes (2×).',
-                description:
-                    '$dice:1d10+10$ dégâts.'
+                description: '$dice:1d10+10$ dégâts.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'cloaker',
+        id: 'cloaker',
         name: 'Voileur',
         type: MONSTER_TYPE.UNDERGROUND,
         hp: 110,
         level: '13',
         size: SIZE_TYPE.LARGE,
         fly: 10,
-        passif : [
+        passif: [
             {
                 name: 'Embusqué.',
-                description: 'Les voileurs agissent toujours en premier et les héros lancent leur initiative avec $advantage:-1$.'
+                description:
+                    'Les voileurs agissent toujours en premier et les héros lancent leur initiative avec $advantage:-1$.',
             },
             {
                 name: 'Souffrance partagée.',
-                description: 'Vous subissez la moitié des dégâts des attaques pendant que vous $status:grappled$ une créature (elle subit l’autre moitié).'
+                description:
+                    'Vous subissez la moitié des dégâts des attaques pendant que vous $status:grappled$ une créature (elle subit l’autre moitié).',
             },
         ],
         action: [
@@ -1178,30 +1176,25 @@ export const dataMonsters = [
                 name: 'Enveloppement.',
                 description:
                     '$dice:2d10+20$. En cas de touche : $status:grappled$ (Évasion DD 16).',
-                effect:
-                {
+                effect: {
                     trigger: TRIGGER_TYPE.HIT,
-                    status: GRAPPLED
-                }
-                
+                    status: GRAPPLED,
+                },
             },
             {
                 name: 'OU :',
-                description:
-                    '',
-                
+                description: '',
             },
             {
                 name: 'Hurlement terrifiant.',
                 description:
-                    'JdS de VOL 16, ou les créatures situées dans un rayon de 6 cases sont $status:frightened$ et doivent utiliser 1 action pour s’éloigner le plus possible.'
-                
+                    'JdS de VOL 16, ou les créatures situées dans un rayon de 6 cases sont $status:frightened$ et doivent utiliser 1 action pour s’éloigner le plus possible.',
             },
         ],
     },
     {
         ...defaultMonster,
-        id:'great_worm',
+        id: 'great_worm',
         name: 'Grand Ver',
         type: MONSTER_TYPE.UNDERGROUND,
         hp: 140,
@@ -1209,37 +1202,35 @@ export const dataMonsters = [
         size: SIZE_TYPE.HUGE,
         armor: ARMOR_TYPE.HEAVY,
         speed: 8,
-        passif : [
+        passif: [
             {
                 name: 'Vision sismique.',
-                description: '$advantage:+1$ contre les créatures qui se sont déplacées depuis le dernier tour du ver.'
+                description:
+                    '$advantage:+1$ contre les créatures qui se sont déplacées depuis le dernier tour du ver.',
             },
         ],
         action: [
             {
                 name: 'Écrasement.',
                 description:
-                    'Les créatures dans une zone de 2×6 cases subissent 50 dégâts si elles ratent un JdS de DEX 18. (Les créatures ayant échoué peuvent dépenser 1 action pour plonger hors de la zone au lieu de subir les dégâts. Elles se déplacent alors de la moitié de leur vitesse et finissent $status:prone$.)'
-                
+                    'Les créatures dans une zone de 2×6 cases subissent 50 dégâts si elles ratent un JdS de DEX 18. (Les créatures ayant échoué peuvent dépenser 1 action pour plonger hors de la zone au lieu de subir les dégâts. Elles se déplacent alors de la moitié de leur vitesse et finissent $status:prone$.)',
             },
             {
                 name: 'OU :',
-                description:
-                    '',
-                
+                description: '',
             },
             {
                 name: 'Morsure / Déglutition.',
                 description: '$dice:1d4+40$. Sur un coup critique : $status:swallowed$.',
                 effect: {
-                    trigger:TRIGGER_TYPE.CRITIC,
-                    status:SWALLOWED
+                    trigger: TRIGGER_TYPE.CRITIC,
+                    status: SWALLOWED,
                 },
                 advantage: {
                     name: 'Vision sismique.',
                     description:
-                    '1 Avantage contre les créatures qui se sont déplacées depuis le dernier tour du ver.',
-                }
+                        '1 Avantage contre les créatures qui se sont déplacées depuis le dernier tour du ver.',
+                },
             },
         ],
     },

@@ -16,7 +16,6 @@ export async function POST(req) {
     try {
         const { name, encounter } = await req.json();
 
-
         if (!name || !Array.isArray(encounter) || encounter.length === 0) {
             return errorResponse(new Error('Nom ou détails manquants'), 400);
         }

@@ -13,7 +13,7 @@ export default function AdvantageInputNumber({ min, max, value, onChange }) {
 
     return (
         <div className="mx-auto max-w-xs">
-            <div className="relative max-w-[9rem] flex items-center rounded-xl shadow-md">
+            <div className="relative flex max-w-[9rem] items-center rounded-xl shadow-md">
                 <button
                     type="button"
                     onClick={decrement}
@@ -41,7 +41,7 @@ export default function AdvantageInputNumber({ min, max, value, onChange }) {
                     disabled={typeof max === 'number' && Number(value) >= max}
                     className={`h-11 cursor-pointer rounded-e-md border border-gray-300 bg-gray-100 p-2 transition-transform hover:bg-gray-200 focus:outline-none active:scale-95 ${typeof max === 'number' && Number(value) >= max ? 'cursor-not-allowed opacity-50' : ''}`}
                 >
-                   <Image src="/dice/advantage.png" alt="advantage" width={80} height={80} />
+                    <Image src="/dice/advantage.png" alt="advantage" width={80} height={80} />
                 </button>
             </div>
         </div>

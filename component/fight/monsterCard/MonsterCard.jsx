@@ -7,7 +7,7 @@ export default function MonsterCard({ monster, addMonsterCard }) {
         <div className="w-full space-y-4 rounded-2xl border border-neutral-300 bg-amber-50 p-6 shadow-lg transition-shadow hover:shadow-xl md:w-[70%]">
             <NamePanel monster={monster} />
 
-            <PassivePanel monster={monster} addMonsterCard={addMonsterCard}/>
+            <PassivePanel monster={monster} addMonsterCard={addMonsterCard} />
 
             <ActionPanel monster={monster} addMonsterCard={addMonsterCard} />
         </div>

@@ -30,7 +30,7 @@ export function useEncounterForm(encounterId = 0) {
     const saveEncounter = useCallback(async () => {
         const name = encounterName.trim();
         if (await isExisting(encounterId, name)) return;
-        
+
         try {
             const details = getMonsterToSave(selectedMonsters);
             saveEncounterInDB(encounterId, name, details);

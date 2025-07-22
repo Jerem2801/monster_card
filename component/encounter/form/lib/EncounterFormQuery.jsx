@@ -21,7 +21,7 @@ export async function saveEncounterInDB(encounterId, name, encounter) {
     const url = isUpdate ? `/api/encounter/${encounterId}` : `/api/encounter`;
 
     const method = isUpdate ? 'PUT' : 'POST';
-    
+
     const response = await fetch(url, {
         method,
         headers: {

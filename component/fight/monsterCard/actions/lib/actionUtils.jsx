@@ -18,11 +18,15 @@ export function getActionContent(action, passive, addMonsterCard, monsterName) {
 
                 const parsed = parseToken(tokenMatch[1]); // Envoie juste le contenu : "dice:2d4+5"
                 if (!parsed) {
-                    return <span key={`invalid-${index}`} className="text-red-600 italic">[token invalide]</span>;
+                    return (
+                        <span key={`invalid-${index}`} className="text-red-600 italic">
+                            [token invalide]
+                        </span>
+                    );
                 }
 
                 switch (parsed.type) {
-                    case "dice":
+                    case 'dice':
                         const diceText = formatDice(parsed.diceProperty);
                         return (
                             <AttackButton
@@ -34,7 +38,7 @@ export function getActionContent(action, passive, addMonsterCard, monsterName) {
                                 monsterName={monsterName}
                             />
                         );
-                    case "status":
+                    case 'status':
                         return (
                             <StatusButton
                                 key={`status-${index}`}
@@ -42,7 +46,7 @@ export function getActionContent(action, passive, addMonsterCard, monsterName) {
                                 passive={passive}
                             />
                         );
-                    case "summon":
+                    case 'summon':
                         return (
                             <SummonButton
                                 key={`summon-${index}`}
@@ -54,7 +58,7 @@ export function getActionContent(action, passive, addMonsterCard, monsterName) {
                                 addMonsterCard={addMonsterCard}
                             />
                         );
-                    case "advantage":
+                    case 'advantage':
                         return (
                             <AdvantageButton
                                 key={`advantage-${index}`}
@@ -73,32 +77,32 @@ export function getActionContent(action, passive, addMonsterCard, monsterName) {
 export function parseToken(token) {
     const diceRegex = /^dice:(\d*)d(\d+)([+-]\d+)?$/;
     const statusRegex = /^status:(\w+)$/;
-    const summonRegex = /^summon:(\w+):(\d+)(h?)$/; 
-    const advantageRegex = /^advantage:([+-]\d+)$/; 
+    const summonRegex = /^summon:(\w+):(\d+)(h?)$/;
+    const advantageRegex = /^advantage:([+-]\d+)$/;
 
     const diceMatch = token.match(diceRegex);
     if (diceMatch) {
         const [, numberDiceRaw, valueDiceRaw, bonusRaw] = diceMatch;
         return {
-            type: "dice",
+            type: 'dice',
             diceProperty: {
-                numberDice: parseInt(numberDiceRaw || "1", 10),
+                numberDice: parseInt(numberDiceRaw || '1', 10),
                 valueDice: parseInt(valueDiceRaw, 10),
                 bonus: bonusRaw ? parseInt(bonusRaw, 10) : 0,
-            }
+            },
         };
     }
 
     const statusMatch = token.match(statusRegex);
     if (statusMatch) {
-        return { type: "status", name: statusMatch[1] };
+        return { type: 'status', name: statusMatch[1] };
     }
 
     const summonMatch = token.match(summonRegex);
     if (summonMatch) {
         const [, monsterId, rawQuantity, perHeroFlag] = summonMatch;
         return {
-            type: "summon",
+            type: 'summon',
             name: monsterId,
             quantity: parseInt(rawQuantity, 10),
             perHero: perHeroFlag === 'h',
@@ -109,40 +113,37 @@ export function parseToken(token) {
     if (advantageMatch) {
         const [, advantageNumber] = advantageMatch;
         return {
-            type: "advantage",
-            advantageNumber: advantageNumber
+            type: 'advantage',
+            advantageNumber: advantageNumber,
         };
     }
 
     return null;
 }
 
-
-
 export function getDiceImagePath(diceProperty) {
     const value = diceProperty.valueDice;
     return `/dice/d${value}.png`;
 }
 
-
-export function getAdvantage(action){
+export function getAdvantage(action) {
     const modifiers = [];
 
-  if (action.advantage) {
-    modifiers.push({
-      type: "advantage",
-      name: action.advantage.name,
-      description: action.advantage.description,
-    });
-  }
+    if (action.advantage) {
+        modifiers.push({
+            type: 'advantage',
+            name: action.advantage.name,
+            description: action.advantage.description,
+        });
+    }
 
-  if (action.disadvantage) {
-    modifiers.push({
-      type: "disadvantage",
-      name: action.disadvantage.name,
-      description: action.disadvantage.description,
-    });
-  }
+    if (action.disadvantage) {
+        modifiers.push({
+            type: 'disadvantage',
+            name: action.disadvantage.name,
+            description: action.disadvantage.description,
+        });
+    }
 
-  return modifiers;
+    return modifiers;
 }

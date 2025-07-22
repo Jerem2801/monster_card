@@ -98,7 +98,8 @@ export const SLOWED = {
 export const SILENCED = {
     id: 'silenced',
     label: 'Réduit au silence',
-    description: 'Ne peut pas lancer de sorts ni utiliser d’autres capacités nécessitant la parole (ex. : Ordres du commandant).',
+    description:
+        'Ne peut pas lancer de sorts ni utiliser d’autres capacités nécessitant la parole (ex. : Ordres du commandant).',
     path: '/status/silence.png',
 };
 
@@ -112,7 +113,8 @@ export const CONFUSED = {
 export const SWALLOWED = {
     id: 'swallowed',
     label: 'Avalé.',
-    description: 'Vous subissez 20 dégâts au début de votre tour. Vos attaques ne peuvent pas rater et ignorent l’armure.',
+    description:
+        'Vous subissez 20 dégâts au début de votre tour. Vos attaques ne peuvent pas rater et ignorent l’armure.',
     path: '/status/swallowed.png',
 };
 
@@ -180,5 +182,5 @@ export const STATUSES_TO_SHOW = [
     PETRIFIED,
     POISONED,
     PRONE,
-    SLOWED
+    SLOWED,
 ];
