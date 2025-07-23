@@ -1,4 +1,4 @@
-import { DAZED, PRONE, RESTRAINED, GRAPPLED, POISONED, BLINDED, SWALLOWED } from './statusdata';
+import { DAZED, PRONE, RESTRAINED, GRAPPLED, POISONED, BLINDED, SWALLOWED, LATCH_ON,DIGESTED } from './statusdata';
 
 // Tableau des types de taille
 export const SIZE_TYPE = {
@@ -66,6 +66,16 @@ const passiveEvasiveFlier = {
     name: 'Vol Évasif.',
     description:
         'Les attaques contre les Stirges se font avec $advantage:-1$.',
+};
+const passiveMimicsAmbusher = {
+    name: 'Embusqueur.',
+    description:
+        'Les mimics commencent toujours en premier et les héros jettent l’Initiative avec $advantage:-1$.',
+};
+const passiveMimicsSticky = {
+    name: 'Collant.',
+    description:
+        'Les Mimic peuvent agripper un nombre illimité de créatures. En cas de coup critique : libère 1 créature (au choix de l’attaquant).',
 };
 
 // Tableau des types conditions
@@ -591,6 +601,212 @@ export const dataMonsters = [
             },
         ],
     },
+    {
+        ...defaultMonster,
+        id: 'tiny_mimic',
+        name: 'Mimic Minuscule',
+        type: MONSTER_TYPE.DUNGEON_DENIZEN,
+        size: SIZE_TYPE.TINY,
+        hp: 28,
+        level: '1',
+        passif: [passiveMimicsAmbusher,passiveMimicsSticky],
+        action: [
+            {
+                name: 'Pseudopode.',
+                description: '$dice:1d4$. En cas de touche: $status:grappled$ (Évasion DD 9).',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: GRAPPLED,
+                },
+            },
+            {
+                name: 'Morsure.',
+                description: '(Une créature $status:grappled$) $dice:1d12$.'
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'small_mimic',
+        name: 'Mimic Petite',
+        type: MONSTER_TYPE.DUNGEON_DENIZEN,
+        size: SIZE_TYPE.SMALL,
+        hp: 41,
+        level: '2',
+        passif: [passiveMimicsAmbusher,passiveMimicsSticky],
+        action: [
+            {
+                name: 'Pseudopode.',
+                description: '$dice:1d6$. En cas de touche: $status:grappled$ (Évasion DD 11).',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: GRAPPLED,
+                },
+            },
+            {
+                name: 'Morsure.',
+                description: '(Une créature $status:grappled$) $dice:1d20$.'
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'medium_mimic',
+        name: 'Mimic Moyenne',
+        type: MONSTER_TYPE.DUNGEON_DENIZEN,
+        hp: 79,
+        level: '6',
+        passif: [passiveMimicsAmbusher,passiveMimicsSticky],
+        action: [
+            {
+                name: 'Pseudopode.',
+                description: '$dice:1d8$. En cas de touche: $status:grappled$ (Évasion DD 13).',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: GRAPPLED,
+                },
+            },
+            {
+                name: 'Morsure.',
+                description: '(Une créature $status:grappled$) $dice:2d20$.'
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'minion_ooze',
+        name: 'Sbire Vase',
+        minion: true,
+        type: MONSTER_TYPE.DUNGEON_DENIZEN,
+        hp: 1,
+        level: '1/3',
+        passif: [],
+        action: [
+            {
+                name: 'Toucher Acide.',
+                description: '$dice:1d6$. En cas de coup : $status:digested$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: DIGESTED,
+                },
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'gray_ooze',
+        name: 'Vase Grise',
+        type: MONSTER_TYPE.DUNGEON_DENIZEN,
+        hp: 28,
+        level: '1',
+        passif: [
+            {
+                name: 'Contact digestif.',
+                decription: 'Le contact avec une vase inflige $status:digested$.'
+            },
+            {
+                name: 'Visqueux.',
+                decription: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 2 $summon:minion_ooze:2$.'
+            },
+        ],
+        action: [
+            {
+                name: 'Toucher Acide (2x).',
+                description: '$dice:1d6+2$. En cas de coup : $status:digested$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: DIGESTED,
+                },
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'ochre_jelly',
+        name: 'Vase Ocre',
+        type: MONSTER_TYPE.DUNGEON_DENIZEN,
+        hp: 52,
+        level: '4',
+        size: SIZE_TYPE.LARGE,
+        passif: [
+            {
+                name: 'Contact digestif.',
+                decription: 'Le contact avec une vase inflige $status:digested$.'
+            },
+            {
+                name: 'Visqueux.',
+                decription: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 3 $summon:minion_ooze:3$.'
+            },
+        ],
+        action: [
+            {
+                name: 'Toucher Acide (2x).',
+                description: '$dice:1d6+3$. En cas de coup : $status:digested$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: DIGESTED,
+                },
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'black_pudding',
+        name: 'Vase Noir',
+        type: MONSTER_TYPE.DUNGEON_DENIZEN,
+        hp: 90,
+        level: '8',
+        size: SIZE_TYPE.LARGE,
+        passif: [
+            {
+                name: 'Contact digestif.',
+                decription: 'Le contact avec une vase inflige $status:digested$.'
+            },
+            {
+                name: 'Visqueux.',
+                decription: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 5 $summon:minion_ooze:5$.'
+            },
+        ],
+        action: [
+            {
+                name: 'Toucher Acide (2x).',
+                description: '(Portée 2) $dice:1d6+5$. En cas de coup : $status:digested$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: DIGESTED,
+                },
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'elder_ooze',
+        name: 'Vase Vieille',
+        type: MONSTER_TYPE.DUNGEON_DENIZEN,
+        hp: 150,
+        level: '12',
+        size: SIZE_TYPE.HUGE,
+        passif: [
+            {
+                name: 'Contact digestif.',
+                decription: 'Le contact avec une vase inflige $status:digested$.'
+            },
+            {
+                name: 'Visqueux.',
+                decription: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 6 $summon:minion_ooze:6$.'
+            },
+        ],
+        action: [
+            {
+                name: 'Toucher Acide (3x).',
+                description: '(Portée 3) $dice:1d6+6$. En cas de coup : $status:digested$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: DIGESTED,
+                },
+            }
+        ],
+    },
     //HABITANT DE LA FORET
     {
         ...defaultMonster,
@@ -676,12 +892,11 @@ export const dataMonsters = [
             },
         ],
     },
-    //FLEAUX DES RONCES
     {
         ...defaultMonster,
         id: 'seedling',
         name: 'Pousse',
-        type: MONSTER_TYPE.BRIARBANE,
+        type: MONSTER_TYPE.FOREST_DENIZEN,
         hp: 8,
         level: '1/2',
         size: SIZE_TYPE.SMALL,
@@ -698,7 +913,7 @@ export const dataMonsters = [
         ...defaultMonster,
         id: 'acidpod',
         name: 'Gousse Acide',
-        type: MONSTER_TYPE.BRIARBANE,
+        type: MONSTER_TYPE.FOREST_DENIZEN,
         hp: 8,
         level: '1',
         size: SIZE_TYPE.SMALL,
@@ -721,7 +936,7 @@ export const dataMonsters = [
         ...defaultMonster,
         id: 'tangler',
         name: 'Enchevêtreur',
-        type: MONSTER_TYPE.BRIARBANE,
+        type: MONSTER_TYPE.FOREST_DENIZEN,
         hp: 20,
         level: '2',
         armor: ARMOR_TYPE.HEAVY,
@@ -742,7 +957,7 @@ export const dataMonsters = [
         ...defaultMonster,
         id: 'rootbreaker',
         name: 'Brise-racines Géante',
-        type: MONSTER_TYPE.BRIARBANE,
+        type: MONSTER_TYPE.FOREST_DENIZEN,
         hp: 50,
         level: '5',
         size: SIZE_TYPE.LARGE,
@@ -763,7 +978,7 @@ export const dataMonsters = [
         ...defaultMonster,
         id: 'treant',
         name: 'Gardien Sylvestre',
-        type: MONSTER_TYPE.BRIARBANE,
+        type: MONSTER_TYPE.FOREST_DENIZEN,
         hp: 170,
         level: '14',
         size: SIZE_TYPE.HUGE,

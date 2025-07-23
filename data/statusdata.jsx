@@ -133,6 +133,13 @@ export const TAUNTED = {
     emoji: '😠',
 };
 
+export const DIGESTED = {
+    id: 'digested',
+    label: 'Digéré',
+    description: 'Inflige X (Bonus de dégâts) dégâts supplémentaires pour chaque fois que la cible a été Digéré.',
+    path: '/status/swallowed.png',
+};
+
 // États spéciaux
 export const BLOODIED = {
     id: 'bloodied',
@@ -169,6 +176,7 @@ export const STATUSES = {
     LATCH_ON,
     POISONED,
     CONFUSED,
+    DIGESTED,
     SWALLOWED,
     PRONE,
     SILENCED,
