@@ -4,6 +4,10 @@ export const BLINDED = {
     description:
         "Ne peut pas voir. Les attaques contre vous ont l'avantage, vos attaques ont le désavantage.",
     path: '/status/blinded.png',
+    disadvantage: {
+        name: 'Aveuglé.',
+        description: 'Vos attaques ont 1 Désavantage.',
+    }
 };
 
 export const CHARMED = {
@@ -26,6 +30,10 @@ export const FRIGHTENED = {
     label: 'Effrayé',
     description: 'Désavantage près de la source de peur. Vitesse réduite en s’en approchant.',
     path: '/status/frightened.png',
+    disadvantage: {
+        name: 'Effrayé.',
+        description: '1 Désavantage près de la source de peur.',
+    }
 };
 
 export const GRAPPLED = {
@@ -63,6 +71,10 @@ export const INVISIBLE = {
     description:
         'Impossible à voir. Vos attaques ont l’avantage, celles contre vous ont le désavantage.',
     path: '/status/invisible.png',
+    advantage: {
+        name: 'Invisible.',
+        description: 'Vos attaques ont 1 Avantage.',
+    }
 };
 
 export const PETRIFIED = {
@@ -86,6 +98,10 @@ export const POISONED = {
     label: 'Empoisonné',
     description: 'Désavantage à tous les jets.',
     path: '/status/poisoned.png',
+    disadvantage: {
+        name: 'Empoisonné.',
+        description: '1 Désavantage à tous les jets.',
+    }
 };
 
 export const PRONE = {
@@ -94,6 +110,10 @@ export const PRONE = {
     description:
         'Se déplacer coûte deux fois plus, et vous avez un désavantage aux attaques. Les attaques de mêlée contre vous ont l’avantage et les attaques à distance ont un désavantage. Dépensez 3 cases de déplacement pour vous relever.',
     path: '/status/prone.png',
+    disadvantage: {
+        name: 'À terre.',
+        description: 'Vos attaques ont 1 Désavantage.',
+    }
 };
 
 export const SLOWED = {
@@ -140,6 +160,14 @@ export const DIGESTED = {
     path: '/status/swallowed.png',
 };
 
+export const SMOLDERING = {
+    id: 'smoldering',
+    label: 'Fumant',
+    description: 'Vous êtes Fumant.',
+    path: '/status/smoldering.png',
+};
+
+
 // États spéciaux
 export const BLOODIED = {
     id: 'bloodied',
@@ -177,6 +205,7 @@ export const STATUSES = {
     POISONED,
     CONFUSED,
     DIGESTED,
+    SMOLDERING,
     SWALLOWED,
     PRONE,
     SILENCED,
@@ -195,6 +224,7 @@ export const STATUSES_TO_SHOW = [
     GRAPPLED,
     RESTRAINED,
     INCAPACITATED,
+    SMOLDERING,
     INVISIBLE,
     PETRIFIED,
     POISONED,

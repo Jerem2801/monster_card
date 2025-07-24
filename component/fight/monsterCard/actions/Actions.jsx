@@ -3,9 +3,9 @@ import CheckUsage from './CheckUsage';
 import { getActionContent } from './lib/actionUtils';
 import { useActionUses } from './hook/useActionUses';
 
-export default function Actions({ action, addMonsterCard, monsterName }) {
+export default function Actions({ action, addMonsterCard, monsterName,status }) {
     const { useCount, checkedStates, allChecked, toggleCheckbox } = useActionUses(action);
-    const content = getActionContent(action, false, addMonsterCard, monsterName);
+    const content = getActionContent(action, false, addMonsterCard, monsterName,status);
 
     return (
         <div

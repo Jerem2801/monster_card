@@ -1,4 +1,4 @@
-import { DAZED, PRONE, RESTRAINED, GRAPPLED, POISONED, BLINDED, SWALLOWED, LATCH_ON,DIGESTED } from './statusdata';
+import { DAZED, PRONE, RESTRAINED, GRAPPLED, POISONED, BLINDED, SWALLOWED, LATCH_ON, DIGESTED } from './statusdata';
 
 // Tableau des types de taille
 export const SIZE_TYPE = {
@@ -22,11 +22,10 @@ export const MONSTER_TYPE = {
     KOBOLD: { id: 'kobold', label: 'Kobolds' },
     BANDIT: { id: 'bandit', label: 'Bandits' },
     SNAKEMEN: { id: 'snakemen', label: 'Hommmes-serpents' },
-    FOREST_DENIZEN: { id: 'forest_denizen', label: 'Habitant de la forêt' },
-    BRIARBANE: { id: 'briarbane', label: 'Fléaux des ronces' },
     TROGLODYTE: { id: 'troglodyte', label: 'Troglodyte' },
-    UNDERGROUND: { id: 'underground', label: 'Souterrain' },
+    FOREST_DENIZEN: { id: 'forest_denizen', label: 'Habitant de la forêt' },
     DUNGEON_DENIZEN: { id: 'dungeon_denizen', label: 'Habitant du donjons' },
+    UNDERGROUND: { id: 'underground', label: 'Souterrain' },
     ANIMAL: { id: 'animal', label: 'Animaux' },
     SORCIER: { id: 'sorcier', label: 'Sorcier' },
 };
@@ -702,11 +701,11 @@ export const dataMonsters = [
         passif: [
             {
                 name: 'Contact digestif.',
-                decription: 'Le contact avec une vase inflige $status:digested$.'
+                description: 'Le contact avec une vase inflige $status:digested$.'
             },
             {
                 name: 'Visqueux.',
-                decription: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 2 $summon:minion_ooze:2$.'
+                description: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 2 $summon:minion_ooze:2$.'
             },
         ],
         action: [
@@ -731,11 +730,11 @@ export const dataMonsters = [
         passif: [
             {
                 name: 'Contact digestif.',
-                decription: 'Le contact avec une vase inflige $status:digested$.'
+                description: 'Le contact avec une vase inflige $status:digested$.'
             },
             {
                 name: 'Visqueux.',
-                decription: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 3 $summon:minion_ooze:3$.'
+                description: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 3 $summon:minion_ooze:3$.'
             },
         ],
         action: [
@@ -760,11 +759,11 @@ export const dataMonsters = [
         passif: [
             {
                 name: 'Contact digestif.',
-                decription: 'Le contact avec une vase inflige $status:digested$.'
+                description: 'Le contact avec une vase inflige $status:digested$.'
             },
             {
                 name: 'Visqueux.',
-                decription: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 5 $summon:minion_ooze:5$.'
+                description: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 5 $summon:minion_ooze:5$.'
             },
         ],
         action: [
@@ -789,11 +788,11 @@ export const dataMonsters = [
         passif: [
             {
                 name: 'Contact digestif.',
-                decription: 'Le contact avec une vase inflige $status:digested$.'
+                description: 'Le contact avec une vase inflige $status:digested$.'
             },
             {
                 name: 'Visqueux.',
-                decription: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 6 $summon:minion_ooze:6$.'
+                description: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 6 $summon:minion_ooze:6$.'
             },
         ],
         action: [
@@ -833,7 +832,7 @@ export const dataMonsters = [
     {
         ...defaultMonster,
         id: 'basilik',
-        name: 'Basilic ',
+        name: 'Basilic',
         type: MONSTER_TYPE.FOREST_DENIZEN,
         hp: 48,
         level: '7',

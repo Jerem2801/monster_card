@@ -1,6 +1,6 @@
 import Actions from './Actions';
 
-export default function ActionPanel({ monster, addMonsterCard }) {
+export default function ActionPanel({ monster, addMonsterCard,status }) {
     return (
         <div className="relative inline-block">
             {monster.action.map(action => (
@@ -9,6 +9,7 @@ export default function ActionPanel({ monster, addMonsterCard }) {
                     action={action}
                     addMonsterCard={addMonsterCard}
                     monsterName={monster.name}
+                    status={status}
                 />
             ))}
         </div>

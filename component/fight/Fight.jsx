@@ -8,10 +8,12 @@ import MonsterCard from './monsterCard/MonsterCard';
 import FightHeader from './FightHeader';
 
 export default function Fight({ encounterId }) {
-    const [selectedMonster, setSelectedMonster] = useState(null);
+    const [selectedMonsterId, setSelectedMonsterId] = useState(null);
     const [monsters, setMonsters] = useState([]);
     const [deleteMode, setDeleteMode] = useState(false);
     const [encounterName, setEncounterName] = useState('Rencontre');
+
+    const selectedMonster = monsters.find(m => m.id === selectedMonsterId);
 
     useEffect(() => {
         async function fetchEncounter() {
@@ -80,7 +82,7 @@ export default function Fight({ encounterId }) {
     function deleteMonster(id) {
         setMonsters(prev => prev.filter(m => m.id !== id));
         if (selectedMonster?.id === id) {
-            setSelectedMonster(null);
+            setSelectedMonsterId(null);
         }
     }
 
@@ -105,7 +107,7 @@ export default function Fight({ encounterId }) {
                                 currentHp={currentHp}
                                 status={status}
                                 onSelect={() =>
-                                    setSelectedMonster({ id, monster, currentHp, status })
+                                    setSelectedMonsterId(id)
                                 }
                                 onHpChange={newHp => updateMonsterHp(id, newHp)}
                                 selected={selectedMonster?.id === id}
@@ -125,6 +127,10 @@ export default function Fight({ encounterId }) {
                         <MonsterCard
                             monster={selectedMonster.monster}
                             addMonsterCard={addMonsterCard}
+                            status={selectedMonster.status}
+                            updateMonsterStatus={newStatusList =>
+                                    updateMonsterStatus(selectedMonster.id, newStatusList)
+                                }
                         />
                     )}
 

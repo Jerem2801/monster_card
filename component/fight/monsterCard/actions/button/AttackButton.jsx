@@ -3,7 +3,7 @@ import ActionThrowModal from './ActionThrowModal';
 import Image from 'next/image';
 import { getDiceImagePath } from '../lib/actionUtils';
 
-export default function AttackButton({ diceText, diceProperty, action, passive, monsterName }) {
+export default function AttackButton({ diceText, diceProperty, action, passive, monsterName,status }) {
     const baseClass =
         'text-md inline-flex items-center gap-1 cursor-pointer rounded px-1 align-middle';
     const passiveClass = 'bg-gray-100 hover:bg-gray-200';
@@ -18,6 +18,7 @@ export default function AttackButton({ diceText, diceProperty, action, passive, 
                     action={action}
                     monsterName={monsterName}
                     diceProperty={diceProperty}
+                    status={status}
                 />
             }
             placement="top"

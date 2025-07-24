@@ -58,10 +58,11 @@ export default function SimpleCard({
                         className="cursor-pointer px-1 transition duration-200 hover:text-blue-600"
                     >
                         <h2 className="text-lg font-bold">{monster.name}</h2>
-                        <StatusPanel
-                            status={status}
-                        />
+                        
                     </button>
+                    <span><StatusPanel
+                            status={status}
+                        /></span>
 
                     {/* Right: Stats + HP */}
                     <div className="flex items-center gap-2">

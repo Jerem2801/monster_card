@@ -4,7 +4,7 @@ import SummonButton from '../button/SummonButton';
 import StatusButton from '../button/StatusButton';
 import AdvantageButton from '../button/AdvantageButton';
 
-export function getActionContent(action, passive, addMonsterCard, monsterName) {
+export function getActionContent(action, passive, addMonsterCard, monsterName,status) {
     const parts = action.description.split(/(\$[^$]+\$)/g); // Match tout ce qui est entre deux $
 
     return (
@@ -36,6 +36,7 @@ export function getActionContent(action, passive, addMonsterCard, monsterName) {
                                 action={action}
                                 passive={passive}
                                 monsterName={monsterName}
+                                status={status}
                             />
                         );
                     case 'status':
@@ -126,7 +127,7 @@ export function getDiceImagePath(diceProperty) {
     return `/dice/d${value}.png`;
 }
 
-export function getAdvantage(action) {
+export function getAdvantage(action,status) {
     const modifiers = [];
 
     if (action.advantage) {
@@ -144,6 +145,24 @@ export function getAdvantage(action) {
             description: action.disadvantage.description,
         });
     }
+
+     status?.forEach(s => {
+        if (s.advantage) {
+            modifiers.push({
+                type: 'advantage',
+                name: s.advantage.name,
+                description: s.advantage.description,
+            });
+        }
+
+        if (s.disadvantage) {
+            modifiers.push({
+                type: 'disadvantage',
+                name: s.disadvantage.name,
+                description: s.disadvantage.description,
+            });
+        }
+    });
 
     return modifiers;
 }

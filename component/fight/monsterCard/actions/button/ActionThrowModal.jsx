@@ -9,11 +9,11 @@ import { getAdvantage } from '../lib/actionUtils';
 import Image from 'next/image';
 import { getDiceImagePath } from '../lib/actionUtils';
 
-export default function ActionThrowModal({ action, monsterName, diceProperty }) {
+export default function ActionThrowModal({ action, monsterName, diceProperty,status }) {
     const [advantage, setAdvantage] = useState(0);
     const { addMessage } = useMessages();
 
-    const modifiers = getAdvantage(action);
+    const modifiers = getAdvantage(action,status);
     const dicePath = getDiceImagePath(diceProperty);
 
     const cleanedActionName = action.name
