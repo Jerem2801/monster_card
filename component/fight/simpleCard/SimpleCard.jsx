@@ -4,8 +4,8 @@ import { getHealthBarProps } from './health/lib/healthCalculatorUtils';
 import { useState } from 'react';
 import StatPanel from '../monsterCard/headerPanel/StatPanel';
 import HealPanel from './health/HealthPanel';
-import StatusModal from './status/StatusModal';
-import StatusPanel from './status/StatusPanel';
+import StatusModal from './edit/status/StatusModal';
+import StatusPanel from './edit/status/StatusPanel';
 
 export default function SimpleCard({
     monster,
@@ -17,6 +17,7 @@ export default function SimpleCard({
     deleteMode,
     onDelete,
     updateMonsterStatus,
+    updateMonster
 }) {
     const [openModal, setOpenModal] = useState(false);
 
@@ -53,6 +54,7 @@ export default function SimpleCard({
                         type="button"
                         onClick={e => {
                             e.stopPropagation();
+                            onSelect();
                             setOpenModal(true);
                         }}
                         className="cursor-pointer px-1 transition duration-200 hover:text-blue-600"
@@ -60,12 +62,13 @@ export default function SimpleCard({
                         <h2 className="text-lg font-bold">{monster.name}</h2>
                         
                     </button>
-                    <span><StatusPanel
-                            status={status}
-                        /></span>
+                    
 
                     {/* Right: Stats + HP */}
                     <div className="flex items-center gap-2">
+                        <span><StatusPanel
+                            status={status}
+                        /></span>
                         <StatPanel monster={monster} />
                         <HealPanel
                             currentHp={currentHp}
@@ -103,6 +106,8 @@ export default function SimpleCard({
                 onClose={() => setOpenModal(false)}
                 status={status}
                 updateMonsterStatus={updateMonsterStatus}
+                updateMonster={updateMonster}
+                monster={monster}
             />
         </div>
     );

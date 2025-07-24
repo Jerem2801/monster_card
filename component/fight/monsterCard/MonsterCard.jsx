@@ -6,10 +6,10 @@ import NamePanel from './headerPanel/NamePanel';
 import PassivePanel from './passive/PassivePanel';
 import ActionPanel from './actions/ActionPanel';
 
-import StatusModal from '../simpleCard/status/StatusModal';
+import StatusModal from '../simpleCard/edit/status/StatusModal';
 
 
-export default function MonsterCard({ monster, addMonsterCard, status, updateMonsterStatus}) {
+export default function MonsterCard({ monster, addMonsterCard, status, updateMonsterStatus,updateMonster}) {
     const [openModal, setOpenModal] = useState(false);
 
     return (
@@ -29,6 +29,8 @@ export default function MonsterCard({ monster, addMonsterCard, status, updateMon
                 onClose={() => setOpenModal(false)}
                 status={status}
                 updateMonsterStatus={updateMonsterStatus}
+                updateMonster={updateMonster}
+                monster={monster}
             />
         </div>
     );

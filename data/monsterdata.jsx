@@ -1,4 +1,4 @@
-import { DAZED, PRONE, RESTRAINED, GRAPPLED, POISONED, BLINDED, SWALLOWED, LATCH_ON, DIGESTED } from './statusdata';
+import { DAZED, PRONE, RESTRAINED, GRAPPLED, POISONED, BLINDED, SWALLOWED, LATCH_ON, DIGESTED, INVISIBLE } from './statusdata';
 
 // Tableau des types de taille
 export const SIZE_TYPE = {
@@ -11,7 +11,7 @@ export const SIZE_TYPE = {
 
 // Tableau des types d'armure
 export const ARMOR_TYPE = {
-    NONE: { id: null, label: 'Aucune' },
+    NONE: { id: 'none', label: 'Aucune' },
     MEDIUM: { id: 'M', label: 'M', path: '/armor/mediumArmor.png' },
     HEAVY: { id: 'H', label: 'L', path: '/armor/heavyArmor.png' },
 };
@@ -101,7 +101,7 @@ export const TRIGGER_TYPE = {
 const defaultMonster = {
     armor: ARMOR_TYPE.NONE,
     speed: 6,
-    fly: null,
+    fly: 0,
     save: null,
     size: SIZE_TYPE.MEDIUM,
     legendary: false,
@@ -493,6 +493,7 @@ export const dataMonsters = [
         type: MONSTER_TYPE.BANDIT,
         hp: 24,
         level: '2',
+        initStatus: [INVISIBLE],
         passif: [
             passifParry,
             {
@@ -1136,6 +1137,7 @@ export const dataMonsters = [
         type: MONSTER_TYPE.TROGLODYTE,
         hp: 14,
         level: '1',
+        initStatus: [INVISIBLE],
         passif: [
             passiveOverwhelmingStench,
             passiveDeathStench,
@@ -1540,6 +1542,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
+        id:'grimbeak',
         name: 'Grimbeak',
         type: MONSTER_TYPE.ANIMAL,
         legendary: true,
@@ -1552,7 +1555,7 @@ export const dataMonsters = [
             {
                 name: 'Brutal.',
                 description:
-                    "Traitez n'import qu'elle dé comme un Dé Primaire. Sur un critique: A Terre.",
+                    "Traitez n'import qu'elle dé comme un Dé Primaire. Sur un critique: $status:prone$.",
             },
         ],
         action: [
@@ -1563,19 +1566,16 @@ export const dataMonsters = [
             {
                 name: '• Hurlement Sauvage.',
                 description:
-                    "Tous les ennemis dans un rayon de 12 subissent $dice dégâts (ignorent l'armure). JdS de VOL 11 ou deviennent Effrayés pendant 1 round.",
-                dice: { numberDice: 2, valueDice: 6, bonus: 0 },
+                    "Tous les ennemis dans un rayon de 12 subissent $dice:2d6$ dégâts (ignorent l'armure). JdS de VOL 11 ou deviennent $status:frightened$ pendant 1 round.",
                 use: 1,
             },
             {
                 name: '• Déchirer & Lacérer.',
-                description: '$dice.',
-                dice: { numberDice: 2, valueDice: 6, bonus: 10 },
+                description: '$dice:2d6+10$.',
             },
             {
                 name: '• Bec.',
-                description: 'Déplacement de 8 et $dice.',
-                dice: { numberDice: 2, valueDice: 6, bonus: 0 },
+                description: 'Déplacement de 8 et $dice:2d6$.',
             },
         ],
         bloodied: {
@@ -1591,6 +1591,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
+        id:'greenthumb',
         name: 'Greenthumb',
         type: MONSTER_TYPE.SORCIER,
         legendary: true,
@@ -1611,13 +1612,11 @@ export const dataMonsters = [
             {
                 name: '• Enracinement.',
                 description:
-                    'Choisissez la moitié des héros. Ils doivent réussir un JdS de DEX 11 ou subir $dice et être Entravés par des lianes épineuses (évasion : JdS de STR ou DEX 11, ou recevoir des dégâts tranchants ou de feu pour se libérer).',
-                dice: { numberDice: 2, valueDice: 4, bonus: 0 },
+                    'Choisissez la moitié des héros. Ils doivent réussir un JdS de DEX 11 ou subir $dice:2d4$ et être Entravés par des lianes épineuses (évasion : JdS de STR ou DEX 11, ou recevoir des dégâts tranchants ou de feu pour se libérer).',
             },
             {
                 name: '• Tir de ronces.',
-                description: '(Distance 10) $dice.',
-                dice: { numberDice: 5, valueDice: 4, bonus: 5 },
+                description: '(Distance 10) $dice:5d4+4$.',
             },
         ],
         bloodied: {
@@ -1628,7 +1627,7 @@ export const dataMonsters = [
         },
         lastStand: {
             description:
-                'Grimbeak est mourant ! S’il subit $hp dégâts supplémentaires, il meurt. En attendant, il agit deux fois par tour.',
+                'Greenthumb est mourant ! S’il subit $hp dégâts supplémentaires, il meurt. En attendant, il agit deux fois par tour.',
             hp: 30,
             newDescription: "Après chaque tour d'un héro, mouvement de 6 puis choissisez deux :",
         },

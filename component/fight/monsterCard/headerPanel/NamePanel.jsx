@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import StatPanel from './StatPanel';
 import { formatMonsterName } from './lib/headerPanelUtils';
-import StatusPanel from '../../simpleCard/status/StatusPanel';
+import StatusPanel from '../../simpleCard/edit/status/StatusPanel';
 
 export default function NamePanel({ monster,status, updateMonsterStatus,setOpenModal }) {
     // Robustesse : fallback si monster ou monster.size n'est pas défini
@@ -28,12 +28,11 @@ export default function NamePanel({ monster,status, updateMonsterStatus,setOpenM
                 Niv. {monsterLevel}
                 {monsterSizeLabel}
             </span>
-            <span>
-                <StatusPanel
-                    status={status}
-                />
-            </span>
-            <StatPanel monster={monster} />
+           
+            <div className="ml-auto flex items-baseline gap-2">
+                <StatusPanel status={status} />
+                <StatPanel monster={monster} />
+            </div>
         </div>
     );
 }

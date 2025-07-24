@@ -6,6 +6,7 @@ import ResultDisplayDialogBox from '@/component/fight/resultDisplay/ResultDispla
 import SimpleCard from './simpleCard/SimpleCard';
 import MonsterCard from './monsterCard/MonsterCard';
 import FightHeader from './FightHeader';
+import {BLOODIED,DEAD} from '@/data/statusdata'
 
 export default function Fight({ encounterId }) {
     const [selectedMonsterId, setSelectedMonsterId] = useState(null);
@@ -14,6 +15,22 @@ export default function Fight({ encounterId }) {
     const [encounterName, setEncounterName] = useState('Rencontre');
 
     const selectedMonster = monsters.find(m => m.id === selectedMonsterId);
+
+    function updateMonster(id, updatedFields) {
+        setMonsters(prev =>
+            prev.map(m =>
+                m.id === id
+                    ? {
+                        ...m,
+                        monster: {
+                            ...m.monster,
+                            ...updatedFields,
+                        },
+                    }
+                    : m,
+            ),
+        );
+    }
 
     useEffect(() => {
         async function fetchEncounter() {
@@ -26,7 +43,7 @@ export default function Fight({ encounterId }) {
                 id: crypto.randomUUID(),
                 monster,
                 currentHp: monster.hp,
-                status: [],
+                status: monster.initStatus ?? [],
             }));
 
             setMonsters(monstersWithId);
@@ -38,9 +55,30 @@ export default function Fight({ encounterId }) {
 
     function updateMonsterHp(id, newHp) {
         setMonsters(prev =>
-            prev.map(m =>
-                m.id === id ? { ...m, currentHp: Math.max(0, Math.min(newHp, m.monster.hp)) } : m,
-            ),
+            prev.map(m => {
+                if (m.id !== id) return m;
+
+                const maxHp = m.monster.hp;
+                const clampedHp = Math.max(0, Math.min(newHp, maxHp));
+                const isMidLife = clampedHp > 0 && clampedHp <= maxHp / 2;
+                const isDead = clampedHp === 0;
+
+                let newStatus = [...m.status].filter(
+                    s => s.id !== BLOODIED.id && s.id !== DEAD.id
+                );
+
+                if (isDead) {
+                    newStatus.push(DEAD);
+                } else if (isMidLife) {
+                    newStatus.push(BLOODIED);
+                }
+
+                return {
+                    ...m,
+                    currentHp: clampedHp,
+                    status: newStatus,
+                };
+            })
         );
     }
 
@@ -116,6 +154,7 @@ export default function Fight({ encounterId }) {
                                 updateMonsterStatus={newStatusList =>
                                     updateMonsterStatus(id, newStatusList)
                                 }
+                                updateMonster={fields => updateMonster(selectedMonster.id, fields)}
                             />
                         ))}
                     </div>
@@ -131,6 +170,7 @@ export default function Fight({ encounterId }) {
                             updateMonsterStatus={newStatusList =>
                                     updateMonsterStatus(selectedMonster.id, newStatusList)
                                 }
+                            updateMonster={fields => updateMonster(selectedMonster.id, fields)}
                         />
                     )}
 

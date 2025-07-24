@@ -4,8 +4,9 @@ import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from 'flowbite-rea
 import StatusSelector from './StatusSelector';
 import { STATUSES_TO_SHOW } from '@/data/statusdata';
 import { useState } from 'react';
+import StatsPanelEditor from '../StatsPanelEditor';
 
-export default function StatusModal({ openModal, onClose, status, updateMonsterStatus }) {
+export default function StatusModal({ openModal, onClose, status, updateMonsterStatus, updateMonster,monster }) {
     const [selectedStatusIds, setSelectedStatusIds] = useState([]);
 
     // Met à jour les IDs depuis le StatusSelector
@@ -28,6 +29,7 @@ export default function StatusModal({ openModal, onClose, status, updateMonsterS
                 <span className="block w-full font-semibold text-white">Éditer le Monstre</span>
             </ModalHeader>
             <ModalBody>
+                <StatsPanelEditor updateMonster={updateMonster} monster={monster}/>
                 <StatusSelector status={status} handleStatusChange={handleStatusChange} />
             </ModalBody>
             <ModalFooter>

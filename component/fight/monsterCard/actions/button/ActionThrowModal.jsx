@@ -9,31 +9,43 @@ import { getAdvantage } from '../lib/actionUtils';
 import Image from 'next/image';
 import { getDiceImagePath } from '../lib/actionUtils';
 
-export default function ActionThrowModal({ action, monsterName, diceProperty,status }) {
+import { Label, TextInput,Select } from 'flowbite-react';
+
+
+export default function ActionThrowModal({ action, monsterName, diceProperty, status }) {
     const [advantage, setAdvantage] = useState(0);
     const { addMessage } = useMessages();
 
-    const modifiers = getAdvantage(action,status);
-    const dicePath = getDiceImagePath(diceProperty);
+    const [localDice, setLocalDice] = useState(diceProperty);
+
+    const modifiers = getAdvantage(action, status);
+    const dicePath = getDiceImagePath(localDice);
 
     const cleanedActionName = action.name
-        .replace(/^•\s*/, '') // enlève le "• " au début
+        .replace(/^•\s*/, '')
         .replace(/\s*\([^)]*\)[.]?$/, '');
 
     function handleAction() {
-        const resultDice = throwDice(diceProperty, advantage);
-        const diceFormat = formatDice(diceProperty);
+        const resultDice = throwDice(localDice, advantage);
+        const diceFormat = formatDice(localDice);
 
         const message = {
             name: cleanedActionName,
-            advantage: advantage,
+            advantage,
             format: diceFormat,
             result: resultDice,
-            monsterName: monsterName,
+            monsterName,
             effect: action.effect,
         };
 
         addMessage(message);
+    }
+
+    function updateDiceProp(key, value) {
+        setLocalDice(prev => ({
+            ...prev,
+            [key]: parseInt(value || '0', 10),
+        }));
     }
 
     function getMinTotal({ numberDice, bonus }) {
@@ -57,37 +69,96 @@ export default function ActionThrowModal({ action, monsterName, diceProperty,sta
                         {cleanedActionName}
                         <span className="text-sm font-medium text-gray-300">
                             {' ('}
-                            <span className="text-red-400">{getMinTotal(diceProperty)}</span>–
-                            <span className="text-green-400">{getMaxTotal(diceProperty)}</span>
+                            <span className="text-red-400">{getMinTotal(localDice)}</span>–
+                            <span className="text-green-400">{getMaxTotal(localDice)}</span>
                             {')'}
                         </span>
                     </h3>
                 </div>
 
+                {/* Édition des dés */}
+            <div className="grid grid-cols-3 text-center gap-4 px-4 py-2">
+                <div>
+                    <Label htmlFor="numberDice">Nb de dés</Label>
+                    <TextInput
+                        id="numberDice"
+                        type="number"
+                        min={1}
+                        value={localDice.numberDice}
+                        onChange={e => updateDiceProp('numberDice', e.target.value)}
+                    />
+                </div>
+                <div>
+                    <Label htmlFor="valueDice">Valeur dé</Label>
+                    <Select
+                        id="valueDice"
+                        value={localDice.valueDice}
+                        onChange={e => updateDiceProp('valueDice', e.target.value)}
+                    >
+                        {[4, 6, 8, 10, 12, 20].map(die => (
+                            <option key={die} value={die}>d{die}</option>
+                        ))}
+                    </Select>
+                </div>
+                <div>
+                    <Label htmlFor="bonus">Bonus</Label>
+                    <TextInput
+                        id="bonus"
+                        type="number"
+                        value={localDice.bonus}
+                        onChange={e => updateDiceProp('bonus', e.target.value)}
+                    />
+                </div>
+            </div>
+
+
                 {/* Modificateurs */}
                 {modifiers.length > 0 && (
-                    <div className="px-4 py-3">
-                        <h4 className="mb-2 text-xs font-semibold tracking-wider text-gray-600 uppercase">
-                            Avantage / Désavantage
-                        </h4>
-                        <ul className="space-y-2">
-                            {modifiers.map((mod, index) => (
-                                <li key={index} className="flex items-start gap-2">
-                                    <span
-                                        className={`text-xs font-semibold ${
-                                            mod.type === 'advantage'
-                                                ? 'text-green-600'
-                                                : 'text-red-600'
-                                        }`}
-                                    >
-                                        {mod.name}
-                                    </span>
-                                    <p className="text-xs text-gray-600">{mod.description}</p>
-                                </li>
-                            ))}
-                        </ul>
+                    <div className="px-4 py-3 space-y-4">
+                        {/* Avantages */}
+                        {modifiers.some(mod => mod.type === 'advantage') && (
+                            <div>
+                                <h4 className="mb-2 text-xs font-semibold tracking-wider text-gray-600 uppercase">
+                                    Avantages
+                                </h4>
+                                <ul className="space-y-2">
+                                    {modifiers
+                                        .filter(mod => mod.type === 'advantage')
+                                        .map((mod, index) => (
+                                            <li key={index} className="flex items-start gap-2">
+                                                <span className="text-xs font-semibold text-green-600">
+                                                    {mod.name}
+                                                </span>
+                                                <p className="text-xs text-gray-600">{mod.description}</p>
+                                            </li>
+                                        ))}
+                                </ul>
+                            </div>
+                        )}
+
+                        {/* Désavantages */}
+                        {modifiers.some(mod => mod.type === 'disadvantage') && (
+                            <div className="border-t border-gray-500 pt-4">
+                                <h4 className="mb-2 text-xs font-semibold tracking-wider text-gray-600 uppercase">
+                                    Désavantages
+                                </h4>
+                                <ul className="space-y-2">
+                                    {modifiers
+                                        .filter(mod => mod.type === 'disadvantage')
+                                        .map((mod, index) => (
+                                            <li key={index} className="flex items-start gap-2">
+                                                <span className="text-xs font-semibold text-red-600">
+                                                    {mod.name}
+                                                </span>
+                                                <p className="text-xs text-gray-600">{mod.description}</p>
+                                            </li>
+                                        ))}
+                                </ul>
+                            </div>
+                        )}
                     </div>
                 )}
+
 
                 {/* Input + Bouton côte à côte et centrés */}
                 <div className="flex flex-wrap items-center justify-center gap-3 px-4 py-4">

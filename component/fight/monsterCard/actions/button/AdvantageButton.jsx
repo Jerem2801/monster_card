@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function AdvantageButton({ advantageNumber, passive }) {
     const baseClass =
-        'text-md inline-flex items-center gap-1 rounded px-1 align-middle select-none';
+        'text-md inline-flex items-center gap-1 rounded px-1 select-none';
     const passiveClass = 'bg-gray-100 hover:bg-gray-200';
     const activeClass = 'bg-gray-200 hover:bg-gray-300';
 
