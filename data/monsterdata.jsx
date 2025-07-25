@@ -1322,7 +1322,7 @@ export const dataMonsters = [
             {
                 name: 'Poussière d’Ombre.',
                 description:
-                    'Les Troglodytes dans une Portée de 12 lancent des d12 au lieu de d6. Lorsqu’elle subit des dégâts, inflige 1d12 de dégâts psychiques imparables aux ennemis dans une portée de 12.',
+                    'Les Troglodytes dans une Portée de 12 lancent des d12 au lieu de d6. Lorsqu’elle subit des dégâts, inflige $dice:1d12$ de dégâts psychiques imparables aux ennemis dans une portée de 12.',
             },
         ],
         action: [],

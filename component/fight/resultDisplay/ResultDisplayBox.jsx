@@ -86,7 +86,7 @@ export default function ResultDisplayBox({ msg }) {
     };
 
     return (
-        <div className="flex flex-col rounded bg-gray-100 p-3">
+        <div className="flex flex-col rounded bg-gray-100 border border-gray-300 p-3">
             {/* Haut : nom + stats + résultat */}
             <div className="flex items-center justify-between">
                 {/* Partie gauche */}

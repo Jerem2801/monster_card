@@ -21,7 +21,7 @@ export default function NamePanel({ monster,status, updateMonsterStatus,setOpenM
                 }}
                 className="cursor-pointer px-1 transition duration-200 hover:text-blue-600"
             >
-                <div className="flex flex-wrap font-semibold">{monsterName}</div>
+                <div className="flex flex-wrap font-bold it">{monsterName}</div>
                 
             </button>
             <span className="text-sm text-gray-500">

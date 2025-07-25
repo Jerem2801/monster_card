@@ -157,7 +157,7 @@ useEffect(() => {
         <MessagesProvider>
             <div className="relative flex h-[calc(100vh-5rem)] overflow-hidden">
                 {/* Liste à gauche */}
-                <div className="w-1/3 overflow-y-auto border-r border-gray-200 bg-white">
+                <div className="flex-[1.3] overflow-y-auto border-r border-gray-200 bg-white">
                     {/* Header uniquement au-dessus de la liste */}
                     <FightHeader
                         deleteMode={deleteMode}
@@ -190,7 +190,8 @@ useEffect(() => {
                 </div>
 
                 {/* Carte à droite */}
-                <div className="w-2/3 space-y-6 overflow-hidden p-6">
+                <div className="flex-[1.5] space-y-6 overflow-hidden p-10">
+                                
                     {selectedMonster && (
                         <MonsterCard
                             monster={selectedMonster.monster}
@@ -202,7 +203,8 @@ useEffect(() => {
                             updateMonster={fields => updateMonster(selectedMonster.id, fields)}
                         />
                     )}
-
+                </div>
+                <div className="flex-[1] space-y-6 overflow-hidden p-10 ">
                     <ResultDisplayDialogBox />
                 </div>
             </div>

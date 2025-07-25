@@ -4,7 +4,7 @@ import SummonButton from '../button/SummonButton';
 import StatusButton from '../button/StatusButton';
 import AdvantageButton from '../button/AdvantageButton';
 
-export function getActionContent(action, passive, addMonsterCard, monsterName,status) {
+export function getActionContent(action, passive, addMonsterCard, monsterName,status,allChecked) {
     const parts = action.description.split(/(\$[^$]+\$)/g); // Match tout ce qui est entre deux $
 
     return (
@@ -37,6 +37,7 @@ export function getActionContent(action, passive, addMonsterCard, monsterName,st
                                 passive={passive}
                                 monsterName={monsterName}
                                 status={status}
+                                allChecked={allChecked}
                             />
                         );
                     case 'status':
@@ -45,6 +46,7 @@ export function getActionContent(action, passive, addMonsterCard, monsterName,st
                                 key={`status-${index}`}
                                 statusName={parsed.name}
                                 passive={passive}
+                                allChecked={allChecked}
                             />
                         );
                     case 'summon':
@@ -57,6 +59,7 @@ export function getActionContent(action, passive, addMonsterCard, monsterName,st
                                 action={action}
                                 passive={passive}
                                 addMonsterCard={addMonsterCard}
+                                allChecked={allChecked}
                             />
                         );
                     case 'advantage':
@@ -65,6 +68,7 @@ export function getActionContent(action, passive, addMonsterCard, monsterName,st
                                 key={`advantage-${index}`}
                                 advantageNumber={parsed.advantageNumber}
                                 passive={passive}
+                                allChecked={allChecked}
                             />
                         );
                     default:

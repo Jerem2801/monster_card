@@ -13,7 +13,7 @@ export default function MonsterCard({ monster, addMonsterCard, status, updateMon
     const [openModal, setOpenModal] = useState(false);
 
     return (
-        <div className="w-full space-y-4 rounded-2xl border border-neutral-300 bg-amber-50 p-6 shadow-lg transition-shadow hover:shadow-xl md:w-[70%]">
+        <div className="space-y-3 rounded-2xl border-2 border-neutral-300 p-6 pb-0 transition-shadow hover:shadow-lg">
             <NamePanel 
                 monster={monster} 
                 status={status}

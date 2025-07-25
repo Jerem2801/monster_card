@@ -5,11 +5,11 @@ import { useActionUses } from './hook/useActionUses';
 
 export default function Actions({ action, addMonsterCard, monsterName,status }) {
     const { useCount, checkedStates, allChecked, toggleCheckbox } = useActionUses(action);
-    const content = getActionContent(action, false, addMonsterCard, monsterName,status);
+    const content = getActionContent(action, false, addMonsterCard, monsterName,status,allChecked);
 
     return (
         <div
-            className={`rounded-md px-2 py-1 text-left ${
+            className={`rounded-md px-2 text-left ${
                 allChecked ? 'text-gray-500 line-through' : ''
             }`}
         >

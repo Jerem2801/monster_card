@@ -1,6 +1,6 @@
 export default function FightHeader({ encounterName, deleteMode, setDeleteMode }) {
     return (
-        <div className="flex items-center justify-between border-b border-gray-300 bg-white px-5 py-3 shadow-sm">
+        <div className="flex items-center justify-between  bg-white px-5 py-3">
             <div className="flex items-center gap-3">
                 ⚔️
                 <h1 className="text-xl font-bold tracking-tight text-gray-800">{encounterName}</h1>
