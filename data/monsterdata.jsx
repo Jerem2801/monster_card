@@ -25,6 +25,8 @@ export const MONSTER_TYPE = {
     TROGLODYTE: { id: 'troglodyte', label: 'Troglodyte' },
     FOREST_DENIZEN: { id: 'forest_denizen', label: 'Habitant de la forêt' },
     DUNGEON_DENIZEN: { id: 'dungeon_denizen', label: 'Habitant du donjons' },
+    DAEMONS: { id: 'daemons', label: 'Démons' },
+    DEVIL: { id: 'devil', label: 'Diable' },
     UNDERGROUND: { id: 'underground', label: 'Souterrain' },
     ANIMAL: { id: 'animal', label: 'Animaux' },
     SORCIER: { id: 'sorcier', label: 'Sorcier' },
@@ -76,6 +78,11 @@ const passiveMimicsSticky = {
     description:
         'Les Mimic peuvent agripper un nombre illimité de créatures. En cas de coup critique : libère 1 créature (au choix de l’attaquant).',
 };
+const passiveDemonicFrenzy = {
+    name: 'Frénésie démoniaque.',
+    description:
+        'Lorsqu\'il est $status:bloodied$, $advantage:+1$ sur l\'attaque.',
+};
 
 // Tableau des types conditions
 export const TRIGGER_TYPE = {
@@ -102,7 +109,7 @@ const defaultMonster = {
     armor: ARMOR_TYPE.NONE,
     speed: 6,
     fly: 0,
-    save: null,
+    save: "",
     size: SIZE_TYPE.MEDIUM,
     legendary: false,
     minion: false,
@@ -113,6 +120,37 @@ const defaultMonster = {
 };
 
 export const dataMonsters = [
+    {
+        ...defaultMonster,
+        id: 'ruinant',
+        name: 'Ruinant',
+        type: MONSTER_TYPE.DAEMONS,
+        hp: 60,
+        level: '5',
+        speed: 12,
+        save : 'DEX+',
+        passif: [passiveDemonicFrenzy,
+            {
+                name: 'Soin corrompu.',
+                description: '(Aura 4) La magie de soin échoue. JdS de FOR 12 ou subissent la moitié des PV bloqués en dégâts nécrotiques.'
+            }
+        ],
+        action: [
+            {
+                name: 'Griffes sanguinaitres (2x).',
+                description: '$dice:1d12+2$ nécrotiques. En cas de coup pas de réaction jusqu\'au début du tour de la cible.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    message: 'Pas de réaction jusqu\'au début du tour de la cible.'
+                },
+                advantage: {
+                    name: 'Frénésie démoniaque.',
+                    description:
+                        "Lorsqu\'il est Ensanglanté, 1 Avantage sur l\'attaque.",
+                },
+            },
+        ],
+    },
     //GOBELIN
     {
         ...defaultMonster,

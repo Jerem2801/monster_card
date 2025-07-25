@@ -20,7 +20,7 @@ export default function EncounterSelectedMonsters({
     };
 
     return (
-        <div className="w-full md:w-1/3">
+        <div className="w-full md:w-1/3 flex flex-col ">
             <h2 className="mb-1 text-lg font-semibold">Monstres Sélectionnés</h2>
 
             <EncounterDifficulty
@@ -30,11 +30,11 @@ export default function EncounterSelectedMonsters({
             />
 
             {selectedMonsters.length === 0 ? (
-                <div className="flex h-24 items-center justify-center text-gray-400 italic">
+                <div className="flex h-24 items-center justify-center text-gray-400 italic ">
                     Aucun monstre sélectionné.
                 </div>
             ) : (
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 overflow-y-auto">
                     {selectedMonsters.map((monster, index) => (
                         <div
                             key={index}

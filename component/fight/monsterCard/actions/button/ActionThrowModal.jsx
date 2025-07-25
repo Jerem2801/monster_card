@@ -86,14 +86,17 @@ export default function ActionThrowModal({ action, monsterName, diceProperty, st
                         min={1}
                         value={localDice.numberDice}
                         onChange={e => updateDiceProp('numberDice', e.target.value)}
+                        style={{ textAlign: 'center' }}
                     />
                 </div>
                 <div>
                     <Label htmlFor="valueDice">Valeur dé</Label>
                     <Select
+                        className="text-center"
                         id="valueDice"
                         value={localDice.valueDice}
                         onChange={e => updateDiceProp('valueDice', e.target.value)}
+                        style={{ textAlign: 'center' }}
                     >
                         {[4, 6, 8, 10, 12, 20].map(die => (
                             <option key={die} value={die}>d{die}</option>
@@ -103,9 +106,11 @@ export default function ActionThrowModal({ action, monsterName, diceProperty, st
                 <div>
                     <Label htmlFor="bonus">Bonus</Label>
                     <TextInput
+                        className="text-center"
                         id="bonus"
                         type="number"
                         value={localDice.bonus}
+                        style={{ textAlign: 'center' }}
                         onChange={e => updateDiceProp('bonus', e.target.value)}
                     />
                 </div>

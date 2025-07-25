@@ -35,7 +35,7 @@ export default function EncounterForm({ encounterId = 0 }) {
     }, [encounterId]);
 
     return (
-        <div className="pt-8 pr-8 pl-8 lg:pr-80 lg:pl-80">
+        <div className="pt-8 pr-8 pl-8 lg:pr-80 lg:pl-70">
             <EncounterParams
                 encounterName={encounterName}
                 nbHeroes={nbHeroes}
@@ -47,7 +47,7 @@ export default function EncounterForm({ encounterId = 0 }) {
                 saveEncounter={saveEncounter}
             />
 
-            <div className="flex h-full w-full flex-col gap-6 md:flex-row">
+            <div className="flex h-[calc(100vh-14rem)] w-full flex-col gap-6 md:flex-row">
                 <EncounterListMonsters sortedMonsters={sortedMonsters} addMonster={addMonster} />
 
                 <EncounterSelectedMonsters

@@ -23,7 +23,7 @@ export default function StatPanel({ selected, monster, add, remove }) {
                         </span>
                     )}
 
-                    {monster.save != null && (
+                    {monster.save && (
                         <span
                             className="flex items-center gap-1 rounded bg-amber-200 px-2 py-0.5 text-sm font-bold text-amber-600"
                             title="Sauvegarde"

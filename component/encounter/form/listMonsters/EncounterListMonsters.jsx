@@ -23,10 +23,10 @@ export default function EncounterListMonsters({ sortedMonsters, addMonster }) {
     }, [sortedMonsters, filters]);
 
     return (
-        <div className="w-full md:w-2/3">
+        <div className="w-full md:w-2/3 flex flex-col pr-2">
             <EncounterFormFilter onFilterChange={setFilters} />
 
-            <div className="flex flex-wrap gap-2 lg:gap-4">
+            <div className="flex flex-wrap gap-2 lg:gap-4 overflow-y-auto">
                 {filteredMonsters.map((monster, index) => (
                     <MonsterCard
                         key={index}

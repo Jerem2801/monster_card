@@ -32,26 +32,44 @@ export default function Fight({ encounterId }) {
         );
     }
 
-    useEffect(() => {
-        async function fetchEncounter() {
-            const { selectedMonsters, encounterName } = await loadEncounter(
-                encounterId,
-                dataMonsters,
-            );
+useEffect(() => {
+    async function fetchEncounter() {
+        const { selectedMonsters, encounterName } = await loadEncounter(
+            encounterId,
+            dataMonsters,
+        );
 
-            const monstersWithId = selectedMonsters.map(monster => ({
+        // On prépare un compteur par nom de monstre
+        const nameCount = {};
+
+        const monstersWithId = selectedMonsters.map(monster => {
+            // On récupère le nombre déjà compté pour ce nom
+            const baseName = monster.name;
+            nameCount[baseName] = (nameCount[baseName] || 0) + 1;
+
+            // On ajoute un suffixe uniquement si il y a plusieurs du même nom
+            const nameWithSuffix = nameCount[baseName] > 1 
+                ? `${baseName} ${nameCount[baseName]}` 
+                : baseName;
+
+            return {
                 id: crypto.randomUUID(),
-                monster,
+                monster: {
+                    ...monster,
+                    name: nameWithSuffix,
+                },
                 currentHp: monster.hp,
                 status: monster.initStatus ?? [],
-            }));
+            };
+        });
 
-            setMonsters(monstersWithId);
-            setEncounterName(encounterName ?? 'Rencontre');
-        }
+        setMonsters(monstersWithId);
+        setEncounterName(encounterName ?? 'Rencontre');
+    }
 
-        fetchEncounter();
-    }, [encounterId]);
+    fetchEncounter();
+}, [encounterId]);
+
 
     function updateMonsterHp(id, newHp) {
         setMonsters(prev =>
@@ -107,15 +125,26 @@ export default function Fight({ encounterId }) {
     function addMonsterCard(baseMonster, quantity = 1) {
         if (!baseMonster || quantity <= 0) return;
 
-        const newMonsters = Array.from({ length: quantity }, () => ({
-            id: crypto.randomUUID(),
-            monster: baseMonster,
-            currentHp: baseMonster.hp,
-            status: [],
-        }));
+        const existingCount = monsters.filter(
+            m => m.monster.name.replace(/\s\d+$/, '') === baseMonster.name
+        ).length;
+
+        const newMonsters = Array.from({ length: quantity }, (_, index) => {
+            const suffix = existingCount + index + 1;
+            return {
+                id: crypto.randomUUID(),
+                monster: {
+                    ...baseMonster,
+                    name: `${baseMonster.name} ${suffix}`,
+                },
+                currentHp: baseMonster.hp,
+                status: [],
+            };
+        });
 
         setMonsters(prev => [...prev, ...newMonsters]);
     }
+
 
     function deleteMonster(id) {
         setMonsters(prev => prev.filter(m => m.id !== id));
