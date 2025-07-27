@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import EncounterForm from '@/component/encounter/form/EncounterForm';
+import EncounterFormPage from '@/component/encounter/form/EncounterFormPage';
 
 export default function Page() {
     const params = useParams();
@@ -9,7 +9,7 @@ export default function Page() {
 
     return (
         <div>
-            <EncounterForm encounterId={encounterId} />
+            <EncounterFormPage encounterId={encounterId} />
         </div>
     );
 }

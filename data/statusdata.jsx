@@ -7,7 +7,7 @@ export const BLINDED = {
     disadvantage: {
         name: 'Aveuglé.',
         description: 'Vos attaques ont 1 Désavantage.',
-    }
+    },
 };
 
 export const CHARMED = {
@@ -33,7 +33,7 @@ export const FRIGHTENED = {
     disadvantage: {
         name: 'Effrayé.',
         description: '1 Désavantage près de la source de peur.',
-    }
+    },
 };
 
 export const GRAPPLED = {
@@ -74,7 +74,7 @@ export const INVISIBLE = {
     advantage: {
         name: 'Invisible.',
         description: 'Vos attaques ont 1 Avantage.',
-    }
+    },
 };
 
 export const PETRIFIED = {
@@ -101,7 +101,7 @@ export const POISONED = {
     disadvantage: {
         name: 'Empoisonné.',
         description: '1 Désavantage à tous les jets.',
-    }
+    },
 };
 
 export const PRONE = {
@@ -113,7 +113,7 @@ export const PRONE = {
     disadvantage: {
         name: 'À terre.',
         description: 'Vos attaques ont 1 Désavantage.',
-    }
+    },
 };
 
 export const SLOWED = {
@@ -156,7 +156,8 @@ export const TAUNTED = {
 export const DIGESTED = {
     id: 'digested',
     label: 'Digéré',
-    description: 'Inflige X (Bonus de dégâts) dégâts supplémentaires pour chaque fois que la cible a été Digéré.',
+    description:
+        'Inflige X (Bonus de dégâts) dégâts supplémentaires pour chaque fois que la cible a été Digéré.',
     path: '/status/swallowed.png',
 };
 
@@ -166,7 +167,6 @@ export const SMOLDERING = {
     description: 'Vous êtes Fumant.',
     path: '/status/smoldering.png',
 };
-
 
 // États spéciaux
 export const BLOODIED = {

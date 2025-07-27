@@ -1,4 +1,4 @@
-import { ARMOR_TYPE } from "@/data/monsterdata";
+import { ARMOR_TYPE } from '@/data/monsterdata';
 
 export function getArmorImagePath(monster) {
     if (!monster?.armor?.id) return;

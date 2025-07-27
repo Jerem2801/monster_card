@@ -1,9 +1,9 @@
-import EncounterPage from '@/component/encounter/listPage/EncounterPage';
+import EncounterListPage from '@/component/encounter/list/EncounterListPage';
 
 export default function Page() {
     return (
         <div>
-            <EncounterPage />
+            <EncounterListPage />
         </div>
     );
 }

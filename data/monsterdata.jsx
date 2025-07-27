@@ -1,4 +1,16 @@
-import { DAZED, PRONE, RESTRAINED, GRAPPLED, POISONED, BLINDED, SWALLOWED, LATCH_ON, DIGESTED, INVISIBLE } from './statusdata';
+import {
+    DAZED,
+    PRONE,
+    RESTRAINED,
+    GRAPPLED,
+    POISONED,
+    BLINDED,
+    SWALLOWED,
+    LATCH_ON,
+    DIGESTED,
+    INVISIBLE,
+    SMOLDERING,
+} from './statusdata';
 
 // Tableau des types de taille
 export const SIZE_TYPE = {
@@ -23,6 +35,8 @@ export const MONSTER_TYPE = {
     BANDIT: { id: 'bandit', label: 'Bandits' },
     SNAKEMEN: { id: 'snakemen', label: 'Hommmes-serpents' },
     TROGLODYTE: { id: 'troglodyte', label: 'Troglodyte' },
+    HILL_FIELD: { id: 'hill_field', label: 'Colline et Champ' },
+    GNOLL: { id: 'gnoll', label: 'Gnoll' },
     FOREST_DENIZEN: { id: 'forest_denizen', label: 'Habitant de la forêt' },
     DUNGEON_DENIZEN: { id: 'dungeon_denizen', label: 'Habitant du donjons' },
     DAEMONS: { id: 'daemons', label: 'Démons' },
@@ -65,8 +79,7 @@ const passiveOverwhelmingStench = {
 };
 const passiveEvasiveFlier = {
     name: 'Vol Évasif.',
-    description:
-        'Les attaques contre les Stirges se font avec $advantage:-1$.',
+    description: 'Les attaques contre les Stirges se font avec $advantage:-1$.',
 };
 const passiveMimicsAmbusher = {
     name: 'Embusqueur.',
@@ -80,8 +93,7 @@ const passiveMimicsSticky = {
 };
 const passiveDemonicFrenzy = {
     name: 'Frénésie démoniaque.',
-    description:
-        'Lorsqu\'il est $status:bloodied$, $advantage:+1$ sur l\'attaque.',
+    description: "Lorsqu'il est $status:bloodied$, $advantage:+1$ sur l'attaque.",
 };
 
 // Tableau des types conditions
@@ -109,7 +121,7 @@ const defaultMonster = {
     armor: ARMOR_TYPE.NONE,
     speed: 6,
     fly: 0,
-    save: "",
+    save: '',
     size: SIZE_TYPE.MEDIUM,
     legendary: false,
     minion: false,
@@ -120,37 +132,6 @@ const defaultMonster = {
 };
 
 export const dataMonsters = [
-    {
-        ...defaultMonster,
-        id: 'ruinant',
-        name: 'Ruinant',
-        type: MONSTER_TYPE.DAEMONS,
-        hp: 60,
-        level: '5',
-        speed: 12,
-        save : 'DEX+',
-        passif: [passiveDemonicFrenzy,
-            {
-                name: 'Soin corrompu.',
-                description: '(Aura 4) La magie de soin échoue. JdS de FOR 12 ou subissent la moitié des PV bloqués en dégâts nécrotiques.'
-            }
-        ],
-        action: [
-            {
-                name: 'Griffes sanguinaitres (2x).',
-                description: '$dice:1d12+2$ nécrotiques. En cas de coup pas de réaction jusqu\'au début du tour de la cible.',
-                effect: {
-                    trigger: TRIGGER_TYPE.HIT,
-                    message: 'Pas de réaction jusqu\'au début du tour de la cible.'
-                },
-                advantage: {
-                    name: 'Frénésie démoniaque.',
-                    description:
-                        "Lorsqu\'il est Ensanglanté, 1 Avantage sur l\'attaque.",
-                },
-            },
-        ],
-    },
     //GOBELIN
     {
         ...defaultMonster,
@@ -596,6 +577,141 @@ export const dataMonsters = [
             },
         ],
     },
+    //COLLINE ET CHAMPS
+    {
+        ...defaultMonster,
+        id: 'troll',
+        name: 'Troll',
+        type: MONSTER_TYPE.HILL_FIELD,
+        hp: 100,
+        armor: ARMOR_TYPE.MEDIUM,
+        level: '10',
+        size: 8,
+        size: SIZE_TYPE.LARGE,
+        passif: [
+            {
+                name: 'Brute.',
+                description: 'En cas de touche : repousse de nombre de cases égal au Dé Primaire.',
+            },
+        ],
+        action: [
+            {
+                name: 'Écrasement (2×).',
+                description: '(Portée 2) $dice:1d6+15$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    message: 'Repousse de nombre de cases égal au Dé Primaire.',
+                },
+            },
+            {
+                name: 'Rocher !',
+                description: '(Distance 12) $dice:1d6+20$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    message: 'Repousse de nombre de cases égal au Dé Primaire.',
+                },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'hill_giant',
+        name: 'Géant des Collines',
+        type: MONSTER_TYPE.HILL_FIELD,
+        hp: 140,
+        level: '12',
+        speed: 8,
+        size: SIZE_TYPE.HUGE,
+        passif: [
+            {
+                name: 'Brute.',
+                description: 'En cas de touche : repousse de nombre de cases égal au Dé Primaire.',
+            },
+        ],
+        action: [
+            {
+                name: 'Écrasement (2×).',
+                description: '(Portée 2) $dice:1d6+15$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    message: 'Repousse de nombre de cases égal au Dé Primaire.',
+                },
+            },
+            {
+                name: 'Rocher !',
+                description: '(Distance 12) $dice:1d6+20$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    message: 'Repousse de nombre de cases égal au Dé Primaire.',
+                },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'hyene_sbire',
+        name: 'Sbire Hyène',
+        type: MONSTER_TYPE.GNOLL,
+        hp: 1,
+        level: '1/2',
+        minion: true,
+        size: SIZE_TYPE.SMALL,
+        passif: [],
+        action: [
+            {
+                name: 'Morsure.',
+                description: '$dice:1d8$.',
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'gnoll_bonesplitter',
+        name: 'Gnoll Brute',
+        type: MONSTER_TYPE.GNOLL,
+        hp: 49,
+        level: '4',
+        passif: [
+            {
+                name: 'Death Frenzy.',
+                description:
+                    "Lorsque qu'un allié meurt à 6 cases, ce déplace de la moitié de sa vitesse et fait une attaque.",
+            },
+        ],
+        action: [
+            {
+                name: 'Fléau.',
+                description: '$dice:2d8+9$, sur un coup $status:grappled$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: GRAPPLED,
+                },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'gnoll_abyssal_summoner',
+        name: 'Gnoll Invocateur',
+        type: MONSTER_TYPE.GNOLL,
+        hp: 68,
+        level: '6',
+        passif: [],
+        action: [
+            {
+                name: 'Fléau.',
+                description: '$dice:2d8+12$.',
+            },
+            {
+                name: 'Invoquer sbire.',
+                description: 'Invoquer 3 $summon:hyene_sbire:3$.',
+            },
+            {
+                name: 'Transformer sbire.',
+                description: 'Transformer 1 Sbire Hyène en $summon:gnoll_bonesplitter:1$.',
+            },
+        ],
+    },
     //HABITANT DU DONJONS
     {
         ...defaultMonster,
@@ -609,7 +725,7 @@ export const dataMonsters = [
         passif: [passiveEvasiveFlier],
         action: [
             {
-                name: 'S\'accrocher.',
+                name: "S'accrocher.",
                 description: '$dice:1d4+2$. En cas de touche : $status:latch_on$.',
                 effect: {
                     trigger: TRIGGER_TYPE.HIT,
@@ -630,7 +746,7 @@ export const dataMonsters = [
         passif: [passiveEvasiveFlier],
         action: [
             {
-                name: 'S\'accrocher.',
+                name: "S'accrocher.",
                 description: '$dice:1d12+10$. En cas de touche: $status:latch_on$.',
                 effect: {
                     trigger: TRIGGER_TYPE.HIT,
@@ -647,7 +763,7 @@ export const dataMonsters = [
         size: SIZE_TYPE.TINY,
         hp: 28,
         level: '1',
-        passif: [passiveMimicsAmbusher,passiveMimicsSticky],
+        passif: [passiveMimicsAmbusher, passiveMimicsSticky],
         action: [
             {
                 name: 'Pseudopode.',
@@ -659,7 +775,7 @@ export const dataMonsters = [
             },
             {
                 name: 'Morsure.',
-                description: '(Une créature $status:grappled$) $dice:1d12$.'
+                description: '(Une créature $status:grappled$) $dice:1d12$.',
             },
         ],
     },
@@ -671,7 +787,7 @@ export const dataMonsters = [
         size: SIZE_TYPE.SMALL,
         hp: 41,
         level: '2',
-        passif: [passiveMimicsAmbusher,passiveMimicsSticky],
+        passif: [passiveMimicsAmbusher, passiveMimicsSticky],
         action: [
             {
                 name: 'Pseudopode.',
@@ -683,7 +799,7 @@ export const dataMonsters = [
             },
             {
                 name: 'Morsure.',
-                description: '(Une créature $status:grappled$) $dice:1d20$.'
+                description: '(Une créature $status:grappled$) $dice:1d20$.',
             },
         ],
     },
@@ -694,7 +810,7 @@ export const dataMonsters = [
         type: MONSTER_TYPE.DUNGEON_DENIZEN,
         hp: 79,
         level: '6',
-        passif: [passiveMimicsAmbusher,passiveMimicsSticky],
+        passif: [passiveMimicsAmbusher, passiveMimicsSticky],
         action: [
             {
                 name: 'Pseudopode.',
@@ -706,7 +822,7 @@ export const dataMonsters = [
             },
             {
                 name: 'Morsure.',
-                description: '(Une créature $status:grappled$) $dice:2d20$.'
+                description: '(Une créature $status:grappled$) $dice:2d20$.',
             },
         ],
     },
@@ -727,7 +843,7 @@ export const dataMonsters = [
                     trigger: TRIGGER_TYPE.HIT,
                     status: DIGESTED,
                 },
-            }
+            },
         ],
     },
     {
@@ -740,11 +856,12 @@ export const dataMonsters = [
         passif: [
             {
                 name: 'Contact digestif.',
-                description: 'Le contact avec une vase inflige $status:digested$.'
+                description: 'Le contact avec une vase inflige $status:digested$.',
             },
             {
                 name: 'Visqueux.',
-                description: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 2 $summon:minion_ooze:2$.'
+                description:
+                    'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 2 $summon:minion_ooze:2$.',
             },
         ],
         action: [
@@ -755,7 +872,7 @@ export const dataMonsters = [
                     trigger: TRIGGER_TYPE.HIT,
                     status: DIGESTED,
                 },
-            }
+            },
         ],
     },
     {
@@ -769,11 +886,12 @@ export const dataMonsters = [
         passif: [
             {
                 name: 'Contact digestif.',
-                description: 'Le contact avec une vase inflige $status:digested$.'
+                description: 'Le contact avec une vase inflige $status:digested$.',
             },
             {
                 name: 'Visqueux.',
-                description: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 3 $summon:minion_ooze:3$.'
+                description:
+                    'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 3 $summon:minion_ooze:3$.',
             },
         ],
         action: [
@@ -784,7 +902,7 @@ export const dataMonsters = [
                     trigger: TRIGGER_TYPE.HIT,
                     status: DIGESTED,
                 },
-            }
+            },
         ],
     },
     {
@@ -798,11 +916,12 @@ export const dataMonsters = [
         passif: [
             {
                 name: 'Contact digestif.',
-                description: 'Le contact avec une vase inflige $status:digested$.'
+                description: 'Le contact avec une vase inflige $status:digested$.',
             },
             {
                 name: 'Visqueux.',
-                description: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 5 $summon:minion_ooze:5$.'
+                description:
+                    'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 5 $summon:minion_ooze:5$.',
             },
         ],
         action: [
@@ -813,7 +932,7 @@ export const dataMonsters = [
                     trigger: TRIGGER_TYPE.HIT,
                     status: DIGESTED,
                 },
-            }
+            },
         ],
     },
     {
@@ -827,11 +946,12 @@ export const dataMonsters = [
         passif: [
             {
                 name: 'Contact digestif.',
-                description: 'Le contact avec une vase inflige $status:digested$.'
+                description: 'Le contact avec une vase inflige $status:digested$.',
             },
             {
                 name: 'Visqueux.',
-                description: 'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 6 $summon:minion_ooze:6$.'
+                description:
+                    'En cas de coup critique ou lorsqu’elle subit des dégâts tranchants : invoque 6 $summon:minion_ooze:6$.',
             },
         ],
         action: [
@@ -842,7 +962,7 @@ export const dataMonsters = [
                     trigger: TRIGGER_TYPE.HIT,
                     status: DIGESTED,
                 },
-            }
+            },
         ],
     },
     //HABITANT DE LA FORET
@@ -1580,7 +1700,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        id:'grimbeak',
+        id: 'grimbeak',
         name: 'Grimbeak',
         type: MONSTER_TYPE.ANIMAL,
         legendary: true,
@@ -1629,7 +1749,7 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        id:'greenthumb',
+        id: 'greenthumb',
         name: 'Greenthumb',
         type: MONSTER_TYPE.SORCIER,
         legendary: true,
@@ -1669,5 +1789,42 @@ export const dataMonsters = [
             hp: 30,
             newDescription: "Après chaque tour d'un héro, mouvement de 6 puis choissisez deux :",
         },
+    },
+    {
+        ...defaultMonster,
+        id: 'azriel',
+        name: 'Azriel',
+        type: MONSTER_TYPE.DEVIL,
+        hp: 135,
+        level: '6',
+        armor: ARMOR_TYPE.HEAVY,
+        save: 'TOUT+',
+        passif: [
+            {
+                name: 'DOULEUR !',
+                description:
+                    'Les coups critiques contre Azriel sont vicieux : Il inflige des dégâts égaux aux dés de critique à l’attaquant.',
+            },
+        ],
+        action: [
+            {
+                name: 'ACTIONS:',
+                description: 'Après le tour de chaque héros, choisissez-en un:',
+            },
+            {
+                name: '• Fouet Crépitant.',
+                description:
+                    "Mouvement 6. (Portée 6) Inflige  $dice:2d12$. Sur un coup touche $status:grappled$ et tirée au contact d’Azriel (Évasion DC 13 FOR, DEX ou jusqu'à ce qu'il réutilise le fouet).",
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: GRAPPLED,
+                },
+            },
+            {
+                name: '• Épée du Destin.',
+                description:
+                    'Inflige $dice:3d12+4$ dégâts de feu à toutes les créatures dans une Portée de 2.',
+            },
+        ],
     },
 ];

@@ -1,7 +1,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import Fight from '@/component/fight/Fight';
+import FightPage from '@/component/fight/FightPage';
 
 export default function Page() {
     const params = useParams();
@@ -9,7 +9,7 @@ export default function Page() {
 
     return (
         <div>
-            <Fight encounterId={encounterId} />
+            <FightPage encounterId={encounterId} />
         </div>
     );
 }
