@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body className={`${inter.className} h-screen antialiased`}>
                 <TopNav />
-                <div className="h-full border pt-20">{children}</div>
+                <div className="h-full pt-20">{children}</div>
             </body>
         </html>
     );

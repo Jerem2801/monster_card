@@ -24,8 +24,8 @@ export const SIZE_TYPE = {
 // Tableau des types d'armure
 export const ARMOR_TYPE = {
     NONE: { id: 'none', label: 'Aucune' },
-    MEDIUM: { id: 'M', label: 'M', path: '/armor/mediumArmor.png' },
-    HEAVY: { id: 'H', label: 'L', path: '/armor/heavyArmor.png' },
+    MEDIUM: { id: 'M', label: 'Moyenne', path: '/armor/mediumArmor.png' },
+    HEAVY: { id: 'L', label: 'Lourde', path: '/armor/heavyArmor.png' },
 };
 
 // Tableau des types de monstres
@@ -1052,6 +1052,23 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
+        id: 'minion_briarbanes',
+        name: 'Sbire Ombre-Ronce',
+        type: MONSTER_TYPE.FOREST_DENIZEN,
+        hp: 1,
+        minion: true,
+        level: '1/4',
+        size: SIZE_TYPE.SMALL,
+        passif: [],
+        action: [
+            {
+                name: 'Graine de ronces.',
+                description: '$dice:1d4$.',
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
         id: 'seedling',
         name: 'Pousse',
         type: MONSTER_TYPE.FOREST_DENIZEN,
@@ -1683,19 +1700,22 @@ export const dataMonsters = [
                 name: '• Casse-crânes.',
                 description:
                     'Se déplace de 6. Utilise une créature $status:grappled$ comme arme contre une autre créature. Les deux subissent $dice:2d6+3$ dégâts, et l’agrippement prend fin.',
-                dice: { numberDice: 2, valueDice: 6, bonus: 3 },
             },
         ],
         bloodied: {
-            description: 'À $hp, les dégâts de Krogg passent à 2d8+3.',
+            description: 'À $hp$, ses attaques utilisent des d8 au lieu des d6.',
             hp: '37 PV',
-            newDice: { numberDice: 2, valueDice: 8, bonus: 3 },
+            modifiers: {
+                replaceDice: 8,
+            },
         },
-        lastStand: {
+        last_stand: {
             description:
-                'Krogg est mourant ! S’il subit $hp dégâts supplémentaires, il meurt. D’ici là, il bénéficie d’une armure lourde.',
+                "Krogg est mourant ! S’il subit $hp$ dégâts supplémentaires, il meurt. Jusqu'à ce moment-là,, il bénéficie d’une armure lourde.",
             hp: 20,
-            newArmor: ARMOR_TYPE.HEAVY,
+            modifiers: {
+                overrideArmor: ARMOR_TYPE.HEAVY,
+            },
         },
     },
     {
@@ -1737,14 +1757,16 @@ export const dataMonsters = [
             },
         ],
         bloodied: {
-            description: 'À $hp, Hurlement Sauvage se recharge.',
+            description: 'À $hp$, Hurlement Sauvage se recharge.',
             hp: '50 PV',
         },
-        lastStand: {
+        last_stand: {
             description:
-                "Grimbeak est mourant ! S’il subit $hp dégâts supplémentaires, il meurt. Jusqu'à ce moment-là, ses attaques utilisent des d10 au lieu des d6.",
+                "Grimbeak est mourant ! S’il subit $hp$ dégâts supplémentaires, il meurt. Jusqu'à ce moment-là, ses attaques utilisent des d10 au lieu des d6.",
             hp: 30,
-            newValueDice: 10,
+            modifiers: {
+                replaceDice: 10,
+            },
         },
     },
     {
@@ -1765,12 +1787,12 @@ export const dataMonsters = [
             },
             {
                 name: '• Invoquer des Roncespectres.',
-                description: 'Invoque 1 sbire / héros (taille : 1d4).',
+                description: 'Invoque 1 $summon:minion_briarbanes:4$ par héros.',
             },
             {
                 name: '• Enracinement.',
                 description:
-                    'Choisissez la moitié des héros. Ils doivent réussir un JdS de DEX 11 ou subir $dice:2d4$ et être Entravés par des lianes épineuses (évasion : JdS de STR ou DEX 11, ou recevoir des dégâts tranchants ou de feu pour se libérer).',
+                    'Choisissez la moitié des héros. Ils doivent réussir un JdS de DEX 11 ou subir $dice:2d4$ et être $status:restrained$ par des lianes épineuses (Évasion : JdS de FOR ou DEX 11, ou recevoir des dégâts tranchants ou de feu).',
             },
             {
                 name: '• Tir de ronces.',
@@ -1779,15 +1801,19 @@ export const dataMonsters = [
         ],
         bloodied: {
             description:
-                'À $hp, Greenthumb gagne une écorce magique qui lui confère une Armure Lourde.',
+                'À $hp$, Greenthumb gagne une écorce magique qui lui confère une Armure Lourde.',
             hp: '50 PV',
-            armor: ARMOR_TYPE.HEAVY,
+            modifiers: {
+                overrideArmor: ARMOR_TYPE.HEAVY,
+            },
         },
-        lastStand: {
+        last_stand: {
             description:
-                'Greenthumb est mourant ! S’il subit $hp dégâts supplémentaires, il meurt. En attendant, il agit deux fois par tour.',
+                'Greenthumb est mourant ! S’il subit $hp$ dégâts supplémentaires, il meurt. En attendant, il agit deux fois par tour.',
             hp: 30,
-            newDescription: "Après chaque tour d'un héro, mouvement de 6 puis choissisez deux :",
+            modifiers: {
+                overrideActions: "Après chaque tour d'un héro, mouvement de 6 puis choissisez deux :"
+            }
         },
     },
     {
@@ -1797,13 +1823,14 @@ export const dataMonsters = [
         type: MONSTER_TYPE.DEVIL,
         hp: 135,
         level: '6',
+        legendary:true,
         armor: ARMOR_TYPE.HEAVY,
         save: 'TOUT+',
         passif: [
             {
                 name: 'DOULEUR !',
                 description:
-                    'Les coups critiques contre Azriel sont vicieux : Il inflige des dégâts égaux aux dés de critique à l’attaquant.',
+                    'Les coups critiques contre Azriel sont Vicieux et ils infligent des dégâts égaux aux dés de critique à l’attaquant.',
             },
         ],
         action: [
@@ -1826,5 +1853,27 @@ export const dataMonsters = [
                     'Inflige $dice:3d12+4$ dégâts de feu à toutes les créatures dans une Portée de 2.',
             },
         ],
+        bloodied: {
+            description:
+                'À $hp$, Azriel peut utiliser Fouet Crépitant 2x par tour.',
+            hp: '67 PV',
+            modifiers: {
+                overrideAction:{
+                    name: '• Fouet Crépitant.',
+                    newName: '• Fouet Crépitant (2x).'
+                }
+            },
+        },
+        last_stand: {
+            description:
+                'Azriel est mourant ! S’il subit $hp$ dégâts supplémentaires, il meurt. En attendant, TOUT les coups contre lui sont critique.',
+            hp: 60,
+            modifiers: {
+                addPassive:{
+                    name: 'OUI, PLUS DE DOULEUR.',
+                    description: 'Tout les coups contre Azriel sont des critiques.',
+                } 
+            }
+        },
     },
 ];

@@ -9,7 +9,7 @@ export default function StatPanel({ monster }) {
             {monster.armor.id != 'none' && (
                 <span className="ml-2 flex items-center gap-1 rounded bg-slate-300 px-2 py-0.5 text-sm font-bold text-slate-600">
                     <Image src={armorPath} alt="🛡️" width={20} height={20} />
-                    {monster.armor.label}
+                    {monster.armor.id}
                 </span>
             )}
 

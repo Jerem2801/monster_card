@@ -7,6 +7,7 @@ import PassivePanel from './passive/PassivePanel';
 import ActionPanel from './actions/ActionPanel';
 
 import StatusModal from '../editModal/EditModal';
+import LegendaryPanel from './legendary/LegendaryPanel';
 
 export default function MonsterCard({
     monster,
@@ -18,7 +19,9 @@ export default function MonsterCard({
     const [openModal, setOpenModal] = useState(false);
 
     return (
-        <div className="space-y-3 rounded-2xl border-2 border-neutral-300 p-6 pb-0 transition-shadow hover:shadow-lg">
+        <div
+            className={`space-y-3 rounded-2xl border-2 p-6 transition-shadow hover:shadow-lg ${monster.legendary ? 'border-yellow-400 bg-yellow-50 ring-1 ring-yellow-200' : 'border-neutral-300 bg-white'} `}
+        >
             <NamePanel
                 monster={monster}
                 status={status}
@@ -29,6 +32,8 @@ export default function MonsterCard({
             <PassivePanel monster={monster} addMonsterCard={addMonsterCard} />
 
             <ActionPanel monster={monster} addMonsterCard={addMonsterCard} status={status} />
+
+            {monster.legendary && <LegendaryPanel monster={monster} />}
 
             <StatusModal
                 openModal={openModal}
