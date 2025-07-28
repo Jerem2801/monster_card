@@ -11,6 +11,7 @@ export default function AttackButton({
     monsterName,
     status,
     allChecked,
+    isMinion
 }) {
     const baseClass =
         'text-md inline-flex items-center gap-1 cursor-pointer rounded px-1 transition';
@@ -34,6 +35,7 @@ export default function AttackButton({
                     monsterName={monsterName}
                     diceProperty={diceProperty}
                     status={status}
+                    isMinion={isMinion}
                 />
             }
             placement="top"

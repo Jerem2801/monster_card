@@ -4,7 +4,15 @@ import SummonButton from '../button/SummonButton';
 import StatusButton from '../button/StatusButton';
 import AdvantageButton from '../button/AdvantageButton';
 
-export function getActionContent(action, passive, addMonsterCard, monsterName, status, allChecked) {
+export function getActionContent(
+    action,
+    passive,
+    addMonsterCard,
+    monsterName,
+    status,
+    allChecked,
+    isMinion
+) {
     const parts = action.description.split(/(\$[^$]+\$)/g); // Match tout ce qui est entre deux $
 
     return (
@@ -38,6 +46,7 @@ export function getActionContent(action, passive, addMonsterCard, monsterName, s
                                 monsterName={monsterName}
                                 status={status}
                                 allChecked={allChecked}
+                                isMinion={isMinion}
                             />
                         );
                     case 'status':

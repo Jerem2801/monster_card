@@ -96,23 +96,31 @@ function applyModifierByKey(monster, key, value) {
         overrideActions: (mon, val) => ({
             ...mon,
             action: mon.action?.map(action =>
-                action.name === 'ACTIONS.'
-                ? { ...action, description: val }
-                : action
+                action.name === 'ACTIONS.' ? { ...action, description: val } : action,
             ),
         }),
         overrideAction: (mon, val) => ({
             ...mon,
             action: mon.action?.map(action =>
-                action.name === val.name
-                ? { ...action, name: val.newName }
-                : action
+                action.name === val.name ? { ...action, name: val.newName } : action,
+            ),
+        }),
+        overridePassive: (mon, val) => ({
+            ...mon,
+            passif: mon.passif?.map(passif =>
+                passif.name === val.oldPassifName ? { ...passif, name: val.newPassifName,description: val.newPassifDescription } : passif,
             ),
         }),
         addPassive: (mon, val) => ({
             ...mon,
-                passif: [...(mon.passif || []), val],
-            }),
+            passif: [...(mon.passif || []), val],
+        }),
+        reloadAction: (mon, val) => ({
+            ...mon,
+            action: mon.action?.map(action =>
+                action.name === val ? { ...action, reload: true } : action,
+            ),
+        }),
     };
 
     const handler = modifierHandlers[key];

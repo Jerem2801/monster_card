@@ -100,15 +100,15 @@ const passiveDemonicFrenzy = {
 export const TRIGGER_TYPE = {
     CRITIC: {
         id: 'critic',
-        name: 'de Critique',
+        name: '🔥Critique !',
     },
     HIT: {
         id: 'damage',
-        name: 'de Touche',
+        name: '✅ Touché :',
     },
     DAMAGE: {
         id: 'damage',
-        name: 'de Dégâts',
+        name: '💥Dégâts :',
     },
     MISS: {
         id: 'miss',
@@ -580,35 +580,197 @@ export const dataMonsters = [
     //COLLINE ET CHAMPS
     {
         ...defaultMonster,
+        id: 'gnoll',
+        name: 'Gnoll',
+        type: MONSTER_TYPE.HILL_FIELD,
+        hp: 28,
+        level: '1',
+        passif: [
+            {
+                name: 'Frénésie.',
+                description: '$advantage:+1$ contre les créatures $status:bloodied$.',
+            },
+        ],
+        action: [
+            {
+                name: 'Ravage (2×).',
+                description: '$dice:1d10$.',
+                advantage: {
+                    name: 'Frénésie.',
+                    description: '1 Avantage contre les créatures Ensanglanté.',
+                },
+            },
+            {
+                name: 'Tir.',
+                description: '(Distance 12) $dice:1d10$.',
+                advantage: {
+                    name: 'Frénésie.',
+                    description: '1 Avantage contre les créatures Ensanglanté.',
+                },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'worg',
+        name: 'Worg',
+        type: MONSTER_TYPE.HILL_FIELD,
+        hp: 28,
+        speed: 10,
+        level: '1',
+        passif: [
+            {
+                name: 'Sauvage.',
+                description: 'Effectue toujours un coup critique lorsqu’il attaque une créature agrippée.',
+            },
+        ],
+        action: [
+            {
+                name: 'Déchirer (2×).',
+                description: '$dice:1d6+2$. En cas de touche : $status:grappled$ (Évasion DD 10).',
+            }
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'blue_drake',
+        name: 'Drake Bleu',
+        type: MONSTER_TYPE.HILL_FIELD,
+        hp: 34,
+        level: '2',
+        fly: 12,
+        passif: [
+            {
+                name: 'À la mort.',
+                description: 'Inflige $dice:1d12$ dégâts en retour (ignore l’armure métallique).',
+            },
+        ],
+        action: [
+            {
+                name: 'Morsure Foudroyante.',
+                description: '$dice:1d12+5$ (ignore l’armure métallique).',
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'griffon',
+        name: 'Griffon',
+        type: MONSTER_TYPE.HILL_FIELD,
+        hp: 50,
+        fly: 12,
+        level: '4',
+        passif: [
+        ],
+        action: [
+            {
+                name: 'Serres. ',
+                description: '$dice:2d6+10$, en cas de touche : $status:grappled$ (Évasion DD 14)',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    statusbar: GRAPPLED,
+                },
+            },
+            {
+                name: 'Vol & Lâcher.' ,
+                description: '(Une cible $status:grappled$) Vole 12 vers le haut et lâche la cible ($dice:6d6$ dégâts de chute).',
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'gnoll_packleader',
+        name: 'Chef de Meute Gnoll',
+        type: MONSTER_TYPE.HILL_FIELD,
+        hp: 39,
+        armor: ARMOR_TYPE.MEDIUM,
+        level: '4',
+        passif: [
+            {
+                name: 'Frénésie.',
+                description: '$advantage:+1$ contre les créatures $status:bloodied$.',
+            },
+        ],
+        action: [
+            {
+                name: 'Aboyer des Ordres.',
+                description: '2 alliés peuvent se déplacer.',
+            },
+            {
+                name: 'PUIS :',
+                description: '',
+            },
+            {
+                name: 'Ravage (3×).',
+                description: '$dice:1d10$.',
+                advantage: {
+                    name: 'Frénésie.',
+                    description: '1 Avantage contre les créatures Ensanglanté.',
+                },
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
         id: 'troll',
         name: 'Troll',
         type: MONSTER_TYPE.HILL_FIELD,
         hp: 100,
         armor: ARMOR_TYPE.MEDIUM,
         level: '10',
-        size: 8,
+        speed: 8,
         size: SIZE_TYPE.LARGE,
         passif: [
             {
-                name: 'Brute.',
-                description: 'En cas de touche : repousse de nombre de cases égal au Dé Primaire.',
+                name: 'Régénération.',
+                description: 'Ne meurt pas à 0 PV. Seuls le feu, les dégâts radiants, ou un coup critique alors qu’il est à 0 PV peuvent le tuer.',
             },
         ],
         action: [
             {
-                name: 'Écrasement (2×).',
-                description: '(Portée 2) $dice:1d6+15$.',
+                name: '',
+                description: 'Choisissez deux fois :',
+            },
+            {
+                name: '• Griffes.',
+                description: '(Portée 2) $dice:1d4+10$. En cas de critique : $status:prone$.',
                 effect: {
-                    trigger: TRIGGER_TYPE.HIT,
-                    message: 'Repousse de nombre de cases égal au Dé Primaire.',
+                    trigger: TRIGGER_TYPE.CRITIC,
+                    status: PRONE
                 },
             },
             {
-                name: 'Rocher !',
-                description: '(Distance 12) $dice:1d6+20$.',
+                name: '• Morsure.',
+                description: '(Sur une créature $status:prone$) $dice:1d4+20$.',
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'bulette',
+        name: 'Bulette',
+        type: MONSTER_TYPE.HILL_FIELD,
+        hp: 74,
+        armor: ARMOR_TYPE.HEAVY,
+        level: '10',
+        size: SIZE_TYPE.LARGE,
+        passif: [
+            {
+                name: 'Jaillissement !',
+                description: 'Le combat contre une Bulette commence avec le personnage le plus lourd qui doit réussir un JdS de DEX 14, ou bien il est $status:grappled$ (Évasion DD 14) et subit $dice:1d12+20$ dégâts (moitié en cas de réussite).',
+            },
+        ],
+        action: [
+            {
+                name: 'Entraîner Sous Terre.',
+                description: '(Sur une cible $status:grappled$) $dice:2d12$, puis l’entraîne sous terre et creuse pour s’éloigner.',
+            },
+            {
+                name: 'Bond & Morsure.',
+                description: '(Si elle n’agrippe personne) bondit de 6 cases, puis attaque pour $dice:1d12+20$. En cas de touche : $status:grappled$',
                 effect: {
                     trigger: TRIGGER_TYPE.HIT,
-                    message: 'Repousse de nombre de cases égal au Dé Primaire.',
+                    status: GRAPPLED
                 },
             },
         ],
@@ -1689,17 +1851,21 @@ export const dataMonsters = [
         action: [
             {
                 name: 'ACTIONS.',
-                description: "Après chaque tour d'un héro, choissisez un :",
+                description: "Après chaque tour d'un héro, Mouvement de 6 puis choissisez un :",
             },
             {
                 name: '• Massacre brutal.',
                 description:
-                    'Se déplace de 6. Inflige $dice:2d6+3$ dégâts, la cible est $status:grappled$ (Évasion DD 10).',
+                    'Inflige $dice:2d6+3$ dégâts, la cible est $status:grappled$ (Évasion DD 10).',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: GRAPPLED,
+                },
             },
             {
                 name: '• Casse-crânes.',
                 description:
-                    'Se déplace de 6. Utilise une créature $status:grappled$ comme arme contre une autre créature. Les deux subissent $dice:2d6+3$ dégâts, et l’agrippement prend fin.',
+                    'Utilise une créature $status:grappled$ comme arme contre une autre créature. Les deux subissent $dice:2d6+3$ dégâts, et l’agrippement prend fin.',
             },
         ],
         bloodied: {
@@ -1711,7 +1877,7 @@ export const dataMonsters = [
         },
         last_stand: {
             description:
-                "Krogg est mourant ! S’il subit $hp$ dégâts supplémentaires, il meurt. Jusqu'à ce moment-là,, il bénéficie d’une armure lourde.",
+                'Krogg est mourant ! S’il subit $hp$ dégâts supplémentaires, il meurt. Il bénéficie d’une armure lourde.',
             hp: 20,
             modifiers: {
                 overrideArmor: ARMOR_TYPE.HEAVY,
@@ -1744,21 +1910,36 @@ export const dataMonsters = [
             {
                 name: '• Hurlement Sauvage.',
                 description:
-                    "Tous les ennemis dans un rayon de 12 subissent $dice:2d6$ dégâts (ignorent l'armure). JdS de VOL 11 ou deviennent $status:frightened$ pendant 1 round.",
+                    "Tous les ennemis dans une Portée de 12 subissent $dice:2d6$ dégâts (ignorent l'armure). JdS de VOL 11 ou deviennent $status:frightened$ pendant 1 round.",
                 use: 1,
+                reload: false,
+                AOE:true,
             },
             {
                 name: '• Déchirer & Lacérer.',
                 description: '$dice:2d6+10$.',
+                brutal:true,
+                effect: {
+                    trigger: TRIGGER_TYPE.CRITIC,
+                    status: PRONE,
+                },
             },
             {
                 name: '• Bec.',
                 description: 'Déplacement de 8 et $dice:2d6$.',
+                brutal:true,
+                effect: {
+                    trigger: TRIGGER_TYPE.CRITIC,
+                    status: PRONE,
+                },
             },
         ],
         bloodied: {
             description: 'À $hp$, Hurlement Sauvage se recharge.',
             hp: '50 PV',
+            modifiers: {
+                reloadAction: '• Hurlement Sauvage.',
+            },
         },
         last_stand: {
             description:
@@ -1766,6 +1947,114 @@ export const dataMonsters = [
             hp: 30,
             modifiers: {
                 replaceDice: 10,
+            },
+        },
+    },
+    {
+        ...defaultMonster,
+        id: 'thorn_quickblade',
+        name: 'Thorn Lamevive',
+        type: MONSTER_TYPE.BANDIT,
+        legendary: true,
+        hp: 125,
+        armor: ARMOR_TYPE.MEDIUM,
+        level: '4',
+        save: 'DEX+',
+        passif: [
+            {
+                name: 'Riposte.',
+                description:
+                    "Lorsqu’il subit un coup critique, effectue immédiatement une attaque Perce-Cœur ou Trait-tempête en retour.",
+            },
+        ],
+        action: [
+            {
+                name: 'ACTIONS.',
+                description: "Après chaque tour d'un héro, choissisez un :",
+            },
+            {
+                name: '• Trait-tempête (Arbalète).',
+                description: 'Mouvement de 4, inflige $dice:4d4+10$ dégâts (Distance 8).',
+            },
+            {
+                name: '• Perce-Cœur (Rapière).',
+                description: 'Mouvement de 8, inflige $dice:2d4+3$ dégâts. En cas de critique : $status:dazed$.',
+                effect: {
+                    trigger: TRIGGER_TYPE.CRITIC,
+                    status: DAZED,
+                },
+            }
+        ],
+        bloodied: {
+            description: 'À $hp$, Thorn devient immédiatement $status:invisible$ (jusqu’à la fin de son prochain tour), puis se déplace de 8 cases, sans provoquer d’attaques d’opportunité.',
+            hp: '62 PV',
+            modifiers: {
+                newStatus: INVISIBLE,
+            },
+        },
+        last_stand: {
+            description:
+                "Thorn est mourant ! S’il subit $hp$ dégâts supplémentaires, il meurt. Jusqu'à ce moment-là, il Riposte à chaque fois qu’il est touché (1/Tour).",
+            hp: 30,
+            modifiers: {
+                overridePassive: { 
+                    oldPassifName: 'Riposte.',
+                    newPassifName: 'Riposte (1/Tour).',
+                    newPassifDescription: 'Lorsqu’il subit un coup, effectue immédiatement une attaque Perce-Cœur ou Trait-tempête en retour.',
+
+                } 
+            },
+        },
+    },
+    {
+        ...defaultMonster,
+        id: 'ravager_of_the_lowlands',
+        name: 'Ravageur des Terres Basses',
+        type: MONSTER_TYPE.ANIMAL,
+        legendary: true,
+        hp: 130,
+        armor: ARMOR_TYPE.MEDIUM,
+        level: '5',
+        save: 'FOR+, DEX+',
+        passif: [
+            {
+                name: 'Instinct Sauvage.',
+                description: 'Chaque fois que le Ravageur subit un coup critique, il peut voler de 10 cases.',
+            },
+        ],
+        action: [
+            {
+                name: 'ACTIONS.',
+                description: "Après chaque tour d'un héro, choissisez un :",
+            },
+            {
+                name: '• Dard Venimeux.',
+                description: 'Portée 3, inflige $dice:5d12$ dégâts.',
+                use:1
+            },
+            {
+                name: '• Ravage.',
+                description: '$dice:1d12+20$ dégâts.',
+            },
+            {
+                name: '• Griffe.',
+                description: 'Vole de 10, puis inflige $dice:1d12+6$ dégâts.',
+            }
+        ],
+        bloodied: {
+            description: 'À $hp$, son Dard Venimeux se recharge.',
+            hp: '65 PV'
+        },
+        last_stand: {
+            description:
+                "Le Ravageur est mourant ! S’il subit $hp$ dégâts supplémentaires, il meurt. Jusqu'à ce moment-là, la première fois qu’il subit des dégâts à chaque tour, il utilise Vol & Griffe.",
+            hp: 40,
+            modifiers: {
+                overridePassive: {
+                    oldPassifName: 'Instinct Sauvage.',
+                    newPassifName: 'Instinct Sauvage (1/Tour).',
+                    newPassifDescription: 'Chaque fois que le Ravageur subit un coup, il utilise Griffe.',
+                },
             },
         },
     },
@@ -1793,6 +2082,7 @@ export const dataMonsters = [
                 name: '• Enracinement.',
                 description:
                     'Choisissez la moitié des héros. Ils doivent réussir un JdS de DEX 11 ou subir $dice:2d4$ et être $status:restrained$ par des lianes épineuses (Évasion : JdS de FOR ou DEX 11, ou recevoir des dégâts tranchants ou de feu).',
+                AOE:true
             },
             {
                 name: '• Tir de ronces.',
@@ -1812,8 +2102,9 @@ export const dataMonsters = [
                 'Greenthumb est mourant ! S’il subit $hp$ dégâts supplémentaires, il meurt. En attendant, il agit deux fois par tour.',
             hp: 30,
             modifiers: {
-                overrideActions: "Après chaque tour d'un héro, mouvement de 6 puis choissisez deux :"
-            }
+                overrideActions:
+                    "Après chaque tour d'un héro, mouvement de 6 puis choissisez deux :",
+            },
         },
     },
     {
@@ -1823,7 +2114,7 @@ export const dataMonsters = [
         type: MONSTER_TYPE.DEVIL,
         hp: 135,
         level: '6',
-        legendary:true,
+        legendary: true,
         armor: ARMOR_TYPE.HEAVY,
         save: 'TOUT+',
         passif: [
@@ -1854,14 +2145,13 @@ export const dataMonsters = [
             },
         ],
         bloodied: {
-            description:
-                'À $hp$, Azriel peut utiliser Fouet Crépitant 2x par tour.',
+            description: 'À $hp$, Azriel peut utiliser Fouet Crépitant 2x par tour.',
             hp: '67 PV',
             modifiers: {
-                overrideAction:{
+                overrideAction: {
                     name: '• Fouet Crépitant.',
-                    newName: '• Fouet Crépitant (2x).'
-                }
+                    newName: '• Fouet Crépitant (2x).',
+                },
             },
         },
         last_stand: {
@@ -1869,11 +2159,11 @@ export const dataMonsters = [
                 'Azriel est mourant ! S’il subit $hp$ dégâts supplémentaires, il meurt. En attendant, TOUT les coups contre lui sont critique.',
             hp: 60,
             modifiers: {
-                addPassive:{
+                addPassive: {
                     name: 'OUI, PLUS DE DOULEUR.',
                     description: 'Tout les coups contre Azriel sont des critiques.',
-                } 
-            }
+                },
+            },
         },
     },
 ];

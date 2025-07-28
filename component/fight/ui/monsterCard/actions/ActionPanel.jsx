@@ -10,6 +10,7 @@ export default function ActionPanel({ monster, addMonsterCard, status }) {
                     addMonsterCard={addMonsterCard}
                     monsterName={monster.name}
                     status={status}
+                    isMinion={monster.minion}
                 />
             ))}
         </div>

@@ -1,8 +1,9 @@
 import { getLegendaryContent } from './lib/legendaryUtils';
 
 export default function LegendaryPanel({ monster }) {
-    const bloodiedContent = getLegendaryContent(monster.bloodied);
-    const lastStandContent = getLegendaryContent(monster.last_stand);
+    const bloodiedContent = getLegendaryContent(monster.bloodied,null,false);
+    const lastStandContent = getLegendaryContent(monster.last_stand,null,false);
+
 
     return (
         <div>

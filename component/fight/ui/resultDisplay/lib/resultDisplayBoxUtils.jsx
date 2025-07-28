@@ -25,8 +25,8 @@ export function getEffectToDisplay({ result, effect }) {
     );
 
     return (
-        <div className="mt-3 border-t pt-2 text-sm font-semibold text-green-600">
-            Effet {effect.trigger.name} ! {content}
+        <div className="mt-3 border-t pt-2 font-semibold text-green-600">
+            {effect.trigger.name} {content}
         </div>
     );
 }

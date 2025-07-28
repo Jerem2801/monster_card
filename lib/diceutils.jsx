@@ -1,135 +1,152 @@
-export function shuffle(array) {
-    array.sort(() => Math.random() - 0.5);
+// Utilitaires de dé
+function rollDie(sides) {
+    return Math.floor(Math.random() * sides) + 1;
 }
 
-export function doCritic(allResultDices, firstResult, valueDice, onCritic) {
-    if (firstResult === valueDice) {
-        onCritic?.();
-        const newValue = Math.floor(Math.random() * valueDice) + 1;
-        allResultDices.push(newValue);
-        doCritic(allResultDices, newValue, valueDice, onCritic);
-    }
-    return allResultDices;
+function rollMultipleDice(count, sides) {
+    return Array.from({ length: count }, () => rollDie(sides));
 }
 
-export function doAdvantage(advantageAbsolute, allResultDices, advantage) {
-    if (advantageAbsolute === 0) {
-        return {
-            final: allResultDices,
-            annotated: allResultDices.map(value => ({
-                value,
-                kept: true,
-            })),
-        };
-    }
+// Annoter les dés gardés/jettés
+function annotateDice(values, indexesToKeep) {
+    return values.map((value, index) => ({
+        value,
+        kept: indexesToKeep.has(index),
+    }));
+}
 
-    const dicesWithIndex = allResultDices.map((value, index) => ({ value, index }));
-    dicesWithIndex.sort((a, b) => a.value - b.value);
+function getKeptIndexes(values, advantage) {
+    const sorted = values
+        .map((value, index) => ({ value, index }))
+        .sort((a, b) => a.value - b.value);
 
-    const toDiscard =
-        advantage > 0
-            ? dicesWithIndex.slice(0, advantageAbsolute) // On jette les plus petits
-            : dicesWithIndex.slice(-advantageAbsolute); // On jette les plus grands
+    const toDiscard = advantage > 0
+        ? sorted.slice(0, Math.abs(advantage))
+        : sorted.slice(-Math.abs(advantage));
 
     const discardedIndexes = new Set(toDiscard.map(d => d.index));
+    return new Set(values.map((_, i) => i).filter(i => !discardedIndexes.has(i)));
+}
 
-    const annotated = allResultDices.map((value, index) => ({
-        value,
-        kept: !discardedIndexes.has(index),
+function applyAdvantage(rawRolls, advantage) {
+    if (advantage === 0) {
+        return annotateDice(rawRolls, new Set(rawRolls.map((_, i) => i)));
+    }
+    const keptIndexes = getKeptIndexes(rawRolls, advantage);
+    return annotateDice(rawRolls, keptIndexes);
+}
+
+function isFailure(values) {
+    return values.every(v => v === 1);
+}
+
+// Fonction récursive pour gérer les explosions avec effet "vicious"
+function explodeCrits(valueDice, countExtra, finalDiceList) {
+    for (let i = 0; i < countExtra; i++) {
+        const rolled = rollDie(valueDice);
+        finalDiceList.push({
+            value: rolled,
+            kept: true,
+            discarded: false,
+            primary: false,
+            extra: true,
+        });
+
+        // Si c’est encore un critique, on relance encore countExtra dés
+        if (rolled === valueDice) {
+            explodeCrits(valueDice, countExtra, finalDiceList);
+        }
+    }
+}
+
+
+export function throwDice(diceProperty, advantage = 0, options = {}) {
+    // Extraction des options avec valeurs par défaut
+    const {
+        vicious = false,    // Critique génère 2 dés au lieu de 1
+        brutal = false,     // Le plus haut dé gardé devient le primaire
+        noCrit = false,     // Désactive les critiques
+        noFail = false,     // Désactive les échecs critiques
+        forceCrit = false,  // Forcement un critique
+    } = options;
+
+    // Décomposition des propriétés du jet
+    const { numberDice, valueDice, bonus = 0 } = diceProperty;
+
+    // Nombre total de dés à lancer (en tenant compte de l'avantage)
+    const totalToRoll = numberDice + Math.abs(advantage);
+
+    // Lancer des dés bruts
+    const rawRolls = rollMultipleDice(totalToRoll, valueDice);
+
+    // Annoter les dés en fonction de l'avantage/désavantage
+    const annotated = applyAdvantage(rawRolls, advantage);
+
+    // Préparation des dés avec structure enrichie
+    const finalDiceList = annotated.map((d, idx) => ({
+        value: d.value,
+        kept: d.kept,
+        discarded: !d.kept,
+        primary: false,
+        extra: false,
     }));
 
-    const finalValues = annotated.filter(d => d.kept).map(d => d.value);
+    let isCritic = false;
+    let isFailed = false;
 
-    return {
-        final: finalValues,
-        annotated,
-    };
-}
+    // Liste des dés gardés avec leurs index
+    const keptDice = finalDiceList
+        .map((d, i) => ({ ...d, index: i }))
+        .filter(d => d.kept);
 
-export function checkFailed(allResultDices, onFailed) {
-    if (allResultDices[0] === 1) {
-        onFailed?.();
-    }
-}
+    // Index du dé primaire : le plus haut si brutal, sinon le premier gardé
+    const primaryIndex = brutal
+        ? keptDice.reduce((max, d) => (d.value > max.value ? d : max), keptDice[0])?.index
+        : keptDice[0]?.index;
 
-export function throwDice(diceProperty, advantage) {
-    const advantageAbsolute = Math.abs(advantage);
-    const totalToRoll = diceProperty.numberDice + advantageAbsolute;
-    const valueDice = diceProperty.valueDice;
-
-    // Génération brute des dés
-    const rawRolls = Array.from(
-        { length: totalToRoll },
-        () => Math.floor(Math.random() * valueDice) + 1,
-    );
-
-    // Application de l'avantage/désavantage
-    const { final: keptDiceValues, annotated } = doAdvantage(
-        advantageAbsolute,
-        rawRolls,
-        advantage,
-    );
-
-    // Ajout des critiques
-    let isCriticResult = false;
-    let isFailedResult = false;
-    const finalDiceList = [];
-
-    annotated.forEach((die, idx) => {
-        finalDiceList.push({
-            value: die.value,
-            kept: die.kept,
-            discarded: !die.kept,
-            primary: false,
-            extra: false,
-        });
-    });
-
-    // Recherche du 1er dé gardé pour vérifier s’il est critique
-    const primaryIndex = finalDiceList.findIndex(d => d.kept);
-    if (primaryIndex !== -1 && finalDiceList[primaryIndex].value === valueDice) {
-        isCriticResult = true;
+    // Marquer le dé primaire
+    if (primaryIndex !== undefined) {
         finalDiceList[primaryIndex].primary = true;
 
-        let lastCritValue = valueDice;
-        while (lastCritValue === valueDice) {
-            const extra = Math.floor(Math.random() * valueDice) + 1;
-            lastCritValue = extra;
-            finalDiceList.push({
-                value: extra,
-                kept: true,
-                discarded: false,
-                primary: false,
-                extra: true,
-            });
+        // Si forceCrit est activé, on force la valeur max sur ce dé primaire
+        if (forceCrit) {
+            finalDiceList[primaryIndex].value = valueDice;
         }
-    } else if (primaryIndex !== -1) {
-        finalDiceList[primaryIndex].primary = true;
     }
 
-    // Vérification d’un échec critique (si tous les dés gardés == 1)
-    const keptForFailureCheck = finalDiceList.filter(d => d.kept).map(d => d.value);
-    checkFailed(keptForFailureCheck, () => {
-        isFailedResult = true;
-    });
+    // TRAITEMENT DU CRITIQUE (si activé)
+    if (!noCrit && primaryIndex !== undefined) {
+        const die = finalDiceList[primaryIndex];
+        if (die.value === valueDice) {
+            isCritic = true;
+            const countExtra = vicious ? 2 : 1;
 
-    // Total des dés gardés (bonus ignoré pour l’instant)
-    const totalKept = finalDiceList.filter(d => d.kept).reduce((sum, d) => sum + d.value, 0);
+            // Nouvelle version avec explosion récursive
+            explodeCrits(valueDice, countExtra, finalDiceList);
+        }
+    }
 
-    const totalWithBonus = totalKept + parseInt(diceProperty.bonus || 0, 10);
+    // Vérification d’un échec critique (tous les dés gardés = 1)
+    if (!noFail) {
+        const keptValues = finalDiceList.filter(d => d.kept).map(d => d.value);
+        isFailed = isFailure(keptValues);
+    }
 
+    // Calcul du total final avec bonus
+    const total =
+        finalDiceList.filter(d => d.kept).reduce((sum, d) => sum + d.value, 0) +
+        parseInt(bonus, 10);
+
+    // Résultat final du jet
     return {
-        type: isCriticResult ? 'critic' : isFailedResult ? 'failed' : 'normal',
-        total: totalWithBonus,
+        type: isCritic ? 'critic' : isFailed ? 'failed' : 'normal',
+        total,
         dices: finalDiceList,
         diceProperty,
     };
 }
 
-export function formatDice({ numberDice, valueDice, bonus }) {
-    let result = `${numberDice}d${valueDice}`;
-    if (bonus && bonus !== 0) {
-        result += bonus > 0 ? `+${bonus}` : `${bonus}`;
-    }
-    return result;
+
+export function formatDice({ numberDice, valueDice, bonus = 0 }) {
+    return `${numberDice}d${valueDice}${bonus ? (bonus > 0 ? `+${bonus}` : bonus) : ''}`;
 }
