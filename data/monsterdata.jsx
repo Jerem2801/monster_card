@@ -9,6 +9,7 @@ import {
     LATCH_ON,
     DIGESTED,
     INVISIBLE,
+    DESPAIR,
 } from './statusdata';
 
 // Tableau des types de taille
@@ -36,6 +37,8 @@ export const MONSTER_TYPE = {
     SNAKEMEN: { id: 'snakemen', label: 'Hommmes-serpents' },
     TROGLODYTE: { id: 'troglodyte', label: 'Troglodyte' },
     HILL_FIELD: { id: 'hill_field', label: 'Colline et Champ' },
+    UNDEAD: {id:'undead', label :'Mort-vivant'},
+    CULTISTS_HORRORS: {id: 'cultists_horrors', label:'Cultiste et Horreur'},
     UNDEAD: {id:'undead', label :'Mort-vivant'},
     FOREST_DENIZEN: { id: 'forest_denizen', label: 'Habitant de la forêt' },
     DUNGEON_DENIZEN: { id: 'dungeon_denizen', label: 'Habitant du donjons' },
@@ -94,6 +97,11 @@ const passiveUnlivingUndying = {
     name: 'Non-vivant, non-mortel.',
     description: "La première fois que cette créature meurt, elle revient à 1 PV à la place.",
 };
+const passiveFanaticalZeal = {
+    name: 'Zèle Fanatique.',
+    description: 'Tant que vous n’êtes pas à vos PV max, vous effectuez tous vos jets avec avantage. Vos coups critiques infligent également $status:despair$.',
+};
+
 
 // Tableau des types conditions
 export const TRIGGER_TYPE = {
@@ -1019,7 +1027,7 @@ export const dataMonsters = [
         action: [
             {
                 name: '• Essaim de Scarabées.',
-                description: 'Invoque 10 $summon:minion_scarab$10$ dans une Portée de 6.',
+                description: 'Invoque 10 $summon:minion_scarab:10$ dans une Portée de 6.',
                 effect :{
                     trigger: TRIGGER_TYPE.DAMAGE,
                     message: 'Inflige 1 Blessure.'
@@ -1036,6 +1044,170 @@ export const dataMonsters = [
                     trigger: TRIGGER_TYPE.DAMAGE,
                     status: DAZED
                 }
+            },
+        ],
+    },
+    //CULTISTE ET HORREUR
+    {
+        ...defaultMonster,
+        id: 'cultist',
+        name: 'Cultiste',
+        type: MONSTER_TYPE.CULTISTS_HORRORS,
+        hp: 28,
+        level: '1',
+        passif: [passiveFanaticalZeal],
+        action: [
+            {
+                name: 'Oblation de Sang !',
+                description: 'Si indemne, s’inflige 2 dégâts. Les ennemis adjacents subissent $status:despair$.'
+            },
+            {
+                name: 'Lame Terrifiante.',
+                description: '$dice:1d6+6$ dégâts.',
+                advantage: {
+                    name: 'Zèle Fanatique.',
+                    description: 'Tant que vous n’êtes pas à vos PV max, vous avez 1 Avantage.',
+                },
+                effect :{
+                    trigger: TRIGGER_TYPE.CRITIC,
+                    status: DESPAIR
+                }
+            },
+            {
+                name: 'Ébullition de Sang.',
+                description: '(Distance 12, cible $status:bloodied$) $dice:3d6+6$ dégâts.',
+                advantage: {
+                    name: 'Zèle Fanatique.',
+                    description: 'Tant que vous n’êtes pas à vos PV max, vous avez 1 Avantage.',
+                },
+                effect :{
+                    trigger: TRIGGER_TYPE.CRITIC,
+                    status: DESPAIR
+                }
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'fanatic',
+        name: 'Fanatique',
+        type: MONSTER_TYPE.CULTISTS_HORRORS,
+        hp: 41,
+        level: '3',
+        passif: [passiveFanaticalZeal],
+        action: [
+            {
+                name: 'Oblation de Sang !',
+                description: 'Si indemne, s’inflige 2 dégâts. Les ennemis adjacents subissent $status:despair$.'
+            },
+            {
+                name: 'Murmures de Folie.',
+                description: ' Jet opposé de FOR ou $status:grappled$ (peut s’échapper par un jet ou tout dégât radiant). Si réussi, inflige $dice:3d6+6$ dégâts psychiques (ne peut pas être Défendu ni Interposé).',
+                advantage: {
+                    name: 'Zèle Fanatique.',
+                    description: 'Tant que vous n’êtes pas à vos PV max, vous avez 1 Avantage.',
+                },
+                effect :{
+                    trigger: TRIGGER_TYPE.CRITIC,
+                    status: DESPAIR
+                }
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'doomsayer',
+        name: 'Prophète de Malheur',
+        type: MONSTER_TYPE.CULTISTS_HORRORS,
+        hp: 58,
+        level: '5',
+        passif: [passiveFanaticalZeal],
+        action: [
+            {
+                name: 'Chant Fiévreux.',
+                description: '(Concentration) Réduit tous les dégâts infligés à vos alliés qui peuvent vous entendre à 1.'
+            },
+            {
+                name: 'Délires Extatiques.',
+                description: ' Inflige $dice:2d6$ dégâts psychiques à tous les ennemis qui peuvent vous entendre.',
+                advantage: {
+                    name: 'Zèle Fanatique.',
+                    description: 'Tant que vous n’êtes pas à vos PV max, vous avez 1 Avantage.',
+                },
+                effect :{
+                    trigger: TRIGGER_TYPE.CRITIC,
+                    status: DESPAIR
+                }
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'stenchling',
+        name: 'Pestelingue',
+        type: MONSTER_TYPE.CULTISTS_HORRORS,
+        hp: 18,
+        level: '1/2',
+        size: SIZE_TYPE.SMALL,
+        passif: [
+            {
+                name:'Nuage Putride.',
+                description:'À la mort : $dice:2d6$ dégâts de poison aux ennemis dans une Portée 2.'
+            }
+        ],
+        action: [
+            {
+                name: 'Morsure.',
+                description: '$dice:2d6$ dégâts.'
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'spiny_fiend',
+        name: 'Démon Épineux',
+        type: MONSTER_TYPE.CULTISTS_HORRORS,
+        hp: 49,
+        level: '4',
+        passif: [
+            {
+                name:'Épines.',
+                description:'Les attaquants au corps à corps subissent 3 dégâts.'
+            }
+        ],
+        action: [
+            {
+                name: 'Griffes (2×).',
+                description: '$dice:1d6+6$ dégâts.'
+            },
+            {
+                name: 'Lancer d’Épine.',
+                description: '(Distance 12) $dice:1d6+6$ dégâts.'
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'glabrezu',
+        name: 'Glabrezu',
+        type: MONSTER_TYPE.CULTISTS_HORRORS,
+        hp: 110,
+        armor: ARMOR_TYPE.HEAVY,
+        size: SIZE_TYPE.LARGE,
+        level: '14',
+        passif: [],
+        action: [
+            {
+                name: ' Griffe du Destin (2×).',
+                description: '(Portée 2) $dice:3d6+10$. En cas de dégâts : $status:grappled$ (Évasion DD 17). Si la même créature est agrippée par les deux griffes du glabrezu, elle doit s’échapper séparément de chacune.',
+                effect:{
+                    trigger: TRIGGER_TYPE.DAMAGE,
+                    status: GRAPPLED
+                }
+            },
+            {
+                name: 'Déchirer en Morceaux.',
+                description: '(Sur une créature agrippée par les deux griffes du glabrezu) Inflige 50 dégâts inévitables. Si la cible est à 0 PV : Jds de FOR 17 ou elle est déchirée en deux, mourant sur-le-champ.'
             },
         ],
     },

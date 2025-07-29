@@ -168,6 +168,17 @@ export const SMOLDERING = {
     path: '/status/smoldering.png',
 };
 
+export const DESPAIR = {
+    id: 'despair',
+    label: 'Désespoir.',
+    description: 'Désavantage à la prochaine attaque que vous effectuez pendant cet affrontement.',
+    path: '/status/frightened.png',
+    disadvantage: {
+        name: 'Désespoir.',
+        description: 'Votre prochaine attaque a 1 Désavantage.',
+    },
+};
+
 // États spéciaux
 export const BLOODIED = {
     id: 'bloodied',
@@ -201,6 +212,7 @@ export const STATUSES = {
     HAMPERED,
     INVISIBLE,
     PETRIFIED,
+    DESPAIR,
     LATCH_ON,
     POISONED,
     CONFUSED,
