@@ -99,7 +99,7 @@ const passiveUnlivingUndying = {
 };
 const passiveFanaticalZeal = {
     name: 'Zèle Fanatique.',
-    description: 'Tant que vous n’êtes pas à vos PV max, vous effectuez tous vos jets avec avantage. Vos coups critiques infligent également $status:despair$.',
+    description: 'Tant que vous n’êtes pas à vos PV max, vous effectuez tous vos jets avec $advantage:+1$. Vos coups critiques infligent également $status:despair$.',
 };
 
 
@@ -1207,7 +1207,7 @@ export const dataMonsters = [
             },
             {
                 name: 'Déchirer en Morceaux.',
-                description: '(Sur une créature agrippée par les deux griffes du glabrezu) Inflige 50 dégâts inévitables. Si la cible est à 0 PV : Jds de FOR 17 ou elle est déchirée en deux, mourant sur-le-champ.'
+                description: '(Sur une créature $status:grappled$ par les deux griffes du glabrezu) Inflige 50 dégâts inévitables. Si la cible est à 0 PV : Jds de FOR 17 ou elle est déchirée en deux, $status:dead$ sur-le-champ.'
             },
         ],
     },
