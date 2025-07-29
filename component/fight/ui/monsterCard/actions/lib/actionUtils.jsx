@@ -11,7 +11,8 @@ export function getActionContent(
     monsterName,
     status,
     allChecked,
-    isMinion
+    isMinion,
+    nbHeroes
 ) {
     const parts = action.description.split(/(\$[^$]+\$)/g); // Match tout ce qui est entre deux $
 
@@ -59,12 +60,12 @@ export function getActionContent(
                             />
                         );
                     case 'summon':
+                        const quantity = parsed.perHero ? nbHeroes * parsed.quantity : parsed.quantity;
                         return (
                             <SummonButton
                                 key={`summon-${index}`}
                                 summonName={parsed.name}
-                                quantity={parsed.quantity}
-                                perHero={parsed.perHero}
+                                quantity={quantity}
                                 action={action}
                                 passive={passive}
                                 addMonsterCard={addMonsterCard}

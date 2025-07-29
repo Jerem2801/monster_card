@@ -1,4 +1,8 @@
-export default function FightHeader({ encounterName, deleteMode, setDeleteMode }) {
+import SimpleInputNumber from '@/ui/simple/SimpleInputNumber';
+import ReadOnlyNumber from '@/ui/simple/ReadOnlyNumber';
+
+export default function FightHeader({ encounterName, deleteMode, setDeleteMode, heroes }) {
+
     return (
         <div className="flex items-center justify-between bg-white px-5 py-3">
             <div className="flex items-center gap-3">
@@ -17,6 +21,24 @@ export default function FightHeader({ encounterName, deleteMode, setDeleteMode }
                 <span className="text-base">{deleteMode ? '✖' : '🗑️'}</span>
                 {deleteMode ? 'Quitter Suppression' : 'Mode Suppression'}
             </button>
+
+             <SimpleInputNumber
+                label="Nombre de héros"
+                min={1}
+                max={10}
+                value={heroes.heroSettings.nbHeroes}
+                onChange={e => updateHeroSettings('nbHeroes', Number(e.target.value))}
+            />
+
+            <SimpleInputNumber
+                label="Niveau des héros"
+                min={1}
+                max={20}
+                value={heroes.heroSettings.levelHeroes}
+                onChange={e => updateHeroSettings('levelHeroes', Number(e.target.value))}
+            />
+
+            <ReadOnlyNumber label="Niveau Total" value={heroes.heroSettings.nbHeroes * heroes.heroSettings.levelHeroes} />
         </div>
     );
 }

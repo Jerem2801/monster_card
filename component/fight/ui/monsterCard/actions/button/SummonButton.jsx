@@ -3,10 +3,9 @@ import { dataMonsters } from '@/data/monsterdata';
 export default function SummonButton({
     summonName,
     quantity,
-    perHero,
     passive,
     addMonsterCard,
-    allChecked,
+    allChecked
 }) {
     const baseClass = 'text-md inline-block rounded px-1 transition';
     const passiveClass = 'bg-gray-100 hover:bg-gray-200';

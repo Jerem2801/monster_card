@@ -3,7 +3,7 @@ import CheckUsage from './CheckUsage';
 import { getActionContent } from './lib/actionUtils';
 import { useActionUses } from './hook/useActionUses';
 
-export default function Actions({ action, addMonsterCard, monsterName, status,isMinion }) {
+export default function Actions({ action, addMonsterCard, monsterName, status, isMinion, nbHeroes }) {
     const { useCount, checkedStates, allChecked, toggleCheckbox } = useActionUses(action);
     const content = getActionContent(
         action,
@@ -12,7 +12,8 @@ export default function Actions({ action, addMonsterCard, monsterName, status,is
         monsterName,
         status,
         allChecked,
-        isMinion
+        isMinion,
+        nbHeroes
     );
 
     return (

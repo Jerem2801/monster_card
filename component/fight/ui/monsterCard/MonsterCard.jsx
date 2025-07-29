@@ -15,6 +15,7 @@ export default function MonsterCard({
     status,
     updateMonsterStatus,
     updateMonster,
+    nbHeroes
 }) {
     const [openModal, setOpenModal] = useState(false);
 
@@ -29,9 +30,9 @@ export default function MonsterCard({
                 setOpenModal={setOpenModal}
             />
 
-            <PassivePanel monster={monster} addMonsterCard={addMonsterCard} />
+            <PassivePanel monster={monster} addMonsterCard={addMonsterCard} nbHeroes={nbHeroes}/>
 
-            <ActionPanel monster={monster} addMonsterCard={addMonsterCard} status={status} />
+            <ActionPanel monster={monster} addMonsterCard={addMonsterCard} status={status} nbHeroes={nbHeroes}/>
 
             {monster.legendary && <LegendaryPanel monster={monster} />}
 
