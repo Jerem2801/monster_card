@@ -9,7 +9,6 @@ import {
     LATCH_ON,
     DIGESTED,
     INVISIBLE,
-    SMOLDERING,
 } from './statusdata';
 
 // Tableau des types de taille
@@ -19,6 +18,7 @@ export const SIZE_TYPE = {
     MEDIUM: { id: null, label: 'Moyenne' },
     LARGE: { id: 'large', label: 'Grand' },
     HUGE: { id: 'huge', label: 'Très Grand' },
+    GARGANTUAN: { id: 'gargantuan', label: 'Gigantesque' },
 };
 
 // Tableau des types d'armure
@@ -36,14 +36,13 @@ export const MONSTER_TYPE = {
     SNAKEMEN: { id: 'snakemen', label: 'Hommmes-serpents' },
     TROGLODYTE: { id: 'troglodyte', label: 'Troglodyte' },
     HILL_FIELD: { id: 'hill_field', label: 'Colline et Champ' },
-    GNOLL: { id: 'gnoll', label: 'Gnoll' },
+    UNDEAD: {id:'undead', label :'Mort-vivant'},
     FOREST_DENIZEN: { id: 'forest_denizen', label: 'Habitant de la forêt' },
     DUNGEON_DENIZEN: { id: 'dungeon_denizen', label: 'Habitant du donjons' },
-    DAEMONS: { id: 'daemons', label: 'Démons' },
-    DEVIL: { id: 'devil', label: 'Diable' },
     UNDERGROUND: { id: 'underground', label: 'Souterrain' },
     ANIMAL: { id: 'animal', label: 'Animaux' },
     SORCIER: { id: 'sorcier', label: 'Sorcier' },
+    DEVIL: { id: 'devil', label: 'Diable' },
 };
 
 // Passifs réutilisables
@@ -91,9 +90,9 @@ const passiveMimicsSticky = {
     description:
         'Les Mimic peuvent agripper un nombre illimité de créatures. En cas de coup critique : libère 1 créature (au choix de l’attaquant).',
 };
-const passiveDemonicFrenzy = {
-    name: 'Frénésie démoniaque.',
-    description: "Lorsqu'il est $status:bloodied$, $advantage:+1$ sur l'attaque.",
+const passiveUnlivingUndying = {
+    name: 'Non-vivant, non-mortel.',
+    description: "La première fois que cette créature meurt, elle revient à 1 PV à la place.",
 };
 
 // Tableau des types conditions
@@ -811,66 +810,232 @@ export const dataMonsters = [
     },
     {
         ...defaultMonster,
-        id: 'hyene_sbire',
-        name: 'Sbire Hyène',
-        type: MONSTER_TYPE.GNOLL,
-        hp: 1,
-        level: '1/2',
-        minion: true,
-        size: SIZE_TYPE.SMALL,
+        id: 'roc',
+        name: 'Roc',
+        type: MONSTER_TYPE.HILL_FIELD,
+        hp: 195,
+        level: '17',
+        fly: 20,
+        size: SIZE_TYPE.GARGANTUAN,
         passif: [],
+        action: [
+            {
+                name: 'Happer.',
+                description: '(Portée 4, jusqu’à 2 cibles) $dice:3d12+20$. En cas de touche : $status:grappled$ (Évasion DD 18).',
+                effect: {
+                    trigger: TRIGGER_TYPE.HIT,
+                    status: GRAPPLED
+                },
+            },
+            {
+                name: 'Lâcher & Écraser.',
+                description: 'Vole vers le haut de 20 cases, inflige 20 dégâts aux créatures $status:grappled$, puis les relâche ($dice:10d6$ dégâts de chute).',
+            },
+        ],
+    },
+    //MORT-VIVANT
+    {
+        ...defaultMonster,
+        id: 'minion_scarab',
+        name: 'Sbire Scarabée',
+        type: MONSTER_TYPE.UNDEAD,
+        minion:true,
+        hp: 1,
+        level: '1/3',
+        passif: [],
+        action: [
+            {
+                name: 'Corne.',
+                description: '$dice:1d6$ dégâts.',
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'skeleton',
+        name: 'Squelette',
+        type: MONSTER_TYPE.UNDEAD,
+        hp: 10,
+        level: '1/3',
+        passif: [passiveUnlivingUndying],
+        action: [
+            {
+                name: 'Flèche de Tombe.',
+                description: '(Distance 8) $dice:1d4+3$ dégâts.',
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'zombie',
+        name: 'Zombie',
+        type: MONSTER_TYPE.UNDEAD,
+        hp: 15,
+        level: '1/2',
+        passif: [passiveUnlivingUndying],
         action: [
             {
                 name: 'Morsure.',
-                description: '$dice:1d8$.',
+                description: '$dice:1d4+4$ dégâts. En cas de dégâts : $status:grappled$',
+                effect :{
+                    trigger: TRIGGER_TYPE.DAMAGE,
+                    status: GRAPPLED
+                }
             },
         ],
     },
     {
         ...defaultMonster,
-        id: 'gnoll_bonesplitter',
-        name: 'Gnoll Brute',
-        type: MONSTER_TYPE.GNOLL,
-        hp: 49,
-        level: '4',
-        passif: [
-            {
-                name: 'Death Frenzy.',
-                description:
-                    "Lorsque qu'un allié meurt à 6 cases, ce déplace de la moitié de sa vitesse et fait une attaque.",
-            },
-        ],
+        id: 'Ghoul',
+        name: 'Goule',
+        type: MONSTER_TYPE.UNDEAD,
+        hp: 15,
+        level: '1',
+        passif: [passiveUnlivingUndying],
         action: [
             {
-                name: 'Fléau.',
-                description: '$dice:2d8+9$, sur un coup $status:grappled$.',
-                effect: {
-                    trigger: TRIGGER_TYPE.HIT,
-                    status: GRAPPLED,
-                },
+                name: 'Griffe Nauséabonde.',
+                description: '$dice:1d4+8$ dégâts. En cas de dégâts : $status:dazed$',
+                effect :{
+                    trigger: TRIGGER_TYPE.DAMAGE,
+                    status: DAZED
+                }
             },
         ],
     },
     {
         ...defaultMonster,
-        id: 'gnoll_abyssal_summoner',
-        name: 'Gnoll Invocateur',
-        type: MONSTER_TYPE.GNOLL,
-        hp: 68,
+        id: 'Specter',
+        name: 'Spectre',
+        type: MONSTER_TYPE.UNDEAD,
+        hp: 30,
+        fly: 6,
+        level: '3',
+        passif: [passiveUnlivingUndying],
+        action: [
+            {
+                name: 'Toucher Mortel.',
+                description: '$dice:1d4$ dégâts. En cas de dégâts : les PV sont réduits à 0.',
+                effect :{
+                    trigger: TRIGGER_TYPE.DAMAGE,
+                    message: 'Les PV sont réduits à 0'
+                }
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'ogre_zombie',
+        name: 'Ogre Zombie',
+        type: MONSTER_TYPE.UNDEAD,
+        hp: 46,
+        level: '5',
+        size: SIZE_TYPE.LARGE,
+        passif: [passiveUnlivingUndying],
+        action: [
+            {
+                name: 'Massue Géante (2×).',
+                description: '$dice:1d4+8$ dégâts. En cas de crtitique : $status:prone$.',
+                effect :{
+                    trigger: TRIGGER_TYPE.CRITIC,
+                    stauts: PRONE,
+                }
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'mummy',
+        name: 'Momie',
+        type: MONSTER_TYPE.UNDEAD,
+        hp: 54,
         level: '6',
-        passif: [],
+        passif: [passiveUnlivingUndying],
         action: [
             {
-                name: 'Fléau.',
-                description: '$dice:2d8+12$.',
+                name: 'Coup Brutal (2×).',
+                description: '$dice:1d4+8$ dégâts. En cas de dégâts : $status:dazed$.',
+                effect :{
+                    trigger: TRIGGER_TYPE.DAMAGE,
+                    stauts: DAZED,
+                }
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'giant_zombie',
+        name: 'Zombie Géant',
+        type: MONSTER_TYPE.UNDEAD,
+        hp: 73,
+        level: '8',
+        size: SIZE_TYPE.HUGE,
+        passif: [passiveUnlivingUndying],
+        action: [
+            {
+                name: 'Balayage en Décomposition (2×).',
+                description: '$dice:1d4+10$ dégâts. En cas de dégâts : repousse d’un nombre de cases égal au Dé Primaire.',
+                effect :{
+                    trigger: TRIGGER_TYPE.DAMAGE,
+                    message: 'Repousse d’un nombre de cases égal au Dé Primaire.'
+                }
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'wraith',
+        name: 'Revenant',
+        type: MONSTER_TYPE.UNDEAD,
+        hp: 94,
+        level: '10',
+        fly: 6,
+        passif: [passiveUnlivingUndying],
+        action: [
+            {
+                name: 'Déchirure d’Âme (2×).',
+                description: '(Distance 8) $dice:1d4+10$ dégâts. En cas de dégâts : inflige 1 Blessure.',
+                effect :{
+                    trigger: TRIGGER_TYPE.DAMAGE,
+                    message: 'Inflige 1 Blessure.'
+                }
+            },
+        ],
+    },
+    {
+        ...defaultMonster,
+        id: 'mummy_lord',
+        name: 'Seigneur Momie',
+        type: MONSTER_TYPE.UNDEAD,
+        hp: 280,
+        level: '21',
+        passif: [
+            passiveUnlivingUndying,
+            {
+                name: 'Regard Maudit.',
+                description: 'En cas de critique : JdS de INT 20, ou inflige 1 Blessure.'
+            }
+        ],
+        action: [
+            {
+                name: '• Essaim de Scarabées.',
+                description: 'Invoque 10 $summon:minion_scarab$10$ dans une Portée de 6.',
+                effect :{
+                    trigger: TRIGGER_TYPE.DAMAGE,
+                    message: 'Inflige 1 Blessure.'
+                }
             },
             {
-                name: 'Invoquer sbire.',
-                description: 'Invoquer 3 $summon:hyene_sbire:3$.',
+                name: 'Puis',
+                description: '',
             },
-            {
-                name: 'Transformer sbire.',
-                description: 'Transformer 1 Sbire Hyène en $summon:gnoll_bonesplitter:1$.',
+                        {
+                name: '• Coup Brutal (2×).',
+                description: '$dice:1d4+20$ dégâts. En cas de dégâts : $status:dazed$.',
+                effect :{
+                    trigger: TRIGGER_TYPE.DAMAGE,
+                    status: DAZED
+                }
             },
         ],
     },
