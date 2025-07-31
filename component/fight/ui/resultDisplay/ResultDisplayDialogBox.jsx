@@ -24,7 +24,7 @@ export default function ResultDisplayDialogBox() {
         <div
             role="region"
             aria-label="Résultats des lancers de dés"
-            className="flex h-[calc(100vh-155px)] w-full max-w-lg flex-col overflow-hidden rounded-xl border border-gray-300 bg-white shadow-lg"
+            className="flex h-[calc(100vh-16rem)] w-full max-w-lg flex-col overflow-hidden rounded-xl border border-gray-300 bg-white shadow-lg"
         >
             {/* Header fixe et sombre */}
 

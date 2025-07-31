@@ -37,7 +37,7 @@ function applyAdvantage(rawRolls, advantage) {
 }
 
 function isFailure(values) {
-    return values.every(v => v === 1);
+    return values[0] === 1;
 }
 
 // Fonction récursive pour gérer les explosions avec effet "vicious"

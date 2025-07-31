@@ -22,37 +22,38 @@ export default function Fight({ encounterId }) {
 
     return (
         <MessagesProvider>
-            <div className="relative flex h-[calc(100vh-5rem)] overflow-hidden">
+
                 <FightHeader
                     encounterName={encounter.encounterName}
                     deleteMode={deleteMode}
                     heroes={heroes}
                     setDeleteMode={setDeleteMode}
-                />
-
-                <MonsterList
                     monsters={encounter.monsters}
-                    modifiedMonsters={monster.modifiedMonsters}
-                    selectedMonsterId={encounter.selectedMonsterId}
-                    setSelectedMonsterId={encounter.setSelectedMonsterId}
-                    deleteMode={deleteMode}
-                    deleteMonster={monster.deleteMonster}
-                    updateMonsterHp={monster.updateMonsterHp}
-                    updateMonsterHpLegendary={monster.updateMonsterHpLegendary}
-                    updateMonster={monster.updateMonster}
-                    updateMonsterStatus={monster.updateMonsterStatus}
                 />
+                <div className="relative flex h-[calc(100vh-12rem)] overflow-hidden">
+                    <MonsterList
+                        monsters={encounter.monsters}
+                        modifiedMonsters={monster.modifiedMonsters}
+                        selectedMonsterId={encounter.selectedMonsterId}
+                        setSelectedMonsterId={encounter.setSelectedMonsterId}
+                        deleteMode={deleteMode}
+                        deleteMonster={monster.deleteMonster}
+                        updateMonsterHp={monster.updateMonsterHp}
+                        updateMonsterHpLegendary={monster.updateMonsterHpLegendary}
+                        updateMonster={monster.updateMonster}
+                        updateMonsterStatus={monster.updateMonsterStatus}
+                    />
 
-                <MonsterDetail
-                    selectedMonster={encounter.selectedMonster}
-                    modifiedMonsters={monster.modifiedMonsters}
-                    addMonsterCard={monster.addMonsterCard}
-                    updateMonster={monster.updateMonster}
-                    updateMonsterStatus={monster.updateMonsterStatus}
-                    nbHeroes={heroes.heroSettings.nbHeroes}
-                />
+                    <MonsterDetail
+                        selectedMonster={encounter.selectedMonster}
+                        modifiedMonsters={monster.modifiedMonsters}
+                        addMonsterCard={monster.addMonsterCard}
+                        updateMonster={monster.updateMonster}
+                        updateMonsterStatus={monster.updateMonsterStatus}
+                        nbHeroes={heroes.heroSettings.nbHeroes}
+                    />
 
-                <ResultPanel />
+                    <ResultPanel />
             </div>
         </MessagesProvider>
     );

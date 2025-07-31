@@ -13,7 +13,7 @@ export default function MonsterList({
     deleteMonster,
 }) {
     return (
-        <div className="flex-[1.3] overflow-y-auto border-r border-gray-200 bg-white">
+        <div className="flex-[1.3] overflow-y-auto bg-white">
             <div className="p-4">
                 {monsters.map(({ id, monster, currentHp, currentHpLegendary, status }) => {
                     const modifiedMonster = modifiedMonsters[id] || monster;

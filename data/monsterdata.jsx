@@ -2413,7 +2413,7 @@ export const dataMonsters = [
             },
             {
                 name: '• Invoquer des Roncespectres.',
-                description: 'Invoque 1 $summon:minion_briarbanes:1:h$ par héros.',
+                description: 'Invoque 1 $summon:minion_briarbanes:1h$ par héros.',
             },
             {
                 name: '• Enracinement.',
